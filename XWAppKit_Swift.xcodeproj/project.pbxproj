@@ -10,7 +10,7 @@
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */; };
 		AEA7472024CA756900E4B8E1 /* XWAppKit_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEA7472D24CA790B00E4B8E1 /* XWASSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */; };
+		AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */; };
 		AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */; };
 		AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */; };
 		AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473824CA90FD00E4B8E1 /* ViewController.swift */; };
@@ -20,6 +20,14 @@
 		AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */; };
 		AEA7474924CA943C00E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7474A24CA943C00E4B8E1 /* XWAppKit_Swift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7475124CABE7D00E4B8E1 /* XWAKKeychain.swift */; };
+		AEA7475824CABEB700E4B8E1 /* XWASSwitchButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7475724CABEB700E4B8E1 /* XWASSwitchButtonTests.swift */; };
+		AEA7475A24CAC53400E4B8E1 /* XWASKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7475924CAC53400E4B8E1 /* XWASKeychainTests.swift */; };
+		AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7475C24CAC9BF00E4B8E1 /* DictionaryExtension.swift */; };
+		AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */; };
+		AEA7476224CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476124CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift */; };
+		AEA7476424CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476324CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift */; };
+		AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +68,7 @@
 		AEA7471824CA756900E4B8E1 /* XWAppKit_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XWAppKit_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAppKit_SwiftTests.swift; sourceTree = "<group>"; };
 		AEA7471F24CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWASSwitchButton.swift; sourceTree = "<group>"; };
+		AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSwitchButton.swift; sourceTree = "<group>"; };
 		AEA7473224CA90FD00E4B8E1 /* XWAppKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XWAppKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +78,14 @@
 		AEA7474024CA910100E4B8E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEA7474224CA910100E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAppKitSwitchViewController.swift; sourceTree = "<group>"; };
+		AEA7475124CABE7D00E4B8E1 /* XWAKKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKKeychain.swift; sourceTree = "<group>"; };
+		AEA7475724CABEB700E4B8E1 /* XWASSwitchButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWASSwitchButtonTests.swift; sourceTree = "<group>"; };
+		AEA7475924CAC53400E4B8E1 /* XWASKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWASKeychainTests.swift; sourceTree = "<group>"; };
+		AEA7475C24CAC9BF00E4B8E1 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AEA7476124CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKStringExtensionTests.swift; sourceTree = "<group>"; };
+		AEA7476324CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDictionaryEntensionTests.swift; sourceTree = "<group>"; };
+		AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +139,7 @@
 		AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7475B24CAC93200E4B8E1 /* Extension */,
 				AEA7472924CA785100E4B8E1 /* UI */,
 				AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */,
 				AEA7471324CA756900E4B8E1 /* Info.plist */,
@@ -133,6 +150,8 @@
 		AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7476024CACDC800E4B8E1 /* Extension */,
+				AEA7475324CABE8600E4B8E1 /* UI */,
 				AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */,
 				AEA7471F24CA756900E4B8E1 /* Info.plist */,
 			);
@@ -159,7 +178,7 @@
 		AEA7472B24CA78E900E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */,
+				AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,8 +224,61 @@
 		AEA7475024CABD3200E4B8E1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7475124CABE7D00E4B8E1 /* XWAKKeychain.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		AEA7475324CABE8600E4B8E1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7475624CABE9C00E4B8E1 /* Tools */,
+				AEA7475524CABE9800E4B8E1 /* View */,
+				AEA7475424CABE8E00E4B8E1 /* Hud */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AEA7475424CABE8E00E4B8E1 /* Hud */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Hud;
+			sourceTree = "<group>";
+		};
+		AEA7475524CABE9800E4B8E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7475724CABEB700E4B8E1 /* XWASSwitchButtonTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AEA7475624CABE9C00E4B8E1 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7475924CAC53400E4B8E1 /* XWASKeychainTests.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		AEA7475B24CAC93200E4B8E1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7475C24CAC9BF00E4B8E1 /* DictionaryExtension.swift */,
+				AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */,
+				AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AEA7476024CACDC800E4B8E1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7476324CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift */,
+				AEA7476124CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,7 +356,7 @@
 		AEA7470624CA756900E4B8E1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = XWAS;
+				CLASSPREFIX = XWAK;
 				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = ZhuanagXiaowei;
@@ -353,7 +425,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEA7472D24CA790B00E4B8E1 /* XWASSwitchButton.swift in Sources */,
+				AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */,
+				AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */,
+				AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */,
+				AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */,
+				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +437,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA7476424CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift in Sources */,
+				AEA7475824CABEB700E4B8E1 /* XWASSwitchButtonTests.swift in Sources */,
 				AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */,
+				AEA7475A24CAC53400E4B8E1 /* XWASKeychainTests.swift in Sources */,
+				AEA7476224CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

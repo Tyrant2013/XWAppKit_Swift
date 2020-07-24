@@ -1,5 +1,5 @@
 //
-//  XWSwitchButton.swift
+//  XWAKSwitchButton.swift
 //  XWAppKit_Swift
 //
 //  Created by ZHXW on 2020/7/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class XWASSwitchButton: UIControl {
+public class XWAKSwitchButton: UIControl {
     
     private let animationDuration: CGFloat = 0.3
     private let finalStrokeEndForCheckmark: CGFloat = 0.85
