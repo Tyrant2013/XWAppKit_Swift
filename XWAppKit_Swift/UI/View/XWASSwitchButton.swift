@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class XWSwitchButton: UIControl {
+public class XWASSwitchButton: UIControl {
     
     private let animationDuration: CGFloat = 0.3
     private let finalStrokeEndForCheckmark: CGFloat = 0.85

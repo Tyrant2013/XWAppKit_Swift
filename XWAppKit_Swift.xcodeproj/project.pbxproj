@@ -10,7 +10,7 @@
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */; };
 		AEA7472024CA756900E4B8E1 /* XWAppKit_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEA7472D24CA790B00E4B8E1 /* XWSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7472C24CA790B00E4B8E1 /* XWSwitchButton.swift */; };
+		AEA7472D24CA790B00E4B8E1 /* XWASSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */; };
 		AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */; };
 		AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */; };
 		AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473824CA90FD00E4B8E1 /* ViewController.swift */; };
@@ -60,7 +60,7 @@
 		AEA7471824CA756900E4B8E1 /* XWAppKit_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XWAppKit_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAppKit_SwiftTests.swift; sourceTree = "<group>"; };
 		AEA7471F24CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEA7472C24CA790B00E4B8E1 /* XWSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWSwitchButton.swift; sourceTree = "<group>"; };
+		AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWASSwitchButton.swift; sourceTree = "<group>"; };
 		AEA7473224CA90FD00E4B8E1 /* XWAppKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XWAppKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 		AEA7472924CA785100E4B8E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7475024CABD3200E4B8E1 /* Tools */,
 				AEA7472B24CA78E900E4B8E1 /* View */,
 				AEA7472A24CA785F00E4B8E1 /* Hud */,
 			);
@@ -158,7 +159,7 @@
 		AEA7472B24CA78E900E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA7472C24CA790B00E4B8E1 /* XWSwitchButton.swift */,
+				AEA7472C24CA790B00E4B8E1 /* XWASSwitchButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +200,13 @@
 				AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AEA7475024CABD3200E4B8E1 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +284,7 @@
 		AEA7470624CA756900E4B8E1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = XWAS;
 				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = ZhuanagXiaowei;
@@ -344,7 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEA7472D24CA790B00E4B8E1 /* XWSwitchButton.swift in Sources */,
+				AEA7472D24CA790B00E4B8E1 /* XWASSwitchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
