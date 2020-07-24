@@ -28,6 +28,10 @@
 		AEA7476224CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476124CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift */; };
 		AEA7476424CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476324CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift */; };
 		AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */; };
+		AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */; };
+		AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */; };
+		AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */; };
+		AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,10 @@
 		AEA7476124CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKStringExtensionTests.swift; sourceTree = "<group>"; };
 		AEA7476324CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDictionaryEntensionTests.swift; sourceTree = "<group>"; };
 		AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHud.swift; sourceTree = "<group>"; };
+		AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAlert.swift; sourceTree = "<group>"; };
+		AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
+		AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,21 +171,15 @@
 			children = (
 				AEA7475024CABD3200E4B8E1 /* Tools */,
 				AEA7472B24CA78E900E4B8E1 /* View */,
-				AEA7472A24CA785F00E4B8E1 /* Hud */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		AEA7472A24CA785F00E4B8E1 /* Hud */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Hud;
 			sourceTree = "<group>";
 		};
 		AEA7472B24CA78E900E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */,
+				AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */,
 				AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */,
 			);
 			path = View;
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */,
+				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,16 +237,8 @@
 			children = (
 				AEA7475624CABE9C00E4B8E1 /* Tools */,
 				AEA7475524CABE9800E4B8E1 /* View */,
-				AEA7475424CABE8E00E4B8E1 /* Hud */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		AEA7475424CABE8E00E4B8E1 /* Hud */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Hud;
 			sourceTree = "<group>";
 		};
 		AEA7475524CABE9800E4B8E1 /* View */ = {
@@ -268,6 +263,7 @@
 				AEA7475C24CAC9BF00E4B8E1 /* DictionaryExtension.swift */,
 				AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */,
 				AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */,
+				AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -429,7 +425,10 @@
 				AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */,
 				AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */,
 				AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */,
+				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
+				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
+				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +450,7 @@
 			files = (
 				AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */,
 				AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */,
+				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
 			);

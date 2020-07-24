@@ -14,7 +14,7 @@ class XWAppKitSwitchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let btn = XWSwitchButton()
+        let btn = XWAKSwitchButton()
         btn.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
         view.addSubview(btn)
         // Do any additional setup after loading the view.
