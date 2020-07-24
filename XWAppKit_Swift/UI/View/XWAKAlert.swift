@@ -25,8 +25,11 @@ public class XWAKAlert: NSObject {
             alert.addAction(cancelAction)
         }
         var actualDelay = delay
-        if ok == nil && cancel == nil && actualDelay == 0.0 {
-            actualDelay = 1.5
+        if ok == nil && cancel == nil {
+            actualDelay = actualDelay == 0.0 ? 1.5 : actualDelay
+        }
+        else {
+            actualDelay = 0.0
         }
         
         DispatchQueue.main.async {
