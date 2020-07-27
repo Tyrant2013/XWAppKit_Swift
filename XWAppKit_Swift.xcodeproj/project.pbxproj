@@ -36,6 +36,7 @@
 		AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477124CEB2BF00E4B8E1 /* XWAKToast.swift */; };
 		AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */; };
 		AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477724CED11000E4B8E1 /* XWAKDesign.swift */; };
+		AEA7477B24CED2F800E4B8E1 /* XWAKColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		AEA7477124CEB2BF00E4B8E1 /* XWAKToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKToast.swift; sourceTree = "<group>"; };
 		AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKToastViewController.swift; sourceTree = "<group>"; };
 		AEA7477724CED11000E4B8E1 /* XWAKDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDesign.swift; sourceTree = "<group>"; };
+		AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7477924CED2DB00E4B8E1 /* Design */,
 				AEA7476024CACDC800E4B8E1 /* Extension */,
 				AEA7475324CABE8600E4B8E1 /* UI */,
 				AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */,
@@ -293,6 +296,14 @@
 			isa = PBXGroup;
 			children = (
 				AEA7477724CED11000E4B8E1 /* XWAKDesign.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		AEA7477924CED2DB00E4B8E1 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -462,6 +473,7 @@
 				AEA7475824CABEB700E4B8E1 /* XWASSwitchButtonTests.swift in Sources */,
 				AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */,
 				AEA7475A24CAC53400E4B8E1 /* XWASKeychainTests.swift in Sources */,
+				AEA7477B24CED2F800E4B8E1 /* XWAKColorTests.swift in Sources */,
 				AEA7476224CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

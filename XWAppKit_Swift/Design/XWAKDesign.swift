@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum Font: String {
+public enum Font: String {
     case regular = "regular"
     case medium = "medium"
     
@@ -18,13 +18,13 @@ enum Font: String {
     }
 }
 
-struct FontDescription {
+public struct FontDescription {
     let font: Font
     let size: CGFloat
     let style: UIFont.TextStyle
 }
 
-enum TextStyle {
+public enum TextStyle {
     case display1
     
     private var fontDescription: FontDescription {
@@ -48,7 +48,7 @@ enum TextStyle {
 //label.font = TextStyle.display1.font
 
 // 里面的名字是Color Assets 里面定义的颜色名字
-enum Color: String, CaseIterable {
+public enum Color: String, CaseIterable {
     // Base Colors
     case primary = "Primary"
     // Text Colors
@@ -65,7 +65,7 @@ enum Color: String, CaseIterable {
 }
 
 // 必须保存 Color Assets 里面有设定好的颜色，不然就会出错
-extension UIColor {
+public extension UIColor {
     convenience init(color: Color) {
         self.init(named: color.rawValue)!
     }
@@ -74,7 +74,7 @@ extension UIColor {
 // Usage
 // let color = UIColor(color: .primary)
 
-enum AnimationDuration: TimeInterval {
+public enum AnimationDuration: TimeInterval {
     case microFast = 0.1
     case microRegular = 0.2
     case microSlow = 0.3
@@ -88,7 +88,7 @@ enum AnimationDuration: TimeInterval {
     }
 }
 
-enum AnimationTiming {
+public enum AnimationTiming {
     case easeIn
     case easeOut
     case easeInOut
