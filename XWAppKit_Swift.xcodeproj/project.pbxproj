@@ -32,6 +32,7 @@
 		AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */; };
 		AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */; };
 		AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */; };
+		AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAlert.swift; sourceTree = "<group>"; };
 		AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAlertViewController.swift; sourceTree = "<group>"; };
+		AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHudViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 			children = (
 				AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */,
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
+				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
+				AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
