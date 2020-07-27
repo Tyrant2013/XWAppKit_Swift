@@ -13,7 +13,8 @@ class ViewController: UITableViewController {
     private let dataSources = [
         "XWSwitchButton",
         "XWAKAlertViewController",
-        "XWAKHudViewController"
+        "XWAKHudViewController",
+        "XWAKToastViewController"
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,9 @@ extension ViewController {
             navigationController?.pushViewController(vc, animated: true)
         case 2:
             let vc = XWAKHudViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case 3:
+            let vc = XWAKToastViewController()
             navigationController?.pushViewController(vc, animated: true)
         default:
             break

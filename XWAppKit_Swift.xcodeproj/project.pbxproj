@@ -33,6 +33,8 @@
 		AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */; };
 		AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */; };
 		AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */; };
+		AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477124CEB2BF00E4B8E1 /* XWAKToast.swift */; };
+		AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAlertViewController.swift; sourceTree = "<group>"; };
 		AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHudViewController.swift; sourceTree = "<group>"; };
+		AEA7477124CEB2BF00E4B8E1 /* XWAKToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKToast.swift; sourceTree = "<group>"; };
+		AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKToastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 			children = (
 				AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */,
 				AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */,
+				AEA7477124CEB2BF00E4B8E1 /* XWAKToast.swift */,
 				AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */,
 			);
 			path = View;
@@ -223,6 +228,7 @@
 				AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */,
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
+				AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
+				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
 				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +464,7 @@
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
 				AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */,
+				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
