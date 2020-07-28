@@ -33,6 +33,11 @@ class XWAKHudViewController: UIViewController {
         dismissBtn.frame = CGRect(x: 210, y: 200, width: 100, height: 30)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hud.dismiss()
+    }
+    
     private func makeButton(title: String, action: Selector) -> UIButton {
         let btn = UIButton(type: .system)
         btn.addTarget(self, action: action, for: .touchUpInside)

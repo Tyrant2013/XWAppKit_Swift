@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import XWAppKit_Swift
 
 class ViewController: UITableViewController {
 
     private let dataSources = [
-        "XWSwitchButton",
+        [
+        "XWAppKitSwitchViewController",
         "XWAKAlertViewController",
         "XWAKHudViewController",
         "XWAKToastViewController"
+        ],
+        ["XWAKLoginViewController"]
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,33 +28,38 @@ class ViewController: UITableViewController {
 }
 
 extension ViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return dataSources.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSources[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = dataSources[indexPath.row]
+        cell.textLabel?.text = dataSources[indexPath.section][indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        switch indexPath.row {
-        case 0:
-            let vc = XWAppKitSwitchViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        case 1:
-            let vc = XWAKAlertViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        case 2:
-            let vc = XWAKHudViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        case 3:
-            let vc = XWAKToastViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        default:
-            break
+        
+        if let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] {
+            let name = dataSources[indexPath.section][indexPath.row]
+            if let cls: AnyClass = NSClassFromString(namespace as! String + "." + name) {
+                let vcCls = cls as! UIViewController.Type
+                
+                let vc = vcCls.init()
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            else {
+                if let cls: AnyClass = NSClassFromString("XWAppKit_Swift." + name) {
+                    let vcCls = cls as! UIViewController.Type
+                    let vc = vcCls.init()
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 }

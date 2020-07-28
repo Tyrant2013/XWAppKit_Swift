@@ -37,6 +37,10 @@
 		AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */; };
 		AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477724CED11000E4B8E1 /* XWAKDesign.swift */; };
 		AEA7477B24CED2F800E4B8E1 /* XWAKColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */; };
+		AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477D24CFC26700E4B8E1 /* XWAKLoginViewController.swift */; };
+		AEA7478024CFC34A00E4B8E1 /* XWAKInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477F24CFC34A00E4B8E1 /* XWAKInputView.swift */; };
+		AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478124CFCC5400E4B8E1 /* XWAKLoginView.swift */; };
+		AEA7478424CFCE1000E4B8E1 /* XWAKLoginInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478324CFCE1000E4B8E1 /* XWAKLoginInputCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,10 @@
 		AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKToastViewController.swift; sourceTree = "<group>"; };
 		AEA7477724CED11000E4B8E1 /* XWAKDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDesign.swift; sourceTree = "<group>"; };
 		AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorTests.swift; sourceTree = "<group>"; };
+		AEA7477D24CFC26700E4B8E1 /* XWAKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLoginViewController.swift; sourceTree = "<group>"; };
+		AEA7477F24CFC34A00E4B8E1 /* XWAKInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKInputView.swift; sourceTree = "<group>"; };
+		AEA7478124CFCC5400E4B8E1 /* XWAKLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLoginView.swift; sourceTree = "<group>"; };
+		AEA7478324CFCE1000E4B8E1 /* XWAKLoginInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLoginInputCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +189,7 @@
 		AEA7472924CA785100E4B8E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7477C24CFC23B00E4B8E1 /* ViewController */,
 				AEA7475024CABD3200E4B8E1 /* Tools */,
 				AEA7472B24CA78E900E4B8E1 /* View */,
 			);
@@ -306,6 +315,17 @@
 				AEA7477A24CED2F800E4B8E1 /* XWAKColorTests.swift */,
 			);
 			path = Design;
+			sourceTree = "<group>";
+		};
+		AEA7477C24CFC23B00E4B8E1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7477D24CFC26700E4B8E1 /* XWAKLoginViewController.swift */,
+				AEA7478324CFCE1000E4B8E1 /* XWAKLoginInputCell.swift */,
+				AEA7477F24CFC34A00E4B8E1 /* XWAKInputView.swift */,
+				AEA7478124CFCC5400E4B8E1 /* XWAKLoginView.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,12 +472,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA7478024CFC34A00E4B8E1 /* XWAKInputView.swift in Sources */,
 				AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */,
 				AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */,
 				AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */,
 				AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */,
+				AEA7478424CFCE1000E4B8E1 /* XWAKLoginInputCell.swift in Sources */,
+				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
+				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
