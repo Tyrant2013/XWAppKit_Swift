@@ -10,8 +10,6 @@ import UIKit
 import XWAppKit_Swift
 
 class XWAKHudViewController: UIViewController {
-
-    private let hud = XWAKHud()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +23,20 @@ class XWAKHudViewController: UIViewController {
         
         let noTitleAndMsg = makeButton(title: "无标题和内容", action: #selector(showWithNoTitleAndMsg(_:)))
         
+        let autoDismiss = makeButton(title: "自动隐藏", action: #selector(autoDismiss(_:)))
+        
         let dismissBtn = makeButton(title: "隐藏", action: #selector(dismissHud(_:)))
         
         noTitleBtn.frame = CGRect(x: 100, y: 200, width: 100, height: 30)
         hasTitleBtn.frame = CGRect(x: 100, y: 240, width: 100, height: 30)
         noTitleAndMsg.frame = CGRect(x: 100, y: 280, width: 150, height: 30)
+        autoDismiss.frame = CGRect(x: 100, y: 320, width: 120, height: 30)
         dismissBtn.frame = CGRect(x: 210, y: 200, width: 100, height: 30)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        hud.dismiss()
+        XWAKHud.dismiss()
     }
     
     private func makeButton(title: String, action: Selector) -> UIButton {
@@ -49,22 +50,27 @@ class XWAKHudViewController: UIViewController {
     
     @objc
     func showWithNoTitle(_ sender: UIButton) {
-        hud.show(title: nil, msg: "这个没有标题")
+        XWAKHud.show(msg: "这个没有标题")
     }
     
     @objc
     func showWithTitle(_ sender: UIButton) {
-        hud.show(title: "这里是标题", msg: "这个有标题")
+        XWAKHud.show(title: "这里是标题", msg: "这个有标题")
     }
     
     @objc
     func showWithNoTitleAndMsg(_ sender: UIButton) {
-        hud.show(title: nil, msg: nil)
+        XWAKHud.wait()
+    }
+    
+    @objc
+    func autoDismiss(_ sender: UIButton) {
+        XWAKHud.show(in: view, title: "", msg: "会自动隐藏的", delay: 3.0)
     }
     
     @objc
     func dismissHud(_ sender: UIButton) {
-        hud.dismiss()
+        XWAKHud.dismiss()
     }
 
     /*
