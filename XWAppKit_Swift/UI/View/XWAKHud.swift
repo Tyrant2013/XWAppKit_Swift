@@ -127,6 +127,7 @@ class XWAKHudView: UIView {
 }
 
 let hud = XWAKHudView()
+let ignoreView = UIView()
 public class XWAKHud: NSObject {
     private static let shared = XWAKHud()
     private var delayTimer: Timer?
@@ -173,6 +174,7 @@ public class XWAKHud: NSObject {
                 hud.transform = end
             }) { _ in
                 if !show {
+                    ignoreView.removeFromSuperview()
                     hud.removeFromSuperview()
                 }
             }
@@ -205,12 +207,23 @@ public class XWAKHud: NSObject {
         show(in: nil, title: title, msg: msg, delay: 0.0)
     }
     
-    public class func show(in view: UIView?, title: String?, msg: String?, delay: TimeInterval) {
+    public class func show(in view: UIView?, title: String?, msg: String?, delay: TimeInterval, ignoreInteraction: Bool = true) {
         var inView = view
         if inView == nil {
             inView = UIWindow.findKeyWindow()
         }
         hud.set(title: title, msg: msg)
+        if ignoreInteraction {
+            inView!.addSubview(ignoreView)
+            ignoreView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                ignoreView.leftAnchor.constraint(equalTo: inView!.leftAnchor),
+                ignoreView.rightAnchor.constraint(equalTo: inView!.rightAnchor),
+                ignoreView.topAnchor.constraint(equalTo: inView!.topAnchor),
+                ignoreView.bottomAnchor.constraint(equalTo: inView!.bottomAnchor)
+            ])
+        }
+        
         inView!.addSubview(hud)
         NSLayoutConstraint.activate([
             hud.centerXAnchor.constraint(equalTo: inView!.centerXAnchor),
