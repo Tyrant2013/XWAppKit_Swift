@@ -13,14 +13,27 @@ class XWAKLoginInputCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        initViews()
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        initViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initViews()
+    }
+    
+    private func initViews() {
         let loginView = XWAKLoginView()
         loginView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(loginView)
         
         NSLayoutConstraint.activate([
             loginView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            loginView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            loginView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            loginView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             loginView.heightAnchor.constraint(equalToConstant: 300),
             loginView.widthAnchor.constraint(equalToConstant: 250)
         ])

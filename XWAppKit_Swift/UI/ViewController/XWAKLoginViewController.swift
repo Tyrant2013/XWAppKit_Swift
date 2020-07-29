@@ -14,6 +14,9 @@ public class XWAKLoginViewController: UIViewController {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(XWAKLoginInputCell.self, forCellReuseIdentifier: "LoginInputCell")
+        table.bounces = false
+        table.allowsSelection = false
+        table.separatorStyle = .none
         return table
     }()
     
