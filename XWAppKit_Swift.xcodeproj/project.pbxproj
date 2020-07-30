@@ -45,6 +45,7 @@
 		AEA7478A24D1187C00E4B8E1 /* XWAKAntiDebug.c in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478824D1187C00E4B8E1 /* XWAKAntiDebug.c */; };
 		AEA7479124D11E0600E4B8E1 /* XWAKAntiCrack.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7478F24D11E0600E4B8E1 /* XWAKAntiCrack.h */; };
 		AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479024D11E0600E4B8E1 /* XWAKAntiCrack.m */; };
+		AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		AEA7478824D1187C00E4B8E1 /* XWAKAntiDebug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = XWAKAntiDebug.c; sourceTree = "<group>"; };
 		AEA7478F24D11E0600E4B8E1 /* XWAKAntiCrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWAKAntiCrack.h; sourceTree = "<group>"; };
 		AEA7479024D11E0600E4B8E1 /* XWAKAntiCrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWAKAntiCrack.m; sourceTree = "<group>"; };
+		AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7479724D2B48E00E4B8E1 /* IAP */,
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7477624CED0EA00E4B8E1 /* Design */,
 				AEA7475B24CAC93200E4B8E1 /* Extension */,
@@ -348,6 +351,14 @@
 			path = AntiDebug;
 			sourceTree = "<group>";
 		};
+		AEA7479724D2B48E00E4B8E1 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */,
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -497,6 +508,7 @@
 				AEA7478024CFC34A00E4B8E1 /* XWAKInputView.swift in Sources */,
 				AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */,
 				AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */,
+				AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */,
 				AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */,
 				AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */,
 				AEA7478A24D1187C00E4B8E1 /* XWAKAntiDebug.c in Sources */,
