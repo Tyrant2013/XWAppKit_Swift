@@ -16,7 +16,8 @@ class ViewController: UITableViewController {
         "XWAppKitSwitchViewController",
         "XWAKAlertViewController",
         "XWAKHudViewController",
-        "XWAKToastViewController"
+        "XWAKToastViewController",
+        "XWAKIAPViewController"
         ],
         ["XWAKLoginViewController"]
     ]

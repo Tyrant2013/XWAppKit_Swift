@@ -47,6 +47,7 @@
 		AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479024D11E0600E4B8E1 /* XWAKAntiCrack.m */; };
 		AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */; };
 		AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */; };
+		AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		AEA7479024D11E0600E4B8E1 /* XWAKAntiCrack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWAKAntiCrack.m; sourceTree = "<group>"; };
 		AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPManager.swift; sourceTree = "<group>"; };
 		AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPVerify.swift; sourceTree = "<group>"; };
+		AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
 				AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */,
+				AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 			files = (
 				AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */,
 				AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */,
+				AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */,
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
