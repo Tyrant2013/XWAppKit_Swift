@@ -163,11 +163,11 @@ public struct XWAKVrifyResponseReceipt: Codable {
     // A unique identifier for the app download transaction.
     let download_id: Int
     // The time the receipt expires for apps purchased through the Volume Purchase Program, in a date-time format similar to the ISO 8601.
-    let expiration_date: String
+    let expiration_date: String?
     // The time the receipt expires for apps purchased through the Volume Purchase Program, in UNIX epoch time format, in milliseconds. If this key is not present for apps purchased through the Volume Purchase Program, the receipt does not expire. Use this time format for processing dates.
-    let expiration_date_ms: String
+    let expiration_date_ms: String?
     // The time the receipt expires for apps purchased through the Volume Purchase Program, in the Pacific Time zone.
-    let expiration_date_pst: String
+    let expiration_date_pst: String?
     // An array that contains the in-app purchase receipt fields for all in-app purchase transactions.
     let in_app: [XWAKVerifyResponseInApp]
     // The version of the app that the user originally purchased. This value does not change, and corresponds to the value of CFBundleVersion (in iOS) or CFBundleShortVersionString (in macOS) in the Info.plist file of the original purchase. In the sandbox environment, the value is always "1.0".
@@ -179,11 +179,11 @@ public struct XWAKVrifyResponseReceipt: Codable {
     // The time of the original app purchase, in the Pacific Time zone.
     let original_purchase_date_pst: String
     // The time the user ordered the app available for pre-order, in a date-time format similar to ISO 8601.
-    let preorder_date: String
+    let preorder_date: String?
     // The time the user ordered the app available for pre-order, in UNIX epoch time format, in milliseconds. This field is only present if the user pre-orders the app. Use this time format for processing dates.
-    let preorder_date_ms: String
+    let preorder_date_ms: String?
     // The time the user ordered the app available for pre-order, in the Pacific Time zone.
-    let preorder_date_pst: String
+    let preorder_date_pst: String?
     // The time the App Store generated the receipt, in a date-time format similar to ISO 8601.
     let receipt_creation_date: String
     // The time the App Store generated the receipt, in UNIX epoch time format, in milliseconds. Use this time format for processing dates. This value does not change.
@@ -205,22 +205,22 @@ public struct XWAKVrifyResponseReceipt: Codable {
 
 public struct XWAKVerifyResponseInApp: Codable {
     // The time Apple customer support canceled a transaction, or the time an auto-renewable subscription plan was upgraded, in a date-time format similar to the ISO 8601. This field is only present for refunded transactions.
-    let cancellation_date: String
+    let cancellation_date: String?
     // The time Apple customer support canceled a transaction, or the time an auto-renewable subscription plan was upgraded, in UNIX epoch time format, in milliseconds. This field is only present for refunded transactions. Use this time format for processing dates. See cancellation_date_ms for more information.
     // https://developer.apple.com/documentation/appstorereceipts/cancellation_date_ms
-    let cancellation_date_ms: String
+    let cancellation_date_ms: String?
     // The time Apple customer support canceled a transaction, or the time an auto-renewable subscription plan was upgraded, in the Pacific Time zone. This field is only present for refunded transactions.
-    let cancellation_date_pst: String
+    let cancellation_date_pst: String?
     // The reason for a refunded transaction. When a customer cancels a transaction, the App Store gives them a refund and provides a value for this key. A value of “1” indicates that the customer canceled their transaction due to an actual or perceived issue within your app. A value of “0” indicates that the transaction was canceled for another reason; for example, if the customer made the purchase accidentally.
     // Possible values: 1, 0
-    let cancellation_reason: String
+    let cancellation_reason: String?
     // The time a subscription expires or when it will renew, in a date-time format similar to the ISO 8601.
-    let expires_date: String
+    let expires_date: String?
     //  The time a subscription expires or when it will renew, in UNIX epoch time format, in milliseconds. Use this time format for processing dates. See expires_date_ms for more information.
     // https://developer.apple.com/documentation/appstorereceipts/expires_date_ms
-    let expires_date_ms: String
+    let expires_date_ms: String?
     // The time a subscription expires or when it will renew, in the Pacific Time zone.
-    let expires_date_pst: String
+    let expires_date_pst: String?
     // An indicator of whether an auto-renewable subscription is in the introductory price period. See is_in_intro_offer_period for more information.
     // https://developer.apple.com/documentation/appstorereceipts/is_in_intro_offer_period
     // Possible Values
@@ -228,7 +228,7 @@ public struct XWAKVerifyResponseInApp: Codable {
     // The customer’s subscription is in an introductory price period
     // false
     // The subscription is not in an introductory price period.
-    let is_in_intro_offer_period: String
+    let is_in_intro_offer_period: String?
     // An indication of whether a subscription is in the free trial period. See is_trial_period for more information.
     // https://developer.apple.com/documentation/appstorereceipts/is_trial_period
     // Possible Values
@@ -249,7 +249,7 @@ public struct XWAKVerifyResponseInApp: Codable {
     // The unique identifier of the product purchased. You provide this value when creating the product in App Store Connect, and it corresponds to the productIdentifier property of the SKPayment object stored in the transaction's payment property.
     let product_id: String
     // The identifier of the subscription offer redeemed by the user. See promotional_offer_id for more information.
-    let promotional_offer_id: String
+    let promotional_offer_id: String?
     // The time the App Store charged the user's account for a purchased or restored product, or the time the App Store charged the user’s account for a subscription purchase or renewal after a lapse, in a date-time format similar to ISO 8601.
     let purchase_date: String
     // For consumable, non-consumable, and non-renewing subscription products, the time the App Store charged the user's account for a purchased or restored product, in the UNIX epoch time format, in milliseconds. For auto-renewable subscriptions, the time the App Store charged the user’s account for a subscription purchase or renewal after a lapse, in the UNIX epoch time format, in milliseconds. Use this time format for processing dates.
@@ -261,7 +261,7 @@ public struct XWAKVerifyResponseInApp: Codable {
     // A unique identifier for a transaction such as a purchase, restore, or renewal. See transaction_id for more information.
     let transaction_id: String
     // A unique identifier for purchase events across devices, including subscription-renewal events. This value is the primary key for identifying subscription purchases.
-    let web_order_line_item_id: String
+    let web_order_line_item_id: String?
     
 }
 
@@ -286,6 +286,11 @@ public class XWAKIAPVerify: NSObject {
         }
     }
     
+    public func showSaveDataList() {
+        let vc = XWAKIAPResponDataListViewController()
+        UIWindow.findKeyWindow().rootViewController?.present(vc, animated: true, completion: nil)
+    }
+    
     private func load(URL url: URL, httpBody: Data, requestHandler: @escaping XWAKVerifyResult) {
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -298,8 +303,9 @@ public class XWAKIAPVerify: NSObject {
             }
             if let data = data {
                 do {
-                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
-                    print("验证结果数据: ", jsonResponse)
+                    
+                    self.save(data: data)
+                    
                     let responOjb = try JSONDecoder().decode(XWAKVerifyResponse.self, from: data)
                     requestHandler(.success(responOjb))
                 }
@@ -312,6 +318,36 @@ public class XWAKIAPVerify: NSObject {
             }
         }.resume()
     }
+    
+    private func save(data: Data) {
+        do {
+            let savePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+            if !FileManager.default.fileExists(atPath: savePath + "/iap") {
+                try FileManager.default.createDirectory(atPath: savePath + "/iap",
+                                                        withIntermediateDirectories: true,
+                                                        attributes: nil)
+            }
+            let filePath = savePath.appendingFormat("/iap/%@", NSUUID().uuidString)
+            try data.write(to: URL(fileURLWithPath: filePath))
+            print("response data save to: ", filePath)
+        }
+        catch {
+            print("save error: ", error)
+        }
+    }
+    
+    func loadDeviceDatas() -> [String] {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let dir = path.appending("/iap")
+        do {
+            let contents = try FileManager.default.contentsOfDirectory(atPath: dir)
+            return contents.map { "\(dir)/\($0)" }
+        }
+        catch {
+            return []
+        }
+    }
+    
 }
 // decode: The data couldn’t be read because it is missing.
 /*

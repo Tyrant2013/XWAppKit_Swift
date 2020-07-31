@@ -48,6 +48,7 @@
 		AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */; };
 		AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */; };
 		AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */; };
+		AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPManager.swift; sourceTree = "<group>"; };
 		AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPVerify.swift; sourceTree = "<group>"; };
 		AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPViewController.swift; sourceTree = "<group>"; };
+		AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPResponDataListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +363,7 @@
 			children = (
 				AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */,
 				AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */,
+				AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */,
 			);
 			path = IAP;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
+				AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */,
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
 				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,
 			);

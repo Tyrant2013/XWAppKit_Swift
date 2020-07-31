@@ -25,6 +25,8 @@ class XWAKIAPViewController: UIViewController {
         
         let nonAutoRenewalButton = makeButton(title: "非自动续费型项目", sel: #selector(buyNonAutoRenewal(_:)))
         
+        let showButton = makeButton(title: "显示验证数据", sel: #selector(showVerifyDataList(_:)))
+        
         NSLayoutConstraint.activate([
             comsumeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
             comsumeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
@@ -45,6 +47,11 @@ class XWAKIAPViewController: UIViewController {
             nonAutoRenewalButton.widthAnchor.constraint(equalTo: comsumeButton.widthAnchor),
             nonAutoRenewalButton.heightAnchor.constraint(equalTo: comsumeButton.heightAnchor),
             nonAutoRenewalButton.centerXAnchor.constraint(equalTo: comsumeButton.centerXAnchor),
+            
+            showButton.topAnchor.constraint(equalTo: nonAutoRenewalButton.bottomAnchor, constant: 10),
+            showButton.widthAnchor.constraint(equalTo: comsumeButton.widthAnchor),
+            showButton.heightAnchor.constraint(equalTo: comsumeButton.heightAnchor),
+            showButton.centerXAnchor.constraint(equalTo: comsumeButton.centerXAnchor),
         ])
     }
     
@@ -126,6 +133,10 @@ class XWAKIAPViewController: UIViewController {
         buy(name: "buyNonAutoRenewal", productID: "com.indie.XWAppKitDemo.non_auto_renewal")
     }
 
+    @objc
+    func showVerifyDataList(_ sender: UIButton) {
+        self.verify.showSaveDataList()
+    }
     /*
     // MARK: - Navigation
 
