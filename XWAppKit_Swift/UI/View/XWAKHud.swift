@@ -16,6 +16,7 @@ class XWAKHudView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
+        label.textColor = .white
         NSLayoutConstraint.activate([label.heightAnchor.constraint(equalToConstant: 30)])
         return label
     }()
@@ -26,6 +27,7 @@ class XWAKHudView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
+        label.textColor = .white
         return label
     }()
     private let indicator: UIActivityIndicatorView = {
