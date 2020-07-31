@@ -9,6 +9,18 @@
 import UIKit
 import StoreKit
 
+public enum XWAKIAPProcess {
+    case requestProductStart
+    case requestProductSuccess
+    case requestProductFailed
+    case transactionStart
+    case transactionPurchasing
+    case transactionPurchased
+    case transactionFailed
+    case transactionRestored
+    case transactionDeferred
+}
+
 public enum XWAKIAPFailed: Error {
     case cancel
     case network
@@ -40,9 +52,11 @@ extension XWAKIAPFailed {
     }
 }
 
-typealias XWAKIAPResultHandler = (Result<String, XWAKIAPFailed>) -> Void
+public typealias XWAKIAPProcessHandler = (_ state: XWAKIAPProcess) -> Void
+public typealias XWAKIAPResultHandler = (_ result: Result<Data, XWAKIAPFailed>) -> Void
 public class XWAKIAPManager: NSObject {
     private static let shared = XWAKIAPManager()
+    private var processHandler: XWAKIAPProcessHandler?
     private var resultHandler: XWAKIAPResultHandler!
     
     override init() {
@@ -50,21 +64,24 @@ public class XWAKIAPManager: NSObject {
         SKPaymentQueue.default().add(self)
     }
     
-    private func post(productID: String, handler: @escaping XWAKIAPResultHandler) {
+    private func post(productID: String, processHandler: XWAKIAPProcessHandler?, handler: @escaping XWAKIAPResultHandler) {
         resultHandler = handler
+        self.processHandler = processHandler
         
         let request = SKProductsRequest(productIdentifiers: Set(arrayLiteral: productID))
         request.delegate = self
         request.start()
+        processHandler?(.requestProductStart)
     }
     
-    public class func post(productID: String, handler: @escaping (_ result: Result<String, XWAKIAPFailed>) -> Void) {
-        XWAKIAPManager.shared.post(productID: productID, handler: handler)
+    public class func post(productID: String, processHandler: XWAKIAPProcessHandler?, handler: @escaping XWAKIAPResultHandler) {
+        XWAKIAPManager.shared.post(productID: productID, processHandler: processHandler, handler: handler)
     }
 }
 
 extension XWAKIAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        processHandler?(.requestProductSuccess)
         if response.invalidProductIdentifiers.count > 0 {
             resultHandler(.failure(.invalidProducts(productIDs: response.invalidProductIdentifiers)))
             return
@@ -72,10 +89,12 @@ extension XWAKIAPManager: SKProductsRequestDelegate {
         if let product = response.products.first {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
+            processHandler?(.transactionStart)
         }
     }
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {
+        processHandler?(.requestProductFailed)
         resultHandler(.failure(.product(reason: error.localizedDescription)))
     }
 }
@@ -85,14 +104,14 @@ extension XWAKIAPManager: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
-                print("state purchasing: do nothing")
+                processHandler?(.transactionPurchasing)
             case .purchased:
                 SKPaymentQueue.default().finishTransaction(transaction)
+                processHandler?(.transactionPurchased)
                 if let receiptURL = Bundle.main.appStoreReceiptURL {
                     do {
                         let receiptData = try Data(contentsOf: receiptURL)
-                        let receiptStr = receiptData.base64EncodedString(options: .endLineWithLineFeed)
-                        resultHandler(.success(receiptStr))
+                        resultHandler(.success(receiptData))
                     }
                     catch {
                         resultHandler(.failure(.receipt(reason: error)))
@@ -103,13 +122,15 @@ extension XWAKIAPManager: SKPaymentTransactionObserver {
                 }
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
+                processHandler?(.transactionFailed)
                 if let error = transaction.error {
                     resultHandler(.failure(.transactionFailed(reason: error)))
                 }
             case .restored:
-                print("")
+                SKPaymentQueue.default().finishTransaction(transaction)
+                processHandler?(.transactionRestored)
             case .deferred:
-                print("")
+                processHandler?(.transactionDeferred)
             @unknown default:
                 print("unkndow transactionState")
             }
