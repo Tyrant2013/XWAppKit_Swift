@@ -201,15 +201,7 @@ public class XWAKHud: NSObject {
         show(in: nil, title: nil, msg: nil, delay: 0.0)
     }
     
-    public class func show(msg: String) {
-        show(in: nil, title: nil, msg: msg, delay: 0.0)
-    }
-    
-    public class func show(title: String, msg: String) {
-        show(in: nil, title: title, msg: msg, delay: 0.0)
-    }
-    
-    public class func show(in view: UIView?, title: String?, msg: String?, delay: TimeInterval, ignoreInteraction: Bool = true) {
+    public class func show(in view: UIView? = nil, title: String? = nil, msg: String? = nil, delay: TimeInterval = 0.0, ignoreInteraction: Bool = true) {
         DispatchQueue.main.async {
             var inView = view
             if inView == nil {
