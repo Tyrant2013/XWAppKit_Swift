@@ -49,7 +49,7 @@ class XWAKHudView: UIView {
     
     private func initSelf() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        backgroundColor = UIColor.black.withAlphaComponent(0.8)
         layer.cornerRadius = 20
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 2
@@ -208,28 +208,30 @@ public class XWAKHud: NSObject {
     }
     
     public class func show(in view: UIView?, title: String?, msg: String?, delay: TimeInterval, ignoreInteraction: Bool = true) {
-        var inView = view
-        if inView == nil {
-            inView = UIWindow.findKeyWindow()
-        }
-        hud.set(title: title, msg: msg)
-        if ignoreInteraction {
-            inView!.addSubview(ignoreView)
-            ignoreView.translatesAutoresizingMaskIntoConstraints = false
+        DispatchQueue.main.async {
+            var inView = view
+            if inView == nil {
+                inView = UIWindow.findKeyWindow()
+            }
+            hud.set(title: title, msg: msg)
+            if ignoreInteraction {
+                inView!.addSubview(ignoreView)
+                ignoreView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    ignoreView.leftAnchor.constraint(equalTo: inView!.leftAnchor),
+                    ignoreView.rightAnchor.constraint(equalTo: inView!.rightAnchor),
+                    ignoreView.topAnchor.constraint(equalTo: inView!.topAnchor),
+                    ignoreView.bottomAnchor.constraint(equalTo: inView!.bottomAnchor)
+                ])
+            }
+            
+            inView!.addSubview(hud)
             NSLayoutConstraint.activate([
-                ignoreView.leftAnchor.constraint(equalTo: inView!.leftAnchor),
-                ignoreView.rightAnchor.constraint(equalTo: inView!.rightAnchor),
-                ignoreView.topAnchor.constraint(equalTo: inView!.topAnchor),
-                ignoreView.bottomAnchor.constraint(equalTo: inView!.bottomAnchor)
+                hud.centerXAnchor.constraint(equalTo: inView!.centerXAnchor),
+                hud.centerYAnchor.constraint(equalTo: inView!.centerYAnchor),
             ])
+            XWAKHud.shared.showHudAnimated(true)
+            XWAKHud.shared.dismiss(after: delay)
         }
-        
-        inView!.addSubview(hud)
-        NSLayoutConstraint.activate([
-            hud.centerXAnchor.constraint(equalTo: inView!.centerXAnchor),
-            hud.centerYAnchor.constraint(equalTo: inView!.centerYAnchor),
-        ])
-        XWAKHud.shared.showHudAnimated(true)
-        XWAKHud.shared.dismiss(after: delay)
     }
 }
