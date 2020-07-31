@@ -9,6 +9,7 @@
 import UIKit
 
 public enum XWAKVerifyFailed: Error {
+    case initRequestData(error: Error)
     case network(error: Error)
     case decode(error: Error)
     case noResponseData
@@ -266,7 +267,7 @@ public class XWAKIAPVerify: NSObject {
             load(URL: url, httpBody: requestData, requestHandler: completeHandler)
         }
         catch {
-            
+            completeHandler(.failure(.initRequestData(error: error)))
         }
     }
     
