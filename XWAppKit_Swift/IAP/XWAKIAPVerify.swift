@@ -15,6 +15,21 @@ public enum XWAKVerifyFailed: Error {
     case noResponseData
 }
 
+extension XWAKVerifyFailed {
+    public var localizedDescription: String {
+        switch self {
+        case .initRequestData(let error):
+            return "initRequestData: \(error.localizedDescription)"
+        case .network(let error):
+            return "network: \(error.localizedDescription)"
+        case .decode(let error):
+            return "decode: \(error.localizedDescription)"
+        case .noResponseData:
+            return "no response data"
+        }
+    }
+}
+
 public struct XWAKVerifyResponse: Codable {
     // The environment for which the receipt was generated.
     // Possible values: Sandbox, Production
@@ -283,14 +298,10 @@ public class XWAKIAPVerify: NSObject {
             }
             if let data = data {
                 do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
+                    print("验证结果数据: ", jsonResponse)
                     let responOjb = try JSONDecoder().decode(XWAKVerifyResponse.self, from: data)
                     requestHandler(.success(responOjb))
-//                    let jsonObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : Any]
-//                    let environment = jsonObj["environment"] as! String
-//                    let status = jsonObj["status"] as! Int
-//                    let receipt = jsonObj["receipt"] as! [String : Any]
-//                    let bundleId = receipt["bundle_id"] as! String
-//                    let inApp = receipt["in_app"] as! [[String : Any]]
                 }
                 catch {
                     requestHandler(.failure(.decode(error: error)))
@@ -299,6 +310,43 @@ public class XWAKIAPVerify: NSObject {
             else {
                 requestHandler(.failure(.noResponseData))
             }
-        }
+        }.resume()
     }
 }
+// decode: The data couldn’t be read because it is missing.
+/*
+["status": 0, "receipt": {
+    "adam_id" = 0;
+    "app_item_id" = 0;
+    "application_version" = 1;
+    "bundle_id" = "com.indie.XWAppKitDemo";
+    "download_id" = 0;
+    "in_app" =     (
+                {
+            "is_trial_period" = false;
+            "original_purchase_date" = "2020-07-31 08:25:43 Etc/GMT";
+            "original_purchase_date_ms" = 1596183943000;
+            "original_purchase_date_pst" = "2020-07-31 01:25:43 America/Los_Angeles";
+            "original_transaction_id" = 1000000700445122;
+            "product_id" = "com.indie.XWAppKitDemo.productTest";
+            "purchase_date" = "2020-07-31 08:25:43 Etc/GMT";
+            "purchase_date_ms" = 1596183943000;
+            "purchase_date_pst" = "2020-07-31 01:25:43 America/Los_Angeles";
+            quantity = 1;
+            "transaction_id" = 1000000700445122;
+        }
+    );
+    "original_application_version" = "1.0";
+    "original_purchase_date" = "2013-08-01 07:00:00 Etc/GMT";
+    "original_purchase_date_ms" = 1375340400000;
+    "original_purchase_date_pst" = "2013-08-01 00:00:00 America/Los_Angeles";
+    "receipt_creation_date" = "2020-07-31 08:25:43 Etc/GMT";
+    "receipt_creation_date_ms" = 1596183943000;
+    "receipt_creation_date_pst" = "2020-07-31 01:25:43 America/Los_Angeles";
+    "receipt_type" = ProductionSandbox;
+    "request_date" = "2020-07-31 08:25:50 Etc/GMT";
+    "request_date_ms" = 1596183950778;
+    "request_date_pst" = "2020-07-31 01:25:50 America/Los_Angeles";
+    "version_external_identifier" = 0;
+}, "environment": Sandbox]
+*/
