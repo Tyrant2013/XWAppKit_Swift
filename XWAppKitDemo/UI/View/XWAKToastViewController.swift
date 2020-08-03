@@ -20,6 +20,8 @@ class XWAKToastViewController: UIViewController {
         // Do any additional setup after loading the view.
         let btn = UIButton(type: .system)
         btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.systemBlue.cgColor
+        btn.layer.cornerRadius = 10
         btn.setTitle("显示", for: .normal)
         btn.addTarget(self, action: #selector(show(_:)), for: .touchUpInside)
         view.addSubview(btn)
@@ -27,6 +29,8 @@ class XWAKToastViewController: UIViewController {
         
         let dism = UIButton(type: .system)
         dism.layer.borderWidth = 1
+        dism.layer.borderColor = UIColor.systemBlue.cgColor
+        dism.layer.cornerRadius = 10
         dism.setTitle("隐藏", for: .normal)
         dism.addTarget(self, action: #selector(dismiss(_:)), for: .touchUpInside)
         view.addSubview(dism)

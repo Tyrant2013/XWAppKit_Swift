@@ -14,9 +14,17 @@ class XWAppKitSwitchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         let btn = XWAKSwitchButton()
-        btn.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(btn)
+        NSLayoutConstraint.activate([
+            btn.widthAnchor.constraint(equalToConstant: 50),
+            btn.heightAnchor.constraint(equalToConstant: 50),
+            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         // Do any additional setup after loading the view.
     }
     

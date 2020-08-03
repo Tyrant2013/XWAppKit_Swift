@@ -27,11 +27,11 @@ class XWAKHudViewController: UIViewController {
         
         let dismissBtn = makeButton(title: "隐藏", action: #selector(dismissHud(_:)))
         
-        noTitleBtn.frame = CGRect(x: 100, y: 200, width: 100, height: 30)
-        hasTitleBtn.frame = CGRect(x: 100, y: 240, width: 100, height: 30)
-        noTitleAndMsg.frame = CGRect(x: 100, y: 280, width: 150, height: 30)
-        autoDismiss.frame = CGRect(x: 100, y: 320, width: 120, height: 30)
-        dismissBtn.frame = CGRect(x: 210, y: 200, width: 100, height: 30)
+        noTitleBtn.frame = CGRect(x: 100, y: 200, width: 100, height: 40)
+        hasTitleBtn.frame = CGRect(x: 100, y: 260, width: 100, height: 40)
+        noTitleAndMsg.frame = CGRect(x: 100, y: 320, width: 150, height: 40)
+        autoDismiss.frame = CGRect(x: 100, y: 380, width: 120, height: 40)
+        dismissBtn.frame = CGRect(x: 210, y: 260, width: 100, height: 40)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,6 +44,8 @@ class XWAKHudViewController: UIViewController {
         btn.addTarget(self, action: action, for: .touchUpInside)
         btn.setTitle(title, for: .normal)
         btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.systemBlue.cgColor
+        btn.layer.cornerRadius = 10
         view.addSubview(btn)
         return btn
     }

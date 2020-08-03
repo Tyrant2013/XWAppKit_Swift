@@ -18,9 +18,18 @@ class XWAKAlertViewController: UIViewController {
         view.backgroundColor = .white
         let btn = UIButton(type: .system)
         btn.setTitle("提示", for: .normal)
-        btn.frame = CGRect(x: 100, y: 100, width: 100, height: 50)
+        btn.layer.borderColor = UIColor.systemBlue.cgColor
+        btn.layer.borderWidth = 1
+        btn.layer.cornerRadius = 10
+        btn.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btn)
         btn.addTarget(self, action: #selector(btnTouched(_:)), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            btn.widthAnchor.constraint(equalToConstant: 100),
+            btn.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     @objc
@@ -31,16 +40,5 @@ class XWAKAlertViewController: UIViewController {
             print("cancel handler")
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

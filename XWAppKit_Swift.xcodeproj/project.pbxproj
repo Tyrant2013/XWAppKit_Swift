@@ -49,6 +49,8 @@
 		AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */; };
 		AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */; };
 		AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */; };
+		AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A324D7E38100E4B8E1 /* UITableViewExtension.swift */; };
+		AEA747A724D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A624D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPVerify.swift; sourceTree = "<group>"; };
 		AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPViewController.swift; sourceTree = "<group>"; };
 		AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPResponDataListViewController.swift; sourceTree = "<group>"; };
+		AEA747A324D7E38100E4B8E1 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		AEA747A624D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTableViewExtensionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,8 @@
 		AEA7473324CA90FD00E4B8E1 /* XWAppKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AEA747A824D7EF5800E4B8E1 /* IAP */,
+				AEA747A524D7ED2700E4B8E1 /* Extension */,
 				AEA7474E24CAB23100E4B8E1 /* UI */,
 				AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */,
 				AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */,
@@ -262,7 +268,6 @@
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
 				AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */,
-				AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */,
 				AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */,
 				AEA7476B24CAE66400E4B8E1 /* WindowExtension.swift */,
+				AEA747A324D7E38100E4B8E1 /* UITableViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -364,6 +370,22 @@
 				AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */,
 				AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */,
 				AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */,
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
+		AEA747A524D7ED2700E4B8E1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AEA747A624D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AEA747A824D7EF5800E4B8E1 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */,
 			);
 			path = IAP;
 			sourceTree = "<group>";
@@ -525,6 +547,7 @@
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
+				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
 				AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
@@ -559,6 +582,7 @@
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
+				AEA747A724D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift in Sources */,
 				AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */,
 				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
 			);
