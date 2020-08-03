@@ -50,22 +50,25 @@ class XWAKHudViewController: UIViewController {
     
     @objc
     func showWithNoTitle(_ sender: UIButton) {
-        XWAKHud.show(msg: "这个没有标题")
+        XWAKHud.show(msg: "这个没有标题", ignoreInteraction: false)
     }
     
     @objc
     func showWithTitle(_ sender: UIButton) {
-        XWAKHud.show(title: "这里是标题", msg: "这个有标题")
+        XWAKHud.show(title: "这里是标题", msg: "这个有标题", ignoreInteraction: false)
     }
     
     @objc
     func showWithNoTitleAndMsg(_ sender: UIButton) {
         XWAKHud.wait()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            XWAKHud.dismiss()
+        }
     }
     
     @objc
     func autoDismiss(_ sender: UIButton) {
-        XWAKHud.show(in: view, title: "", msg: "会自动隐藏的", delay: 3.0)
+        XWAKHud.show(in: view, title: "", msg: "会自动隐藏的", delay: 1.5)
     }
     
     @objc

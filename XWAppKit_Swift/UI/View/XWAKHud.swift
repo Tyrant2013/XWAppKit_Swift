@@ -34,6 +34,7 @@ class XWAKHudView: UIView {
         var style: UIActivityIndicatorView.Style
         if #available(iOS 13.0, *) { style = .large } else { style = .whiteLarge }
         let activity = UIActivityIndicatorView(style: style)
+        activity.color = .white
         activity.hidesWhenStopped = true
         activity.translatesAutoresizingMaskIntoConstraints = false
         return activity
