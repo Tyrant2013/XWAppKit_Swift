@@ -238,6 +238,8 @@
 		AEA7473324CA90FD00E4B8E1 /* XWAppKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AEA747B024D8123D00E4B8E1 /* Network */,
+				AEA747AF24D8123700E4B8E1 /* Profile */,
 				AEA747A824D7EF5800E4B8E1 /* IAP */,
 				AEA747A524D7ED2700E4B8E1 /* Extension */,
 				AEA7474E24CAB23100E4B8E1 /* UI */,
@@ -406,6 +408,20 @@
 			sourceTree = "<group>";
 		};
 		AEA747AE24D80B0200E4B8E1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AEA747AF24D8123700E4B8E1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AEA747B024D8123D00E4B8E1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 			);

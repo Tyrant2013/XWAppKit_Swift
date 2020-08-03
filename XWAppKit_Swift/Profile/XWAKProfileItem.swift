@@ -11,6 +11,7 @@ import UIKit
 public typealias XWAKProfileAction = () -> Void
 public struct XWAKProfileItem {
     let name: String
+    let detail: String?
     let targetVC: UIViewController?
     let action: XWAKProfileAction?
 }
