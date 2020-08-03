@@ -51,6 +51,8 @@
 		AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */; };
 		AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A324D7E38100E4B8E1 /* UITableViewExtension.swift */; };
 		AEA747A724D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747A624D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift */; };
+		AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747AA24D7FE4500E4B8E1 /* XWAKProfileItem.swift */; };
+		AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,8 @@
 		AEA747A024D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKIAPResponDataListViewController.swift; sourceTree = "<group>"; };
 		AEA747A324D7E38100E4B8E1 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		AEA747A624D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTableViewExtensionViewController.swift; sourceTree = "<group>"; };
+		AEA747AA24D7FE4500E4B8E1 /* XWAKProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProfileItem.swift; sourceTree = "<group>"; };
+		AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,8 @@
 		AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				AEA747AE24D80B0200E4B8E1 /* Network */,
+				AEA747A924D7FE3600E4B8E1 /* Profile */,
 				AEA7479724D2B48E00E4B8E1 /* IAP */,
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7477624CED0EA00E4B8E1 /* Design */,
@@ -390,6 +396,22 @@
 			path = IAP;
 			sourceTree = "<group>";
 		};
+		AEA747A924D7FE3600E4B8E1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AEA747AA24D7FE4500E4B8E1 /* XWAKProfileItem.swift */,
+				AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AEA747AE24D80B0200E4B8E1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -547,6 +569,7 @@
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
+				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
 				AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */,
@@ -555,6 +578,7 @@
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
 				AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */,
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
+				AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */,
 				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
