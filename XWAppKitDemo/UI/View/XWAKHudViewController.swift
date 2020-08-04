@@ -27,11 +27,47 @@ class XWAKHudViewController: UIViewController {
         
         let dismissBtn = makeButton(title: "隐藏", action: #selector(dismissHud(_:)))
         
-        noTitleBtn.frame = CGRect(x: 100, y: 200, width: 100, height: 40)
-        hasTitleBtn.frame = CGRect(x: 100, y: 260, width: 100, height: 40)
-        noTitleAndMsg.frame = CGRect(x: 100, y: 320, width: 150, height: 40)
-        autoDismiss.frame = CGRect(x: 100, y: 380, width: 120, height: 40)
-        dismissBtn.frame = CGRect(x: 210, y: 260, width: 100, height: 40)
+        let showTABtn = makeButton(title: "标题和转圈", action: #selector(showTitleAndIndicator(_:)))
+        
+        let showAMBtn = makeButton(title: "转圈和内容", action: #selector(showIndicatorAndMsg(_:)))
+        
+        
+        NSLayoutConstraint.activate([
+            noTitleAndMsg.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noTitleAndMsg.widthAnchor.constraint(equalToConstant: 150),
+            noTitleAndMsg.heightAnchor.constraint(equalToConstant: 40),
+            noTitleAndMsg.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            
+            hasTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            hasTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            hasTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            hasTitleBtn.bottomAnchor.constraint(equalTo: noTitleAndMsg.topAnchor, constant: -10),
+            
+            noTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            noTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            noTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            noTitleBtn.bottomAnchor.constraint(equalTo: hasTitleBtn.topAnchor, constant: -10),
+            
+            autoDismiss.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            autoDismiss.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            autoDismiss.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            autoDismiss.topAnchor.constraint(equalTo: noTitleAndMsg.bottomAnchor, constant: 10),
+            
+            dismissBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            dismissBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            dismissBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            dismissBtn.topAnchor.constraint(equalTo: autoDismiss.bottomAnchor, constant: 10),
+            
+            showTABtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            showTABtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            showTABtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            showTABtn.topAnchor.constraint(equalTo: dismissBtn.bottomAnchor, constant: 10),
+            
+            showAMBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+            showAMBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+            showAMBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+            showAMBtn.topAnchor.constraint(equalTo: showTABtn.bottomAnchor, constant: 10),
+        ])
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,6 +82,7 @@ class XWAKHudViewController: UIViewController {
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor.systemBlue.cgColor
         btn.layer.cornerRadius = 10
+        btn.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btn)
         return btn
     }
@@ -76,6 +113,16 @@ class XWAKHudViewController: UIViewController {
     @objc
     func dismissHud(_ sender: UIButton) {
         XWAKHud.dismiss()
+    }
+    
+    @objc
+    func showTitleAndIndicator(_ sender: UIButton) {
+        XWAKHud.show(in: view, title: "标题", showIndicator: true, delay: 3, ignoreInteraction: true)
+    }
+    
+    @objc
+    func showIndicatorAndMsg(_ sender: UIButton) {
+        XWAKHud.show(in: view, msg: "内容", showIndicator: true, delay: 3, ignoreInteraction: true)
     }
 
     /*

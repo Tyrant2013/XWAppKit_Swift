@@ -66,15 +66,21 @@ class XWAKHudView: UIView {
         NSLayoutConstraint.activate([minWidth, minHeight, maxWidth, maxHeight])
     }
     
-    public func set(title: String?, msg: String?) {
+    public func set(title: String?, msg: String?, indicator: Bool = false) {
         // 移除所有View
         resetViews()
         // 设置标题
-        let hasTitle = setup(title: title)
-        // 设置内容
-        let hasMsg = setup(msg: msg, hasTitle: hasTitle)
+        let hasTitle = title != nil && title!.count > 0
+        let hasMsg = msg != nil && msg!.count > 0
+        setup(title: title)
         // 设置转圈
-        setup(isNeedIndicator: !hasTitle && !hasMsg)
+        setup(hasTitle: hasTitle, hasMsg: hasMsg, isNeedIndicator: indicator)
+        // 设置内容
+        setup(msg: msg, hasTitle: hasTitle, hasIndicator: indicator)
+//        // 设置转圈
+//        if !indicator {
+//            setup(isNeedIndicator: (!hasTitle && !hasMsg) || indicator)
+//        }
     }
     
     private func resetViews() {
@@ -85,7 +91,7 @@ class XWAKHudView: UIView {
         removeFromSuperview()
     }
     
-    private func setup(title: String?) -> Bool {
+    private func setup(title: String?) {
         titleLabel.text = title
 
         if let title = title, title.count > 0 {
@@ -95,34 +101,42 @@ class XWAKHudView: UIView {
                 titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
                 titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
             ])
-            return true
         }
-        return false
     }
     
-    private func setup(msg: String?, hasTitle: Bool) -> Bool {
+    private func setup(msg: String?, hasTitle: Bool, hasIndicator: Bool = false) {
         msgLabel.text = msg
         if let msg = msg, msg.count > 0 {
             addSubview(msgLabel)
+            
+            let posY = !hasIndicator ? msgLabel.topAnchor.constraint(equalTo: topAnchor, constant: hasTitle ? 40 : 20) : msgLabel.topAnchor.constraint(equalTo: indicator.bottomAnchor, constant: 10)
             NSLayoutConstraint.activate([
                 msgLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
                 msgLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
                 msgLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-                msgLabel.topAnchor.constraint(equalTo: topAnchor, constant: hasTitle ? 40 : 20)
+                posY
             ])
-            return true
         }
-        return false
     }
     
-    private func setup(isNeedIndicator: Bool) {
-        guard isNeedIndicator else {
+    private func setup(hasTitle: Bool = false, hasMsg: Bool = false, isNeedIndicator: Bool) {
+        guard (!hasTitle && !hasMsg) || isNeedIndicator else {
             return
         }
         addSubview(indicator)
+        var posY: NSLayoutConstraint
+        if !hasTitle && !hasMsg {
+            posY = indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        }
+        else if hasTitle {
+            posY = indicator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+        }
+        else {
+            posY = indicator.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+        }
         NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+            posY,
+            indicator.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         indicator.startAnimating()
     }
@@ -199,16 +213,16 @@ public class XWAKHud: NSObject {
     }
     
     public class func wait() {
-        show(in: nil, title: nil, msg: nil, delay: 0.0)
+        show(showIndicator: true)
     }
     
-    public class func show(in view: UIView? = nil, title: String? = nil, msg: String? = nil, delay: TimeInterval = 0.0, ignoreInteraction: Bool = true) {
+    public class func show(in view: UIView? = nil, title: String? = nil, msg: String? = nil, showIndicator: Bool = false, delay: TimeInterval = 0.0, ignoreInteraction: Bool = true) {
         DispatchQueue.main.async {
             var inView = view
             if inView == nil {
                 inView = UIWindow.findKeyWindow()
             }
-            hud.set(title: title, msg: msg)
+            hud.set(title: title, msg: msg, indicator: showIndicator)
             if ignoreInteraction {
                 inView!.addSubview(ignoreView)
                 ignoreView.translatesAutoresizingMaskIntoConstraints = false
