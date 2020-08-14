@@ -169,6 +169,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE6E03D024E6914B0035C519 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		AEA7470524CA756900E4B8E1 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +200,7 @@
 		AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				AE6E03D024E6914B0035C519 /* Layout */,
 				AEA747B324DA61CD00E4B8E1 /* Log */,
 				AEA747AE24D80B0200E4B8E1 /* Network */,
 				AEA747A924D7FE3600E4B8E1 /* Profile */,
