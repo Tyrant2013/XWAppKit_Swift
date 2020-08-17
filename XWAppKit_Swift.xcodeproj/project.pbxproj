@@ -215,7 +215,8 @@
 				AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */,
 				AEA7471324CA756900E4B8E1 /* Info.plist */,
 			);
-			path = XWAppKit_Swift;
+			name = XWAppKit_Swift;
+			path = Sources/XWAppKit_Swift;
 			sourceTree = "<group>";
 		};
 		AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
@@ -821,7 +822,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = XWAppKit_Swift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/XWAppKit_Swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -848,7 +849,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = XWAppKit_Swift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/XWAppKit_Swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1017,7 +1018,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
-				INFOPLIST_FILE = XWAppKit_Swift/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/XWAppKit_Swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
