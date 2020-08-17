@@ -129,6 +129,7 @@ public class XWAKLayoutConstrait: NSObject {
 
 public extension UIView {
     var xwak: XWAKLayout {
+        self.translatesAutoresizingMaskIntoConstraints = false
         return XWAKLayout(targetView: self)
     }
 }
