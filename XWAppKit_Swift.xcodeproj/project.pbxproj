@@ -42,10 +42,6 @@
 		AEA7478024CFC34A00E4B8E1 /* XWAKInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7477F24CFC34A00E4B8E1 /* XWAKInputView.swift */; };
 		AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478124CFCC5400E4B8E1 /* XWAKLoginView.swift */; };
 		AEA7478424CFCE1000E4B8E1 /* XWAKLoginInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478324CFCE1000E4B8E1 /* XWAKLoginInputCell.swift */; };
-		AEA7478924D1187C00E4B8E1 /* XWAKAntiDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7478724D1187C00E4B8E1 /* XWAKAntiDebug.h */; };
-		AEA7478A24D1187C00E4B8E1 /* XWAKAntiDebug.c in Sources */ = {isa = PBXBuildFile; fileRef = AEA7478824D1187C00E4B8E1 /* XWAKAntiDebug.c */; };
-		AEA7479124D11E0600E4B8E1 /* XWAKAntiCrack.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7478F24D11E0600E4B8E1 /* XWAKAntiCrack.h */; };
-		AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479024D11E0600E4B8E1 /* XWAKAntiCrack.m */; };
 		AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479824D2B4A700E4B8E1 /* XWAKIAPManager.swift */; };
 		AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479C24D3B84B00E4B8E1 /* XWAKIAPVerify.swift */; };
 		AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7479E24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift */; };
@@ -182,6 +178,7 @@
 		AEA7470524CA756900E4B8E1 = {
 			isa = PBXGroup;
 			children = (
+				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */,
 				AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */,
 				AEA7473324CA90FD00E4B8E1 /* XWAppKitDemo */,
@@ -208,7 +205,6 @@
 				AEA747AE24D80B0200E4B8E1 /* Network */,
 				AEA747A924D7FE3600E4B8E1 /* Profile */,
 				AEA7479724D2B48E00E4B8E1 /* IAP */,
-				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7477624CED0EA00E4B8E1 /* Design */,
 				AEA7475B24CAC93200E4B8E1 /* Extension */,
 				AEA7472924CA785100E4B8E1 /* UI */,
@@ -461,9 +457,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEA7479124D11E0600E4B8E1 /* XWAKAntiCrack.h in Headers */,
 				AEA7472024CA756900E4B8E1 /* XWAppKit_Swift.h in Headers */,
-				AEA7478924D1187C00E4B8E1 /* XWAKAntiDebug.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,7 +601,6 @@
 				AEA7476624CAD33100E4B8E1 /* UIColorExtension.swift in Sources */,
 				AEA747B524DA61E500E4B8E1 /* XWAKLog.swift in Sources */,
 				AEA7475224CABE7D00E4B8E1 /* XWAKKeychain.swift in Sources */,
-				AEA7478A24D1187C00E4B8E1 /* XWAKAntiDebug.c in Sources */,
 				AEA7478424CFCE1000E4B8E1 /* XWAKLoginInputCell.swift in Sources */,
 				AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */,
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
@@ -616,7 +609,6 @@
 				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
-				AEA7479224D11E0600E4B8E1 /* XWAKAntiCrack.m in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
 				AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
