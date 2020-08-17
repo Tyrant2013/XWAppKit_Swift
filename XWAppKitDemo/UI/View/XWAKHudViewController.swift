@@ -31,17 +31,26 @@ class XWAKHudViewController: UIViewController {
         
         let showAMBtn = makeButton(title: "转圈和内容", action: #selector(showIndicatorAndMsg(_:)))
         
+        noTitleAndMsg.xwak.centerX(equalTo: view.xwak.centerX)
+                .width(150)
+                .height(40)
+                .centerY(equalTo: view.xwak.centerY, -30)
+        
+        hasTitleBtn.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(150)
+            .height(40)
+            .bottom(equalTo: noTitleAndMsg.xwak.top, -10)
         
         NSLayoutConstraint.activate([
-            noTitleAndMsg.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            noTitleAndMsg.widthAnchor.constraint(equalToConstant: 150),
-            noTitleAndMsg.heightAnchor.constraint(equalToConstant: 40),
-            noTitleAndMsg.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+//            noTitleAndMsg.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            noTitleAndMsg.widthAnchor.constraint(equalToConstant: 150),
+//            noTitleAndMsg.heightAnchor.constraint(equalToConstant: 40),
+//            noTitleAndMsg.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
             
-            hasTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            hasTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            hasTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            hasTitleBtn.bottomAnchor.constraint(equalTo: noTitleAndMsg.topAnchor, constant: -10),
+//            hasTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            hasTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            hasTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            hasTitleBtn.bottomAnchor.constraint(equalTo: noTitleAndMsg.topAnchor, constant: -10),
             
             noTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
             noTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),

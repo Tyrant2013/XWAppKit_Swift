@@ -25,44 +25,42 @@ public class XWAKLayout: NSObject {
         super.init()
     }
     
-    public func left(equalTo edge: XWAKLayoutConstrait) -> XWAKLayout {
-        let constraint = self.left.equal(edge)
-        edge.upper.target.addConstraint(constraint)
-        return self
+    @discardableResult
+    public func left(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: left, r: edge, multiplier: 1.0, constatnt: constant)
     }
-    public func right(equalTo edge: XWAKLayoutConstrait) -> XWAKLayout {
-        let constraint = self.right.equal(edge)
-        edge.upper.target.addConstraint(constraint)
-        return self
+    @discardableResult
+    public func right(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: right, r: edge, multiplier: 1.0, constatnt: constant)
     }
-    public func centerX(equalTo edge: XWAKLayoutConstrait) -> XWAKLayout {
-        let constraint = self.centerX.equal(edge)
-        edge.upper.target.addConstraint(constraint)
-        return self
+    @discardableResult
+    public func top(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: top, r: edge, multiplier: 1.0, constatnt: constant)
     }
-    public func centerY(equalTo edge: XWAKLayoutConstrait) -> XWAKLayout {
-        let constraint = self.centerY.equal(edge)
-        edge.upper.target.addConstraint(constraint)
-        return self
+    @discardableResult
+    public func bottom(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: bottom, r: edge, multiplier: 1.0, constatnt: constant)
     }
+    @discardableResult
+    public func centerX(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: centerX, r: edge, multiplier: 1.0, constatnt: constant)
+    }
+    @discardableResult
+    public func centerY(equalTo edge: XWAKLayoutConstrait, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        return equal(l: centerY, r: edge, multiplier: 1.0, constatnt: constant)
+    }
+    @discardableResult
     public func width(equalTo edge: XWAKLayoutConstrait? = nil, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        let constraint = self.width.equal(edge, constant: constant)
-        if edge == nil {
-            target.addConstraint(constraint)
-        }
-        else {
-            edge!.upper.target.addConstraint(constraint)
-        }
-        return self
+        return equal(l: width, r: edge, multiplier: 1.0, constatnt: constant)
     }
+    @discardableResult
     public func height(equalTo edge: XWAKLayoutConstrait? = nil, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        let constraint = self.height.equal(edge, constant: constant)
-        if edge == nil {
-            target.addConstraint(constraint)
-        }
-        else {
-            edge!.upper.target.addConstraint(constraint)
-        }
+        return equal(l: height, r: edge, multiplier: 1.0, constatnt: constant)
+    }
+    
+    private func equal(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 0.0, constatnt: CGFloat) -> XWAKLayout {
+        let constraint = l.equal(r, multiplier: multiplier, constant: constatnt)
+        NSLayoutConstraint.activate([constraint])
         return self
     }
 }
@@ -107,7 +105,7 @@ public class XWAKLayoutConstrait: NSObject {
         super.init()
     }
     
-    public func equal(_ to: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, constant: CGFloat = 0.0) -> NSLayoutConstraint {
+    fileprivate func equal(_ to: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, constant: CGFloat = 0.0) -> NSLayoutConstraint {
         if to == nil {
             return NSLayoutConstraint(item: upper.target,
                                       attribute: attribute,

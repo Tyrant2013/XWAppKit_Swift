@@ -19,12 +19,17 @@ class XWAppKitSwitchViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(btn)
-        NSLayoutConstraint.activate([
-            btn.widthAnchor.constraint(equalToConstant: 50),
-            btn.heightAnchor.constraint(equalToConstant: 50),
-            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        btn.xwak.width(50)
+            .height(50)
+            .centerY(equalTo: view.xwak.centerY)
+            .centerX(equalTo: view.xwak.centerX)
+        
+//        NSLayoutConstraint.activate([
+//            btn.widthAnchor.constraint(equalToConstant: 50),
+//            btn.heightAnchor.constraint(equalToConstant: 50),
+//            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
         // Do any additional setup after loading the view.
     }
     
