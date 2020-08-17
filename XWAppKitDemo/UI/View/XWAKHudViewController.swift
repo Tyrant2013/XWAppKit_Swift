@@ -41,6 +41,30 @@ class XWAKHudViewController: UIViewController {
             .height(40)
             .bottom(equalTo: noTitleAndMsg.xwak.top, -10)
         
+        noTitleBtn.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(equalTo: noTitleAndMsg.xwak.width)
+            .height(equalTo: noTitleAndMsg.xwak.height)
+            .bottom(equalTo: hasTitleBtn.xwak.top, -10)
+        
+        autoDismiss.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(equalTo: noTitleAndMsg.xwak.width)
+            .height(equalTo: noTitleAndMsg.xwak.height)
+            .top(equalTo: noTitleAndMsg.xwak.bottom, 10)
+        
+        dismissBtn.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(equalTo: noTitleAndMsg.xwak.width)
+            .height(equalTo: noTitleAndMsg.xwak.height)
+            .top(equalTo: autoDismiss.xwak.bottom, 10)
+        
+        showTABtn.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(equalTo: noTitleAndMsg.xwak.width)
+            .height(equalTo: noTitleAndMsg.xwak.height)
+            .top(equalTo: dismissBtn.xwak.bottom, 10)
+        
+        showAMBtn.xwak.centerX(equalTo: noTitleAndMsg.xwak.centerX)
+            .width(equalTo: noTitleAndMsg.xwak.width)
+            .height(equalTo: noTitleAndMsg.xwak.height)
+            .top(equalTo: showTABtn.xwak.bottom, 10)
         NSLayoutConstraint.activate([
 //            noTitleAndMsg.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            noTitleAndMsg.widthAnchor.constraint(equalToConstant: 150),
@@ -52,30 +76,30 @@ class XWAKHudViewController: UIViewController {
 //            hasTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
 //            hasTitleBtn.bottomAnchor.constraint(equalTo: noTitleAndMsg.topAnchor, constant: -10),
             
-            noTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            noTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            noTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            noTitleBtn.bottomAnchor.constraint(equalTo: hasTitleBtn.topAnchor, constant: -10),
+//            noTitleBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            noTitleBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            noTitleBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            noTitleBtn.bottomAnchor.constraint(equalTo: hasTitleBtn.topAnchor, constant: -10),
             
-            autoDismiss.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            autoDismiss.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            autoDismiss.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            autoDismiss.topAnchor.constraint(equalTo: noTitleAndMsg.bottomAnchor, constant: 10),
+//            autoDismiss.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            autoDismiss.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            autoDismiss.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            autoDismiss.topAnchor.constraint(equalTo: noTitleAndMsg.bottomAnchor, constant: 10),
             
-            dismissBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            dismissBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            dismissBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            dismissBtn.topAnchor.constraint(equalTo: autoDismiss.bottomAnchor, constant: 10),
+//            dismissBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            dismissBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            dismissBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            dismissBtn.topAnchor.constraint(equalTo: autoDismiss.bottomAnchor, constant: 10),
             
-            showTABtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            showTABtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            showTABtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            showTABtn.topAnchor.constraint(equalTo: dismissBtn.bottomAnchor, constant: 10),
+//            showTABtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            showTABtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            showTABtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            showTABtn.topAnchor.constraint(equalTo: dismissBtn.bottomAnchor, constant: 10),
             
-            showAMBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
-            showAMBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
-            showAMBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
-            showAMBtn.topAnchor.constraint(equalTo: showTABtn.bottomAnchor, constant: 10),
+//            showAMBtn.centerXAnchor.constraint(equalTo: noTitleAndMsg.centerXAnchor),
+//            showAMBtn.widthAnchor.constraint(equalTo: noTitleAndMsg.widthAnchor),
+//            showAMBtn.heightAnchor.constraint(equalTo: noTitleAndMsg.heightAnchor),
+//            showAMBtn.topAnchor.constraint(equalTo: showTABtn.bottomAnchor, constant: 10),
         ])
     }
     

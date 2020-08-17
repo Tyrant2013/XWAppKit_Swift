@@ -25,7 +25,12 @@ class XWAKToastViewController: UIViewController {
         btn.setTitle("显示", for: .normal)
         btn.addTarget(self, action: #selector(show(_:)), for: .touchUpInside)
         view.addSubview(btn)
-        btn.frame = CGRect(x: 100, y: 200, width: 100, height: 50)
+//        btn.frame = CGRect(x: 100, y: 200, width: 100, height: 50)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.xwak.width(100)
+            .height(50)
+            .centerX(equalTo: view.xwak.centerX, -60)
+            .centerY(equalTo: view.xwak.centerY)
         
         let dism = UIButton(type: .system)
         dism.layer.borderWidth = 1
@@ -34,7 +39,12 @@ class XWAKToastViewController: UIViewController {
         dism.setTitle("隐藏", for: .normal)
         dism.addTarget(self, action: #selector(dismiss(_:)), for: .touchUpInside)
         view.addSubview(dism)
-        dism.frame = CGRect(x: 210, y: 200, width: 100, height: 50)
+//        dism.frame = CGRect(x: 210, y: 200, width: 100, height: 50)
+        dism.translatesAutoresizingMaskIntoConstraints = false
+        dism.xwak.width(100)
+            .height(50)
+            .centerX(equalTo: view.xwak.centerX, 60)
+            .centerY(equalTo: view.xwak.centerY)
     }
     
 
