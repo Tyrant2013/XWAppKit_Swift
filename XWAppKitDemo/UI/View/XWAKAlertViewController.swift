@@ -24,12 +24,18 @@ class XWAKAlertViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btn)
         btn.addTarget(self, action: #selector(btnTouched(_:)), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            btn.widthAnchor.constraint(equalToConstant: 100),
-            btn.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        
+        _ = btn.xwak.centerX(equalTo: view.xwak.centerX)
+                    .centerY(equalTo: view.xwak.centerY)
+                    .width(equalTo: view.xwak.width, -30)
+                    .height(50)
+        
+//        NSLayoutConstraint.activate([
+//            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            btn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            btn.widthAnchor.constraint(equalToConstant: 100),
+//            btn.heightAnchor.constraint(equalToConstant: 50)
+//        ])
     }
     
     @objc
