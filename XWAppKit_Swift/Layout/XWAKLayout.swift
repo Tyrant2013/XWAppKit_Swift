@@ -9,7 +9,7 @@
 import UIKit
 
 public class XWAKLayout: NSObject {
-    fileprivate let target: UIView
+    fileprivate let target: Any
     
     lazy public var left = XWAKLayoutConstrait(edge: .left, upper: self)
     lazy public var right = XWAKLayoutConstrait(edge: .right, upper: self)
@@ -20,7 +20,7 @@ public class XWAKLayout: NSObject {
     lazy public var width = XWAKLayoutConstrait(edge: .width, upper: self)
     lazy public var height = XWAKLayoutConstrait(edge: .height, upper: self)
     
-    init(targetView: UIView) {
+    init(targetView: Any) {
         self.target = targetView
         super.init()
     }
@@ -129,7 +129,12 @@ public class XWAKLayoutConstrait: NSObject {
 
 public extension UIView {
     var xwak: XWAKLayout {
-//        self.translatesAutoresizingMaskIntoConstraints = false
+        return XWAKLayout(targetView: self)
+    }
+}
+
+public extension UILayoutGuide {
+    var xwak: XWAKLayout {
         return XWAKLayout(targetView: self)
     }
 }
