@@ -65,6 +65,7 @@ public class XWAKLayout: NSObject {
     public func height(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         return equal(l: height, r: edge, multiplier: multiplier, constatnt: constant)
     }
+    
     @discardableResult
     public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat = 0.0, edges: [XWAKEqualEdge]) -> XWAKLayout {
         if edges.contains(.all) {
@@ -88,6 +89,16 @@ public class XWAKLayout: NSObject {
             }
         }
         return self
+    }
+    @discardableResult
+    public func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: CGPoint = .zero) -> XWAKLayout {
+        return self.centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
+            .centerY(equalTo: center.centerY, multiplier: multiplier, offset.y)
+    }
+    @discardableResult
+    public func size(equalTo center: XWAKLayout? = nil, multiplier: CGFloat = 1.0, _ size: CGSize = .zero) -> XWAKLayout {
+        return self.width(equalTo: center?.width, multiplier: multiplier, size.width)
+            .height(equalTo: center?.height, multiplier: multiplier, size.height)
     }
     
     private func equal(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 0.0, constatnt: CGFloat) -> XWAKLayout {
