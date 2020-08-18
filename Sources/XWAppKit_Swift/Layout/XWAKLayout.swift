@@ -96,7 +96,7 @@ public class XWAKLayout: NSObject {
         return self
     }
     @discardableResult
-    public func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat)) -> XWAKLayout {
+    public func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
         return self.centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
             .centerY(equalTo: center.centerY, multiplier: multiplier, offset.y)
     }
