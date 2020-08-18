@@ -37,12 +37,13 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+//            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        ])
+        tableView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, edges: [.all])
         // Do any additional setup after loading the view.
     }
 }
