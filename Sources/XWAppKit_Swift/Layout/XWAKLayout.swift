@@ -68,24 +68,29 @@ public class XWAKLayout: NSObject {
     
     @discardableResult
     public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat = 0.0, edges: [XWAKEqualEdge]) -> XWAKLayout {
+        let edgeInset = UIEdgeInsets(top: inset, left: inset, bottom: -inset, right: -inset)
+        return self.edge(equalTo: edge, multiplier: multiplier, inset: edgeInset, edges: edges)
+    }
+    @discardableResult
+    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets = .zero, edges: [XWAKEqualEdge]) -> XWAKLayout {
         if edges.contains(.all) {
-            self.left(equalTo: edge.left, multiplier: multiplier, inset)
-                .right(equalTo: edge.right, multiplier: multiplier, -inset)
-                .top(equalTo: edge.top, multiplier: multiplier, inset)
-                .bottom(equalTo: edge.bottom, multiplier: multiplier, -inset)
+            self.left(equalTo: edge.left, multiplier: multiplier, inset.left)
+                .right(equalTo: edge.right, multiplier: multiplier, inset.right)
+                .top(equalTo: edge.top, multiplier: multiplier, inset.top)
+                .bottom(equalTo: edge.bottom, multiplier: multiplier, inset.bottom)
         }
         else {
             if edges.contains(.left) {
-                self.left(equalTo: edge.left, multiplier: multiplier, inset)
+                self.left(equalTo: edge.left, multiplier: multiplier, inset.left)
             }
             if edges.contains(.right) {
-                self.right(equalTo: edge.right, multiplier: multiplier, -inset)
+                self.right(equalTo: edge.right, multiplier: multiplier, inset.right)
             }
             if edges.contains(.top) {
-                self.top(equalTo: edge.top, multiplier: multiplier, inset)
+                self.top(equalTo: edge.top, multiplier: multiplier, inset.top)
             }
             if edges.contains(.bottom) {
-                self.bottom(equalTo: edge.bottom, multiplier: multiplier, -inset)
+                self.bottom(equalTo: edge.bottom, multiplier: multiplier, inset.bottom)
             }
         }
         return self
