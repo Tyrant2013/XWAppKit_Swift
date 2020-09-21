@@ -20,7 +20,8 @@ class ViewController: UIViewController {
             ("SwitchButton", "XWAppKitSwitchViewController"),
             ("Alert", "XWAKAlertViewController"),
             ("Hud", "XWAKHudViewController"),
-            ("Toast", "XWAKToastViewController")
+            ("Toast", "XWAKToastViewController"),
+            ("TextView", "XWAKTextViewViewController"),
             ]
         ),
         ("ViewController", [
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
 //            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 //            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 //        ])
-        tableView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, edges: [.all])
+        tableView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 0, edges: [.all])
         // Do any additional setup after loading the view.
     }
 }

@@ -10,6 +10,8 @@
 		AE10F257251493FF000131BE /* XWAKAnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */; };
 		AE10F2632514A027000131BE /* XWAKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F2622514A027000131BE /* XWAKLabel.swift */; };
 		AE10F2672514A03E000131BE /* XWAKTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F2662514A03E000131BE /* XWAKTextView.swift */; };
+		AE10F26B25184B73000131BE /* XWAKTextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F26A25184B73000131BE /* XWAKTextViewViewController.swift */; };
+		AE10F2742518A008000131BE /* XWAKTextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F2732518A008000131BE /* XWAKTextLayout.swift */; };
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */; };
@@ -92,6 +94,8 @@
 		AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAnimatedImageView.swift; sourceTree = "<group>"; };
 		AE10F2622514A027000131BE /* XWAKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLabel.swift; sourceTree = "<group>"; };
 		AE10F2662514A03E000131BE /* XWAKTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextView.swift; sourceTree = "<group>"; };
+		AE10F26A25184B73000131BE /* XWAKTextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextViewViewController.swift; sourceTree = "<group>"; };
+		AE10F2732518A008000131BE /* XWAKTextLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextLayout.swift; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWAppKit_Swift.h; sourceTree = "<group>"; };
@@ -173,6 +177,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE10F2772518A016000131BE /* XWAKText */ = {
+			isa = PBXGroup;
+			children = (
+				AE10F2732518A008000131BE /* XWAKTextLayout.swift */,
+			);
+			path = XWAKText;
+			sourceTree = "<group>";
+		};
 		AE6E03D024E6914B0035C519 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +248,7 @@
 		AEA7472924CA785100E4B8E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AE10F2772518A016000131BE /* XWAKText */,
 				AEA7477C24CFC23B00E4B8E1 /* ViewController */,
 				AEA7475024CABD3200E4B8E1 /* Tools */,
 				AEA7472B24CA78E900E4B8E1 /* View */,
@@ -298,6 +311,7 @@
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
 				AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */,
+				AE10F26A25184B73000131BE /* XWAKTextViewViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -620,6 +634,7 @@
 				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
+				AE10F2742518A008000131BE /* XWAKTextLayout.swift in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
 				AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
@@ -651,6 +666,7 @@
 			files = (
 				AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */,
 				AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */,
+				AE10F26B25184B73000131BE /* XWAKTextViewViewController.swift in Sources */,
 				AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */,
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
