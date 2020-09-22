@@ -49,7 +49,19 @@ class XWAKTextViewViewController: UIViewController {
         ]
         let attr = NSMutableAttributedString(string: drawStr, attributes: attrs)
         if let image = UIImage(named: "abc") {
-            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image))
+            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: CGSize(width: 40, height: 30), tapHandler: { (image, frame) in
+                print("image frame: \(frame), \(tv.convert(frame, to: self.view))")
+                self.view.viewWithTag(1111)?.removeFromSuperview()
+                
+                let iv = UIImageView(image: image)
+                iv.frame = tv.convert(frame, to: self.view)
+                iv.tag = 1111
+                self.view.addSubview(iv)
+                
+                UIView.animate(withDuration: 1.0) {
+                    iv.frame = CGRect(x: (self.view.bounds.width - image.size.width) / 2, y: (self.view.bounds.height - image.size.height) / 2, width: image.size.width, height: image.size.height)
+                }
+            }))
         }
         attr.append(NSAttributedString(string: "图片后面的文字", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.black,

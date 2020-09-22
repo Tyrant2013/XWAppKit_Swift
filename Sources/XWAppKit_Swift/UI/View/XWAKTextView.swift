@@ -38,6 +38,36 @@ public class XWAKTextView: UIScrollView {
         layout.draw(context: ctx)
 
     }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let layout = layout else { super.touchesBegan(touches, with: event); return }
+        let touch = event?.allTouches?.first
+        if let touchPoint = touch?.location(in: touch?.view),
+           let pointInLayout = _converPointToLayout(touchPoint),
+           let touchImageData = layout.touchImage(in: pointInLayout),
+           let touchBlock = touchImageData.ClickBlock {
+            touchBlock(touchImageData.image, _converRectToView(touchImageData.imageFrame))
+        }
+    }
+    
+    private func _converPointToLayout(_ point: CGPoint) -> CGPoint? {
+        
+        var pointInLayout = point
+        if layout!.size.height <= bounds.height {
+            pointInLayout.y = layout!.size.height - point.y
+        }
+        return pointInLayout
+    }
+    
+    private func _converRectToView(_ frame: CGRect) -> CGRect {
+        var frameInView = frame
+        frameInView.origin.y = layout!.size.height - frame.origin.y - frame.height
+        return frameInView
+    }
+    
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
 
     private func testUpdate(ctx: CGContext) {
         let path = CGPath(rect: bounds, transform: nil)

@@ -14,19 +14,21 @@ public struct XWAKImageMetaData {
     public let width: CGFloat
     public let image: UIImage
     public var imageFrame: CGRect = .zero
+    public let ClickBlock: ((_ image: UIImage, _ frame: CGRect) -> Void)?
     
-    public init(ascent: CGFloat, descent: CGFloat, width: CGFloat, image: UIImage) {
-        self.ascent = ascent
-        self.descent = descent
-        self.width = width
-        self.image = image
-    }
+//    init(ascent: CGFloat, descent: CGFloat, width: CGFloat, image: UIImage, ClickBlock: @escaping (_ image: UIImage) -> Void) {
+//        self.ascent = ascent
+//        self.descent = descent
+//        self.width = width
+//        self.image = image
+//        self.ClickBlock = ClickBlock
+//    }
     
-    public static func makeImageAttributeString(image: UIImage) -> NSAttributedString {
+    public static func makeImageAttributeString(image: UIImage, size: CGSize? = nil, tapHandler: @escaping (_ image: UIImage, _ frame: CGRect) -> Void) -> NSAttributedString {
+        let imageSize = size ?? image.size
         let extentBuffer = UnsafeMutablePointer<XWAKImageMetaData>.allocate(capacity: 1)
-        extentBuffer.initialize(to: XWAKImageMetaData(ascent: image.size.height, descent: 0, width: image.size.width, image: image))
+        extentBuffer.initialize(to: XWAKImageMetaData(ascent: imageSize.height, descent: 0, width: imageSize.width, image: image, ClickBlock: tapHandler))
         var callbacks = CTRunDelegateCallbacks(version: kCTRunDelegateVersion1) { (pointer) in
-            
         } getAscent: { (pointer) -> CGFloat in
             let d = pointer.assumingMemoryBound(to: XWAKImageMetaData.self)
             return d.pointee.ascent
@@ -87,18 +89,22 @@ public class XWAKTextLayout: NSObject {
             for run in runs {
                 if let runAttrs = CTRunGetAttributes(run) as? Dictionary<NSAttributedString.Key, Any> {
                     if let imageDelegate = runAttrs[(kCTRunDelegateAttributeName as NSAttributedString.Key)] {
-                        let keyValue = CTRunDelegateGetRefCon(imageDelegate as! CTRunDelegate)
-                        var metaData = keyValue.assumingMemoryBound(to: XWAKImageMetaData.self).pointee
-                        let imageHeight = metaData.ascent
-                        let imageWidth = metaData.width
-                        let x = CTLineGetOffsetForStringIndex(ctline, CTRunGetStringRange(run).location, nil)
-                        let y = lineOrigins[lineIndex].y
-                        metaData.imageFrame = CGRect(x: x, y: y, width: imageWidth, height: imageHeight)
-                        _innerImages.append(metaData)
+                        parseImages(line: line, run: run, imageDelegate: imageDelegate as! CTRunDelegate)
                     }
                 }
             }
         }
+    }
+    
+    private func parseImages(line: XWAKLine, run: CTRun, imageDelegate: CTRunDelegate) {
+        let keyValue = CTRunDelegateGetRefCon(imageDelegate)
+        var metaData = keyValue.assumingMemoryBound(to: XWAKImageMetaData.self).pointee
+        let imageHeight = metaData.ascent + metaData.descent
+        let imageWidth = metaData.width
+        let x = CTLineGetOffsetForStringIndex(line.line, CTRunGetStringRange(run).location, nil)
+        let y = line.position.y
+        metaData.imageFrame = CGRect(x: x, y: y, width: imageWidth, height: imageHeight)
+        _innerImages.append(metaData)
     }
     
     public func draw(context: CGContext) {
@@ -110,7 +116,17 @@ public class XWAKTextLayout: NSObject {
         }
     }
     
-    public func drawLine(_ line: XWAKLine, context: CGContext) {
+    public func touchImage(in point: CGPoint) -> XWAKImageMetaData? {
+        for imageData in _innerImages {
+            print("image frame: \(imageData.imageFrame), touch point: \(point)")
+            if imageData.imageFrame.contains(point) {
+                return imageData
+            }
+        }
+        return nil
+    }
+    
+    private func drawLine(_ line: XWAKLine, context: CGContext) {
         let ctline = line.line
         let lineOrigin = line.position
         
