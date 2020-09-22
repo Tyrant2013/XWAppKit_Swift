@@ -46,23 +46,13 @@ public class XWAKTextView: UIScrollView {
            let pointInLayout = _converPointToLayout(touchPoint),
            let touchImageData = layout.touchImage(in: pointInLayout),
            let touchBlock = touchImageData.ClickBlock {
-            touchBlock(touchImageData.image, _converRectToView(touchImageData.imageFrame))
+            let frameInView = XWAKTextTools.convertTextLayoutFrame(touchImageData.imageFrame, to: self, layoutSize: layout.size)
+            touchBlock(touchImageData.image, frameInView)
         }
     }
     
     private func _converPointToLayout(_ point: CGPoint) -> CGPoint? {
-        
-        var pointInLayout = point
-        if layout!.size.height <= bounds.height {
-            pointInLayout.y = layout!.size.height - point.y
-        }
-        return pointInLayout
-    }
-    
-    private func _converRectToView(_ frame: CGRect) -> CGRect {
-        var frameInView = frame
-        frameInView.origin.y = layout!.size.height - frame.origin.y - frame.height
-        return frameInView
+        return XWAKTextTools.convertViewPointToTextLayout(layout!.size, frome: bounds, point)
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
