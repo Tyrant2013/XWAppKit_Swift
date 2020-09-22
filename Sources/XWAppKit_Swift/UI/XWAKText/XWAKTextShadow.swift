@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class XWAKTextShadow: NSObject {
+public struct XWAKTextShadow {
     let offset: CGSize
     let color: UIColor
     let blur: CGFloat
@@ -17,6 +17,6 @@ public class XWAKTextShadow: NSObject {
         self.offset = offset
         self.color = color
         self.blur = blur
-        super.init()
+//        super.init()
     }
 }
