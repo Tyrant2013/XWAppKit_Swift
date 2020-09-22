@@ -35,14 +35,29 @@ class XWAKTextViewViewController: UIViewController {
 //
 //        }
         // Do any additional setup after loading the view.
-        let tv = XWAKTextView(frame: CGRect(x: 100, y: 100, width: 200, height: 200))
+        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 400))
         tv.backgroundColor = .orange
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.systemRed.cgColor
         view.addSubview(tv)
+        
+        let drawStr = "这是开始，这是中间，这是结束\n这里换行"
+        let attrs = [
+            NSAttributedString.Key.foregroundColor : UIColor.red,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)
+        ]
+        let attr = NSMutableAttributedString(string: drawStr, attributes: attrs)
+        if let image = UIImage(named: "abc") {
+            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image))
+        }
+        attr.append(NSAttributedString(string: "图片后面的文字", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25)
+        ]))
+        tv.attributeString = attr
     }
-    
-
     /*
     // MARK: - Navigation
 
