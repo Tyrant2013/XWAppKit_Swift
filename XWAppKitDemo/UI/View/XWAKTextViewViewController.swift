@@ -68,6 +68,12 @@ class XWAKTextViewViewController: UIViewController {
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25)
         ]))
+        attr.append(NSAttributedString(string: "这里带阴影", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 23),
+            NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow") : XWAKTextShadow(offset: CGSize(width: 2, height: 3), color: UIColor.lightGray, blur: 1.0)
+                        ] as Dictionary<NSAttributedString.Key, Any>))
         tv.attributeString = attr
     }
     /*

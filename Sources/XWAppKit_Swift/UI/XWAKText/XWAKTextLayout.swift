@@ -108,14 +108,16 @@ public class XWAKTextLayout: NSObject {
     }
     
     public func draw(context: CGContext) {
-        context.setShadow(offset: CGSize(width: 0, height: 3), blur: 1, color: UIColor.black.cgColor)
-        
+        context.saveGState()
         for line in _innerLines {
             drawLine(line, context: context)
         }
+        context.restoreGState()
+        context.saveGState()
         for imageData in _innerImages {
             context.draw(imageData.image.cgImage!, in: imageData.imageFrame)
         }
+        context.restoreGState()
     }
     
     public func touchImage(in point: CGPoint) -> XWAKImageMetaData? {
@@ -149,6 +151,9 @@ public class XWAKTextLayout: NSObject {
 //            for glyphIndex in 0..<glyphCount {
 //                print("glyphIndex: \(glyphIndex), position: \(runPositions[glyphIndex])")
 //            }
+            if let shadowAttr = attributes[NSAttributedString.Key.shadow] as? XWAKTextShadow {
+                context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
+            }
             
             var glyphs = [CGGlyph](repeating: CGGlyph(), count: glyphCount)
             let runFont = attributes[NSAttributedString.Key.font] as! CTFont
@@ -164,4 +169,9 @@ public class XWAKTextLayout: NSObject {
             context.showGlyphs(glyphs, at: runPositions)
         }
     }
+}
+
+
+public extension NSAttributedString.Key {
+    static let shadow = NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow")
 }
