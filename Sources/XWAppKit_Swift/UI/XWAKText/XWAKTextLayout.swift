@@ -108,6 +108,8 @@ public class XWAKTextLayout: NSObject {
     }
     
     public func draw(context: CGContext) {
+        context.setShadow(offset: CGSize(width: 0, height: 3), blur: 1, color: UIColor.black.cgColor)
+        
         for line in _innerLines {
             drawLine(line, context: context)
         }
