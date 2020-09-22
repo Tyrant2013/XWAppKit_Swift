@@ -186,6 +186,7 @@
 		AE10F2772518A016000131BE /* XWAKText */ = {
 			isa = PBXGroup;
 			children = (
+				AE10F28D2519E9E5000131BE /* XWAKTextTools.swift */,
 				AE10F2732518A008000131BE /* XWAKTextLayout.swift */,
 				AE10F28525199265000131BE /* XWAKLine.swift */,
 			);
@@ -273,7 +274,6 @@
 				AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */,
 				AE10F2622514A027000131BE /* XWAKLabel.swift */,
 				AE10F2662514A03E000131BE /* XWAKTextView.swift */,
-				AE10F28D2519E9E5000131BE /* XWAKTextTools.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
