@@ -108,16 +108,15 @@ public class XWAKTextLayout: NSObject {
     }
     
     public func draw(context: CGContext) {
-        context.saveGState()
+        
         for line in _innerLines {
             drawLine(line, context: context)
         }
-        context.restoreGState()
-        context.saveGState()
+        
         for imageData in _innerImages {
             context.draw(imageData.image.cgImage!, in: imageData.imageFrame)
         }
-        context.restoreGState()
+        
     }
     
     public func touchImage(in point: CGPoint) -> XWAKImageMetaData? {
@@ -138,6 +137,7 @@ public class XWAKTextLayout: NSObject {
         
         let runs = CTLineGetGlyphRuns(ctline) as Array
         for run in runs {
+            context.saveGState()
             let run = run as! CTRun
             
             let attributes = CTRunGetAttributes(run) as NSDictionary
@@ -167,6 +167,7 @@ public class XWAKTextLayout: NSObject {
             context.setFont(CTFontCopyGraphicsFont(runFont, nil))
             context.setFontSize(CTFontGetSize(runFont))
             context.showGlyphs(glyphs, at: runPositions)
+            context.restoreGState()
         }
     }
 }
