@@ -47,7 +47,12 @@ public struct XWAKImageMetaData {
 
 public class XWAKTextLayout: NSObject {
     public let text: NSAttributedString
-    public let size: CGSize
+    public var size: CGSize {
+        didSet {
+            parseText()
+        }
+        
+    }
     public var lines: [XWAKLine] {
         get {
             return _innerLines
@@ -67,7 +72,6 @@ public class XWAKTextLayout: NSObject {
         self.text = text
         self.size = size
         super.init()
-        parseText()
     }
     
     private func parseText() {

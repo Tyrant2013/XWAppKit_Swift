@@ -27,6 +27,11 @@ public class XWAKTextView: UIScrollView {
         super.draw(rect)
         update()
     }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        layout?.size = bounds.size
+    }
 
     func update() {
         guard let layout = layout else { return }
