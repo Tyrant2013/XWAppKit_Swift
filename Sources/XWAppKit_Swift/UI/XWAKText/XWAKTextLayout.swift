@@ -141,20 +141,19 @@ public class XWAKTextLayout: NSObject {
             let run = run as! CTRun
             
             let attributes = CTRunGetAttributes(run) as NSDictionary
-            let glyphCount = CTRunGetGlyphCount(run)
-            var runPositions = [CGPoint](repeating: .zero, count: glyphCount)
-            CTRunGetPositions(run, CFRangeMake(0, 0), &runPositions)
             
-//            let stringRange = CTRunGetStringRange(run)
-//            let xOffset = CTLineGetOffsetForStringIndex(ctline, stringRange.location, nil)
-//            print("stringRange: \(stringRange), xOffset: \(xOffset), attrs: \(attributes)")
-//            for glyphIndex in 0..<glyphCount {
-//                print("glyphIndex: \(glyphIndex), position: \(runPositions[glyphIndex])")
-//            }
+            
+            if let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor {
+                drawBackground(backgroundColor, context: context, line: line, run: run)
+            }
+            
             if let shadowAttr = attributes[NSAttributedString.Key.shadow] as? XWAKTextShadow {
                 context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
             }
             
+            let glyphCount = CTRunGetGlyphCount(run)
+            var runPositions = [CGPoint](repeating: .zero, count: glyphCount)
+            CTRunGetPositions(run, CFRangeMake(0, 0), &runPositions)
             var glyphs = [CGGlyph](repeating: CGGlyph(), count: glyphCount)
             let runFont = attributes[NSAttributedString.Key.font] as! CTFont
             CTRunGetGlyphs(run, CFRangeMake(0, 0), &glyphs)
@@ -169,6 +168,27 @@ public class XWAKTextLayout: NSObject {
             context.showGlyphs(glyphs, at: runPositions)
             context.restoreGState()
         }
+    }
+    
+    private func drawBackground(_ backgroundColor: UIColor, context: CGContext, line: XWAKLine, run: CTRun) {
+        ContextStateStore(context) {
+            var runAscent: CGFloat = 0
+            var runDescent: CGFloat = 0
+            let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
+            let runHeight = runAscent + runDescent
+            let stringRange = CTRunGetStringRange(run)
+            let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
+            let runYOffset = line.position.y - runDescent
+            let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
+            context.setFillColor(backgroundColor.cgColor)
+            context.fill(runFrame)
+        }
+    }
+    
+    private func ContextStateStore(_ context: CGContext, _ block: () -> Void) {
+        context.saveGState()
+        block()
+        context.restoreGState()
     }
 }
 
