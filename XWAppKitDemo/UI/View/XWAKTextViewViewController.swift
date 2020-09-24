@@ -35,7 +35,7 @@ class XWAKTextViewViewController: UIViewController {
 //
 //        }
         // Do any additional setup after loading the view.
-        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 600))
+        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 400))
         tv.backgroundColor = .orange
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.systemRed.cgColor
@@ -50,7 +50,6 @@ class XWAKTextViewViewController: UIViewController {
         let attr = NSMutableAttributedString(string: drawStr, attributes: attrs)
         if let image = UIImage(named: "abc") {
             attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: CGSize(width: 40, height: 30), tapHandler: { (image, frame) in
-                print("image frame: \(frame), \(tv.convert(frame, to: self.view))")
                 self.view.viewWithTag(1111)?.removeFromSuperview()
                 
                 let iv = UIImageView(image: image)

@@ -11,6 +11,8 @@ import CoreText
 
 public class XWAKTextView: UIScrollView {
     
+    private let containerView: XWAKTextContainerView = XWAKTextContainerView()
+    
     public var layout: XWAKTextLayout?
     public var attributeString: NSAttributedString? {
         didSet {
@@ -23,46 +25,61 @@ public class XWAKTextView: UIScrollView {
         }
     }
     
-    public override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        update()
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(containerView)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addSubview(containerView)
     }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        layout?.size = bounds.size
-    }
-
-    func update() {
-        guard let layout = layout else { return }
-        guard let ctx = UIGraphicsGetCurrentContext() else { return }
-        ctx.textMatrix = .identity
-        ctx.translateBy(x: 0, y: bounds.height)
-        ctx.scaleBy(x: 1, y: -1)
+        containerView.backgroundColor = backgroundColor
         
-        layout.draw(context: ctx)
-
-    }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let layout = layout else { super.touchesBegan(touches, with: event); return }
-        let touch = event?.allTouches?.first
-        if let touchPoint = touch?.location(in: touch?.view),
-           let pointInLayout = _converPointToLayout(touchPoint),
-           let touchImageData = layout.touchImage(in: pointInLayout),
-           let touchBlock = touchImageData.ClickBlock {
-            let frameInView = XWAKTextTools.convertTextLayoutFrame(touchImageData.imageFrame, to: self, layoutSize: layout.size)
-            touchBlock(touchImageData.image, frameInView)
+        var containerFrame = CGRect(origin: .zero, size: bounds.size)
+        if let layout = layout {
+            let textSize = layout.text.boundingRect(with: CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
+            contentSize = CGSize(width: bounds.width, height: ceil(textSize.height))
+            containerFrame.size.height = ceil(textSize.height)
         }
+        layout?.size = containerFrame.size
+        containerView.frame = containerFrame
+        containerView.layout = layout
     }
+
+//    func update() {
+//        guard let layout = layout else { return }
+//        guard let ctx = UIGraphicsGetCurrentContext() else { return }
+//        ctx.textMatrix = .identity
+//        ctx.translateBy(x: 0, y: bounds.height)
+//        ctx.scaleBy(x: 1, y: -1)
+//
+//        layout.draw(context: ctx)
+//
+//    }
     
-    private func _converPointToLayout(_ point: CGPoint) -> CGPoint? {
-        return XWAKTextTools.convertViewPointToTextLayout(layout!.size, frome: bounds, point)
-    }
-    
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
+//    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let layout = layout else { super.touchesBegan(touches, with: event); return }
+//        let touch = event?.allTouches?.first
+//        if let touchPoint = touch?.location(in: touch?.view),
+//           let pointInLayout = _converPointToLayout(touchPoint),
+//           let touchImageData = layout.touchImage(in: pointInLayout),
+//           let touchBlock = touchImageData.ClickBlock {
+//            let frameInView = XWAKTextTools.convertTextLayoutFrame(touchImageData.imageFrame, to: self, layoutSize: layout.size)
+//            touchBlock(touchImageData.image, frameInView)
+//        }
+//    }
+//
+//    private func _converPointToLayout(_ point: CGPoint) -> CGPoint? {
+//        return XWAKTextTools.convertViewPointToTextLayout(layout!.size, frome: bounds, point)
+//    }
+//
+//    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//    }
 
     private func testUpdate(ctx: CGContext) {
         let path = CGPath(rect: bounds, transform: nil)
@@ -86,8 +103,6 @@ public class XWAKTextView: UIScrollView {
             //let line = unsafeBitCast(CFArrayGetValueAtIndex(lines, index), to: CTLine.self)
             let origin = lineOrigins[index]
             ctx.textPosition = origin
-            print("line origin: \(origin)")
-//            CTLineDraw(line, ctx)
 
             let runs = CTLineGetGlyphRuns(line) as Array
 

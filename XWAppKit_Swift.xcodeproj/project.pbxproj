@@ -62,6 +62,7 @@
 		AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */; };
 		AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747B124D8133800E4B8E1 /* XWAKNetwork.swift */; };
 		AEA747B524DA61E500E4B8E1 /* XWAKLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */; };
+		AEF14D23251C9FAB0022AB88 /* XWAKTextContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProfileCell.swift; sourceTree = "<group>"; };
 		AEA747B124D8133800E4B8E1 /* XWAKNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKNetwork.swift; sourceTree = "<group>"; };
 		AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLog.swift; sourceTree = "<group>"; };
+		AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				AE10F28525199265000131BE /* XWAKLine.swift */,
 				AE10F293251A0804000131BE /* XWAKTextShadow.swift */,
 				AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */,
+				AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */,
 			);
 			path = XWAKText;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AE10F28625199265000131BE /* XWAKLine.swift in Sources */,
+				AEF14D23251C9FAB0022AB88 /* XWAKTextContainerView.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
 				AE10F2742518A008000131BE /* XWAKTextLayout.swift in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,

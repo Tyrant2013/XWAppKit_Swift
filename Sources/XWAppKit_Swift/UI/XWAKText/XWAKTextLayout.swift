@@ -125,7 +125,6 @@ public class XWAKTextLayout: NSObject {
     
     public func touchImage(in point: CGPoint) -> XWAKImageMetaData? {
         for imageData in _innerImages {
-            print("image frame: \(imageData.imageFrame), touch point: \(point)")
             if imageData.imageFrame.contains(point) {
                 return imageData
             }
@@ -153,7 +152,6 @@ public class XWAKTextLayout: NSObject {
                 }
                 
                 if let border = attributes[NSAttributedString.Key.border] as? XWAKTextBorder {
-                    print("border: \(border)")
                     drawBorder(border, line: line, run: run, context: context)
                 }
                 
