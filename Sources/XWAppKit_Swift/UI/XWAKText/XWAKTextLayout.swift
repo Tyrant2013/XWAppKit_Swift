@@ -152,6 +152,10 @@ public class XWAKTextLayout: NSObject {
                     context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
                 }
                 
+                if let border = attributes[NSAttributedString.Key.border] as? XWAKTextBorder {
+                    drawBorder(border, line: line, run: run, context: context)
+                }
+                
                 drawRun(run, attributes: attributes, context: context)
             }
         }
@@ -168,6 +172,22 @@ public class XWAKTextLayout: NSObject {
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
         context.setFillColor(backgroundColor.cgColor)
         context.fill(runFrame)
+    }
+    
+    private func drawBorder(_ border: XWAKTextBorder, line: XWAKLine, run: CTRun, context: CGContext) {
+        var runAscent: CGFloat = 0
+        var runDescent: CGFloat = 0
+        let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
+        let runHeight = runAscent + runDescent
+        let stringRange = CTRunGetStringRange(run)
+        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
+        let runYOffset = line.position.y - runDescent
+        let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
+//        let path = CGPath(rect: runFrame, transform: nil)
+//        context.addPath(path)
+        context.setStrokeColor(border.color.cgColor)
+        context.stroke(runFrame, width: border.width)
+//        context.strokePath()
     }
     
     private func drawRun(_ run: CTRun, attributes: Dictionary<NSAttributedString.Key, Any>, context: CGContext) {
@@ -198,4 +218,5 @@ public class XWAKTextLayout: NSObject {
 
 public extension NSAttributedString.Key {
     static let shadow = NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow")
+    static let border = NSAttributedString.Key(rawValue: "NSAttributedString.Key.border")
 }

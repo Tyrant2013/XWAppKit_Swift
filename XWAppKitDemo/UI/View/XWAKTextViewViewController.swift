@@ -75,6 +75,16 @@ class XWAKTextViewViewController: UIViewController {
         ])
         shadow.addAttribute(NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow"), value: XWAKTextShadow(offset: CGSize(width: 2, height: 3), color: UIColor.lightGray, blur: 1.0), range: NSRange(location: 0, length: 2))
         attr.append(shadow)
+        
+        var borderConfig = XWAKTextBorder()
+        borderConfig.color = .black
+        borderConfig.width = 3
+        attr.append(NSAttributedString(string: "\n带边框的文字", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.backgroundColor : UIColor.orange,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20),
+            NSAttributedString.Key.border : borderConfig
+        ]))
         tv.attributeString = attr
     }
     /*

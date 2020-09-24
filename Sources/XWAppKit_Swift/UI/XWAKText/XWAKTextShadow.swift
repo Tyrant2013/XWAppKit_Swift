@@ -17,6 +17,5 @@ public struct XWAKTextShadow {
         self.offset = offset
         self.color = color
         self.blur = blur
-//        super.init()
     }
 }
