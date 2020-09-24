@@ -35,7 +35,7 @@ class XWAKTextViewViewController: UIViewController {
 //
 //        }
         // Do any additional setup after loading the view.
-        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 400))
+        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 600))
         tv.backgroundColor = .orange
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.systemRed.cgColor
@@ -68,7 +68,7 @@ class XWAKTextViewViewController: UIViewController {
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25)
         ]))
-        let shadow = NSMutableAttributedString(string: "这里带阴影", attributes: [
+        let shadow = NSMutableAttributedString(string: "这里带阴影\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.black,
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 23)
@@ -76,15 +76,46 @@ class XWAKTextViewViewController: UIViewController {
         shadow.addAttribute(NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow"), value: XWAKTextShadow(offset: CGSize(width: 2, height: 3), color: UIColor.lightGray, blur: 1.0), range: NSRange(location: 0, length: 2))
         attr.append(shadow)
         
-        var borderConfig = XWAKTextBorder()
-        borderConfig.color = .black
-        borderConfig.width = 3
-        attr.append(NSAttributedString(string: "\n带边框的文字", attributes: [
+        let borderFont = UIFont(name: "PingFangSC-Regular", size: 20)!
+        attr.append(NSAttributedString(string: "带Dash边框的文字\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.backgroundColor : UIColor.orange,
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20),
-            NSAttributedString.Key.border : borderConfig
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dash, width: 1, color: .black)
         ]))
+        attr.append(NSAttributedString(string: "带Dot边框的文字\n", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.backgroundColor : UIColor.orange,
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dot, width: 1, color: .black)
+        ]))
+        attr.append(NSAttributedString(string: "带DashDot边框的文字\n", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.backgroundColor : UIColor.orange,
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dashdot, width: 1, color: .black)
+        ]))
+        attr.append(NSAttributedString(string: "带DashDotDot边框的文字\n", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dashdotdot, width: 3, color: .black)
+        ]))
+        
+        attr.append(NSAttributedString(string: "带CircleDot边框的文字\n", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .circledot, width: 4, color: .black)
+        ]))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 20
+        paragraphStyle.headIndent = 5
+        attr.addAttributes([
+            NSAttributedString.Key.paragraphStyle : paragraphStyle,
+            NSAttributedString.Key.kern : 5
+        ],
+                           range: NSRange(location: 0, length: attr.length))
         tv.attributeString = attr
     }
     /*

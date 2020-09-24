@@ -9,16 +9,22 @@
 import UIKit
 
 public enum XWAKTextBorderStyle {
-    case line
+    case solid
     case dot
+    case dash
+    case dashdot
+    case dashdotdot
+    case circledot
 }
 
 public struct XWAKTextBorder {
-    public var borderStyle: XWAKTextBorderStyle = .line
-    public var width: CGFloat = 1
-    public var color: UIColor = .black
+    public var borderStyle: XWAKTextBorderStyle
+    public var width: CGFloat
+    public var color: UIColor
     
-    public init() {
-        
+    public init(borderStyle: XWAKTextBorderStyle = .solid, width: CGFloat = 1, color: UIColor = .black) {
+        self.borderStyle = borderStyle
+        self.width = width
+        self.color = color
     }
 }

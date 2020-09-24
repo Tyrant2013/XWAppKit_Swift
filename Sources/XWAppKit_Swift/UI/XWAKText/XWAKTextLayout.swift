@@ -153,6 +153,7 @@ public class XWAKTextLayout: NSObject {
                 }
                 
                 if let border = attributes[NSAttributedString.Key.border] as? XWAKTextBorder {
+                    print("border: \(border)")
                     drawBorder(border, line: line, run: run, context: context)
                 }
                 
@@ -183,11 +184,33 @@ public class XWAKTextLayout: NSObject {
         let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
         let runYOffset = line.position.y - runDescent
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
-//        let path = CGPath(rect: runFrame, transform: nil)
-//        context.addPath(path)
+
         context.setStrokeColor(border.color.cgColor)
-        context.stroke(runFrame, width: border.width)
-//        context.strokePath()
+        context.setLineWidth(border.width)
+        context.setLineCap(.butt)
+        context.setLineJoin(.miter)
+        
+        let (dash, dot, space): (CGFloat, CGFloat, CGFloat) = (12, 5, 3)
+        let dashLengths = [border.width * dash, border.width * space]
+        let dotLengths = [border.width * dot, border.width * space]
+        switch border.borderStyle {
+        case .solid:
+            context.setLineDash(phase: 0, lengths: [])
+        case .dot:
+            context.setLineDash(phase: 0, lengths: dotLengths)
+        case .dash:
+            context.setLineDash(phase: 0, lengths: dashLengths)
+        case .dashdot:
+            context.setLineDash(phase: 0, lengths: dashLengths + dotLengths)
+        case .dashdotdot:
+            context.setLineDash(phase: 0, lengths: dashLengths + dotLengths + dotLengths)
+        case .circledot:
+            context.setLineDash(phase: 0, lengths: [0, border.width * 3])
+            context.setLineCap(.round)
+            context.setLineJoin(.round)
+        }
+        
+        context.stroke(runFrame)
     }
     
     private func drawRun(_ run: CTRun, attributes: Dictionary<NSAttributedString.Key, Any>, context: CGContext) {
