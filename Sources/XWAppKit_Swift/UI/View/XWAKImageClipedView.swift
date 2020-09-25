@@ -40,6 +40,7 @@ public class XWAKImageClipedView: UIView {
         return CGRect(x: 0, y: 0, width: width, height: height)
     }
     private let panRecognizer = UIPanGestureRecognizer()
+    private let pinRecognizer = UIPinchGestureRecognizer()
     private var lastDate: Date?
     private var state: State = .default
     private var contentOffsetAnimation: XWAKTimerAnimation?
@@ -61,6 +62,9 @@ public class XWAKImageClipedView: UIView {
     private func setup() {
         addGestureRecognizer(panRecognizer)
         panRecognizer.addTarget(self, action: #selector(handlePanRecognizer(_:)))
+        
+        addGestureRecognizer(pinRecognizer)
+        pinRecognizer.addTarget(self, action: #selector(handlePinRecognizer(_:)))
     }
 
     @objc
@@ -93,6 +97,30 @@ public class XWAKImageClipedView: UIView {
             fatalError()
         }
         lastDate = curDate
+    }
+    
+    var originFrame: CGRect = .zero
+    var originCenter: CGPoint = .zero
+    var lastScale: CGFloat = 0.0
+    @objc
+    private func handlePinRecognizer(_ sender: UIPinchGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            lastScale = 1.0
+            print("pinch began")
+        case .changed:
+            let scale = 1.0 - (lastScale - sender.scale)
+            contentView?.transform = (contentView?.transform.scaledBy(x: scale, y: scale))!
+            lastScale = sender.scale
+        case .ended:
+            print("pinch ended: ")
+        case .cancelled, .failed:
+            print("pinch \(sender.state)")
+        case .possible:
+            print("pinch possible")
+        @unknown default:
+            fatalError()
+        }
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -157,5 +185,9 @@ public class XWAKImageClipedView: UIView {
 extension CGRect {
     func containsIncludingBorders(_ point: CGPoint) -> Bool {
         return !(point.x < minX || point.x > maxX || point.y < minY || point.y > maxY)
+    }
+    
+    static func *(lhs: CGRect, rhs: CGFloat) -> CGRect {
+        return CGRect(x: lhs.minX * rhs, y: lhs.minY * rhs, width: lhs.width * rhs, height: lhs.height * rhs)
     }
 }
