@@ -18,7 +18,7 @@ class XWAKClipedImageViewController: UIViewController {
         let clipedView = XWAKImageClipedView(frame: view.bounds)
         clipedView.backgroundColor = .orange
         
-        let img = UIImage(named: "scheme")!
+        let img = UIImage(named: "bcd")!
         let imageView = UIImageView(image: img)
         clipedView.contentView = imageView
         clipedView.contentSize = img.size
