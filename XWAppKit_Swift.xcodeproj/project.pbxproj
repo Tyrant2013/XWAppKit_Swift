@@ -74,6 +74,9 @@
 		AEF14D4D251D8C580022AB88 /* XWAKTimingParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D4C251D8C580022AB88 /* XWAKTimingParameters.swift */; };
 		AEF14D51251D8CDD0022AB88 /* XWAKRubberBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D50251D8CDD0022AB88 /* XWAKRubberBand.swift */; };
 		AEF14D55251D953A0022AB88 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D54251D953A0022AB88 /* UIImageExtension.swift */; };
+		AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */; };
+		AEF14D5D251DE3E80022AB88 /* XWAKClipedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */; };
+		AEF14D61251DE4D30022AB88 /* bcd.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF14D60251DE4D30022AB88 /* bcd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +185,9 @@
 		AEF14D4C251D8C580022AB88 /* XWAKTimingParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\U0010XWAKTimingParameters.swift"; sourceTree = "<group>"; };
 		AEF14D50251D8CDD0022AB88 /* XWAKRubberBand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKRubberBand.swift; sourceTree = "<group>"; };
 		AEF14D54251D953A0022AB88 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageClipedView.swift; sourceTree = "<group>"; };
+		AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKClipedImageViewController.swift; sourceTree = "<group>"; };
+		AEF14D60251DE4D30022AB88 /* bcd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bcd.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +313,7 @@
 				AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */,
 				AE10F2622514A027000131BE /* XWAKLabel.swift */,
 				AE10F2662514A03E000131BE /* XWAKTextView.swift */,
+				AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,6 +332,7 @@
 				AEA7473A24CA90FD00E4B8E1 /* Main.storyboard */,
 				AEA7473D24CA910100E4B8E1 /* Assets.xcassets */,
 				AE10F2892519A604000131BE /* abc.png */,
+				AEF14D60251DE4D30022AB88 /* bcd.png */,
 				AEA7473F24CA910100E4B8E1 /* LaunchScreen.storyboard */,
 				AEA7474224CA910100E4B8E1 /* Info.plist */,
 			);
@@ -354,6 +362,7 @@
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
 				AEA7477324CEBC1F00E4B8E1 /* XWAKToastViewController.swift */,
 				AE10F26A25184B73000131BE /* XWAKTextViewViewController.swift */,
+				AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -672,6 +681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE10F28A2519A604000131BE /* abc.png in Resources */,
+				AEF14D61251DE4D30022AB88 /* bcd.png in Resources */,
 				AEA7474124CA910100E4B8E1 /* LaunchScreen.storyboard in Resources */,
 				AEA7473E24CA910100E4B8E1 /* Assets.xcassets in Resources */,
 				AEA7473C24CA90FD00E4B8E1 /* Main.storyboard in Resources */,
@@ -703,6 +713,7 @@
 				AEF14D51251D8CDD0022AB88 /* XWAKRubberBand.swift in Sources */,
 				AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */,
 				AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */,
+				AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */,
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AE10F257251493FF000131BE /* XWAKAnimatedImageView.swift in Sources */,
 				AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */,
@@ -754,6 +765,7 @@
 				AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */,
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
+				AEF14D5D251DE3E80022AB88 /* XWAKClipedImageViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,
 				AEA747A724D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift in Sources */,
 				AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */,

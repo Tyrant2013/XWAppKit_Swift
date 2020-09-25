@@ -22,6 +22,7 @@ class ViewController: UIViewController {
             ("Hud", "XWAKHudViewController"),
             ("Toast", "XWAKToastViewController"),
             ("TextView", "XWAKTextViewViewController"),
+            ("ClipedImage", "XWAKClipedImageViewController"),
             ]
         ),
         ("ViewController", [

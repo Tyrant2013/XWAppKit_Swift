@@ -50,6 +50,10 @@ public final class XWAKTimerAnimation {
             animations(1, duration)
             running = false
             completion?(true)
+            displayLink.invalidate()
+        }
+        else {
+            animations(elapsed / duration, elapsed)
         }
     }
 }
