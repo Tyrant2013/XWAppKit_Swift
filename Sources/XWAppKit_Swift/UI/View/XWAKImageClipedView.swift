@@ -15,7 +15,10 @@ public class XWAKImageClipedView: UIView {
             oldValue?.removeFromSuperview()
             if let contentView = contentView {
                 addSubview(contentView)
-                contentView.frame = CGRect(origin: contentOrigin, size: contentSize)
+
+                clipRect = contentView.frame
+                updateClipMask()
+                bringSubviewToFront(maskToView)
             }
         }
     }
@@ -31,19 +34,26 @@ public class XWAKImageClipedView: UIView {
     }
     
     private var contentOrigin: CGPoint {
-        return CGPoint(x: -contentOffset.x, y: -contentOffset.y)
+        return CGPoint(x: contentOffset.x, y: contentOffset.y)
     }
     
     private var contentOffsetBounds: CGRect {
-        let width = contentSize.width - bounds.width
-        let height = contentSize.height - bounds.height
-        return CGRect(x: 0, y: 0, width: width, height: height)
+//        let width = contentSize.width - bounds.width
+//        let height = contentSize.height - bounds.height
+
+        let width = contentSize.width - clipRect.width
+        let height = contentSize.height - clipRect.height
+        return CGRect(x: clipRect.minX, y: clipRect.minY, width: width, height: height)
     }
     private let panRecognizer = UIPanGestureRecognizer()
     private let pinRecognizer = UIPinchGestureRecognizer()
     private var lastDate: Date?
     private var state: State = .default
     private var contentOffsetAnimation: XWAKTimerAnimation?
+    
+    private let maskToView = UIView()
+    private let maskToLayer = CAShapeLayer()
+    private var clipRect: CGRect = .zero
     
     private enum State {
         case `default`
@@ -65,6 +75,25 @@ public class XWAKImageClipedView: UIView {
         
         addGestureRecognizer(pinRecognizer)
         pinRecognizer.addTarget(self, action: #selector(handlePinRecognizer(_:)))
+        
+        maskToView.frame = bounds
+        maskToView.backgroundColor = .black
+        addSubview(maskToView)
+        clipRect = CGRect(x: 20, y: 100, width: bounds.width - 40, height: bounds.height - 200)
+        let path = UIBezierPath(rect: bounds)
+        path.append(UIBezierPath(rect: clipRect))
+        maskToLayer.path = path.cgPath
+        maskToLayer.fillRule = .evenOdd
+        maskToView.layer.mask = maskToLayer
+    }
+    
+    private func updateClipMask() {
+        let path = UIBezierPath(rect: maskToView.bounds)
+//        path.append(UIBezierPath(rect: clipRect))
+//        maskToLayer.fillRule = .evenOdd
+        path.append(UIBezierPath(rect: clipRect).reversing())
+        
+        maskToLayer.path = path.cgPath
     }
 
     @objc
@@ -77,7 +106,7 @@ public class XWAKImageClipedView: UIView {
         case .changed:
             let translation = sender.translation(in: self)
             if case .dragging(let initialOffset) = state {
-                contentOffset = clampOffset(initialOffset - translation)
+                contentOffset = clampOffset(initialOffset + translation)
             }
         case .ended:
             state = .default
@@ -142,8 +171,9 @@ public class XWAKImageClipedView: UIView {
         let d = UIScrollView.DecelerationRate.normal.rawValue
         let parameters = XWAKDecelerationTimingParameters(initialValue: contentOffset, initialVelocity: velocity, decelerationRate: d, threshold: 0.5)
         let destination = parameters.destination
-        let intersection = getIntersection(rect: contentOffsetBounds, segment: (contentOffset, destination))
         
+        let intersection = getIntersection(rect: contentOffsetBounds, segment: (contentOffset, destination))
+        print("contentOffsetBounds: \(contentOffsetBounds), contentOffset: \(contentOffset), destination: \(destination), intersection: \(intersection ?? .zero)")
         let duration: TimeInterval
         if let intersection = intersection, let intersectionDuration = parameters.duration(to: intersection) {
             duration = intersectionDuration

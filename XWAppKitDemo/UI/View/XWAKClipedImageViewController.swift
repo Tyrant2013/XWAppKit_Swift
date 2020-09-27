@@ -18,11 +18,15 @@ class XWAKClipedImageViewController: UIViewController {
         let clipedView = XWAKImageClipedView(frame: view.bounds)
         clipedView.backgroundColor = .orange
         
+        let contentFrame = CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: view.bounds.height - 200)
         let img = UIImage(named: "bcd")!
         let imageView = UIImageView(image: img)
+        imageView.frame = contentFrame
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.white.cgColor
         clipedView.contentView = imageView
-        clipedView.contentSize = img.size
-        clipedView.contentOffset = CGPoint(x: (img.size.width - view.bounds.width) / 2, y: (img.size.height - view.bounds.height) / 2)
+        clipedView.contentSize = contentFrame.size
+        clipedView.contentOffset = contentFrame.origin
         view.addSubview(clipedView)
     }
     
