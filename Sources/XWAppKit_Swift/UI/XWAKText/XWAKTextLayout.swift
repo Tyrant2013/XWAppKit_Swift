@@ -75,6 +75,8 @@ public class XWAKTextLayout: NSObject {
     }
     
     private func parseText() {
+        _innerLines.removeAll()
+        
         let attrStr = text
         let path = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
         
