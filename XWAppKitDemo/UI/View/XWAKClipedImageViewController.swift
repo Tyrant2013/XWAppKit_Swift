@@ -27,7 +27,8 @@ class XWAKClipedImageViewController: UIViewController {
         clipedView.contentView = imageView
         clipedView.contentSize = contentFrame.size
         clipedView.contentOffset = contentFrame.origin
-        view.addSubview(clipedView)
+        clipedView.tag = 1111
+        view.addSubview(clipedView)   
     }
     
 

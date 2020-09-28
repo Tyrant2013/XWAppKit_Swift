@@ -39,7 +39,17 @@ class XWAKTextViewViewController: UIViewController {
         tv.backgroundColor = .orange
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.systemRed.cgColor
+        tv.tag = 1111
         view.addSubview(tv)
+        
+        let btn = UIButton(type: .system)
+        btn.setTitle("复制", for: .normal)
+        btn.addTarget(self, action: #selector(printSelected(_:)), for: .touchUpInside)
+        btn.frame = CGRect(x: 150, y: 550, width: 100, height: 50)
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.systemBlue.cgColor
+        btn.layer.cornerRadius = 10
+        view.addSubview(btn)
         
         let drawStr = "这是开始，这是中间，这是结束\n这里换行"
         let attrs = [
@@ -117,6 +127,13 @@ class XWAKTextViewViewController: UIViewController {
                            range: NSRange(location: 0, length: attr.length))
         tv.attributeString = attr
     }
+    
+    @objc
+    func printSelected(_ sender: UIButton) {
+        let clipedView = view.viewWithTag(1111) as! XWAKTextView
+        print(clipedView.selectedString as Any)
+    }
+    
     /*
     // MARK: - Navigation
 

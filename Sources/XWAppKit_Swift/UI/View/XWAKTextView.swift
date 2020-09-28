@@ -24,6 +24,18 @@ public class XWAKTextView: UIScrollView {
             }
         }
     }
+    public var selectedString: String? {
+        get {
+            guard let layout = layout, let attrStr = attributeString else { return nil }
+            let originStr = attrStr.string
+            return layout.lines.filter { $0.selected }.reduce("") { (result, line) -> String in
+                let strRange = CTLineGetStringRange(line.line)
+                let start = originStr.index(originStr.startIndex, offsetBy: strRange.location)
+                let end = originStr.index(originStr.startIndex, offsetBy: strRange.location + strRange.length)
+                return result + String(originStr[start..<end])
+            }
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
