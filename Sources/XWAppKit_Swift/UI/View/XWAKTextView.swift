@@ -17,7 +17,7 @@ public class XWAKTextView: UIScrollView {
     public var attributeString: NSAttributedString? {
         didSet {
             if let attrStr = attributeString {
-                layout = XWAKTextLayout(text: attrStr, size: bounds.size)
+                layout = XWAKTextLayout(text: attrStr, size: .zero)
             }
             else {
                 layout = nil
@@ -37,19 +37,22 @@ public class XWAKTextView: UIScrollView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
+        
         containerView.backgroundColor = backgroundColor
         
-        var containerFrame = CGRect(origin: .zero, size: bounds.size)
-        if let layout = layout {
+        if let layout = layout, layout.size == .zero {
+            var containerFrame = CGRect(origin: .zero, size: bounds.size)
             let textSize = layout.text.boundingRect(with: CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
             contentSize = CGSize(width: bounds.width, height: ceil(textSize.height))
             containerFrame.size.height = ceil(textSize.height)
+            layout.size = containerFrame.size
+            containerView.frame = containerFrame
+            containerView.layout = layout
         }
-        layout?.size = containerFrame.size
-        containerView.frame = containerFrame
-        containerView.layout = layout
+        
     }
     
+    private var selectedFrames = [CGRect]()
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let layout = layout else {
             super.touchesBegan(touches, with: event)
@@ -57,10 +60,15 @@ public class XWAKTextView: UIScrollView {
         }
         let touch = touches.first!
         let touchPoint = touch.location(in: self)
-        for line in layout.lines {
-            
-        }
         
+        for line in layout.lines {
+            let frame = CGRect(origin: CGPoint(x: line.position.x, y: layout.size.height - line.position.y - line.bounds.height + line.descent - line.leading), size: line.bounds.size)
+            if frame.contains(touchPoint) {
+                line.selected = !line.selected
+                containerView.update()
+                break
+            }
+        }
     }
 
 //    func update() {

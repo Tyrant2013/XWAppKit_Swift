@@ -15,10 +15,13 @@ class XWAKTextContainerView: UIView {
             setNeedsLayout()
         }
     }
+    
+    public func update() {
+        setNeedsDisplay()
+    }
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        print("container height: \(bounds)")
         guard let layout = layout else { return }
         guard let ctx = UIGraphicsGetCurrentContext() else { return }
         ctx.textMatrix = .identity

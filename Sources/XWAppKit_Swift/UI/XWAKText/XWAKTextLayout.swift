@@ -173,7 +173,7 @@ public class XWAKTextLayout: NSObject {
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
         /// 消除换行符导致的背景色高出一截
         if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runWidth)) {
-            context.setFillColor(backgroundColor.cgColor)
+            context.setFillColor(line.selected ? UIColor.systemYellow.cgColor : backgroundColor.cgColor)
             context.fill(runFrame)
         }
     }

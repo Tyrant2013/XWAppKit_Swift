@@ -17,6 +17,7 @@ public class XWAKLine: NSObject {
     public let descent: CGFloat
     public let leading: CGFloat
     public let trailingWidth: Double
+    public var selected: Bool = false
     init(line: CTLine, position: CGPoint) {
         self.line = line
         self.position = position
