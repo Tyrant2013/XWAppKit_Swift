@@ -49,6 +49,19 @@ public class XWAKTextView: UIScrollView {
         containerView.frame = containerFrame
         containerView.layout = layout
     }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let layout = layout else {
+            super.touchesBegan(touches, with: event)
+            return
+        }
+        let touch = touches.first!
+        let touchPoint = touch.location(in: self)
+        for line in layout.lines {
+            
+        }
+        
+    }
 
 //    func update() {
 //        guard let layout = layout else { return }

@@ -49,7 +49,7 @@ class XWAKTextViewViewController: UIViewController {
         ]
         let attr = NSMutableAttributedString(string: drawStr, attributes: attrs)
         if let image = UIImage(named: "abc") {
-            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: CGSize(width: 40, height: 30), tapHandler: { (image, frame) in
+            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: image.size, tapHandler: { (image, frame) in
                 self.view.viewWithTag(1111)?.removeFromSuperview()
                 
                 let iv = UIImageView(image: image)

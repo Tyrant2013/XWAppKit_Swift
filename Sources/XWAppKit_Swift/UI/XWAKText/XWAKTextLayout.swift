@@ -169,8 +169,11 @@ public class XWAKTextLayout: NSObject {
         let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
         let runYOffset = line.position.y - runDescent
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
-        context.setFillColor(backgroundColor.cgColor)
-        context.fill(runFrame)
+        /// 消除换行符导致的背景色高出一截
+        if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runWidth)) {
+            context.setFillColor(backgroundColor.cgColor)
+            context.fill(runFrame)
+        }
     }
     
     private func drawBorder(_ border: XWAKTextBorder, line: XWAKLine, run: CTRun, context: CGContext) {
