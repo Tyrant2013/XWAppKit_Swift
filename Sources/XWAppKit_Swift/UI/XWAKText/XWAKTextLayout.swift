@@ -102,7 +102,7 @@ public class XWAKTextLayout: NSObject {
                 }
             }
         }
-        size = _lastRect.size
+        size = CGSize(width: ceil(_lastRect.width), height: ceil(_lastRect.height))
         size.height += inset.top + inset.bottom
     }
     
