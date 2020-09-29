@@ -103,6 +103,7 @@ public class XWAKTextLayout: NSObject {
             }
         }
         size = _lastRect.size
+        size.height += inset.top + inset.bottom
     }
     
     private func parseImages(line: XWAKLine, run: CTRun, imageDelegate: CTRunDelegate) {

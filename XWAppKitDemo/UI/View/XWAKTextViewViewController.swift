@@ -35,7 +35,7 @@ class XWAKTextViewViewController: UIViewController {
 //
 //        }
         // Do any additional setup after loading the view.
-        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 400))
+        let tv = XWAKTextView(frame: CGRect(x: 50, y: 100, width: 300, height: 200))
         tv.backgroundColor = .orange
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.systemRed.cgColor

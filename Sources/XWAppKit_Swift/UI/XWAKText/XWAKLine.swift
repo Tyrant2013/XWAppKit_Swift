@@ -44,7 +44,7 @@ public class XWAKLine: NSObject {
                         width: CGFloat(lineWidth),
                         height: ascent + descent)
         bounds.applying(CGAffineTransform(scaleX: 1, y: -1))
-        print("line bounds: \(bounds)")
+//        print("line bounds: \(bounds)")
         super.init()
     }
 }
