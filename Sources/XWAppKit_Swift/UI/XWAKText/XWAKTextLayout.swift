@@ -151,9 +151,17 @@ public class XWAKTextLayout: NSObject {
             let run = run as! CTRun
             let attributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
             ContextStateStore(context) {
+                var runAscent: CGFloat = 0
+                var runDescent: CGFloat = 0
+                let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
+                let runHeight = runAscent + runDescent
+                let stringRange = CTRunGetStringRange(run)
+                let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
+                let runYOffset = size.height - line.position.y - runDescent
+                let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
                 
                 if let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor {
-                    drawBackground(backgroundColor, line: line, run: run, context: context)
+                    drawBackground(backgroundColor, line: line, run: run, runFrame: runFrame, context: context)
                 }
                 
                 if let shadowAttr = attributes[NSAttributedString.Key.xwak_shadow] as? XWAKTextShadow {
@@ -161,7 +169,7 @@ public class XWAKTextLayout: NSObject {
                 }
                 
                 if let border = attributes[NSAttributedString.Key.xwak_border] as? XWAKTextBorder {
-                    drawBorder(border, line: line, run: run, context: context)
+                    drawBorder(border, line: line, run: run, runFrame: runFrame, context: context)
                 }
                 
                 drawRun(run, line: line, attributes: attributes, context: context)
@@ -169,19 +177,11 @@ public class XWAKTextLayout: NSObject {
         }
     }
     
-    private func drawBackground(_ backgroundColor: UIColor, line: XWAKLine, run: CTRun, context: CGContext) {
-        var runAscent: CGFloat = 0
-        var runDescent: CGFloat = 0
-        let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
-        let runHeight = runAscent + runDescent
-        let stringRange = CTRunGetStringRange(run)
-        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
-        let runYOffset = size.height - line.position.y - runDescent
-        let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
+    private func drawBackground(_ backgroundColor: UIColor, line: XWAKLine, run: CTRun, runFrame: CGRect, context: CGContext) {
         let runAttributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
-        
+        let stringRange = CTRunGetStringRange(run)
         /// 消除换行符导致的背景色高出一截
-        if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runWidth)) {
+        if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runFrame.width)) {
             /// 检查是否设置了选中时的背景色
             let selectedAttrs = runAttributes[NSAttributedString.Key.xwak_selected] as? XWAKTextSelected
             let selectedBackgroundColor = selectedAttrs?.backgroundColor ?? UIColor.systemYellow
@@ -191,15 +191,7 @@ public class XWAKTextLayout: NSObject {
         }
     }
     
-    private func drawBorder(_ border: XWAKTextBorder, line: XWAKLine, run: CTRun, context: CGContext) {
-        var runAscent: CGFloat = 0
-        var runDescent: CGFloat = 0
-        let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
-        let runHeight = runAscent + runDescent
-        let stringRange = CTRunGetStringRange(run)
-        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
-        let runYOffset = size.height - line.position.y - runDescent
-        let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
+    private func drawBorder(_ border: XWAKTextBorder, line: XWAKLine, run: CTRun, runFrame: CGRect, context: CGContext) {
 
         context.setStrokeColor(border.color.cgColor)
         context.setLineWidth(border.width)
