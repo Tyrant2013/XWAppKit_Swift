@@ -9,6 +9,7 @@
 import Foundation
 
 public extension NSAttributedString.Key {
+    static let xwak_background = NSAttributedString.Key(rawValue: "NSAttributedString.Key.background")
     static let xwak_shadow = NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow")
     static let xwak_border = NSAttributedString.Key(rawValue: "NSAttributedString.Key.border")
     static let xwak_selected = NSAttributedString.Key(rawValue: "NSAttributedString.Key.selected")

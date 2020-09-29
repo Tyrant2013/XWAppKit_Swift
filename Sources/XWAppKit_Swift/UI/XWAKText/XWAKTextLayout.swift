@@ -162,8 +162,7 @@ public class XWAKTextLayout: NSObject {
                 let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
                 
                 
-                let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor ?? UIColor.clear
-                drawBackground(backgroundColor, line: line, run: run, runFrame: runFrame, context: context)
+                drawBackground(line: line, run: run, runFrame: runFrame, context: context)
                 
                 if let shadowAttr = attributes[NSAttributedString.Key.xwak_shadow] as? XWAKTextShadow {
                     context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
@@ -178,17 +177,22 @@ public class XWAKTextLayout: NSObject {
         }
     }
     
-    private func drawBackground(_ backgroundColor: UIColor, line: XWAKLine, run: CTRun, runFrame: CGRect, context: CGContext) {
+    private func drawBackground(line: XWAKLine, run: CTRun, runFrame: CGRect, context: CGContext) {
         let runAttributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
         let stringRange = CTRunGetStringRange(run)
-        /// 消除换行符导致的背景色高出一截
+        /// 消除换行符导致的背景色高出一截(大概)
         if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runFrame.width)) {
+            let background = runAttributes[NSAttributedString.Key.xwak_background] as? XWAKTextBackground
+            let backgroundColor = background?.color ?? .clear
             /// 检查是否设置了选中时的背景色
             let selectedAttrs = runAttributes[NSAttributedString.Key.xwak_selected] as? XWAKTextSelected
             let selectedBackgroundColor = selectedAttrs?.backgroundColor ?? UIColor.systemYellow
             
+            let path = UIBezierPath(roundedRect: runFrame.inset(by: background?.inset ?? .zero),
+                                    cornerRadius: background?.corner ?? 0)
+            context.addPath(path.cgPath)
             context.setFillColor(line.selected ? selectedBackgroundColor.cgColor : backgroundColor.cgColor)
-            context.fill(runFrame)
+            context.fillPath()
         }
     }
     
