@@ -45,7 +45,7 @@ class XWAKTextViewViewController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("复制", for: .normal)
         btn.addTarget(self, action: #selector(printSelected(_:)), for: .touchUpInside)
-        btn.frame = CGRect(x: 150, y: 550, width: 100, height: 50)
+        btn.frame = CGRect(x: 150, y: 750, width: 100, height: 50)
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor.systemBlue.cgColor
         btn.layer.cornerRadius = 10
@@ -139,6 +139,19 @@ class XWAKTextViewViewController: UIViewController {
         ],
                            range: NSRange(location: 0, length: attr.length))
         tv.attributeString = attr
+        
+        let tv2 = XWAKTextView(frame: CGRect(x: 50, y: 305, width: view.bounds.width - 60, height: 300))
+        tv2.backgroundColor = .white
+        tv2.layer.borderWidth = 1
+        tv2.layer.cornerRadius = 10
+        let tv2Attrs = [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18),
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.kern : 3
+        ] as [NSAttributedString.Key : Any]
+        tv2.attributeString = NSAttributedString(string: "这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。",
+                                                 attributes: tv2Attrs)
+        view.addSubview(tv2)
     }
     
     @objc

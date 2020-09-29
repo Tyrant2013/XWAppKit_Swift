@@ -161,9 +161,9 @@ public class XWAKTextLayout: NSObject {
                 let runYOffset = size.height - line.position.y - runDescent
                 let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
                 
-                if let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor {
-                    drawBackground(backgroundColor, line: line, run: run, runFrame: runFrame, context: context)
-                }
+                
+                let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor ?? UIColor.clear
+                drawBackground(backgroundColor, line: line, run: run, runFrame: runFrame, context: context)
                 
                 if let shadowAttr = attributes[NSAttributedString.Key.xwak_shadow] as? XWAKTextShadow {
                     context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
