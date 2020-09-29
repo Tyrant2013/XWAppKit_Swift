@@ -53,12 +53,10 @@ public class XWAKTextView: UIScrollView {
         containerView.backgroundColor = backgroundColor
         
         if let layout = layout, layout.size == .zero {
-            var containerFrame = CGRect(origin: .zero, size: bounds.size)
-            let textSize = layout.text.boundingRect(with: CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
-            contentSize = CGSize(width: bounds.width, height: ceil(textSize.height))
-            containerFrame.size.height = ceil(textSize.height)
-            layout.size = containerFrame.size
-            containerView.frame = containerFrame
+            layout.updateSize(bounds.size)
+            
+            containerView.frame = CGRect(origin: .zero, size: layout.size)
+            contentSize = layout.size
             containerView.layout = layout
         }
         
@@ -74,8 +72,7 @@ public class XWAKTextView: UIScrollView {
         let touchPoint = touch.location(in: self)
         
         for line in layout.lines {
-            let frame = CGRect(origin: CGPoint(x: line.position.x, y: layout.size.height - line.position.y - line.bounds.height + line.descent - line.leading), size: line.bounds.size)
-            if frame.contains(touchPoint) {
+            if line.bounds.contains(touchPoint) {
                 line.selected = !line.selected
                 containerView.update()
                 break

@@ -39,12 +39,8 @@ public struct XWAKImageMetaData {
 
 public class XWAKTextLayout: NSObject {
     public let text: NSAttributedString
-    public var size: CGSize {
-        didSet {
-            parseText()
-        }
-        
-    }
+    public var size: CGSize
+    public var inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     public var lines: [XWAKLine] {
         get {
             return _innerLines
@@ -66,24 +62,38 @@ public class XWAKTextLayout: NSObject {
         super.init()
     }
     
+    public func updateSize(_ size: CGSize) {
+        self.size = size
+        parseText()
+    }
+    
     private func parseText() {
         _innerLines.removeAll()
         
         let attrStr = text
-        let path = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
+        let pathRect = CGRect(origin: .zero, size: CGSize(width: size.width, height: 10000))
+        let drawBoxRect = pathRect.inset(by: inset)
+        let path = CGPath(rect: drawBoxRect, transform: nil)
         
         let framesetter = CTFramesetterCreateWithAttributedString(attrStr)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attrStr.length), path, nil)
         let lines = CTFrameGetLines(frame) as! [CTLine]
         var lineOrigins = [CGPoint](repeating: .zero, count: lines.count)
         CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), &lineOrigins)
+        var _lastRect: CGRect = .zero
+        
         for lineIndex in 0..<lines.count {
             let ctline = lines[lineIndex]
-            let line = XWAKLine(line: ctline, position: lineOrigins[lineIndex])
+            var position = lineOrigins[lineIndex]
+            position.x = drawBoxRect.minX + lineOrigins[lineIndex].x
+            position.y = drawBoxRect.height + drawBoxRect.minY - position.y
+            
+            let line = XWAKLine(line: ctline, position: position)
             _innerLines.append(line)
+            _lastRect = _lastRect.union(line.bounds)
             
             let runs = CTLineGetGlyphRuns(ctline) as! [CTRun]
-            
+
             for run in runs {
                 if let runAttrs = CTRunGetAttributes(run) as? Dictionary<NSAttributedString.Key, Any> {
                     if let imageDelegate = runAttrs[(kCTRunDelegateAttributeName as NSAttributedString.Key)] {
@@ -92,6 +102,7 @@ public class XWAKTextLayout: NSObject {
                 }
             }
         }
+        size = _lastRect.size
     }
     
     private func parseImages(line: XWAKLine, run: CTRun, imageDelegate: CTRunDelegate) {
@@ -99,7 +110,7 @@ public class XWAKTextLayout: NSObject {
         var metaData = keyValue.assumingMemoryBound(to: XWAKImageMetaData.self).pointee
         let imageHeight = metaData.ascent + metaData.descent
         let imageWidth = metaData.width
-        let x = CTLineGetOffsetForStringIndex(line.line, CTRunGetStringRange(run).location, nil)
+        let x = CTLineGetOffsetForStringIndex(line.line, CTRunGetStringRange(run).location, nil) + line.position.x
         let y = line.position.y
         metaData.imageFrame = CGRect(x: x, y: y, width: imageWidth, height: imageHeight)
         _innerImages.append(metaData)
@@ -112,7 +123,9 @@ public class XWAKTextLayout: NSObject {
         }
         
         for imageData in _innerImages {
-            context.draw(imageData.image.cgImage!, in: imageData.imageFrame)
+            var imageFrame = imageData.imageFrame
+            imageFrame.origin.y = size.height - imageFrame.minY
+            context.draw(imageData.image.cgImage!, in: imageFrame)
         }
         
     }
@@ -128,7 +141,8 @@ public class XWAKTextLayout: NSObject {
     
     private func drawLine(_ line: XWAKLine, context: CGContext) {
         let ctline = line.line
-        let lineOrigin = line.position
+        var lineOrigin = line.position
+        lineOrigin.y = size.height - lineOrigin.y
         
         context.textPosition = lineOrigin
         
@@ -137,6 +151,7 @@ public class XWAKTextLayout: NSObject {
             let run = run as! CTRun
             let attributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
             ContextStateStore(context) {
+                
                 if let backgroundColor = attributes[NSAttributedString.Key.backgroundColor] as? UIColor {
                     drawBackground(backgroundColor, line: line, run: run, context: context)
                 }
@@ -160,8 +175,8 @@ public class XWAKTextLayout: NSObject {
         let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
         let runHeight = runAscent + runDescent
         let stringRange = CTRunGetStringRange(run)
-        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
-        let runYOffset = line.position.y - runDescent
+        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
+        let runYOffset = size.height - line.position.y - runDescent
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
         let runAttributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
         
@@ -182,8 +197,8 @@ public class XWAKTextLayout: NSObject {
         let runWidth = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &runAscent, &runDescent, nil))
         let runHeight = runAscent + runDescent
         let stringRange = CTRunGetStringRange(run)
-        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
-        let runYOffset = line.position.y - runDescent
+        let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
+        let runYOffset = size.height - line.position.y - runDescent
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
 
         context.setStrokeColor(border.color.cgColor)
