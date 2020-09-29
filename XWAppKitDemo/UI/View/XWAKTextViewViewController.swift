@@ -140,7 +140,7 @@ class XWAKTextViewViewController: UIViewController {
                            range: NSRange(location: 0, length: attr.length))
         tv.attributeString = attr
         
-        let tv2 = XWAKTextView(frame: CGRect(x: 50, y: 305, width: view.bounds.width - 60, height: 300))
+        let tv2 = XWAKTextView(frame: CGRect(x: 20, y: 320, width: view.bounds.width - 40, height: 300))
         tv2.backgroundColor = .white
         tv2.layer.borderWidth = 1
         tv2.layer.cornerRadius = 10
