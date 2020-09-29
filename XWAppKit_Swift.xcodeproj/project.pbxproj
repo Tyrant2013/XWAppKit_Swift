@@ -77,6 +77,8 @@
 		AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */; };
 		AEF14D5D251DE3E80022AB88 /* XWAKClipedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */; };
 		AEF14D61251DE4D30022AB88 /* bcd.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF14D60251DE4D30022AB88 /* bcd.png */; };
+		AEF14D7F2522CB180022AB88 /* XWAKTextSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D7E2522CB180022AB88 /* XWAKTextSelected.swift */; };
+		AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D852522CB440022AB88 /* XWAKAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +190,8 @@
 		AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageClipedView.swift; sourceTree = "<group>"; };
 		AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKClipedImageViewController.swift; sourceTree = "<group>"; };
 		AEF14D60251DE4D30022AB88 /* bcd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bcd.png; sourceTree = "<group>"; };
+		AEF14D7E2522CB180022AB88 /* XWAKTextSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextSelected.swift; sourceTree = "<group>"; };
+		AEF14D852522CB440022AB88 /* XWAKAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,11 +224,10 @@
 		AE10F2772518A016000131BE /* XWAKText */ = {
 			isa = PBXGroup;
 			children = (
+				AEF14D842522CB290022AB88 /* Attributes */,
 				AE10F28D2519E9E5000131BE /* XWAKTextTools.swift */,
 				AE10F2732518A008000131BE /* XWAKTextLayout.swift */,
 				AE10F28525199265000131BE /* XWAKLine.swift */,
-				AE10F293251A0804000131BE /* XWAKTextShadow.swift */,
-				AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */,
 				AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */,
 			);
 			path = XWAKText;
@@ -549,6 +552,17 @@
 			path = Parameters;
 			sourceTree = "<group>";
 		};
+		AEF14D842522CB290022AB88 /* Attributes */ = {
+			isa = PBXGroup;
+			children = (
+				AEF14D852522CB440022AB88 /* XWAKAttributes.swift */,
+				AE10F293251A0804000131BE /* XWAKTextShadow.swift */,
+				AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */,
+				AEF14D7E2522CB180022AB88 /* XWAKTextSelected.swift */,
+			);
+			path = Attributes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -711,8 +725,10 @@
 				AEF14D2E251D80240022AB88 /* CGPointExtension.swift in Sources */,
 				AEA7478424CFCE1000E4B8E1 /* XWAKLoginInputCell.swift in Sources */,
 				AEF14D51251D8CDD0022AB88 /* XWAKRubberBand.swift in Sources */,
+				AEF14D7F2522CB180022AB88 /* XWAKTextSelected.swift in Sources */,
 				AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */,
 				AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */,
+				AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */,
 				AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */,
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AE10F257251493FF000131BE /* XWAKAnimatedImageView.swift in Sources */,

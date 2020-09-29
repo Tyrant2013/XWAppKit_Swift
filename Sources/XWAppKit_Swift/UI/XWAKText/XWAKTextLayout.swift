@@ -16,14 +16,6 @@ public struct XWAKImageMetaData {
     public var imageFrame: CGRect = .zero
     public let ClickBlock: ((_ image: UIImage, _ frame: CGRect) -> Void)?
     
-//    init(ascent: CGFloat, descent: CGFloat, width: CGFloat, image: UIImage, ClickBlock: @escaping (_ image: UIImage) -> Void) {
-//        self.ascent = ascent
-//        self.descent = descent
-//        self.width = width
-//        self.image = image
-//        self.ClickBlock = ClickBlock
-//    }
-    
     public static func makeImageAttributeString(image: UIImage, size: CGSize? = nil, tapHandler: @escaping (_ image: UIImage, _ frame: CGRect) -> Void) -> NSAttributedString {
         let imageSize = size ?? image.size
         let extentBuffer = UnsafeMutablePointer<XWAKImageMetaData>.allocate(capacity: 1)
@@ -149,15 +141,15 @@ public class XWAKTextLayout: NSObject {
                     drawBackground(backgroundColor, line: line, run: run, context: context)
                 }
                 
-                if let shadowAttr = attributes[NSAttributedString.Key.shadow] as? XWAKTextShadow {
+                if let shadowAttr = attributes[NSAttributedString.Key.xwak_shadow] as? XWAKTextShadow {
                     context.setShadow(offset: shadowAttr.offset, blur: shadowAttr.blur, color: shadowAttr.color.cgColor)
                 }
                 
-                if let border = attributes[NSAttributedString.Key.border] as? XWAKTextBorder {
+                if let border = attributes[NSAttributedString.Key.xwak_border] as? XWAKTextBorder {
                     drawBorder(border, line: line, run: run, context: context)
                 }
                 
-                drawRun(run, attributes: attributes, context: context)
+                drawRun(run, line: line, attributes: attributes, context: context)
             }
         }
     }
@@ -171,9 +163,15 @@ public class XWAKTextLayout: NSObject {
         let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil)
         let runYOffset = line.position.y - runDescent
         let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
+        let runAttributes = CTRunGetAttributes(run) as! Dictionary<NSAttributedString.Key, Any>
+        
         /// 消除换行符导致的背景色高出一截
         if !(stringRange.location > 0 && stringRange.length == 1 && line.trailingWidth == Double(runWidth)) {
-            context.setFillColor(line.selected ? UIColor.systemYellow.cgColor : backgroundColor.cgColor)
+            /// 检查是否设置了选中时的背景色
+            let selectedAttrs = runAttributes[NSAttributedString.Key.xwak_selected] as? XWAKTextSelected
+            let selectedBackgroundColor = selectedAttrs?.backgroundColor ?? UIColor.systemYellow
+            
+            context.setFillColor(line.selected ? selectedBackgroundColor.cgColor : backgroundColor.cgColor)
             context.fill(runFrame)
         }
     }
@@ -216,21 +214,23 @@ public class XWAKTextLayout: NSObject {
         context.stroke(runFrame)
     }
     
-    private func drawRun(_ run: CTRun, attributes: Dictionary<NSAttributedString.Key, Any>, context: CGContext) {
+    private func drawRun(_ run: CTRun, line: XWAKLine, attributes: Dictionary<NSAttributedString.Key, Any>, context: CGContext) {
         let glyphCount = CTRunGetGlyphCount(run)
         var runPositions = [CGPoint](repeating: .zero, count: glyphCount)
         CTRunGetPositions(run, CFRangeMake(0, 0), &runPositions)
         var glyphs = [CGGlyph](repeating: CGGlyph(), count: glyphCount)
-        let runFont = attributes[NSAttributedString.Key.font] as! CTFont
         CTRunGetGlyphs(run, CFRangeMake(0, 0), &glyphs)
-        if let fillColor = attributes[NSAttributedString.Key.foregroundColor] as? UIColor {
-            context.setFillColor(fillColor.cgColor)
-        }
-        else {
-            context.setFillColor(UIColor.black.cgColor)
-        }
-        context.setFont(CTFontCopyGraphicsFont(runFont, nil))
-        context.setFontSize(CTFontGetSize(runFont))
+        let runFont = attributes[NSAttributedString.Key.font] as! CTFont
+        let fillColor = attributes[NSAttributedString.Key.foregroundColor] as? UIColor ?? UIColor.black
+        
+        let selectedAttribute = attributes[NSAttributedString.Key.xwak_selected] as? XWAKTextSelected
+        let selectedFont = selectedAttribute?.font as CTFont? ?? runFont
+        let selectedForeground = selectedAttribute?.foregroundColor ?? fillColor
+        
+        context.setFillColor(line.selected ? selectedForeground.cgColor : fillColor.cgColor)
+        let setFont = line.selected ? selectedFont : runFont
+        context.setFont(CTFontCopyGraphicsFont(setFont, nil))
+        context.setFontSize(CTFontGetSize(setFont))
         context.showGlyphs(glyphs, at: runPositions)
     }
     
@@ -239,10 +239,4 @@ public class XWAKTextLayout: NSObject {
         block()
         context.restoreGState()
     }
-}
-
-
-public extension NSAttributedString.Key {
-    static let shadow = NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow")
-    static let border = NSAttributedString.Key(rawValue: "NSAttributedString.Key.border")
 }

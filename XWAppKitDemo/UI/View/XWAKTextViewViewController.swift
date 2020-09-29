@@ -59,7 +59,7 @@ class XWAKTextViewViewController: UIViewController {
         ]
         let attr = NSMutableAttributedString(string: drawStr, attributes: attrs)
         if let image = UIImage(named: "abc") {
-            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: image.size, tapHandler: { (image, frame) in
+            attr.append(XWAKImageMetaData.makeImageAttributeString(image: image, size: CGSize(width: 30, height: 30), tapHandler: { (image, frame) in
                 self.view.viewWithTag(1111)?.removeFromSuperview()
                 
                 let iv = UIImageView(image: image)
@@ -77,12 +77,15 @@ class XWAKTextViewViewController: UIViewController {
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25)
         ]))
+        
+        let shadowItem = XWAKTextShadow(offset: CGSize(width: 2, height: 3),
+                                        color: UIColor.lightGray, blur: 1.0)
         let shadow = NSMutableAttributedString(string: "这里带阴影\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.black,
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 23)
         ])
-        shadow.addAttribute(NSAttributedString.Key(rawValue: "NSAttributedString.Key.shadow"), value: XWAKTextShadow(offset: CGSize(width: 2, height: 3), color: UIColor.lightGray, blur: 1.0), range: NSRange(location: 0, length: 2))
+        shadow.addAttribute(NSAttributedString.Key.xwak_shadow, value: shadowItem, range: NSRange(location: 0, length: 2))
         attr.append(shadow)
         
         let borderFont = UIFont(name: "PingFangSC-Regular", size: 20)!
@@ -90,33 +93,43 @@ class XWAKTextViewViewController: UIViewController {
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.backgroundColor : UIColor.orange,
             NSAttributedString.Key.font : borderFont,
-            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dash, width: 1, color: .black)
+            NSAttributedString.Key.xwak_border : XWAKTextBorder(borderStyle: .dash, width: 1, color: .black)
         ]))
+        
         attr.append(NSAttributedString(string: "带Dot边框的文字\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.backgroundColor : UIColor.orange,
             NSAttributedString.Key.font : borderFont,
-            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dot, width: 1, color: .black)
+            NSAttributedString.Key.xwak_border : XWAKTextBorder(borderStyle: .dot, width: 1, color: .black)
         ]))
         attr.append(NSAttributedString(string: "带DashDot边框的文字\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.backgroundColor : UIColor.orange,
             NSAttributedString.Key.font : borderFont,
-            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dashdot, width: 1, color: .black)
+            NSAttributedString.Key.xwak_border : XWAKTextBorder(borderStyle: .dashdot, width: 1, color: .black)
         ]))
         attr.append(NSAttributedString(string: "带DashDotDot边框的文字\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.black,
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : borderFont,
-            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .dashdotdot, width: 3, color: .black)
+            NSAttributedString.Key.xwak_border : XWAKTextBorder(borderStyle: .dashdotdot, width: 3, color: .black)
         ]))
         
         attr.append(NSAttributedString(string: "带CircleDot边框的文字\n", attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.black,
             NSAttributedString.Key.backgroundColor : UIColor.white,
             NSAttributedString.Key.font : borderFont,
-            NSAttributedString.Key.border : XWAKTextBorder(borderStyle: .circledot, width: 4, color: .black)
+            NSAttributedString.Key.xwak_border : XWAKTextBorder(borderStyle: .circledot, width: 4, color: .black)
         ]))
+        
+        let selectedAttr = XWAKTextSelected(backgroundColor: .red, foregroundColor: .white)
+        attr.append(NSAttributedString(string: "这里设置了选中时的背景色和前景色", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor.black,
+            NSAttributedString.Key.backgroundColor : UIColor.white,
+            NSAttributedString.Key.font : borderFont,
+            NSAttributedString.Key.xwak_selected : selectedAttr
+        ]))
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 20
         paragraphStyle.headIndent = 5
