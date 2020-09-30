@@ -36,6 +36,7 @@ public class XWAKTextView: UIScrollView {
             }
         }
     }
+    public var selectable: Bool = false
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,11 +72,13 @@ public class XWAKTextView: UIScrollView {
         let touch = touches.first!
         let touchPoint = touch.location(in: self)
         
-        for line in layout.lines {
-            if line.bounds.contains(touchPoint) {
-                line.selected = !line.selected
-                containerView.update()
-                break
+        if selectable {
+            for line in layout.lines {
+                if line.bounds.contains(touchPoint) {
+                    line.selected = !line.selected
+                    containerView.update()
+                    break
+                }
             }
         }
     }
