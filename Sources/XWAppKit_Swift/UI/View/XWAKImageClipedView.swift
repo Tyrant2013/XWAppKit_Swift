@@ -15,10 +15,7 @@ public class XWAKImageClipedView: UIView {
             oldValue?.removeFromSuperview()
             if let contentView = contentView {
                 addSubview(contentView)
-
-                clipRect = contentView.frame
-                updateClipMask()
-                bringSubviewToFront(maskToView)
+                contentView.frame = CGRect(origin: contentOrigin, size: contentSize)
             }
         }
     }
@@ -34,7 +31,13 @@ public class XWAKImageClipedView: UIView {
     }
     
     private var contentOrigin: CGPoint {
-        return CGPoint(x: contentOffset.x, y: contentOffset.y)
+        return CGPoint(x: -contentOffset.x, y: -contentOffset.y)
+    }
+    
+    public func setupClip(_ clip: CGRect) {
+        clipRect = clip
+        updateClipMask()
+        bringSubviewToFront(maskToView)
     }
     
     private var contentOffsetBounds: CGRect {
@@ -43,7 +46,7 @@ public class XWAKImageClipedView: UIView {
 
         let width = contentSize.width - clipRect.width
         let height = contentSize.height - clipRect.height
-        return CGRect(x: clipRect.minX, y: clipRect.minY, width: width, height: height)
+        return CGRect(x: -clipRect.minX, y: -clipRect.minY, width: width, height: height)
     }
     private let panRecognizer = UIPanGestureRecognizer()
     private let pinRecognizer = UIPinchGestureRecognizer()
@@ -79,7 +82,7 @@ public class XWAKImageClipedView: UIView {
         maskToView.frame = bounds
         maskToView.backgroundColor = .black
         addSubview(maskToView)
-        clipRect = CGRect(x: 20, y: 100, width: bounds.width - 40, height: bounds.height - 200)
+//        clipRect = CGRect(x: 20, y: 100, width: bounds.width - 40, height: bounds.height - 200)
         let path = UIBezierPath(rect: bounds)
         path.append(UIBezierPath(rect: clipRect))
         maskToLayer.path = path.cgPath
@@ -106,7 +109,7 @@ public class XWAKImageClipedView: UIView {
         case .changed:
             let translation = sender.translation(in: self)
             if case .dragging(let initialOffset) = state {
-                contentOffset = clampOffset(initialOffset + translation)
+                contentOffset = clampOffset(initialOffset - translation)
             }
         case .ended:
             state = .default
@@ -173,7 +176,7 @@ public class XWAKImageClipedView: UIView {
         let destination = parameters.destination
         
         let intersection = getIntersection(rect: contentOffsetBounds, segment: (contentOffset, destination))
-        print("contentOffsetBounds: \(contentOffsetBounds), contentOffset: \(contentOffset), destination: \(destination), intersection: \(intersection ?? .zero)")
+        
         let duration: TimeInterval
         if let intersection = intersection, let intersectionDuration = parameters.duration(to: intersection) {
             duration = intersectionDuration
