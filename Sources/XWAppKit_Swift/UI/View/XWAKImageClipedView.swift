@@ -41,11 +41,15 @@ public class XWAKImageClipedView: UIView {
     }
     
     private var contentOffsetBounds: CGRect {
-//        let width = contentSize.width - bounds.width
-//        let height = contentSize.height - bounds.height
 
-        let width = contentSize.width - clipRect.width
-        let height = contentSize.height - clipRect.height
+//        let width = contentSize.width - clipRect.width
+//        let height = contentSize.height - clipRect.height
+//        return CGRect(x: -clipRect.minX, y: -clipRect.minY, width: width, height: height)
+        guard let frame = contentView?.frame else {
+            return .zero
+        }
+        let width = frame.width - clipRect.width
+        let height = frame.height - clipRect.height
         return CGRect(x: -clipRect.minX, y: -clipRect.minY, width: width, height: height)
     }
     private let panRecognizer = UIPanGestureRecognizer()
