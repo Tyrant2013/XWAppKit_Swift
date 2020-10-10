@@ -99,6 +99,10 @@ public class XWAKSquareGridView: UIView {
             case topRight
             case bottomLeft
             case bottomRight
+            case top
+            case left
+            case bottom
+            case right
         }
     }
     
@@ -120,20 +124,30 @@ public class XWAKSquareGridView: UIView {
                     pathBound.origin.y = startPoint.y + translation.y
                     pathBound.size.width = startSize.width - translation.x
                     pathBound.size.height = startSize.height - translation.y
-                    break
                 case .topRight:
                     pathBound.size.width = startSize.width + translation.x
                     pathBound.size.height = startSize.height - translation.y
                     pathBound.origin.y = startPoint.y + translation.y
-                    break
                 case .bottomLeft:
                     pathBound.origin.x = startPoint.x + translation.x
                     pathBound.size.width = startSize.width - translation.x
                     pathBound.size.height = startSize.height + translation.y
-                    break
                 case .bottomRight:
                     pathBound.size.width = startSize.width + translation.x
                     pathBound.size.height = startSize.height + translation.y
+                case .top:
+                    pathBound.origin.y = startPoint.y + translation.y
+                    pathBound.size.height = startSize.height - translation.y
+                    break
+                case .left:
+                    pathBound.origin.x = startPoint.x + translation.x
+                    pathBound.size.width = startSize.width - translation.x
+                    break
+                case .bottom:
+                    pathBound.size.height = startSize.height + translation.y
+                    break
+                case .right:
+                    pathBound.size.width = startSize.width + translation.x
                     break
                 case .none:
                     print("none")
@@ -163,23 +177,27 @@ public class XWAKSquareGridView: UIView {
         let cornerLength: CGFloat = 25
         let inset = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
         let size = CGSize(width: cornerLength, height: cornerLength)
+        
         let topLeftRect = CGRect(origin: pathBound.origin, size: size).inset(by: inset)
         let topRightRect = CGRect(origin: CGPoint(x: pathBound.maxX - cornerLength, y: pathBound.minY), size: size).inset(by: inset)
         let bottomLeftRect = CGRect(origin: CGPoint(x: pathBound.minX, y: pathBound.maxY - cornerLength), size: size).inset(by: inset)
         let bottomRightRect = CGRect(origin: CGPoint(x: pathBound.maxX - cornerLength, y: pathBound.maxY - cornerLength), size: size).inset(by: inset)
         
-        if topLeftRect.contains(point) {
-            return .topLeft
-        }
-        if topRightRect.contains(point) {
-            return .topRight
-        }
-        if bottomLeftRect.contains(point) {
-            return .bottomLeft
-        }
-        if bottomRightRect.contains(point) {
-            return .bottomRight
-        }
-        return .none
+        let topRect = CGRect(x: pathBound.minX + cornerLength, y: pathBound.minY, width: pathBound.width - 2 * cornerLength, height: 10).inset(by: inset)
+        let leftRect = CGRect(x: pathBound.minX, y: pathBound.minY + cornerLength, width: 10, height: pathBound.height - 2 * cornerLength).inset(by: inset)
+        let bottomRect = CGRect(x: pathBound.minX + cornerLength, y: pathBound.maxY, width: pathBound.width - 2 * cornerLength, height: 10).inset(by: inset)
+        let rightRect = CGRect(x: pathBound.maxX, y: pathBound.minY + cornerLength, width: 10, height: pathBound.height - 2 * cornerLength).inset(by: inset)
+        
+        let allCases: [(State.Director, CGRect)] = [
+            (.topLeft, topLeftRect),
+            (.topRight, topRightRect),
+            (.bottomLeft, bottomLeftRect),
+            (.bottomRight, bottomRightRect),
+            (.top, topRect),
+            (.left, leftRect),
+            (.bottom, bottomRect),
+            (.right, rightRect)
+        ]
+        return allCases.filter { $0.1.contains(point) }.first?.0 ?? .none
     }
 }
