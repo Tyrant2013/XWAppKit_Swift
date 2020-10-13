@@ -17,6 +17,7 @@
 		AE10F28E2519E9E5000131BE /* XWAKTextTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F28D2519E9E5000131BE /* XWAKTextTools.swift */; };
 		AE10F294251A0804000131BE /* XWAKTextShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F293251A0804000131BE /* XWAKTextShadow.swift */; };
 		AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3912212535556B00A87A14 /* UIImageViewExtension.swift */; };
+		AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39122E2535584F00A87A14 /* CGSizeExtension.swift */; };
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
@@ -127,6 +128,7 @@
 		AE10F28D2519E9E5000131BE /* XWAKTextTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextTools.swift; sourceTree = "<group>"; };
 		AE10F293251A0804000131BE /* XWAKTextShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextShadow.swift; sourceTree = "<group>"; };
 		AE3912212535556B00A87A14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		AE39122E2535584F00A87A14 /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -427,6 +429,7 @@
 				AEF14D3F251D886A0022AB88 /* UISpringTimingParameters.swift */,
 				AEF14D54251D953A0022AB88 /* UIImageExtension.swift */,
 				AE3912212535556B00A87A14 /* UIImageViewExtension.swift */,
+				AE39122E2535584F00A87A14 /* CGSizeExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
 				AEF14D55251D953A0022AB88 /* UIImageExtension.swift in Sources */,
 				AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */,
+				AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */,
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
 				AEF14D38251D85730022AB88 /* XWAKGeometry.swift in Sources */,
 				AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */,
