@@ -19,12 +19,12 @@ public extension UIColor {
         let b = CGFloat(hex & 0x0000ff) / 255
         return UIColor(red: r, green: g, blue: b, alpha: alpha)
     }
-    class func xwak_color(wiht hex: String) -> UIColor {
+    class func xwak_color(with hex: String) -> UIColor {
         var hexValue = ""
         if hex.starts(with: "0x") || hex.starts(with: "0X") {
             hexValue = String(hex.dropFirst(2))
         }
-        if !(hex.count == 8 || hex.count == 6) {
+        if !(hexValue.count == 8 || hexValue.count == 6) {
             return .clear
         }
         let array = Array(hexValue)
