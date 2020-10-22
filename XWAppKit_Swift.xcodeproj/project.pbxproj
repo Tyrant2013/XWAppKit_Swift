@@ -66,6 +66,7 @@
 		AEA747B524DA61E500E4B8E1 /* XWAKLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */; };
 		AEB42977253152FC003FDB13 /* XWAKSquareGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB42976253152FC003FDB13 /* XWAKSquareGridView.swift */; };
 		AEB4297B25315334003FDB13 /* XWAKSquareGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */; };
+		AEBB8FF8254164ED0027ABB0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */; };
 		AEF14D23251C9FAB0022AB88 /* XWAKTextContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */; };
 		AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D27251D7FAC0022AB88 /* ComparableExtension.swift */; };
 		AEF14D2E251D80240022AB88 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D2D251D80240022AB88 /* CGPointExtension.swift */; };
@@ -184,6 +185,7 @@
 		AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLog.swift; sourceTree = "<group>"; };
 		AEB42976253152FC003FDB13 /* XWAKSquareGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSquareGridView.swift; sourceTree = "<group>"; };
 		AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSquareGridViewController.swift; sourceTree = "<group>"; };
+		AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextContainerView.swift; sourceTree = "<group>"; };
 		AEF14D27251D7FAC0022AB88 /* ComparableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtension.swift; sourceTree = "<group>"; };
 		AEF14D2D251D80240022AB88 /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				AEF14D54251D953A0022AB88 /* UIImageExtension.swift */,
 				AE3912212535556B00A87A14 /* UIImageViewExtension.swift */,
 				AE39122E2535584F00A87A14 /* CGSizeExtension.swift */,
+				AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
 				AEF14D55251D953A0022AB88 /* UIImageExtension.swift in Sources */,
 				AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */,
+				AEBB8FF8254164ED0027ABB0 /* UIViewExtension.swift in Sources */,
 				AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */,
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
 				AEF14D38251D85730022AB88 /* XWAKGeometry.swift in Sources */,
