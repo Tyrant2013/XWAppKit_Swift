@@ -13,6 +13,7 @@ public extension UIView {
                    color: UIColor = .lightGray,
                    radius: CGFloat = 5,
                    offset: CGSize = .init(width: 0, height: 3)) {
+        clipsToBounds = false
         layer.shadowOpacity = opacity
         layer.shadowColor = color.cgColor
         layer.shadowRadius = radius
