@@ -15,22 +15,28 @@ class XWAKClipedImageViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
-        let clipedView = XWAKImageClipedView(frame: view.bounds)
-        clipedView.backgroundColor = .orange
+//        let clipedView = XWAKImageClipedView(frame: view.bounds)
+//        clipedView.backgroundColor = .orange
+//
+//        let contentFrame = CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: view.bounds.height - 200)
+////        let contentFrame = view.bounds
+//        let img = UIImage(named: "bcd")!
+//        let imageView = UIImageView(image: img)
+//        imageView.frame = contentFrame
+//        imageView.layer.borderWidth = 1
+//        imageView.layer.borderColor = UIColor.white.cgColor
+//        clipedView.contentView = imageView
+//        clipedView.contentSize = contentFrame.size
+//        clipedView.contentOffset = -contentFrame.origin
+//        clipedView.tag = 1111
+//        clipedView.setupClip(contentFrame)
+//        view.addSubview(clipedView)
         
-        let contentFrame = CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: view.bounds.height - 200)
-//        let contentFrame = view.bounds
-        let img = UIImage(named: "bcd")!
-        let imageView = UIImageView(image: img)
-        imageView.frame = contentFrame
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.white.cgColor
-        clipedView.contentView = imageView
-        clipedView.contentSize = contentFrame.size
-        clipedView.contentOffset = -contentFrame.origin
-        clipedView.tag = 1111
-        clipedView.setupClip(contentFrame)
-        view.addSubview(clipedView)   
+        let clipedView = XWAKImageCropView()
+        clipedView.image = UIImage(named: "bcd")
+        clipedView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(clipedView)
+        clipedView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 0, edges: [.all])
     }
     
 
