@@ -154,8 +154,9 @@ class XWAKTextViewViewController: UIViewController {
             NSAttributedString.Key.foregroundColor : UIColor.black,
             NSAttributedString.Key.kern : 3
         ] as [NSAttributedString.Key : Any]
-        tv2.attributeString = NSAttributedString(string: "这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。",
+        tv2.attributeString = NSAttributedString(string: "这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。这里翻译\n第二行的翻译内容，就是这么的多，还是这样，试试能不能好好的显示，不能的话就有问题，不能用在自己的项目上了，这样就很不美丽了\n再来一行，不知道是什么结果。",
                                                  attributes: tv2Attrs)
+        tv2.selectable = true
         view.addSubview(tv2)
     }
     

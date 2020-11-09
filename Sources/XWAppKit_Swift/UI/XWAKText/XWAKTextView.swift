@@ -9,6 +9,18 @@
 import UIKit
 import CoreText
 
+extension CGRect: Hashable {
+//    public var hashValue: Int {
+//        return minX.hashValue
+//    }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(minX)
+        hasher.combine(minY)
+        hasher.combine(width)
+        hasher.combine(height)
+    }
+}
+
 public class XWAKTextView: UIScrollView {
     
     private let containerView: XWAKTextContainerView = XWAKTextContainerView()
@@ -36,16 +48,23 @@ public class XWAKTextView: UIScrollView {
             }
         }
     }
-    public var selectable: Bool = false
+    
+    private var selectionView = XWAKTextSelectionView()
+    private var selectionRect = [CGRect: XWAKLine]()
+    public var selectable: Bool = false {
+        didSet {
+            
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(containerView)
+        setup()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        addSubview(containerView)
+        setup()
     }
     
     public override func layoutSubviews() {
@@ -59,60 +78,29 @@ public class XWAKTextView: UIScrollView {
             containerView.frame = CGRect(origin: .zero, size: layout.size)
             contentSize = layout.size
             containerView.layout = layout
+            selectionView.frame = containerView.frame
         }
+        
         
     }
     
-    private var selectedFrames = [CGRect]()
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let layout = layout else {
-            super.touchesBegan(touches, with: event)
-            return
-        }
-        let touch = touches.first!
-        let touchPoint = touch.location(in: self)
-        
-        if selectable {
-            for line in layout.lines {
-                if line.bounds.contains(touchPoint) {
-                    line.selected = !line.selected
-                    containerView.update()
-                    break
-                }
+    private func setup() {
+        addSubview(containerView)
+        addSubview(selectionView)
+        selectionView.lineBoundsHandler = {[weak self](index) in
+            guard let layout = self?.layout else {
+                return .zero
             }
+            return layout.lines[index].bounds
         }
     }
-
-//    func update() {
-//        guard let layout = layout else { return }
-//        guard let ctx = UIGraphicsGetCurrentContext() else { return }
-//        ctx.textMatrix = .identity
-//        ctx.translateBy(x: 0, y: bounds.height)
-//        ctx.scaleBy(x: 1, y: -1)
-//
-//        layout.draw(context: ctx)
-//
-//    }
     
-//    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let layout = layout else { super.touchesBegan(touches, with: event); return }
-//        let touch = event?.allTouches?.first
-//        if let touchPoint = touch?.location(in: touch?.view),
-//           let pointInLayout = _converPointToLayout(touchPoint),
-//           let touchImageData = layout.touchImage(in: pointInLayout),
-//           let touchBlock = touchImageData.ClickBlock {
-//            let frameInView = XWAKTextTools.convertTextLayoutFrame(touchImageData.imageFrame, to: self, layoutSize: layout.size)
-//            touchBlock(touchImageData.image, frameInView)
-//        }
-//    }
-//
-//    private func _converPointToLayout(_ point: CGPoint) -> CGPoint? {
-//        return XWAKTextTools.convertViewPointToTextLayout(layout!.size, frome: bounds, point)
-//    }
-//
-//    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    }
+    private enum TouchState {
+        case nomarl
+        case move(origin: CGPoint)
+    }
+    private var touchState: TouchState = .nomarl
+    private var startState = false
 
     private func testUpdate(ctx: CGContext) {
         let path = CGPath(rect: bounds, transform: nil)
@@ -169,4 +157,81 @@ public class XWAKTextView: UIScrollView {
             }
         }
     }
+}
+
+extension XWAKTextView {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let layout = layout else {
+            super.touchesBegan(touches, with: event)
+            return
+        }
+        let touch = touches.first!
+        let touchPoint = touch.location(in: self)
+        touchState = .move(origin: touchPoint)
+        
+        if selectable {
+            for (index, line) in layout.lines.enumerated() {
+                if line.extBounds.contains(touchPoint) {
+                    let textOffset = line.textPosition(for: touchPoint)
+                    let rect = CGRect(origin: textOffset, size: CGSize(width: 0, height: line.bounds.height))
+                    let pos = XWAKSelectionPosition(rect: rect, index: index)
+                    selectionView.start = pos
+                    selectionView.end = .zero
+                    break
+                }
+            }
+        }
+    }
+
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let layout = layout,
+              let touch = touches.first else {
+            super.touchesMoved(touches, with: event)
+            return
+        }
+
+        let touchPoint = touch.location(in: self)
+        if selectable {
+            for (index, line) in layout.lines.enumerated() {
+                if line.extBounds.contains(touchPoint) {
+                    panGestureRecognizer.isEnabled = false
+                    let textOffset = line.textPosition(for: touchPoint)
+                    let rect = CGRect(origin: textOffset, size: CGSize(width: 0, height: line.bounds.height))
+                    let pos = XWAKSelectionPosition(rect: rect, index: index)
+                    selectionView.end = pos
+                    break
+                }
+            }
+        }
+    }
+
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        startState = false
+        panGestureRecognizer.isEnabled = true
+    }
+}
+
+extension XWAKTextView {
+    private func updateSelections(at point: CGPoint) {
+        guard selectable == true, let layout = layout else { return }
+        for line in layout.lines {
+            if line.bounds.contains(point) {
+                let selLine = selectionRect[line.bounds]
+                if selLine == nil && startState {
+                    selectionRect[line.bounds] = line
+                }
+                line.selected = startState
+                containerView.update()
+                if !line.selected {
+                    selectionRect[line.bounds] = nil
+                }
+                break
+            }
+        }
+    }
+}
+
+extension UIButton {
+    
 }

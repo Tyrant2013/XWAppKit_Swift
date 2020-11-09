@@ -8,35 +8,6 @@
 
 import UIKit
 
-public struct XWAKImageMetaData {
-    public let ascent: CGFloat
-    public let descent: CGFloat
-    public let width: CGFloat
-    public let image: UIImage
-    public var imageFrame: CGRect = .zero
-    public let ClickBlock: ((_ image: UIImage, _ frame: CGRect) -> Void)?
-    
-    public static func makeImageAttributeString(image: UIImage, size: CGSize? = nil, tapHandler: @escaping (_ image: UIImage, _ frame: CGRect) -> Void) -> NSAttributedString {
-        let imageSize = size ?? image.size
-        let extentBuffer = UnsafeMutablePointer<XWAKImageMetaData>.allocate(capacity: 1)
-        extentBuffer.initialize(to: XWAKImageMetaData(ascent: imageSize.height, descent: 0, width: imageSize.width, image: image, ClickBlock: tapHandler))
-        var callbacks = CTRunDelegateCallbacks(version: kCTRunDelegateVersion1) { (pointer) in
-        } getAscent: { (pointer) -> CGFloat in
-            let d = pointer.assumingMemoryBound(to: XWAKImageMetaData.self)
-            return d.pointee.ascent
-        } getDescent: { (pointer) -> CGFloat in
-            let d = pointer.assumingMemoryBound(to: XWAKImageMetaData.self)
-            return d.pointee.descent
-        } getWidth: { (pointer) -> CGFloat in
-            let d = pointer.assumingMemoryBound(to: XWAKImageMetaData.self)
-            return d.pointee.width
-        }
-        let delegate = CTRunDelegateCreate(&callbacks, extentBuffer)
-        let attrDictionaryDelegate = [(kCTRunDelegateAttributeName as NSAttributedString.Key) : delegate as Any]
-        return NSAttributedString(string: " ", attributes: attrDictionaryDelegate)
-    }
-}
-
 public class XWAKTextLayout: NSObject {
     public let text: NSAttributedString
     public var size: CGSize
@@ -139,7 +110,9 @@ public class XWAKTextLayout: NSObject {
         }
         return nil
     }
-    
+}
+
+extension XWAKTextLayout {
     private func drawLine(_ line: XWAKLine, context: CGContext) {
         let ctline = line.line
         var lineOrigin = line.position
@@ -160,7 +133,6 @@ public class XWAKTextLayout: NSObject {
                 let runXOffset = CTLineGetOffsetForStringIndex(line.line, stringRange.location, nil) + line.position.x
                 let runYOffset = size.height - line.position.y - runDescent
                 let runFrame = CGRect(x: runXOffset, y: runYOffset, width: runWidth, height: runHeight)
-                
                 
                 drawBackground(line: line, run: run, runFrame: runFrame, context: context)
                 

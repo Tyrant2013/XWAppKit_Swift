@@ -18,6 +18,7 @@ public class XWAKLine: NSObject {
     private(set) var leading: CGFloat = 0
     private(set) var trailingWidth: Double
     private(set) var lineWidth: Double
+    private(set) var extBounds: CGRect
     
     private let _firstGlyphPos: CGFloat
     public var selected: Bool = false
@@ -45,6 +46,15 @@ public class XWAKLine: NSObject {
                         height: ascent + descent)
         bounds.applying(CGAffineTransform(scaleX: 1, y: -1))
 //        print("line bounds: \(bounds)")
+        extBounds = CGRect(origin: bounds.origin, size: CGSize(width: 1024, height: bounds.height))
         super.init()
+    }
+    
+    public func textPosition(for point: CGPoint) -> CGPoint {
+        var findPoint = point
+        findPoint.x -= position.x
+        let index = CTLineGetStringIndexForPosition(line, findPoint)
+        let offset = CTLineGetOffsetForStringIndex(line, index, nil)
+        return .init(x: offset + position.x - 1.0, y: position.y - ascent)
     }
 }
