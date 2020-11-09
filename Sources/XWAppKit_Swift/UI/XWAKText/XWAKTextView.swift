@@ -40,12 +40,50 @@ public class XWAKTextView: UIScrollView {
         get {
             guard let layout = layout, let attrStr = attributeString else { return nil }
             let originStr = attrStr.string
-            return layout.lines.filter { $0.selected }.reduce("") { (result, line) -> String in
-                let strRange = CTLineGetStringRange(line.line)
-                let start = originStr.index(originStr.startIndex, offsetBy: strRange.location)
-                let end = originStr.index(originStr.startIndex, offsetBy: strRange.location + strRange.length)
-                return result + String(originStr[start..<end])
+//            return layout.lines.filter { $0.selected }.reduce("") { (result, line) -> String in
+//                let strRange = CTLineGetStringRange(line.line)
+//                let start = originStr.index(originStr.startIndex, offsetBy: strRange.location)
+//                let end = originStr.index(originStr.startIndex, offsetBy: strRange.location + strRange.length)
+//                return result + String(originStr[start..<end])
+//            }
+            var start = selectionView.start
+            var end = selectionView.end
+            if start.index > end.index { (start, end) = (end, start) }
+            
+            var result = ""
+            if start.index != end.index {
+                var line = layout.lines[start.index]
+                var strRange = CTLineGetStringRange(line.line)
+                var startIndex = CTLineGetStringIndexForPosition(line.line, start.rect.origin)
+                var endIndex = strRange.location + strRange.length
+                var fstart = originStr.index(originStr.startIndex, offsetBy: startIndex)
+                var fend = originStr.index(originStr.startIndex, offsetBy: endIndex)
+                result += String(originStr[fstart..<fend])
+                
+                for index in (start.index + 1)..<end.index {
+                    let line = layout.lines[index]
+                    let strRange = CTLineGetStringRange(line.line)
+                    let start = originStr.index(originStr.startIndex, offsetBy: strRange.location)
+                    let end = originStr.index(originStr.startIndex, offsetBy: strRange.location + strRange.length)
+                    result += String(originStr[start..<end])
+                }
+                
+                line = layout.lines[end.index]
+                strRange = CTLineGetStringRange(line.line)
+                startIndex = strRange.location
+                endIndex = CTLineGetStringIndexForPosition(line.line, end.rect.origin)
+                fstart = originStr.index(originStr.startIndex, offsetBy: startIndex)
+                fend = originStr.index(originStr.startIndex, offsetBy: endIndex)
+                result += String(originStr[fstart..<fend])
             }
+            else {
+                let startIndex = CTLineGetStringIndexForPosition(layout.lines[start.index].line, start.rect.origin)
+                let endIndex = CTLineGetStringIndexForPosition(layout.lines[end.index].line, end.rect.origin)
+                let start = originStr.index(originStr.startIndex, offsetBy: startIndex)
+                let end = originStr.index(originStr.startIndex, offsetBy: endIndex)
+                result += String(originStr[start..<end])
+            }
+            return result
         }
     }
     
@@ -172,6 +210,8 @@ extension XWAKTextView {
         if selectable {
             for (index, line) in layout.lines.enumerated() {
                 if line.extBounds.contains(touchPoint) {
+                    let range = CTLineGetStringRange(line.line)
+                    
                     let textOffset = line.textPosition(for: touchPoint)
                     let rect = CGRect(origin: textOffset, size: CGSize(width: 0, height: line.bounds.height))
                     let pos = XWAKSelectionPosition(rect: rect, index: index)
@@ -209,6 +249,7 @@ extension XWAKTextView {
         super.touchesEnded(touches, with: event)
         startState = false
         panGestureRecognizer.isEnabled = true
+        print("selected string: ", selectedString as Any)
     }
 }
 
