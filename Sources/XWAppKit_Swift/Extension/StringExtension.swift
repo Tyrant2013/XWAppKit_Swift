@@ -9,8 +9,8 @@
 import Foundation
 import CommonCrypto
 
-extension String {
-    public func xwak_md5() -> Data {
+public extension String {
+    func xwak_md5() -> Data {
         let cStr = cString(using: .utf8)
         let len = CUnsignedInt(lengthOfBytes(using: .utf8))
         let digLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -25,7 +25,7 @@ extension String {
         return Data(bytes: result, count: digLen)
     }
     
-    public func xwak_query() -> Dictionary<String, Any>? {
+    func xwak_query() -> Dictionary<String, Any>? {
         if count == 0 { return nil }
         var query = [String : Any]()
         for comp in components(separatedBy: "&") {
@@ -39,5 +39,13 @@ extension String {
             }
         }
         return query.count > 0 ? query : nil
+    }
+}
+
+public extension String {
+    subscript(_ range: Range<Int>) -> String {
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(startIndex, offsetBy: range.upperBound)
+        return String(self[start..<end])
     }
 }

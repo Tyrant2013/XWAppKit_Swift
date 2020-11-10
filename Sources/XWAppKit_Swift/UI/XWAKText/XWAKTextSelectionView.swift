@@ -39,19 +39,28 @@ class XWAKTextSelectionView: UIView {
         inits()
     }
     private func inits() {
-        layer.addSublayer(selectionLayer)
+//        layer.addSublayer(selectionLayer)
+//        selectionLayer.fillColor = UIColor.systemYellow.withAlphaComponent(0.5).cgColor
         
-        selectionLayer.fillColor = UIColor.systemYellow.withAlphaComponent(0.5).cgColor
+        layer.addSublayer(startCursor)
+        startCursor.fillColor = UIColor.systemYellow.cgColor
     }
     public var lineBoundsHandler: ((_ index: Int) -> CGRect)!
     var layers = [CAShapeLayer]()
     var rects = [CGRect]()
     var start: XWAKSelectionPosition = .zero {
         didSet {
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: start.minX - 10, y: start.minY - 10))
+            path.addLine(to: CGPoint(x: start.maxX + 10, y: start.maxY - 10))
+            path.addLine(to: CGPoint(x: start.minX, y: start.minY))
+            path.addLine(to: CGPoint(x: start.minX - 10, y: start.minY - 10))
+            startCursor.path = path.cgPath
+            startCursor.frame = CGRect(x: start.minX - 10, y: start.minY - 10, width: 20, height: 20)
+            startCursor.backgroundColor = UIColor.clear.cgColor
             update()
         }
     }
-    
     var end: XWAKSelectionPosition = .zero {
         didSet {
             rects.removeAll()
@@ -60,6 +69,8 @@ class XWAKTextSelectionView: UIView {
                 
         }
     }
+    let startCursor = CAShapeLayer()
+    let endCursor = CAShapeLayer()
     private var selectionLayer = CAShapeLayer()
     
     private func calculateRects() {
@@ -87,7 +98,6 @@ class XWAKTextSelectionView: UIView {
             rects.append(CGRect(x: 0, y: endR.minY, width: endR.maxX, height: endR.height))
         }
     }
-    
     private func update() {
         layers.forEach { $0.removeFromSuperlayer() }
         

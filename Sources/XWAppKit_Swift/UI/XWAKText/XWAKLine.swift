@@ -19,14 +19,14 @@ public class XWAKLine: NSObject {
     private(set) var trailingWidth: Double
     private(set) var lineWidth: Double
     private(set) var extBounds: CGRect
+    private(set) var textRange: CFRange
     
     private let _firstGlyphPos: CGFloat
     public var selected: Bool = false
+    
     init(line: CTLine, position: CGPoint) {
         self.line = line
         self.position = position
-//        let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions(rawValue: 0))
-//        self.bounds = bounds
         lineWidth = CTLineGetTypographicBounds(line, &ascent, &descent, &leading)
         trailingWidth = CTLineGetTrailingWhitespaceWidth(line)
         
@@ -36,17 +36,16 @@ public class XWAKLine: NSObject {
             CTRunGetPositions(runs[0], CFRangeMake(0, 1), &pos)
             _firstGlyphPos = pos.x
         }
-        else {
-            _firstGlyphPos = 0
-        }
+        else { _firstGlyphPos = 0 }
         
         bounds = CGRect(x: position.x + _firstGlyphPos,
                         y: position.y - ascent,
                         width: CGFloat(lineWidth),
                         height: ascent + descent)
         bounds.applying(CGAffineTransform(scaleX: 1, y: -1))
-//        print("line bounds: \(bounds)")
+
         extBounds = CGRect(origin: bounds.origin, size: CGSize(width: 1024, height: bounds.height))
+        textRange = CTLineGetStringRange(line)
         super.init()
     }
     
@@ -56,5 +55,9 @@ public class XWAKLine: NSObject {
         let index = CTLineGetStringIndexForPosition(line, findPoint)
         let offset = CTLineGetOffsetForStringIndex(line, index, nil)
         return .init(x: offset + position.x - 1.0, y: position.y - ascent)
+    }
+    
+    public func stringIndex(for point: CGPoint) -> CFIndex {
+        return CTLineGetStringIndexForPosition(line, point)
     }
 }
