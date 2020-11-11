@@ -24,6 +24,7 @@ class ViewController: UIViewController {
             ("TextView", "XWAKTextViewViewController"),
             ("ClipedImage", "XWAKClipedImageViewController"),
             ("SquareGird", "XWAKSquareGridViewController"),
+            ("Photo Asset", "XWAKPhotoAssetViewController"),
             ]
         ),
         ("ViewController", [
