@@ -26,12 +26,13 @@ public class XWAKPhotoAsset {
 }
 
 extension XWAKPhotoAsset {
-    func loadThumb(size: CGSize, _ handler: @escaping (_ image: UIImage?) -> Void) {
+    func loadThumb(_ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
         if let thumbImage = thumbImage {
             handler(thumbImage)
-            return
+            return PHInvalidImageRequestID
         }
-        PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { [weak self](image, info) in
+        let size = CGSize(width: 80, height: 80)
+        return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { [weak self](image, info) in
             if let info = info {
                 if let degraded = info[PHImageResultIsDegradedKey] as? Int {
                     self?.isDegraded = degraded != 0
@@ -71,19 +72,15 @@ extension XWAKPhotoAsset {
         }
     }
     
-    func loadOriginImage(_ handler: @escaping (_ image: UIImage?) -> Void) {
+    func loadOriginImage(_ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
         if let originImage = originImage {
             handler(originImage)
-            return
+            return PHInvalidImageRequestID
         }
-        XWAKPhotoKit.shared.loadOriginImage(from: asset, requestID: requestId) { (image) in
+        return XWAKPhotoKit.shared.loadOriginImage(from: asset, requestID: requestId) { (image, isDegraded, error) in
             self.originImage = image
+            self.isDegraded = isDegraded
             handler(image)
         }
-    }
-    
-    func cancel() {
-        print("cancel \(requestId)")
-        XWAKPhotoKit.shared.removeRequest(requestId: requestId)
     }
 }

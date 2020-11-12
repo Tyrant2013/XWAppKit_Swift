@@ -16,8 +16,6 @@ public typealias AuthorizedHandler = (_ canUse: Bool) -> Void
 public class XWAKPhotoKit {
     public static let shared = XWAKPhotoKit()
     
-    private let originQueue = DispatchQueue(label: "com.origin.image.request.queue")
-    private var LoadOriginImageBlockList = [Int: ((image: UIImage?) -> Void)]()
     internal init() { }
     
     public func authorized(_ handler: @escaping AuthorizedHandler) {
@@ -65,24 +63,29 @@ public class XWAKPhotoKit {
         handler(.success(results))
     }
     
-    public func loadOriginImage(from asset: PHAsset, requestID: Int, handler: @escaping (_ image: UIImage?) -> Void) {
-        LoadOriginImageBlockList[requestID] = handler
-        originQueue.async {
-            PHImageManager.default().requestImageData(for: asset, options: nil) { (data, string, orientation, info) in
-                guard let data = data else {
-                    handler(nil)
-                    return
-                }
-                if let handler = self.LoadOriginImageBlockList[requestID] {
-                    let image = UIImage(data: data)
-                    handler(image)
-                }
+    public func loadOriginImage(from asset: PHAsset, requestID: Int, handler: @escaping (_ image: UIImage?, _ isDegraded: Bool, _ error: NSError?) -> Void) -> PHImageRequestID {
+        
+        let options = PHImageRequestOptions()
+        options.resizeMode = .fast
+        options.isNetworkAccessAllowed = true
+        options.progressHandler = { (progress, error, pStop, info) in
+            print("progress: \(progress)")
+        }
+        
+        return PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options) { (image, info) in
+            var downloadFinished = false
+            var error: NSError? = nil
+            if let info = info {
+                error = info[PHImageErrorKey] as? NSError
+                downloadFinished = !(info[PHImageCancelledKey] as? Bool ?? false) && (error == nil)
             }
+            let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool ?? false)
+            if downloadFinished { handler(image, isDegraded, error) }
         }
     }
     
-    public func removeRequest(requestId: Int) {
-        LoadOriginImageBlockList[requestId] = nil
+    public func cancel(requestId: PHImageRequestID) {
+        PHImageManager.default().cancelImageRequest(requestId)
     }
     
     public func save(image: UIImage, to collectionName: String, handler: @escaping (_ error: Error?) -> Void) {

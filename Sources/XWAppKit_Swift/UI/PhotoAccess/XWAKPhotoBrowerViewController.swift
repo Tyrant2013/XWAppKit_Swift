@@ -108,7 +108,7 @@ extension XWAKPhotoBrowerViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! XWAKPhotoBrowerCell
-        cell.setItem(items[indexPath.row], size: collectionView.frame.size)
+        cell.item = items[indexPath.row]
         return cell
     }
 }

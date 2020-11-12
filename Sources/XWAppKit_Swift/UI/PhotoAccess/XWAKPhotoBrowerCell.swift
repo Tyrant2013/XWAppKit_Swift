@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class XWAKPhotoBrowerCell: UICollectionViewCell {
     
@@ -15,7 +16,19 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private weak var item: XWAKPhotoAsset?
+    public weak var item: XWAKPhotoAsset? {
+        didSet {
+            if requestID != PHInvalidImageRequestID {
+                XWAKPhotoKit.shared.cancel(requestId: requestID)
+            }
+            if let item = item {
+                requestID = item.loadOriginImage { [weak self](image) in
+                    self?.imageShow.image = image
+                }
+            }
+        }
+    }
+    private var requestID: PHImageRequestID = PHInvalidImageRequestID
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,35 +41,5 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
     private func setup() {
         contentView.addSubview(imageShow)
         imageShow.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.item?.cancel()
-    }
-    
-    func setItem(_ item: XWAKPhotoAsset, size: CGSize) {
-        self.item?.cancel()
-        
-        if let image = item.originImage {
-            self.imageShow.image = image
-        }
-        else {
-            if let image = item.thumbImage {
-                self.imageShow.image = image
-            }
-            else {
-                item.loadThumb(size: size) { (image) in
-                    if let image = image {
-                        item.thumbImage = image
-                    }
-                }
-            }
-            item.loadOriginImage { (image) in
-                if let image = image {
-                    self.imageShow.image = image
-                }
-            }
-        }
     }
 }

@@ -10,7 +10,17 @@ import UIKit
 import Photos
 
 class XWAKPhotoCell: UICollectionViewCell {
-    private var item: XWAKPhotoAsset!
+    public weak var item: XWAKPhotoAsset! {
+        didSet {
+            if requestId != PHInvalidImageRequestID {
+                XWAKPhotoKit.shared.cancel(requestId: requestId)
+            }
+            requestId = item.loadThumb() { [weak self](image) in
+                self?.imageView.image = image
+            }
+        }
+    }
+    private var requestId: PHImageRequestID = PHInvalidImageRequestID
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,8 +33,6 @@ class XWAKPhotoCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.addCorner()
-//        view.clipsToBounds = true
         return view
     }()
     private let numLabel: UILabel = {
@@ -64,7 +72,6 @@ class XWAKPhotoCell: UICollectionViewCell {
             if let text = numLabel.text, let num = Int(text) {
                 XWAKPhoto.shared.remove(item, index: num)
             }
-            
         }
         else {
             XWAKPhoto.shared.add(item)
@@ -74,12 +81,5 @@ class XWAKPhotoCell: UICollectionViewCell {
         numLabel.layer.borderColor = item.isSelected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
         numLabel.text = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
         if item.isSelected { numLabel.scaleAnimation() }
-    }
-    
-    func setItem(_ item: XWAKPhotoAsset, size: CGSize) {
-        self.item = item
-        item.loadThumb(size: size) { [weak self](image) in
-            self?.imageView.image = image
-        }
     }
 }

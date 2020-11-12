@@ -121,8 +121,7 @@ class XWAKPhotoViewController: UIViewController {
 extension XWAKPhotoViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! XWAKPhotoCell
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        cell.setItem(items[indexPath.row], size: layout.itemSize)
+        cell.item = items[indexPath.row]
         return cell
     }
     
