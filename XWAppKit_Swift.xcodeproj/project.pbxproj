@@ -286,11 +286,11 @@
 				AE1C0044255B838B0027EBAB /* XWAKPhotoKit.swift */,
 				AEF83F7E255BC588009F454F /* XWAKPhotoCell.swift */,
 				AEF83F96255BF29C009F454F /* XWAKPhotoBrowerCell.swift */,
+				AEF83F9C255BF343009F454F /* XWAKImageBrower.swift */,
 				AEF83F84255BE587009F454F /* XWAKPhoto.swift */,
 				AEF83F7A255BC3CF009F454F /* XWAKPhotoViewController.swift */,
 				AEF83F8E255BEDCC009F454F /* XWAKPhotoBrowerViewController.swift */,
 				AEF83F88255BEA13009F454F /* XWAKPhotoPickerController.swift */,
-				AEF83F9C255BF343009F454F /* XWAKImageBrower.swift */,
 			);
 			path = PhotoAccess;
 			sourceTree = "<group>";

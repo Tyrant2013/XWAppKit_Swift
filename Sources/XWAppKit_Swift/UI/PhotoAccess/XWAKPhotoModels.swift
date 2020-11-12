@@ -86,4 +86,8 @@ extension XWAKPhotoAsset {
             handler(image)
         }
     }
+    
+    func cancel() {
+        PHImageManager.default().cancelImageRequest(PHImageRequestID(requestId))
+    }
 }

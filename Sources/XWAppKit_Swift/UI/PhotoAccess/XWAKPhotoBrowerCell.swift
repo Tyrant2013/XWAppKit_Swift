@@ -15,6 +15,8 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    private weak var item: XWAKPhotoAsset?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -29,19 +31,28 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
     }
     
     func setItem(_ item: XWAKPhotoAsset, size: CGSize) {
+        self.item?.cancel()
+        
         self.imageShow.image = item.originImage == nil ? item.thumbImage : item.originImage
-        if item.originImage == nil {
+        if let image = item.originImage {
+            self.imageShow.image = image
+        }
+        else {
+            if let image = item.thumbImage {
+                self.imageShow.image = image
+            }
+            else {
+                item.loadThumb(size: size) { (image) in
+                    if let image = image {
+                        item.thumbImage = image
+                    }
+                }
+            }
             item.loadOriginImage { (image) in
                 item.originImage = image
                 if let image = image {
                     self.imageShow.image = image
                 }
-            }
-        }
-        item.loadThumb(size: size) { [weak self](image) in
-            if let image = image {
-                item.thumbImage = image
-                self?.imageShow.image = image
             }
         }
     }
