@@ -57,7 +57,7 @@ class XWAKImageBrower: UIView {
         super.layoutSubviews()
         if !isInit {
             if let image = image {
-                let frame = image.size.fixFrameTo(bounds)
+                let frame = image.size.fixFrameTo(bounds.insetBy(dx: 10, dy: 10))
                 imageView.frame = frame
             }
         }

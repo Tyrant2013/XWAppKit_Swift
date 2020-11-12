@@ -29,10 +29,12 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
         contentView.addSubview(imageShow)
         imageShow.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.item?.cancel()
     }
+    
     func setItem(_ item: XWAKPhotoAsset, size: CGSize) {
         self.item?.cancel()
         

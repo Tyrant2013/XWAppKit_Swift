@@ -49,13 +49,17 @@ class XWAKPhotoBrowerViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupLayouts()
-        if index > 0 {
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !isInit {
             isInit = true
-            view.layoutIfNeeded()
-            collectionView.reloadData()
-            
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            if index > 0 {
+                let indexPath = IndexPath(row: index, section: 0)
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            }
         }
     }
     

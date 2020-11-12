@@ -83,6 +83,7 @@ extension XWAKPhotoAsset {
     }
     
     func cancel() {
+        print("cancel \(requestId)")
         XWAKPhotoKit.shared.removeRequest(requestId: requestId)
     }
 }
