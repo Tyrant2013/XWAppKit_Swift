@@ -29,11 +29,13 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
         contentView.addSubview(imageShow)
         imageShow.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
     }
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.item?.cancel()
+    }
     func setItem(_ item: XWAKPhotoAsset, size: CGSize) {
         self.item?.cancel()
         
-        self.imageShow.image = item.originImage == nil ? item.thumbImage : item.originImage
         if let image = item.originImage {
             self.imageShow.image = image
         }
@@ -49,7 +51,6 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
                 }
             }
             item.loadOriginImage { (image) in
-                item.originImage = image
                 if let image = image {
                     self.imageShow.image = image
                 }

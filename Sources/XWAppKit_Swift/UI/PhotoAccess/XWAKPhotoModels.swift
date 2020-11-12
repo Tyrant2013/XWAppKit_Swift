@@ -76,18 +76,13 @@ extension XWAKPhotoAsset {
             handler(originImage)
             return
         }
-        PHImageManager.default().requestImageData(for: asset, options: nil) { (data, string, orientation, info) in
-            guard let data = data else {
-                handler(nil)
-                return
-            }
-            let image = UIImage(data: data)
+        XWAKPhotoKit.shared.loadOriginImage(from: asset, requestID: requestId) { (image) in
             self.originImage = image
             handler(image)
         }
     }
     
     func cancel() {
-        PHImageManager.default().cancelImageRequest(PHImageRequestID(requestId))
+        XWAKPhotoKit.shared.removeRequest(requestId: requestId)
     }
 }

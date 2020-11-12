@@ -29,3 +29,16 @@ public extension UIView {
         layer.borderColor = color.cgColor
     }
 }
+
+public extension UIView {
+    func scaleAnimation() {
+        transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 0.15) {
+            self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        } completion: { (finished) in
+            UIView.animate(withDuration: 0.1) {
+                self.transform = .identity
+            }
+        }
+    }
+}

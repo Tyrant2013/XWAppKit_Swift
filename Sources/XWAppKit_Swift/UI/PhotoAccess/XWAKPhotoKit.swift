@@ -16,6 +16,8 @@ public typealias AuthorizedHandler = (_ canUse: Bool) -> Void
 public class XWAKPhotoKit {
     public static let shared = XWAKPhotoKit()
     
+    private let originQueue = DispatchQueue(label: "com.origin.image.request.queue")
+    private var LoadOriginImageBlockList = [Int: ((image: UIImage?) -> Void)]()
     internal init() { }
     
     public func authorized(_ handler: @escaping AuthorizedHandler) {
@@ -61,6 +63,26 @@ public class XWAKPhotoKit {
             results.append(XWAKPhotoAsset(asset: asset))
         }
         handler(.success(results))
+    }
+    
+    public func loadOriginImage(from asset: PHAsset, requestID: Int, handler: @escaping (_ image: UIImage?) -> Void) {
+        LoadOriginImageBlockList[requestID] = handler
+        originQueue.async {
+            PHImageManager.default().requestImageData(for: asset, options: nil) { (data, string, orientation, info) in
+                guard let data = data else {
+                    handler(nil)
+                    return
+                }
+                if let handler = self.LoadOriginImageBlockList[requestID] {
+                    let image = UIImage(data: data)
+                    handler(image)
+                }
+            }
+        }
+    }
+    
+    public func removeRequest(requestId: Int) {
+        LoadOriginImageBlockList[requestId] = nil
     }
     
     public func save(image: UIImage, to collectionName: String, handler: @escaping (_ error: Error?) -> Void) {
