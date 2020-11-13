@@ -15,6 +15,9 @@ class XWAKPhotoCell: UICollectionViewCell {
             if requestId != PHInvalidImageRequestID {
                 XWAKPhotoKit.shared.cancel(requestId: requestId)
             }
+            let text = item.index == 0 ? "" : "\(item.index)"
+            numLabel.setupState(item.isSelected, text: text)
+            
             requestId = item.loadThumb() { [weak self](image) in
                 self?.imageView.image = image
             }
@@ -58,7 +61,15 @@ class XWAKPhotoCell: UICollectionViewCell {
         imageView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
         numLabel.xwak.edge(equalTo: contentView.xwak, inset: 5, edges: [.top, .right])
             .size((24, 24))
-        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionCountChangeNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+        
+        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+            let item = notification.object as! XWAKPhotoAsset
+            if item.asset.localIdentifier == self?.item.asset.localIdentifier {
+                self?.numLabel.setupState(item.isSelected, text: "\(item.index)")
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
             let removedIndex = notification.object as! Int
             if let text = self?.numLabel.text, let num = Int(text), num > removedIndex {
                 self?.numLabel.text = "\(num - 1)"
@@ -76,10 +87,13 @@ class XWAKPhotoCell: UICollectionViewCell {
         else {
             XWAKPhoto.shared.add(item)
         }
+        
+        let indexText = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
+        numLabel.setupState(item.isSelected, text: indexText)
 
-        numLabel.backgroundColor = item.isSelected ? .systemGreen : .clear
-        numLabel.layer.borderColor = item.isSelected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
-        numLabel.text = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
-        if item.isSelected { numLabel.scaleAnimation() }
+//        numLabel.backgroundColor = item.isSelected ? .systemGreen : .clear
+//        numLabel.layer.borderColor = item.isSelected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
+//        numLabel.text = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
+//        if item.isSelected { numLabel.scaleAnimation() }
     }
 }

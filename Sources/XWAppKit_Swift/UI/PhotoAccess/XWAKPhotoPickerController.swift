@@ -24,17 +24,12 @@ public class XWAKPhotoPickerController {
     public init() { }
     
     public func show(in viewController: UIViewController, with delegate: XWAKPhotoPickerControllerDelegate) {
-        self.delegate = delegate
+        XWAKPhoto.shared.selectionHandler = {
+            delegate.viewController(self, didSelected: XWAKPhoto.shared.selectedItems)
+        }
         let photoView = XWAKPhotoViewController()
-        photoView.delegate = self
         let picker = UINavigationController(rootViewController: photoView)
         picker.modalPresentationStyle = .fullScreen
         viewController.present(picker, animated: true, completion: nil)
-    }
-}
-
-extension XWAKPhotoPickerController: XWAKPhotoViewControllerDelegate {
-    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage]) {
-        delegate?.viewController(self, didSelected: items)
     }
 }

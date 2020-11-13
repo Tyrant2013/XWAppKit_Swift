@@ -9,13 +9,13 @@
 import UIKit
 import Photos
 
-protocol XWAKPhotoViewControllerDelegate {
-    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage])
-}
+//protocol XWAKPhotoViewControllerDelegate {
+//    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage])
+//}
 
 class XWAKPhotoViewController: UIViewController {
 
-    public var delegate: XWAKPhotoViewControllerDelegate?
+//    public var delegate: XWAKPhotoViewControllerDelegate?
     
     private var items = [XWAKPhotoAsset]()
     private let collectionView: UICollectionView = {
@@ -34,22 +34,33 @@ class XWAKPhotoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     private let topActionBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray
         return view
     }()
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("关闭", for: .normal)
+        button.tintColor = .white
         return button
     }()
     private let doneButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("完成", for: .normal)
+        button.tintColor = .systemGreen
         return button
+    }()
+    
+    private let bottomActionBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray
+        return view
     }()
     
     public override func viewDidLoad() {
@@ -60,16 +71,19 @@ class XWAKPhotoViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.addSubview(topActionBar)
         topActionBar.addSubview(cancelButton)
-        topActionBar.addSubview(doneButton)
         cancelButton.addTarget(self, action: #selector(cancelTouched(_:)), for: .touchUpInside)
+        
+        view.addSubview(bottomActionBar)
+        bottomActionBar.addSubview(doneButton)
         doneButton.addTarget(self, action: #selector(doneTouched(_:)), for: .touchUpInside)
         
         view.addSubview(collectionView)
+        collectionView.backgroundColor = .black
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(XWAKPhotoCell.self, forCellWithReuseIdentifier: "Cell")
@@ -81,10 +95,16 @@ class XWAKPhotoViewController: UIViewController {
             .height(50)
         cancelButton.xwak.edge(equalTo: topActionBar.xwak, inset: 0, edges: [.top, .bottom, .left])
             .width(80)
-        doneButton.xwak.edge(equalTo: topActionBar.xwak, inset: 0, edges: [.top, .bottom, .right])
-            .width(80)
-        collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+        
+        collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
             .top(equalTo: topActionBar.xwak.bottom)
+            .bottom(equalTo: bottomActionBar.xwak.top)
+        
+        bottomActionBar.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+            .height(50)
+        doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 0, edges: [.top, .bottom, .right])
+            .width(80)
+        
     }
     
     private func loadData() {
@@ -106,12 +126,13 @@ class XWAKPhotoViewController: UIViewController {
     
     @objc
     func cancelTouched(_ sender: UIButton) {
+        XWAKPhoto.shared.clear()
         dismiss(animated: true, completion: nil)
     }
     
     @objc
     func doneTouched(_ sender: UIButton) {
-        delegate?.viewController(self, didSelected: XWAKPhoto.shared.selectedItems)
+        XWAKPhoto.shared.selectionHandler?()
         dismiss(animated: true, completion: nil)
         XWAKPhoto.shared.clear()
     }

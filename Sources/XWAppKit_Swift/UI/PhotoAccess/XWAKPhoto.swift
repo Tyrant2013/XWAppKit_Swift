@@ -9,21 +9,35 @@
 import Foundation
 import UIKit
 
+extension UILabel {
+    func setupState(_ selected: Bool, text: String) {
+        backgroundColor = selected ? .systemGreen : .clear
+        layer.borderColor = selected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
+        self.text = text
+        if selected { scaleAnimation() }
+    }
+}
+
 class XWAKPhoto {
     static let shared = XWAKPhoto()
-    static let SelectionCountChangeNotification = Notification.Name("SelectionCountChangeNotification")
+    static let SelectionAddNotification = Notification.Name("com.add.notification")
+    static let SelectionRemoveIndexNotification = Notification.Name("com.remove.index.notification")
     private var items = [XWAKPhotoAsset]()
     public var max: Int = 0
+    public var selectionHandler: (() -> Void)?
     
     func add(_ item: XWAKPhotoAsset) {
         items.append(item)
         item.isSelected = true
+        item.index = count
+        NotificationCenter.default.post(name: XWAKPhoto.SelectionAddNotification, object: item)
     }
     
     func remove(_ item: XWAKPhotoAsset, index: Int) {
         items.removeAll { $0.requestId == item.requestId }
         item.isSelected = false
-        NotificationCenter.default.post(name: XWAKPhoto.SelectionCountChangeNotification, object: index)
+        item.index = 0
+        NotificationCenter.default.post(name: XWAKPhoto.SelectionRemoveIndexNotification, object: index)
     }
     
     func clear() {

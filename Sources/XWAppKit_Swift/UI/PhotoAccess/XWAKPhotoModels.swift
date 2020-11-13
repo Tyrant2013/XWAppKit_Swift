@@ -20,6 +20,7 @@ public class XWAKPhotoAsset {
     var originImage: UIImage?
     
     var isSelected: Bool = false
+    var index: Int = 0
     init(asset: PHAsset) {
         self.asset = asset
     }

@@ -13,22 +13,28 @@ class XWAKPhotoBrowerViewController: UIViewController {
     private let topActionsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray
         return view
     }()
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("返回", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.tintColor = .white
         return button
     }()
-    private let doneButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("完成", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
+    private let totalNumLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.backgroundColor = .systemGreen
+        label.addCorner(radius: 5)
+        label.textAlignment = .center
+        label.text = "( 0 )"
+        label.clipsToBounds = true
+        return label
     }()
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -41,6 +47,21 @@ class XWAKPhotoBrowerViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private let bottomActionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGray
+        return view
+    }()
+    private let doneButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("完成", for: .normal)
+        button.tintColor = .systemGreen
+        return button
+    }()
+    
     public var items = [XWAKPhotoAsset]()
     public var index: Int = 0
     private var isInit = false
@@ -49,7 +70,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupLayouts()
-        
+        setupNotifications()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,17 +85,22 @@ class XWAKPhotoBrowerViewController: UIViewController {
     }
     
     func setupViews() {
-        view.backgroundColor = .black
+        view.backgroundColor = .systemGray
         view.addSubview(topActionsView)
         topActionsView.addSubview(backButton)
-        topActionsView.addSubview(doneButton)
-        
         backButton.addTarget(self, action: #selector(backTouched(_:)), for: .touchUpInside)
+        topActionsView.addSubview(totalNumLabel)
+        
+        view.addSubview(bottomActionView)
+        bottomActionView.addSubview(doneButton)
         doneButton.addTarget(self, action: #selector(doneTouched(_:)), for: .touchUpInside)
         
         view.addSubview(collectionView)
+        collectionView.backgroundColor = .black
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
     }
     
     func setupLayouts() {
@@ -83,10 +109,32 @@ class XWAKPhotoBrowerViewController: UIViewController {
             .height(50)
         backButton.xwak.edge(equalTo: topActionsView.xwak, inset: 0, edges: [.top, .bottom, .left])
             .width(80)
-        doneButton.xwak.edge(equalTo: topActionsView.xwak, inset: 0, edges: [.top, .bottom, .right])
-            .width(80)
-        collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+        totalNumLabel.xwak.edge(equalTo: topActionsView.xwak, inset: 10, edges: [.right])
+            .centerY(equalTo: topActionsView.xwak.centerY)
+            .width(40)
+            .height(24)
+        
+        collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
             .top(equalTo: topActionsView.xwak.bottom)
+            .bottom(equalTo: bottomActionView.xwak.top)
+        
+        bottomActionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+            .height(50)
+        doneButton.xwak.edge(equalTo: bottomActionView.xwak, inset: 0, edges: [.top, .bottom, .right])
+            .width(80)
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+            self?.totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
+            self?.totalNumLabel.scaleAnimation()
+        }
+        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification,
+                                               object: nil,
+                                               queue: OperationQueue.main) { [weak self](notification) in
+            self?.totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
+            self?.totalNumLabel.scaleAnimation()
+        }
     }
     
     @objc
@@ -96,6 +144,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
     
     @objc
     func doneTouched(_ sender: UIButton) {
+        XWAKPhoto.shared.selectionHandler?()
         dismiss(animated: true, completion: nil)
     }
 
