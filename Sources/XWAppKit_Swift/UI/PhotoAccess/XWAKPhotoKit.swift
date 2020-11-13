@@ -63,13 +63,15 @@ public class XWAKPhotoKit {
         handler(.success(results))
     }
     
-    public func loadOriginImage(from asset: PHAsset, requestID: Int, handler: @escaping (_ image: UIImage?, _ isDegraded: Bool, _ error: NSError?) -> Void) -> PHImageRequestID {
+    public func loadOriginImage(from asset: PHAsset, requestID: Int, progress: @escaping (_ percent: CGFloat) -> Void, handler: @escaping (_ image: UIImage?, _ isDegraded: Bool, _ error: NSError?) -> Void) -> PHImageRequestID {
         
         let options = PHImageRequestOptions()
         options.resizeMode = .fast
         options.isNetworkAccessAllowed = true
-        options.progressHandler = { (progress, error, pStop, info) in
-            print("progress: \(progress)")
+        options.progressHandler = { (percent, error, pStop, info) in
+            DispatchQueue.main.async {
+                progress(CGFloat(percent))
+            }
         }
         
         return PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options) { (image, info) in

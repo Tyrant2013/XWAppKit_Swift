@@ -26,6 +26,9 @@
 		AE4A4E6025515AB300560A56 /* XWAKImageCropBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */; };
 		AE4A4E6625515B0D00560A56 /* XWAKFrameBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */; };
 		AE4A4E6A25515E5600560A56 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE4A4E6925515E5600560A56 /* Resources.xcassets */; };
+		AE4E0974255E3B8D0028E106 /* XWAKProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */; };
+		AE4E097A255E5A8C0028E106 /* XWAKProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */; };
+		AE4E09D1255E64E00028E106 /* XWAKProgressLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */; };
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
@@ -154,6 +157,9 @@
 		AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageCropBorder.swift; sourceTree = "<group>"; };
 		AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKFrameBorderView.swift; sourceTree = "<group>"; };
 		AE4A4E6925515E5600560A56 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
+		AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressView.swift; sourceTree = "<group>"; };
+		AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressViewController.swift; sourceTree = "<group>"; };
+		AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressLayer.swift; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +311,15 @@
 			path = ImageCropView;
 			sourceTree = "<group>";
 		};
+		AE4E0972255E3B650028E106 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */,
+				AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
 		AE6E03D024E6914B0035C519 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +398,7 @@
 		AEA7472B24CA78E900E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE4E0972255E3B650028E106 /* ProgressView */,
 				AE4A4E5E25515A8C00560A56 /* ImageCropView */,
 				AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */,
 				AEA7476924CAE15100E4B8E1 /* XWAKAlert.swift */,
@@ -443,6 +459,7 @@
 				AEF14D5C251DE3E80022AB88 /* XWAKClipedImageViewController.swift */,
 				AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */,
 				AE25D8F0255B8BC600E8767E /* XWAKPhotoAssetViewController.swift */,
+				AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -794,6 +811,7 @@
 			files = (
 				AEB42977253152FC003FDB13 /* XWAKSquareGridView.swift in Sources */,
 				AEA7478024CFC34A00E4B8E1 /* XWAKInputView.swift in Sources */,
+				AE4E09D1255E64E00028E106 /* XWAKProgressLayer.swift in Sources */,
 				AE10F294251A0804000131BE /* XWAKTextShadow.swift in Sources */,
 				AE10F28E2519E9E5000131BE /* XWAKTextTools.swift in Sources */,
 				AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */,
@@ -822,6 +840,7 @@
 				AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */,
 				AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */,
 				AEF83F85255BE587009F454F /* XWAKPhoto.swift in Sources */,
+				AE4E0974255E3B8D0028E106 /* XWAKProgressView.swift in Sources */,
 				AEA7478224CFCC5400E4B8E1 /* XWAKLoginView.swift in Sources */,
 				AE10F257251493FF000131BE /* XWAKAnimatedImageView.swift in Sources */,
 				AEF83F7B255BC3CF009F454F /* XWAKPhotoViewController.swift in Sources */,
@@ -879,6 +898,7 @@
 			files = (
 				AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */,
 				AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */,
+				AE4E097A255E5A8C0028E106 /* XWAKProgressViewController.swift in Sources */,
 				AE10F26B25184B73000131BE /* XWAKTextViewViewController.swift in Sources */,
 				AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */,
 				AE25D8F1255B8BC600E8767E /* XWAKPhotoAssetViewController.swift in Sources */,

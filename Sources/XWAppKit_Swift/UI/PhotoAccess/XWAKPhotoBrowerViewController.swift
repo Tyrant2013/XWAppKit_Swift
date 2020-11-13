@@ -23,6 +23,13 @@ class XWAKPhotoBrowerViewController: UIViewController {
         button.tintColor = .white
         return button
     }()
+    private let stateImageView: UIImageView = {
+        let bundle = Bundle(for: XWAKPhoto.self)
+        let image = UIImageView(image: UIImage(named: "check-circle", in: bundle, compatibleWith: nil))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.tintColor = .lightGray
+        return image
+    }()
     private let totalNumLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,8 +37,9 @@ class XWAKPhotoBrowerViewController: UIViewController {
         label.backgroundColor = .systemGreen
         label.addCorner(radius: 5)
         label.textAlignment = .center
-        label.text = "( 0 )"
+        label.text = "0"
         label.clipsToBounds = true
+        label.addCorner(radius: 15)
         return label
     }()
     
@@ -58,7 +66,9 @@ class XWAKPhotoBrowerViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("完成", for: .normal)
-        button.tintColor = .systemGreen
+        button.tintColor = .white
+        button.backgroundColor = .systemGreen
+        button.addCorner(radius: 5)
         return button
     }()
     
@@ -74,7 +84,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
     }
     
     private func setText(index: Int) {
-        totalNumLabel.text = "( \(index) )"
+        totalNumLabel.text = "\(index)"
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,6 +104,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
         topActionsView.addSubview(backButton)
         backButton.addTarget(self, action: #selector(backTouched(_:)), for: .touchUpInside)
         topActionsView.addSubview(totalNumLabel)
+        topActionsView.addSubview(stateImageView)
         
         view.addSubview(bottomActionView)
         bottomActionView.addSubview(doneButton)
@@ -104,7 +115,15 @@ class XWAKPhotoBrowerViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        setText(index: XWAKPhoto.shared.count)
+        totalNumLabel.isHidden = true
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(imageTouched(_:)))
+        stateImageView.addGestureRecognizer(imageTap)
+        stateImageView.isUserInteractionEnabled = true
+        
+        let numTap = UITapGestureRecognizer(target: self, action: #selector(numTouched(_:)))
+        totalNumLabel.addGestureRecognizer(numTap)
+        totalNumLabel.isUserInteractionEnabled = true
     }
     
     func setupLayouts() {
@@ -115,8 +134,8 @@ class XWAKPhotoBrowerViewController: UIViewController {
             .width(80)
         totalNumLabel.xwak.edge(equalTo: topActionsView.xwak, inset: 10, edges: [.right])
             .centerY(equalTo: topActionsView.xwak.centerY)
-            .width(40)
-            .height(24)
+            .size((30, 30))
+        stateImageView.xwak.edge(equalTo: totalNumLabel.xwak, inset: 0, edges: [.all])
         
         collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
             .top(equalTo: topActionsView.xwak.bottom)
@@ -124,26 +143,45 @@ class XWAKPhotoBrowerViewController: UIViewController {
         
         bottomActionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
             .height(50)
-        doneButton.xwak.edge(equalTo: bottomActionView.xwak, inset: 0, edges: [.top, .bottom, .right])
-            .width(80)
+        doneButton.xwak.centerY(equalTo: bottomActionView.xwak.centerY)
+            .right(equalTo: bottomActionView.xwak.right, -10)
+            .size((70, 30))
     }
     
     func setupNotifications() {
-        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
-            self?.setText(index: XWAKPhoto.shared.count)
-            self?.totalNumLabel.scaleAnimation()
-        }
+//        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+//            self?.doneButton.setTitle("完成(\(XWAKPhoto.shared.count)", for: .normal)
+//        }
         NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification,
                                                object: nil,
                                                queue: OperationQueue.main) { [weak self](notification) in
-            self?.setText(index: XWAKPhoto.shared.count)
-            self?.totalNumLabel.scaleAnimation()
+            let removedIndex = notification.object as! Int
+            self?.items.filter { $0.isSelected && $0.index > removedIndex }
+                .forEach({ $0.index -= 1 })
         }
     }
     
     @objc
     func backTouched(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func imageTouched(_ sender: UITapGestureRecognizer) {
+        let item = items[index]
+        XWAKPhoto.shared.add(item)
+        totalNumLabel.text = "\(XWAKPhoto.shared.count)"
+        stateImageView.isHidden = true
+        totalNumLabel.isHidden = false
+        totalNumLabel.scaleAnimation()
+    }
+    
+    @objc
+    func numTouched(_ sender: UITapGestureRecognizer) {
+        let item = items[index]
+        XWAKPhoto.shared.remove(item, index: item.index)
+        stateImageView.isHidden = false
+        totalNumLabel.isHidden = true
     }
     
     @objc
@@ -170,5 +208,27 @@ extension XWAKPhotoBrowerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let frame = collectionView.bounds
         return frame.size
+    }
+}
+
+extension XWAKPhotoBrowerViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        var index = Int(floor(offsetX / scrollView.bounds.width))
+        let mid = CGFloat(index) * scrollView.bounds.width + scrollView.bounds.width / 3
+        if index >= 0 {
+            var item = items[Int(index)]
+            stateImageView.isHidden = item.isSelected
+            if offsetX > mid {
+                index += 1
+                if index < items.count {
+                    item = items[Int(index)]
+                }
+            }
+            totalNumLabel.text = "\(item.index)"
+            totalNumLabel.isHidden = !item.isSelected
+            stateImageView.isHidden = item.isSelected
+            self.index = index
+        }
     }
 }

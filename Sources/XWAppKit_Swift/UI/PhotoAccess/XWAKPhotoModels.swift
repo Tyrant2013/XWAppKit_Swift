@@ -32,7 +32,7 @@ extension XWAKPhotoAsset {
             handler(thumbImage)
             return PHInvalidImageRequestID
         }
-        let size = CGSize(width: 80, height: 80)
+        let size = CGSize(width: 300, height: 300)
         return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { [weak self](image, info) in
             if let info = info {
                 if let degraded = info[PHImageResultIsDegradedKey] as? Int {
@@ -73,12 +73,12 @@ extension XWAKPhotoAsset {
         }
     }
     
-    func loadOriginImage(_ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
+    func loadOriginImage(progress: @escaping (_ pencent: CGFloat) -> Void, _ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
         if let originImage = originImage {
             handler(originImage)
             return PHInvalidImageRequestID
         }
-        return XWAKPhotoKit.shared.loadOriginImage(from: asset, requestID: requestId) { (image, isDegraded, error) in
+        return XWAKPhotoKit.shared.loadOriginImage(from: asset, requestID: requestId, progress: progress) { (image, isDegraded, error) in
             self.originImage = image
             self.isDegraded = isDegraded
             handler(image)

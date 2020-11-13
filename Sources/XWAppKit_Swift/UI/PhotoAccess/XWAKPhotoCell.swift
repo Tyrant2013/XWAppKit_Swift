@@ -10,11 +10,12 @@ import UIKit
 import Photos
 
 class XWAKPhotoCell: UICollectionViewCell {
-    public weak var item: XWAKPhotoAsset! {
+    public weak var item: XWAKPhotoAsset? {
         didSet {
             if requestId != PHInvalidImageRequestID {
                 XWAKPhotoKit.shared.cancel(requestId: requestId)
             }
+            guard let item = item else { return }
             let text = item.index == 0 ? "" : "\(item.index)"
             numLabel.setupState(item.isSelected, text: text)
             
@@ -36,6 +37,8 @@ class XWAKPhotoCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     private let numLabel: UILabel = {
@@ -64,32 +67,40 @@ class XWAKPhotoCell: UICollectionViewCell {
         
         NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
             let item = notification.object as! XWAKPhotoAsset
-            if item.asset.localIdentifier == self?.item.asset.localIdentifier {
+            if item.asset.localIdentifier == self?.item?.asset.localIdentifier {
                 self?.numLabel.setupState(item.isSelected, text: "\(item.index)")
             }
         }
         
         NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
             let removedIndex = notification.object as! Int
-            if let text = self?.numLabel.text, let num = Int(text), num > removedIndex {
-                self?.numLabel.text = "\(num - 1)"
+            if let text = self?.numLabel.text, let num = Int(text) {
+                if num > removedIndex {
+                    self?.item?.index -= 1
+                    self?.numLabel.text = "\(num - 1)"
+                }
+                else if num == removedIndex {
+                    self?.numLabel.setupState(false, text: "")
+                }
+            }
+            else {
             }
         }
     }
     
     @objc
     func numberTap(_ sender: UITapGestureRecognizer) {
-        if item.isSelected {
+        if item?.isSelected ?? false {
             if let text = numLabel.text, let num = Int(text) {
-                XWAKPhoto.shared.remove(item, index: num)
+                XWAKPhoto.shared.remove(item!, index: num)
             }
         }
         else {
-            XWAKPhoto.shared.add(item)
+            XWAKPhoto.shared.add(item!)
         }
         
-        let indexText = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
-        numLabel.setupState(item.isSelected, text: indexText)
+        let indexText = (item?.isSelected ?? false) ? "\(XWAKPhoto.shared.count)" : ""
+        numLabel.setupState((item?.isSelected ?? false), text: indexText)
 
 //        numLabel.backgroundColor = item.isSelected ? .systemGreen : .clear
 //        numLabel.layer.borderColor = item.isSelected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
