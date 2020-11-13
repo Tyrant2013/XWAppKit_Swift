@@ -73,6 +73,10 @@ class XWAKPhotoBrowerViewController: UIViewController {
         setupNotifications()
     }
     
+    private func setText(index: Int) {
+        totalNumLabel.text = "( \(index) )"
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !isInit {
@@ -100,7 +104,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
+        setText(index: XWAKPhoto.shared.count)
     }
     
     func setupLayouts() {
@@ -126,13 +130,13 @@ class XWAKPhotoBrowerViewController: UIViewController {
     
     func setupNotifications() {
         NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
-            self?.totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
+            self?.setText(index: XWAKPhoto.shared.count)
             self?.totalNumLabel.scaleAnimation()
         }
         NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification,
                                                object: nil,
                                                queue: OperationQueue.main) { [weak self](notification) in
-            self?.totalNumLabel.text = "( \(XWAKPhoto.shared.count) )"
+            self?.setText(index: XWAKPhoto.shared.count)
             self?.totalNumLabel.scaleAnimation()
         }
     }
