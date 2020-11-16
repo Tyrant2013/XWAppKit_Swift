@@ -20,14 +20,22 @@ public class XWAKPhotoPickerController {
         }
     }
     public var delegate: XWAKPhotoPickerControllerDelegate?
+    private var limited: Bool = false
     
-    public init() { }
+    public init() {
+        XWAKPhotoKit.shared.authorized { [weak self](canUse, limited) in
+            if canUse && limited {
+                self?.limited = true
+            }
+        }
+    }
     
     public func show(in viewController: UIViewController, with delegate: XWAKPhotoPickerControllerDelegate) {
         XWAKPhoto.shared.selectionHandler = {
             delegate.viewController(self, didSelected: XWAKPhoto.shared.selectedItems)
         }
         let photoView = XWAKPhotoViewController()
+        photoView.isLimited = limited
         let picker = UINavigationController(rootViewController: photoView)
         picker.modalPresentationStyle = .fullScreen
         viewController.present(picker, animated: true, completion: nil)

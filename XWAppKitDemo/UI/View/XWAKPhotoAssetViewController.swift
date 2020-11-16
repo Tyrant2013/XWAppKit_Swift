@@ -25,8 +25,16 @@ class XWAKPhotoAssetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        XWAKPhotoKit.shared.authorized { (status) in
-            print("status: \(status)")
+        XWAKPhotoKit.shared.authorized { (status, limited) in
+            if status && limited {
+                print("被限制，但可以获取图片")
+            }
+            else if status && !limited {
+                print("完全的访问")
+            }
+            else {
+                print("不能访问")
+            }
         }
         
         setupViews()

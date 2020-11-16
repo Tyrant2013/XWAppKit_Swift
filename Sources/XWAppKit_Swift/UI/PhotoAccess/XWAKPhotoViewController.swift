@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import PhotosUI
 
 //protocol XWAKPhotoViewControllerDelegate {
 //    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage])
@@ -63,6 +64,60 @@ class XWAKPhotoViewController: UIViewController {
         return view
     }()
     
+    public var isLimited: Bool = false
+    private lazy var limitedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
+    }()
+    private lazy var limitedCloseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("关闭", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(limitedCloseTouched(_:)), for: .touchUpInside)
+        return button
+    }()
+    private lazy var limitedTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "无法访问相册中的所有照片"
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    private lazy var moreDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "只能访问相册中的部分照片，建议前往系统设置，允许访问 照片 中的 所有照片 。"
+        label.font = .systemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        return label
+    }()
+    private lazy var systemConfigButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemGreen
+        button.setTitle("前往系统设置", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addCorner(radius: 5)
+        button.addTarget(self, action: #selector(systemConfigTouched(_:)), for: .touchUpInside)
+        return button
+    }()
+    private lazy var morePhotoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("继续访问部分照片", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(takeMorePhotoTouched(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -87,6 +142,15 @@ class XWAKPhotoViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(XWAKPhotoCell.self, forCellWithReuseIdentifier: "Cell")
+        
+        if isLimited {
+            view.addSubview(limitedView)
+            limitedView.addSubview(limitedCloseButton)
+            limitedView.addSubview(limitedTitleLabel)
+            limitedView.addSubview(moreDescriptionLabel)
+            limitedView.addSubview(systemConfigButton)
+            limitedView.addSubview(morePhotoButton)
+        }
     }
     
     private func setupLayouts() {
@@ -104,6 +168,23 @@ class XWAKPhotoViewController: UIViewController {
             .height(50)
         doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 0, edges: [.top, .bottom, .right])
             .width(80)
+        
+        if isLimited {
+            limitedView.xwak.edge(equalTo: safe, inset: 0, edges: [.all])
+            limitedCloseButton.xwak.edge(equalTo: limitedView.xwak, inset: 20, edges: [.top, .left])
+                .size((60, 30))
+            limitedTitleLabel.xwak.centerX(equalTo: limitedView.xwak.centerX)
+                .top(equalTo: limitedView.xwak.top, 80)
+                .height(50)
+            moreDescriptionLabel.xwak.edge(equalTo: limitedView.xwak, inset: 10, edges: [.left, .right])
+                .top(equalTo: limitedTitleLabel.xwak.bottom, 20)
+            morePhotoButton.xwak.bottom(equalTo: limitedView.xwak.bottom, -10)
+                .edge(equalTo: limitedView.xwak, inset: 30, edges: [.left, .right])
+                .height(40)
+            systemConfigButton.xwak.bottom(equalTo: morePhotoButton.xwak.top, -40)
+                .centerX(equalTo: limitedView.xwak.centerX)
+                .size((200, 40))
+        }
         
     }
     
@@ -135,6 +216,29 @@ class XWAKPhotoViewController: UIViewController {
         XWAKPhoto.shared.selectionHandler?()
         dismiss(animated: true, completion: nil)
         XWAKPhoto.shared.clear()
+    }
+    
+    @objc
+    func limitedCloseTouched(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func systemConfigTouched(_ sender: UIButton) {
+        let url = URL(string: UIApplication.openSettingsURLString)!
+        UIApplication.shared.open(url,
+                                  options: [UIApplication.OpenExternalURLOptionsKey : Any](),
+                                  completionHandler: nil)
+    }
+    
+    @objc
+    func takeMorePhotoTouched(_ sender: UIButton) {
+//        -[PHPhotoLibrary(PhotosUISupport) presentLimitedLibraryPickerFromViewController:]
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
 }

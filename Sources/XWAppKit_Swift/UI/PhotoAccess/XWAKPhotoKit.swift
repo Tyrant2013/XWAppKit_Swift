@@ -11,24 +11,40 @@ import UIKit
 import Photos
 
 public typealias LoadPhotosResultHandler = (_ result: Result<[XWAKPhotoAsset], Error>) -> Void
-public typealias AuthorizedHandler = (_ canUse: Bool) -> Void
+public typealias AuthorizedHandler = (_ canUse: Bool, _ isLimited: Bool) -> Void
 
 public class XWAKPhotoKit {
     public static let shared = XWAKPhotoKit()
+    private(set) var isLimited: Bool = false
     
     internal init() { }
     
     public func authorized(_ handler: @escaping AuthorizedHandler) {
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status: PHAuthorizationStatus
+        if #available(iOS 14, *) {
+            status = PHPhotoLibrary.authorizationStatus(for: PHAccessLevel.readWrite)
+        } else {
+            status = PHPhotoLibrary.authorizationStatus()
+        }
         switch status {
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { handler($0 == .authorized) }
+            PHPhotoLibrary.requestAuthorization {
+                if #available(iOS 14, *) {
+                    handler($0 == .authorized || $0 == .limited, $0 == .limited)
+                    self.isLimited = $0 == .limited
+                } else {
+                    handler($0 == .authorized, false)
+                }
+            }
         case .denied:
-            handler(false)
+            handler(false, false)
         case .authorized:
-            handler(true)
+            handler(true, false)
+        case .limited:
+            handler(true, true)
+            isLimited = true
         default:
-            handler(false)
+            handler(false, false)
         }
     }
     
