@@ -10,6 +10,7 @@ import UIKit
 import Photos
 import PhotosUI
 
+let XWAKReloadPhotoDatasNotification = Notification.Name("XWAKReloadPhotoDatasNotification")
 //protocol XWAKPhotoViewControllerDelegate {
 //    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage])
 //}
@@ -110,11 +111,18 @@ class XWAKPhotoViewController: UIViewController {
         button.addTarget(self, action: #selector(systemConfigTouched(_:)), for: .touchUpInside)
         return button
     }()
-    private lazy var morePhotoButton: UIButton = {
+    private lazy var takeMorePhotoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("选择更多图片", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(takeMorePhotoTouched(_:)), for: .touchUpInside)
+        return button
+    }()
+    private lazy var keepCurrentButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("继续访问部分照片", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(takeMorePhotoTouched(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(keepCurrentPhotoTouched(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -123,6 +131,11 @@ class XWAKPhotoViewController: UIViewController {
         setupViews()
         setupLayouts()
         loadData()
+        NotificationCenter.default.addObserver(forName: XWAKReloadPhotoDatasNotification,
+                                               object: nil,
+                                               queue: OperationQueue.main) { [weak self](notification) in
+            self?.loadData()
+        }
     }
     
     private func setupViews() {
@@ -149,7 +162,8 @@ class XWAKPhotoViewController: UIViewController {
             limitedView.addSubview(limitedTitleLabel)
             limitedView.addSubview(moreDescriptionLabel)
             limitedView.addSubview(systemConfigButton)
-            limitedView.addSubview(morePhotoButton)
+            limitedView.addSubview(takeMorePhotoButton)
+            limitedView.addSubview(keepCurrentButton)
         }
     }
     
@@ -178,10 +192,13 @@ class XWAKPhotoViewController: UIViewController {
                 .height(50)
             moreDescriptionLabel.xwak.edge(equalTo: limitedView.xwak, inset: 10, edges: [.left, .right])
                 .top(equalTo: limitedTitleLabel.xwak.bottom, 20)
-            morePhotoButton.xwak.bottom(equalTo: limitedView.xwak.bottom, -10)
+            keepCurrentButton.xwak.bottom(equalTo: limitedView.xwak.bottom, -10)
                 .edge(equalTo: limitedView.xwak, inset: 30, edges: [.left, .right])
                 .height(40)
-            systemConfigButton.xwak.bottom(equalTo: morePhotoButton.xwak.top, -40)
+            takeMorePhotoButton.xwak.bottom(equalTo: keepCurrentButton.xwak.top, -20)
+                .edge(equalTo: limitedView.xwak, inset: 30, edges: [.left, .right])
+                .height(40)
+            systemConfigButton.xwak.bottom(equalTo: takeMorePhotoButton.xwak.top, -40)
                 .centerX(equalTo: limitedView.xwak.centerX)
                 .size((200, 40))
         }
@@ -192,8 +209,11 @@ class XWAKPhotoViewController: UIViewController {
         XWAKPhotoKit.shared.loadPhotos { [weak self]result in
             switch result {
             case .success(let items):
+                self?.items.removeAll()
                 self?.items.append(contentsOf: items)
-                self?.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             case .failure(let error):
                 print(error)
             }
@@ -213,9 +233,10 @@ class XWAKPhotoViewController: UIViewController {
     
     @objc
     func doneTouched(_ sender: UIButton) {
-        XWAKPhoto.shared.selectionHandler?()
-        dismiss(animated: true, completion: nil)
-        XWAKPhoto.shared.clear()
+        dismiss(animated: true) {
+            XWAKPhoto.shared.selectionHandler?()
+            XWAKPhoto.shared.clear()
+        }
     }
     
     @objc
@@ -231,14 +252,24 @@ class XWAKPhotoViewController: UIViewController {
                                   completionHandler: nil)
     }
     
+    private func hideLimitedAlertView() {
+        UIView.animate(withDuration: 0.25) {[weak self] in
+            self?.limitedView.alpha = 0.0
+        } completion: { [weak self](finished) in
+            self?.limitedView.removeFromSuperview()
+        }
+    }
     @objc
     func takeMorePhotoTouched(_ sender: UIButton) {
-//        -[PHPhotoLibrary(PhotosUISupport) presentLimitedLibraryPickerFromViewController:]
         if #available(iOS 14, *) {
+            PHPhotoLibrary.shared().register(self)
             PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-        } else {
-            // Fallback on earlier versions
         }
+    }
+    
+    @objc
+    func keepCurrentPhotoTouched(_ sender: UIButton) {
+        hideLimitedAlertView()
     }
 
 }
@@ -261,5 +292,14 @@ extension XWAKPhotoViewController: UICollectionViewDelegate {
         brower.index = indexPath.row
         brower.items = items
         navigationController?.pushViewController(brower, animated: true)
+    }
+}
+
+extension XWAKPhotoViewController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        loadData()
+        DispatchQueue.main.async {
+            self.hideLimitedAlertView()
+        }
     }
 }

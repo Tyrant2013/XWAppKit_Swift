@@ -24,8 +24,9 @@ public class XWAKPhotoPickerController {
     
     public init() {
         XWAKPhotoKit.shared.authorized { [weak self](canUse, limited) in
-            if canUse && limited {
-                self?.limited = true
+            if canUse {
+                self?.limited = limited
+                NotificationCenter.default.post(name: XWAKReloadPhotoDatasNotification, object: nil)
             }
         }
     }
