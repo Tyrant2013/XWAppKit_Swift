@@ -24,6 +24,9 @@ public extension UIColor {
         if hex.starts(with: "0x") || hex.starts(with: "0X") {
             hexValue = String(hex.dropFirst(2))
         }
+        if hex.starts(with: "#") {
+            hexValue = String(hex.dropFirst())
+        }
         if !(hexValue.count == 8 || hexValue.count == 6) {
             return .clear
         }
@@ -37,6 +40,12 @@ public extension UIColor {
             let blue = CGFloat(numbers[2]) / 255.0
             let alpha = CGFloat(numbers[3]) / 255.0
             return .init(red: red, green: green, blue: blue, alpha: alpha)
+        }
+        if numbers.count == 3 {
+            let red = CGFloat(numbers[0]) / 255.0
+            let green = CGFloat(numbers[1]) / 255.0
+            let blue = CGFloat(numbers[2]) / 255.0
+            return .init(red: red, green: green, blue: blue, alpha: 1.0)
         }
         return .clear
     }
