@@ -19,9 +19,11 @@ class XWAKPhotoCell: UICollectionViewCell {
             let text = item.index == 0 ? "" : "\(item.index)"
             numLabel.setupState(item.isSelected, text: text)
             
-            requestId = item.loadThumb() { [weak self](image) in
+            requestId = item.loadThumb(progress: { (percent) in
+                
+            }, { [weak self](image) in
                 self?.imageView.image = image
-            }
+            })
         }
     }
     private var requestId: PHImageRequestID = PHInvalidImageRequestID

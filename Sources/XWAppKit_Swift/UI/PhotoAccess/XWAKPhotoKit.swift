@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import Photos
 
+public typealias XWAKImageLoadProgressHandler = (_ pencent: CGFloat) -> Void
+public typealias XWAKImageLoadedHandler = (_ image: UIImage?) -> Void
 public typealias LoadPhotosResultHandler = (_ result: Result<[XWAKPhotoAsset], Error>) -> Void
 public typealias AuthorizedHandler = (_ canUse: Bool, _ isLimited: Bool) -> Void
 
@@ -30,19 +32,18 @@ public class XWAKPhotoKit {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization {
                 if #available(iOS 14, *) {
-                    handler($0 == .authorized || $0 == .limited, $0 == .limited)
-                    self.isLimited = $0 == .limited
-                } else {
-                    handler($0 == .authorized, false)
+                    self.isLimited = PHPhotoLibrary.authorizationStatus(for: .readWrite) == .limited
+                    print("requestAuthorization: ", self.isLimited, $0.rawValue)
                 }
+                handler($0 == .authorized, self.isLimited)
             }
         case .denied:
             handler(false, false)
         case .authorized:
             handler(true, false)
         case .limited:
-            handler(true, true)
             isLimited = true
+            handler(true, true)
         default:
             handler(false, false)
         }
@@ -68,18 +69,20 @@ public class XWAKPhotoKit {
         handler(.success(results))
     }
     
-    public func loadPhotos(from collection: PHAssetCollection, handler: LoadPhotosResultHandler) {
+    public func loadPhotos(from collection: String, handler: LoadPhotosResultHandler) {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        let assets = PHAsset.fetchAssets(in: collection, options: options)
-        var results = [XWAKPhotoAsset]()
-        assets.enumerateObjects { (asset, index, pStop) in
-            results.append(XWAKPhotoAsset(asset: asset))
+        if let collectionItem = loadAllCollections().first(where: { $0.localizedTitle == collection }) {
+            let assets = PHAsset.fetchAssets(in: collectionItem, options: options)
+            var results = [XWAKPhotoAsset]()
+            assets.enumerateObjects { (asset, index, pStop) in
+                results.append(XWAKPhotoAsset(asset: asset))
+            }
+            handler(.success(results))
         }
-        handler(.success(results))
     }
     
-    public func loadOriginImage(from asset: PHAsset, requestID: Int, progress: @escaping (_ percent: CGFloat) -> Void, handler: @escaping (_ image: UIImage?, _ isDegraded: Bool, _ error: NSError?) -> Void) -> PHImageRequestID {
+    public func loadOriginImage(from asset: PHAsset, requestID: Int, progress: @escaping XWAKImageLoadProgressHandler, handler: @escaping (_ image: UIImage?, _ isDegraded: Bool, _ error: NSError?) -> Void) -> PHImageRequestID {
         
         let options = PHImageRequestOptions()
         options.resizeMode = .fast

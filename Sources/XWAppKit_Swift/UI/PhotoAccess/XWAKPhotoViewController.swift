@@ -11,13 +11,13 @@ import Photos
 import PhotosUI
 
 let XWAKReloadPhotoDatasNotification = Notification.Name("XWAKReloadPhotoDatasNotification")
-//protocol XWAKPhotoViewControllerDelegate {
-//    func viewController(_ viewController: XWAKPhotoViewController, didSelected items: [UIImage])
-//}
+
+private extension String {
+    static let current = "最近项目"
+    static let limite = "可访问的照片"
+}
 
 class XWAKPhotoViewController: UIViewController {
-
-//    public var delegate: XWAKPhotoViewControllerDelegate?
     
     private var items = [XWAKPhotoAsset]()
     private let collectionView: UICollectionView = {
@@ -40,7 +40,7 @@ class XWAKPhotoViewController: UIViewController {
     private let topActionBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .black
         return view
     }()
     private let cancelButton: UIButton = {
@@ -50,6 +50,49 @@ class XWAKPhotoViewController: UIViewController {
         button.tintColor = .white
         return button
     }()
+    private let collectionSelectionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .xwak_color(with: "0x555555")
+        view.addCorner(radius: 15)
+        return view
+    }()
+    private var listTap: UITapGestureRecognizer!
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16)
+        label.isUserInteractionEnabled = false
+        label.text = ""
+        return label
+    }()
+    private var lableWidth: NSLayoutConstraint!
+    private var labelTextWidth: CGFloat {
+        if let text = titleLabel.text {
+            let attris = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]
+            return NSAttributedString(string: text, attributes: attris).boundingRect(with: CGSize(width: 1000, height: 30), options: .usesLineFragmentOrigin, context: nil).width + 2
+        }
+        return 0
+    }
+    private let arrowImageVIew: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let bundle = Bundle(for: XWAKPhoto.self)
+        view.image = UIImage(named: "down-circle-fill", in: bundle, compatibleWith: nil)
+        view.backgroundColor = .white
+        view.tintColor = .xwak_color(with: "0x555555")
+        view.addCorner(radius: 10)
+        view.clipsToBounds = true
+        return view
+    }()
+    private let listView: XWAKCollectionListView = {
+        let view = XWAKCollectionListView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var listHeight: NSLayoutConstraint!
+    
     private let doneButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +104,7 @@ class XWAKPhotoViewController: UIViewController {
     private let bottomActionBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .black
         return view
     }()
     
@@ -131,20 +174,29 @@ class XWAKPhotoViewController: UIViewController {
         setupViews()
         setupLayouts()
         loadData()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         NotificationCenter.default.addObserver(forName: XWAKReloadPhotoDatasNotification,
                                                object: nil,
                                                queue: OperationQueue.main) { [weak self](notification) in
+            print(XWAKReloadPhotoDatasNotification.rawValue)
             self?.loadData()
         }
     }
     
     private func setupViews() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .black
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.addSubview(topActionBar)
         topActionBar.addSubview(cancelButton)
         cancelButton.addTarget(self, action: #selector(cancelTouched(_:)), for: .touchUpInside)
+        
+        topActionBar.addSubview(collectionSelectionView)
+        collectionSelectionView.addSubview(titleLabel)
+        collectionSelectionView.addSubview(arrowImageVIew)
+        listTap = UITapGestureRecognizer(target: self, action: #selector(collectionSelectionTap(_:)))
+        collectionSelectionView.addGestureRecognizer(listTap)
+        collectionSelectionView.isUserInteractionEnabled = true
         
         view.addSubview(bottomActionBar)
         bottomActionBar.addSubview(doneButton)
@@ -165,6 +217,10 @@ class XWAKPhotoViewController: UIViewController {
             limitedView.addSubview(takeMorePhotoButton)
             limitedView.addSubview(keepCurrentButton)
         }
+        
+        view.addSubview(listView)
+        listView.alpha = 0.0
+        listView.delegate = self
     }
     
     private func setupLayouts() {
@@ -173,6 +229,18 @@ class XWAKPhotoViewController: UIViewController {
             .height(50)
         cancelButton.xwak.edge(equalTo: topActionBar.xwak, inset: 0, edges: [.top, .bottom, .left])
             .width(80)
+        collectionSelectionView.xwak.center(equalTo: topActionBar.xwak)
+            .height(30)
+        titleLabel.xwak.edge(equalTo: collectionSelectionView.xwak,
+                             inset: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0),
+                             edges: [.left, .top, .bottom])
+        lableWidth = NSLayoutConstraint(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: labelTextWidth)
+        lableWidth.isActive = true
+        
+        arrowImageVIew.xwak.edge(equalTo: collectionSelectionView.xwak, inset: 5, edges: [.top, .bottom])
+            .right(equalTo: collectionSelectionView.xwak.right, -10)
+            .left(equalTo: titleLabel.xwak.right, 10)
+            .width(equalTo: arrowImageVIew.xwak.height)
         
         collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
             .top(equalTo: topActionBar.xwak.bottom)
@@ -203,26 +271,74 @@ class XWAKPhotoViewController: UIViewController {
                 .size((200, 40))
         }
         
+        listView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
+            .top(equalTo: topActionBar.xwak.bottom)
+            .bottom(equalTo: safe.bottom)
     }
     
     private func loadData() {
+        initListView()
+        
         XWAKPhotoKit.shared.loadPhotos { [weak self]result in
-            switch result {
-            case .success(let items):
-                self?.items.removeAll()
-                self?.items.append(contentsOf: items)
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
+            self?.configResult(result)
+        }
+    }
+    private func configResult(_ result: Result<[XWAKPhotoAsset], Error>) {
+        switch result {
+        case .success(let items):
+            self.items.removeAll()
+            self.items.append(contentsOf: items)
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
+        case .failure(let error):
+            print("load photos: ", error)
+        }
+    }
+    private func initListView() {
+        listView.items.removeAll()
+        var items = XWAKPhotoKit.shared.loadAllCollections().compactMap { $0.localizedTitle }
+        let title = XWAKPhotoKit.shared.isLimited ? String.limite : .current
+        items.insert(title , at: 0)
+        titleLabel.text = title
+        listView.items = items
+        calculateTitleSize()
+    }
+    private func calculateTitleSize() {
+        lableWidth.constant = labelTextWidth
+        UIView.animate(withDuration: 0.25) {
+            self.topActionBar.layoutIfNeeded()
         }
     }
     
     public func show(in viewController: UIViewController) {
         modalPresentationStyle = .fullScreen
         viewController.present(self, animated: true, completion: nil)
+    }
+    
+    private var isShowList = false
+    private func showCollectionList() {
+        isShowList = true
+        listTap.isEnabled = false
+        UIView.animate(withDuration: 0.25) {
+            self.arrowImageVIew.transform = .init(rotationAngle: .pi)
+        } completion: { (finished) in
+            self.listTap.isEnabled = true
+        }
+        listView.show()
+    }
+    private func hideCollectionList() {
+        listView.hide()
+    }
+    
+    @objc
+    func collectionSelectionTap(_ sender: UITapGestureRecognizer) {
+        if !isShowList {
+            showCollectionList()
+        }
+        else {
+            hideCollectionList()
+        }
     }
     
     @objc
@@ -297,9 +413,35 @@ extension XWAKPhotoViewController: UICollectionViewDelegate {
 
 extension XWAKPhotoViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        loadData()
         DispatchQueue.main.async {
+            self.loadData()
             self.hideLimitedAlertView()
+        }
+    }
+}
+
+extension XWAKPhotoViewController: XWAKCollectionListViewDelegate {
+    func listView(_ listView: XWAKCollectionListView, will Hide: Bool) {
+        isShowList = false
+        listTap.isEnabled = false
+        UIView.animate(withDuration: 0.25) {
+            self.arrowImageVIew.transform = .identity
+        } completion: { (finished) in
+            self.listTap.isEnabled = true
+        }
+    }
+    
+    func listView(_ listView: XWAKCollectionListView, didSelected item: String) {
+        titleLabel.text = item
+        calculateTitleSize()
+        if item == .current || item == .limite {
+            XWAKPhotoKit.shared.loadPhotos { [weak self](result) in
+                self?.configResult(result)
+            }
+            return
+        }
+        XWAKPhotoKit.shared.loadPhotos(from: item) { [weak self](result) in
+            self?.configResult(result)
         }
     }
 }

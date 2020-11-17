@@ -14,8 +14,8 @@ public class XWAKPhotoAsset {
     var asset: PHAsset
     var requestId: Int = 0
     var isDegraded: Bool = false
-    var isiCloud: Bool = false
-    var isCancel: Bool = false
+//    var isiCloud: Bool = false
+//    var isCancel: Bool = false
     var thumbImage: UIImage?
     var originImage: UIImage?
     
@@ -27,45 +27,26 @@ public class XWAKPhotoAsset {
 }
 
 extension XWAKPhotoAsset {
-    func loadThumb(_ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
+    func loadThumb(progress: @escaping XWAKImageLoadProgressHandler, _ handler: @escaping XWAKImageLoadedHandler) -> PHImageRequestID {
         if let thumbImage = thumbImage {
             handler(thumbImage)
             return PHInvalidImageRequestID
         }
         let size = CGSize(width: 300, height: 300)
-        return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { [weak self](image, info) in
+        let options = PHImageRequestOptions()
+        options.resizeMode = .fast
+        options.isNetworkAccessAllowed = true
+        options.progressHandler = { (percent, error, pStop, info) in
+            progress(CGFloat(percent))
+        }
+        options.isSynchronous = true
+        return PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { [weak self](image, info) in
             if let info = info {
                 if let degraded = info[PHImageResultIsDegradedKey] as? Int {
                     self?.isDegraded = degraded != 0
                 }
-                if let isICloud = info[PHImageResultIsInCloudKey] as? Int {
-                    self?.isiCloud = isICloud != 0
-                }
-                if let requestID = info[PHImageResultRequestIDKey] as? Int {
-                    self?.requestId = requestID
-                }
-                if let cancel = info[PHImageCancelledKey] as? Int {
-                    self?.isCancel = cancel != 0
-                }
                 if let error = info[PHImageErrorKey] as? NSError {
-                    print(error)
-                }
-                if self?.isiCloud ?? false {
-                    let options = PHImageRequestOptions()
-                    options.isNetworkAccessAllowed = true
-                    options.isSynchronous = false
-                    options.deliveryMode = .highQualityFormat
-                    PHImageManager.default().requestImageData(for: (self?.asset)!, options: options) { (iCloudImageData, str, orientation, info) in
-                        if let data = iCloudImageData {
-                            let image = UIImage(data: data)
-                            self?.thumbImage = image
-                            self?.originImage = image
-                            handler(image)
-                        }
-                        else {
-                            handler(nil)
-                        }
-                    }
+                    print("load thumb error: ", error)
                 }
             }
             handler(image)
@@ -73,7 +54,7 @@ extension XWAKPhotoAsset {
         }
     }
     
-    func loadOriginImage(progress: @escaping (_ pencent: CGFloat) -> Void, _ handler: @escaping (_ image: UIImage?) -> Void) -> PHImageRequestID {
+    func loadOriginImage(progress: @escaping XWAKImageLoadProgressHandler, _ handler: @escaping XWAKImageLoadedHandler) -> PHImageRequestID {
         if let originImage = originImage {
             handler(originImage)
             return PHInvalidImageRequestID

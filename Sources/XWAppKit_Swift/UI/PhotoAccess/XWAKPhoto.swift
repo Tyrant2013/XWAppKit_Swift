@@ -12,7 +12,7 @@ import UIKit
 extension UILabel {
     func setupState(_ selected: Bool, text: String) {
         backgroundColor = selected ? .systemGreen : .clear
-        layer.borderColor = selected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
+        layer.borderColor = (selected ? UIColor.systemGreen : UIColor.white).cgColor
         self.text = text
         if selected { scaleAnimation() }
     }
@@ -34,7 +34,7 @@ class XWAKPhoto {
     }
     
     func remove(_ item: XWAKPhotoAsset, index: Int) {
-        items.removeAll { $0.requestId == item.requestId }
+        items.removeAll { $0.asset.localIdentifier == item.asset.localIdentifier }
         item.isSelected = false
         item.index = 0
         NotificationCenter.default.post(name: XWAKPhoto.SelectionRemoveIndexNotification, object: index)
