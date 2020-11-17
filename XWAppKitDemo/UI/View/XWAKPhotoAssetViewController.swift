@@ -52,6 +52,7 @@ class XWAKPhotoAssetViewController: UIViewController {
     @objc
     func showButtonTouched(_ sender: UIButton) {
         let photoView = XWAKPhotoPickerController()
+        photoView.maxNumber = 2
         photoView.show(in: self, with: self)
     }
     

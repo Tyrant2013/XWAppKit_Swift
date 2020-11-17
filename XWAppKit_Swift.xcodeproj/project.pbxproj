@@ -76,6 +76,8 @@
 		AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */; };
 		AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747B124D8133800E4B8E1 /* XWAKNetwork.swift */; };
 		AEA747B524DA61E500E4B8E1 /* XWAKLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */; };
+		AEACCDD12563A856000847A4 /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEACCDD02563A856000847A4 /* NotificationCenterExtension.swift */; };
+		AEACCDDB2563B179000847A4 /* XWAKSelectedItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEACCDDA2563B179000847A4 /* XWAKSelectedItemsView.swift */; };
 		AEB42977253152FC003FDB13 /* XWAKSquareGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB42976253152FC003FDB13 /* XWAKSquareGridView.swift */; };
 		AEB4297B25315334003FDB13 /* XWAKSquareGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */; };
 		AEBB8FF8254164ED0027ABB0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */; };
@@ -215,6 +217,8 @@
 		AEA747AC24D80AA500E4B8E1 /* XWAKProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProfileCell.swift; sourceTree = "<group>"; };
 		AEA747B124D8133800E4B8E1 /* XWAKNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKNetwork.swift; sourceTree = "<group>"; };
 		AEA747B424DA61E500E4B8E1 /* XWAKLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLog.swift; sourceTree = "<group>"; };
+		AEACCDD02563A856000847A4 /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
+		AEACCDDA2563B179000847A4 /* XWAKSelectedItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSelectedItemsView.swift; sourceTree = "<group>"; };
 		AEB42976253152FC003FDB13 /* XWAKSquareGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSquareGridView.swift; sourceTree = "<group>"; };
 		AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSquareGridViewController.swift; sourceTree = "<group>"; };
 		AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -290,16 +294,17 @@
 		AE1C0043255B83670027EBAB /* PhotoAccess */ = {
 			isa = PBXGroup;
 			children = (
-				AE25D8EC255B887E00E8767E /* XWAKPhotoModels.swift */,
+				AEF83F88255BEA13009F454F /* XWAKPhotoPickerController.swift */,
+				AEF83F84255BE587009F454F /* XWAKPhoto.swift */,
 				AE1C0044255B838B0027EBAB /* XWAKPhotoKit.swift */,
+				AE25D8EC255B887E00E8767E /* XWAKPhotoModels.swift */,
 				AEF83F7E255BC588009F454F /* XWAKPhotoCell.swift */,
 				AEF83F96255BF29C009F454F /* XWAKPhotoBrowerCell.swift */,
 				AEF83F9C255BF343009F454F /* XWAKImageBrower.swift */,
-				AEF83F84255BE587009F454F /* XWAKPhoto.swift */,
+				AE35524325625B9C007A7296 /* XWAKCollectionListView.swift */,
 				AEF83F7A255BC3CF009F454F /* XWAKPhotoViewController.swift */,
 				AEF83F8E255BEDCC009F454F /* XWAKPhotoBrowerViewController.swift */,
-				AEF83F88255BEA13009F454F /* XWAKPhotoPickerController.swift */,
-				AE35524325625B9C007A7296 /* XWAKCollectionListView.swift */,
+				AEACCDDA2563B179000847A4 /* XWAKSelectedItemsView.swift */,
 			);
 			path = PhotoAccess;
 			sourceTree = "<group>";
@@ -516,6 +521,7 @@
 				AE3912212535556B00A87A14 /* UIImageViewExtension.swift */,
 				AE39122E2535584F00A87A14 /* CGSizeExtension.swift */,
 				AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */,
+				AEACCDD02563A856000847A4 /* NotificationCenterExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -841,6 +847,7 @@
 				AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */,
 				AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */,
 				AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */,
+				AEACCDDB2563B179000847A4 /* XWAKSelectedItemsView.swift in Sources */,
 				AE35524425625B9C007A7296 /* XWAKCollectionListView.swift in Sources */,
 				AEF14D59251DC7AE0022AB88 /* XWAKImageClipedView.swift in Sources */,
 				AEF83F85255BE587009F454F /* XWAKPhoto.swift in Sources */,
@@ -855,6 +862,7 @@
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AE10F28625199265000131BE /* XWAKLine.swift in Sources */,
 				AEF14D23251C9FAB0022AB88 /* XWAKTextContainerView.swift in Sources */,
+				AEACCDD12563A856000847A4 /* NotificationCenterExtension.swift in Sources */,
 				AEA7477E24CFC26700E4B8E1 /* XWAKLoginViewController.swift in Sources */,
 				AEF14D4D251D8C580022AB88 /* XWAKTimingParameters.swift in Sources */,
 				AEF83F97255BF29C009F454F /* XWAKPhotoBrowerCell.swift in Sources */,

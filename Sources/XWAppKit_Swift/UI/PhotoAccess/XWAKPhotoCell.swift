@@ -55,10 +55,24 @@ class XWAKPhotoCell: UICollectionViewCell {
         label.addCorner(radius: 12)
         return label
     }()
+    private let selectionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        return view
+    }()
+    private let noActionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        return view
+    }()
     
     private func setup() {
         contentView.addSubview(imageView)
+        contentView.addSubview(selectionView)
         contentView.addSubview(numLabel)
+        contentView.addSubview(noActionView)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(numberTap(_:)))
         numLabel.addGestureRecognizer(tap)
@@ -66,15 +80,21 @@ class XWAKPhotoCell: UICollectionViewCell {
         imageView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
         numLabel.xwak.edge(equalTo: contentView.xwak, inset: 5, edges: [.top, .right])
             .size((24, 24))
+        selectionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
+        noActionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
         
-        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+        selectionView.isHidden = true
+        noActionView.isHidden = true
+        
+        NotificationCenter.add(name: XWAKPhoto.SelectionAddNotification) { [weak self](notification) in
             let item = notification.object as! XWAKPhotoAsset
             if item.asset.localIdentifier == self?.item?.asset.localIdentifier {
                 self?.numLabel.setupState(item.isSelected, text: "\(item.index)")
+                self?.selectionView.isHidden = !item.isSelected
             }
         }
-        
-        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
+
+        NotificationCenter.add(name: XWAKPhoto.SelectionRemoveIndexNotification) { [weak self](notification) in
             let removedIndex = notification.object as! Int
             if let text = self?.numLabel.text, let num = Int(text) {
                 if num > removedIndex {
@@ -85,9 +105,16 @@ class XWAKPhotoCell: UICollectionViewCell {
                     self?.numLabel.setupState(false, text: "")
                 }
             }
-            else {
-            }
         }
+
+        NotificationCenter.add(name: XWAKPhoto.NoMorePhotoSelectionNotification) { [weak self](notification) in
+            self?.noActionView.isHidden = false || (self?.item?.isSelected ?? false)
+        }
+
+        NotificationCenter.add(name: XWAKPhoto.ContinuePhotoSelectionNotification) { [weak self](notification) in
+            self?.noActionView.isHidden = true
+        }
+
     }
     
     @objc
@@ -95,18 +122,16 @@ class XWAKPhotoCell: UICollectionViewCell {
         if item?.isSelected ?? false {
             if let text = numLabel.text, let num = Int(text) {
                 XWAKPhoto.shared.remove(item!, index: num)
+                selectionView.isHidden = true
             }
         }
         else {
             XWAKPhoto.shared.add(item!)
+            selectionView.isHidden = false
         }
         
         let indexText = (item?.isSelected ?? false) ? "\(XWAKPhoto.shared.count)" : ""
         numLabel.setupState((item?.isSelected ?? false), text: indexText)
 
-//        numLabel.backgroundColor = item.isSelected ? .systemGreen : .clear
-//        numLabel.layer.borderColor = item.isSelected ? UIColor.systemGreen.cgColor : UIColor.white.cgColor
-//        numLabel.text = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
-//        if item.isSelected { numLabel.scaleAnimation() }
     }
 }

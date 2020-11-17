@@ -14,9 +14,12 @@ public protocol XWAKPhotoPickerControllerDelegate {
 
 public class XWAKPhotoPickerController {
 
-    public var maxNumber: Int = 9 {
-        didSet {
-            XWAKPhoto.shared.max = maxNumber
+    public var maxNumber: Int {
+        set {
+            XWAKPhoto.shared.max = newValue
+        }
+        get {
+            return XWAKPhoto.shared.max
         }
     }
     public var delegate: XWAKPhotoPickerControllerDelegate?

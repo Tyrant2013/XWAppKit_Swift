@@ -55,6 +55,12 @@ class XWAKPhotoBrowerViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    private let selectedView: XWAKSelectedItemsView = {
+        let view = XWAKSelectedItemsView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.95)
+        return view
+    }()
     
     private let bottomActionView: UIView = {
         let view = UIView()
@@ -73,7 +79,20 @@ class XWAKPhotoBrowerViewController: UIViewController {
     }()
     
     public var items = [XWAKPhotoAsset]()
-    public var index: Int = 0
+    public var index: Int = -1 {
+        didSet {
+            guard items.count > index else {
+                return
+            }
+            let item = items[index]
+            if item.isSelected {
+                selectedView.selectedItem = item
+            }
+            else {
+                selectedView.selectedItem = nil
+            }
+        }
+    }
     private var isInit = false
     
     override func viewDidLoad() {
@@ -91,9 +110,16 @@ class XWAKPhotoBrowerViewController: UIViewController {
         super.viewDidLayoutSubviews()
         if !isInit {
             isInit = true
-            if index > 0 {
+            if index >= 0 {
                 let indexPath = IndexPath(row: index, section: 0)
                 collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+                let item = items[index]
+                if XWAKPhoto.shared.items.count > 0 {
+                    selectedView.add(items: XWAKPhoto.shared.items)
+                }
+                if item.isSelected {
+                    selectedView.selectedItem = item
+                }
             }
         }
     }
@@ -124,6 +150,16 @@ class XWAKPhotoBrowerViewController: UIViewController {
         let numTap = UITapGestureRecognizer(target: self, action: #selector(numTouched(_:)))
         totalNumLabel.addGestureRecognizer(numTap)
         totalNumLabel.isUserInteractionEnabled = true
+        
+        view.addSubview(selectedView)
+        selectedView.delegate = self
+        
+        if index == 0 {
+            let item = items[index]
+            totalNumLabel.text = "\(item.index)"
+            totalNumLabel.isHidden = !item.isSelected
+            stateImageView.isHidden = item.isSelected
+        }
     }
     
     func setupLayouts() {
@@ -146,15 +182,14 @@ class XWAKPhotoBrowerViewController: UIViewController {
         doneButton.xwak.centerY(equalTo: bottomActionView.xwak.centerY)
             .right(equalTo: bottomActionView.xwak.right, -10)
             .size((70, 30))
+        
+        selectedView.xwak.bottom(equalTo: bottomActionView.xwak.top)
+            .edge(equalTo: safe, inset: 0, edges: [.left, .right])
+            .height(80)
     }
     
     func setupNotifications() {
-//        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionAddNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
-//            self?.doneButton.setTitle("完成(\(XWAKPhoto.shared.count)", for: .normal)
-//        }
-        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification,
-                                               object: nil,
-                                               queue: OperationQueue.main) { [weak self](notification) in
+        NotificationCenter.add(name: XWAKPhoto.SelectionRemoveIndexNotification) { [weak self](notification) in
             let removedIndex = notification.object as! Int
             self?.items.filter { $0.isSelected && $0.index > removedIndex }
                 .forEach({ $0.index -= 1 })
@@ -170,6 +205,8 @@ class XWAKPhotoBrowerViewController: UIViewController {
     func imageTouched(_ sender: UITapGestureRecognizer) {
         let item = items[index]
         XWAKPhoto.shared.add(item)
+        selectedView.add(item: item)
+        selectedView.selectedItem = item
         totalNumLabel.text = "\(XWAKPhoto.shared.count)"
         stateImageView.isHidden = true
         totalNumLabel.isHidden = false
@@ -180,6 +217,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
     func numTouched(_ sender: UITapGestureRecognizer) {
         let item = items[index]
         XWAKPhoto.shared.remove(item, index: item.index)
+        selectedView.remove(removedItem: item)
         stateImageView.isHidden = false
         totalNumLabel.isHidden = true
     }
@@ -218,7 +256,6 @@ extension XWAKPhotoBrowerViewController: UIScrollViewDelegate {
         let mid = CGFloat(index) * scrollView.bounds.width + scrollView.bounds.width / 3
         if index >= 0 {
             var item = items[Int(index)]
-            stateImageView.isHidden = item.isSelected
             if offsetX > mid {
                 index += 1
                 if index < items.count {
@@ -229,6 +266,15 @@ extension XWAKPhotoBrowerViewController: UIScrollViewDelegate {
             totalNumLabel.isHidden = !item.isSelected
             stateImageView.isHidden = item.isSelected
             self.index = index
+        }
+    }
+}
+
+extension XWAKPhotoBrowerViewController: XWAKSelectedItemsViewDelegate {
+    func selectedView(_ view: XWAKSelectedItemsView, didSelected item: XWAKPhotoAsset) {
+        if let index = items.firstIndex(where: { $0.asset.localIdentifier == item.asset.localIdentifier }) {
+            let indexPath = IndexPath(row: index, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
     }
 }

@@ -22,8 +22,10 @@ class XWAKPhoto {
     static let shared = XWAKPhoto()
     static let SelectionAddNotification = Notification.Name("com.add.notification")
     static let SelectionRemoveIndexNotification = Notification.Name("com.remove.index.notification")
-    private var items = [XWAKPhotoAsset]()
-    public var max: Int = 0
+    static let NoMorePhotoSelectionNotification = Notification.Name("com.no.more.selection.notification")
+    static let ContinuePhotoSelectionNotification = Notification.Name("com.continue.selection.notification")
+    private(set) var items = [XWAKPhotoAsset]()
+    public var max: Int = 1
     public var selectionHandler: (() -> Void)?
     
     func add(_ item: XWAKPhotoAsset) {
@@ -31,6 +33,9 @@ class XWAKPhoto {
         item.isSelected = true
         item.index = count
         NotificationCenter.default.post(name: XWAKPhoto.SelectionAddNotification, object: item)
+        if items.count >= max {
+            NotificationCenter.default.post(name: XWAKPhoto.NoMorePhotoSelectionNotification, object: nil)
+        }
     }
     
     func remove(_ item: XWAKPhotoAsset, index: Int) {
@@ -38,6 +43,9 @@ class XWAKPhoto {
         item.isSelected = false
         item.index = 0
         NotificationCenter.default.post(name: XWAKPhoto.SelectionRemoveIndexNotification, object: index)
+        if items.count == (max - 1) {
+            NotificationCenter.default.post(name: XWAKPhoto.ContinuePhotoSelectionNotification, object: nil)
+        }
     }
     
     func clear() {

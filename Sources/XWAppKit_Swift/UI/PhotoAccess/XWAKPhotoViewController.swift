@@ -93,6 +93,13 @@ class XWAKPhotoViewController: UIViewController {
     }()
     private var listHeight: NSLayoutConstraint!
     
+    private let previewButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("预览", for: .normal)
+        button.setTitleColor(.systemGreen, for: .normal)
+        return button
+    }()
     private let doneButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -178,7 +185,6 @@ class XWAKPhotoViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: XWAKReloadPhotoDatasNotification,
                                                object: nil,
                                                queue: OperationQueue.main) { [weak self](notification) in
-            print(XWAKReloadPhotoDatasNotification.rawValue)
             self?.loadData()
         }
     }
@@ -200,6 +206,8 @@ class XWAKPhotoViewController: UIViewController {
         
         view.addSubview(bottomActionBar)
         bottomActionBar.addSubview(doneButton)
+        bottomActionBar.addSubview(previewButton)
+        previewButton.addTarget(self, action: #selector(previewTouched(_:)), for: .touchUpInside)
         doneButton.addTarget(self, action: #selector(doneTouched(_:)), for: .touchUpInside)
         
         view.addSubview(collectionView)
@@ -345,6 +353,14 @@ class XWAKPhotoViewController: UIViewController {
     func cancelTouched(_ sender: UIButton) {
         XWAKPhoto.shared.clear()
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func previewTouched(_ sender: UIButton) {
+        let brower = XWAKPhotoBrowerViewController()
+        brower.index = 0
+        brower.items = XWAKPhoto.shared.items
+        navigationController?.pushViewController(brower, animated: true)
     }
     
     @objc
