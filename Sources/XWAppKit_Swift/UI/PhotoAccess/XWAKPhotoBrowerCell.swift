@@ -43,6 +43,7 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
             let text = item.index == 0 ? "" : "\(item.index)"
             indexLabel.setupState(item.isSelected, text: text)
             
+            progress.isHidden = false
             requestID = item.loadOriginImage(progress: { [weak self](pencent) in
                 self?.progress.isHidden = false
                 self?.progress.progress = pencent
@@ -73,33 +74,9 @@ class XWAKPhotoBrowerCell: UICollectionViewCell {
         progress.xwak.center(equalTo: contentView.xwak)
             .size((80, 80))
         
+        progress.progress = 0.0
         indexLabel.isHidden = true
         progress.isHidden = true
         progress.backgroundColor = .clear
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(indexTap(_:)))
-//        indexLabel.addGestureRecognizer(tap)
-//
-//        NotificationCenter.default.addObserver(forName: XWAKPhoto.SelectionRemoveIndexNotification, object: nil, queue: OperationQueue.main) { [weak self](notification) in
-//            let removedIndex = notification.object as! Int
-//            if let text = self?.indexLabel.text, let num = Int(text), num > removedIndex {
-//                self?.indexLabel.text = "\(num - 1)"
-//            }
-//        }
     }
-    
-//    @objc
-//    func indexTap(_ sender: UITapGestureRecognizer) {
-//        if item.isSelected {
-//            if let text = indexLabel.text, let num = Int(text) {
-//                XWAKPhoto.shared.remove(item, index: num)
-//            }
-//        }
-//        else {
-//            XWAKPhoto.shared.add(item)
-//        }
-//
-//        let text = item.isSelected ? "\(XWAKPhoto.shared.count)" : ""
-//        indexLabel.setupState(item.isSelected, text: text)
-//    }
 }
