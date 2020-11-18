@@ -24,8 +24,8 @@ class XWAKPhotoBrowerViewController: UIViewController {
         return button
     }()
     private let stateImageView: UIImageView = {
-        let bundle = Bundle(for: XWAKPhoto.self)
-        let image = UIImageView(image: UIImage(named: "check-circle", in: bundle, compatibleWith: nil))
+        let im = UIImage.xwak_frameImage(name: "check-circle")
+        let image = UIImageView(image: im)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.tintColor = .lightGray
         return image

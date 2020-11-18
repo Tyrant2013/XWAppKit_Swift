@@ -78,8 +78,7 @@ class XWAKPhotoViewController: UIViewController {
     private let arrowImageVIew: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        let bundle = Bundle(for: XWAKPhoto.self)
-        view.image = UIImage(named: "down-circle-fill", in: bundle, compatibleWith: nil)
+        view.image = UIImage.xwak_frameImage(name: "down-circle-fill")
         view.backgroundColor = .white
         view.tintColor = .xwak_color(with: "0x555555")
         view.addCorner(radius: 10)

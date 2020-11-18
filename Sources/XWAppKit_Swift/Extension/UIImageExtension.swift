@@ -23,4 +23,13 @@ public extension UIImage {
         path.fill()
         return UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: capInsets)
     }
+    
+    static func xwak_frameImage(name: String) -> UIImage? {
+        let bundle = Bundle(for: XWAKPhotoKit.self)
+        let image = UIImage(named: name)
+        if image != nil {
+            return image
+        }
+        return UIImage(named: name, in: bundle, compatibleWith: nil)
+    }
 }
