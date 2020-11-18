@@ -96,14 +96,18 @@ class XWAKPhotoViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("预览", for: .normal)
-        button.setTitleColor(.systemGreen, for: .normal)
+        button.tintColor = .systemGreen
+        button.isEnabled = false
         return button
     }()
     private let doneButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("完成", for: .normal)
-        button.tintColor = .systemGreen
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.addCorner(radius: 5)
+        button.isEnabled = false
         return button
     }()
     
@@ -177,15 +181,11 @@ class XWAKPhotoViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         setupViews()
         setupLayouts()
+        setupNotifications()
         loadData()
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        NotificationCenter.default.addObserver(forName: XWAKReloadPhotoDatasNotification,
-                                               object: nil,
-                                               queue: OperationQueue.main) { [weak self](notification) in
-            self?.loadData()
-        }
     }
     
     private func setupViews() {
@@ -255,8 +255,10 @@ class XWAKPhotoViewController: UIViewController {
         
         bottomActionBar.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
             .height(50)
-        doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 0, edges: [.top, .bottom, .right])
+        previewButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .left])
             .width(80)
+        doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .right])
+            .width(100)
         
         if isLimited {
             limitedView.xwak.edge(equalTo: safe, inset: 0, edges: [.all])
@@ -281,6 +283,29 @@ class XWAKPhotoViewController: UIViewController {
         listView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
             .top(equalTo: topActionBar.xwak.bottom)
             .bottom(equalTo: safe.bottom)
+    }
+    private func setupNotifications() {
+        NotificationCenter.add(name: XWAKReloadPhotoDatasNotification) { [weak self](notification) in
+            self?.loadData()
+        }
+        
+        NotificationCenter.add(name: XWAKPhoto.SelectionAddNotification) { [weak self](notification) in
+            if XWAKPhoto.shared.count > 0 {
+                self?.previewButton.isEnabled = true
+                self?.doneButton.isEnabled = true
+                self?.doneButton.setTitle("完成 (\(XWAKPhoto.shared.count))", for: .normal)
+            }
+        }
+        NotificationCenter.add(name: XWAKPhoto.SelectionRemoveIndexNotification) { [weak self](notification) in
+            if XWAKPhoto.shared.count == 0 {
+                self?.previewButton.isEnabled = false
+                self?.doneButton.isEnabled = false
+                self?.doneButton.setTitle("完成", for: .normal)
+            }
+            else {
+                self?.doneButton.setTitle("完成 (\(XWAKPhoto.shared.count))", for: .normal)
+            }
+        }
     }
     
     private func loadData() {

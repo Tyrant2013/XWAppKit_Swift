@@ -103,6 +103,7 @@ class XWAKPhotoCell: UICollectionViewCell {
                 }
                 else if num == removedIndex {
                     self?.numLabel.setupState(false, text: "")
+                    self?.selectionView.isHidden = true
                 }
             }
         }
