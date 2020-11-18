@@ -224,8 +224,10 @@ class XWAKPhotoBrowerViewController: UIViewController {
     
     @objc
     func doneTouched(_ sender: UIButton) {
-        XWAKPhoto.shared.selectionHandler?()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            XWAKPhoto.shared.selectionHandler?()
+            XWAKPhoto.shared.clear()
+        }
     }
 
 }
