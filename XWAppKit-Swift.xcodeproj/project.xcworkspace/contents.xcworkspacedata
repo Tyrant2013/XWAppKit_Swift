@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:XWAppKit_Swift.xcodeproj">
+      location = "self:/Users/zhxw/Github/XWAppKit_Swift/XWAppKit-Swift.xcodeproj">
    </FileRef>
 </Workspace>

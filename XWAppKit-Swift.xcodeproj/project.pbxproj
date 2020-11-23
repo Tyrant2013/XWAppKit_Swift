@@ -169,7 +169,7 @@
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWAppKit_Swift.h; sourceTree = "<group>"; };
 		AEA7471324CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEA7471824CA756900E4B8E1 /* XWAppKit_SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XWAppKit_SwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEA7471824CA756900E4B8E1 /* XWAppKit-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "XWAppKit-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAppKit_SwiftTests.swift; sourceTree = "<group>"; };
 		AEA7471F24CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSwitchButton.swift; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */,
-				AEA7471824CA756900E4B8E1 /* XWAppKit_SwiftTests.xctest */,
+				AEA7471824CA756900E4B8E1 /* XWAppKit-SwiftTests.xctest */,
 				AEA7473224CA90FD00E4B8E1 /* XWAppKitDemo.app */,
 			);
 			name = Products;
@@ -685,9 +685,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AEA7470E24CA756900E4B8E1 /* XWAppKit_Swift */ = {
+		AEA7470E24CA756900E4B8E1 /* XWAppKit-Swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AEA7472324CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit_Swift" */;
+			buildConfigurationList = AEA7472324CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit-Swift" */;
 			buildPhases = (
 				AEA7470A24CA756900E4B8E1 /* Headers */,
 				AEA7470B24CA756900E4B8E1 /* Sources */,
@@ -698,14 +698,14 @@
 			);
 			dependencies = (
 			);
-			name = XWAppKit_Swift;
+			name = "XWAppKit-Swift";
 			productName = XWAppKit_Swift;
 			productReference = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AEA7471724CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
+		AEA7471724CA756900E4B8E1 /* XWAppKit-SwiftTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AEA7472624CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit_SwiftTests" */;
+			buildConfigurationList = AEA7472624CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit-SwiftTests" */;
 			buildPhases = (
 				AEA7471424CA756900E4B8E1 /* Sources */,
 				AEA7471524CA756900E4B8E1 /* Frameworks */,
@@ -716,9 +716,9 @@
 			dependencies = (
 				AEA7471B24CA756900E4B8E1 /* PBXTargetDependency */,
 			);
-			name = XWAppKit_SwiftTests;
+			name = "XWAppKit-SwiftTests";
 			productName = XWAppKit_SwiftTests;
-			productReference = AEA7471824CA756900E4B8E1 /* XWAppKit_SwiftTests.xctest */;
+			productReference = AEA7471824CA756900E4B8E1 /* XWAppKit-SwiftTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AEA7473124CA90FD00E4B8E1 /* XWAppKitDemo */ = {
@@ -763,7 +763,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AEA7470924CA756900E4B8E1 /* Build configuration list for PBXProject "XWAppKit_Swift" */;
+			buildConfigurationList = AEA7470924CA756900E4B8E1 /* Build configuration list for PBXProject "XWAppKit-Swift" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -776,8 +776,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AEA7470E24CA756900E4B8E1 /* XWAppKit_Swift */,
-				AEA7471724CA756900E4B8E1 /* XWAppKit_SwiftTests */,
+				AEA7470E24CA756900E4B8E1 /* XWAppKit-Swift */,
+				AEA7471724CA756900E4B8E1 /* XWAppKit-SwiftTests */,
 				AEA7473124CA90FD00E4B8E1 /* XWAppKitDemo */,
 			);
 		};
@@ -930,12 +930,12 @@
 /* Begin PBXTargetDependency section */
 		AEA7471B24CA756900E4B8E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AEA7470E24CA756900E4B8E1 /* XWAppKit_Swift */;
+			target = AEA7470E24CA756900E4B8E1 /* XWAppKit-Swift */;
 			targetProxy = AEA7471A24CA756900E4B8E1 /* PBXContainerItemProxy */;
 		};
 		AEA7474C24CA943C00E4B8E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AEA7470E24CA756900E4B8E1 /* XWAppKit_Swift */;
+			target = AEA7470E24CA756900E4B8E1 /* XWAppKit-Swift */;
 			targetProxy = AEA7474B24CA943C00E4B8E1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1354,7 +1354,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AEA7470924CA756900E4B8E1 /* Build configuration list for PBXProject "XWAppKit_Swift" */ = {
+		AEA7470924CA756900E4B8E1 /* Build configuration list for PBXProject "XWAppKit-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA7472124CA756900E4B8E1 /* Debug */,
@@ -1364,7 +1364,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AEA7472324CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit_Swift" */ = {
+		AEA7472324CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA7472424CA756900E4B8E1 /* Debug */,
@@ -1374,7 +1374,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AEA7472624CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit_SwiftTests" */ = {
+		AEA7472624CA756900E4B8E1 /* Build configuration list for PBXNativeTarget "XWAppKit-SwiftTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEA7472724CA756900E4B8E1 /* Debug */,

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AEA7470E24CA756900E4B8E1"
                BuildableName = "XWAppKit_Swift.framework"
-               BlueprintName = "XWAppKit_Swift"
-               ReferencedContainer = "container:XWAppKit_Swift.xcodeproj">
+               BlueprintName = "XWAppKit-Swift"
+               ReferencedContainer = "container:XWAppKit-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AEA7471724CA756900E4B8E1"
-               BuildableName = "XWAppKit_SwiftTests.xctest"
-               BlueprintName = "XWAppKit_SwiftTests"
-               ReferencedContainer = "container:XWAppKit_Swift.xcodeproj">
+               BuildableName = "XWAppKit-SwiftTests.xctest"
+               BlueprintName = "XWAppKit-SwiftTests"
+               ReferencedContainer = "container:XWAppKit-Swift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -62,8 +62,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AEA7470E24CA756900E4B8E1"
             BuildableName = "XWAppKit_Swift.framework"
-            BlueprintName = "XWAppKit_Swift"
-            ReferencedContainer = "container:XWAppKit_Swift.xcodeproj">
+            BlueprintName = "XWAppKit-Swift"
+            ReferencedContainer = "container:XWAppKit-Swift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
