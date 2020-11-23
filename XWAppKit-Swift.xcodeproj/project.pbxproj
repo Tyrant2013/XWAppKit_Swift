@@ -340,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
-				AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */,
+				AEA7471124CA756900E4B8E1 /* XWAppKit-Swift */,
 				AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */,
 				AEA7473324CA90FD00E4B8E1 /* XWAppKitDemo */,
 				AEA7471024CA756900E4B8E1 /* Products */,
@@ -358,7 +358,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AEA7471124CA756900E4B8E1 /* XWAppKit_Swift */ = {
+		AEA7471124CA756900E4B8E1 /* XWAppKit-Swift */ = {
 			isa = PBXGroup;
 			children = (
 				AEF14D43251D89360022AB88 /* Parameters */,
@@ -375,8 +375,8 @@
 				AEA7471324CA756900E4B8E1 /* Info.plist */,
 				AE4A4E6925515E5600560A56 /* Resources.xcassets */,
 			);
-			name = XWAppKit_Swift;
-			path = Sources/XWAppKit_Swift;
+			name = "XWAppKit-Swift";
+			path = "Sources/XWAppKit-Swift";
 			sourceTree = "<group>";
 		};
 		AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
