@@ -11,7 +11,7 @@ import UIKit
 
 extension UILabel {
     func setupState(_ selected: Bool, text: String) {
-        backgroundColor = selected ? .systemGreen : .clear
+        backgroundColor = selected ? .systemGreen : UIColor.black.withAlphaComponent(0.2)
         layer.borderColor = (selected ? UIColor.systemGreen : UIColor.white).cgColor
         self.text = text
         if selected { scaleAnimation() }

@@ -53,6 +53,7 @@ class XWAKPhotoCell: UICollectionViewCell {
         label.clipsToBounds = true
         label.addBorder(width: 2, color: .white)
         label.addCorner(radius: 12)
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         return label
     }()
     private let selectionView: UIView = {
