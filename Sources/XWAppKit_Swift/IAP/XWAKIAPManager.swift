@@ -14,11 +14,11 @@ public enum XWAKIAPProcess {
     case requestProductSuccess
     case requestProductFailed
     case transactionStart
-    case transactionPurchasing
-    case transactionPurchased
-    case transactionFailed
-    case transactionRestored
-    case transactionDeferred
+    case transactionPurchasing(transaction: SKPaymentTransaction)
+    case transactionPurchased(transaction: SKPaymentTransaction)
+    case transactionFailed(transaction: SKPaymentTransaction)
+    case transactionRestored(transaction: SKPaymentTransaction)
+    case transactionDeferred(transaction: SKPaymentTransaction)
 }
 
 public enum XWAKIAPFailed: Error {
@@ -104,10 +104,10 @@ extension XWAKIAPManager: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
-                processHandler?(.transactionPurchasing)
+                processHandler?(.transactionPurchasing(transaction: transaction))
             case .purchased:
                 SKPaymentQueue.default().finishTransaction(transaction)
-                processHandler?(.transactionPurchased)
+                processHandler?(.transactionPurchased(transaction: transaction))
                 if let receiptURL = Bundle.main.appStoreReceiptURL {
                     do {
                         let receiptData = try Data(contentsOf: receiptURL)
@@ -122,15 +122,15 @@ extension XWAKIAPManager: SKPaymentTransactionObserver {
                 }
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
-                processHandler?(.transactionFailed)
+                processHandler?(.transactionFailed(transaction: transaction))
                 if let error = transaction.error {
                     resultHandler(.failure(.transactionFailed(reason: error)))
                 }
             case .restored:
                 SKPaymentQueue.default().finishTransaction(transaction)
-                processHandler?(.transactionRestored)
+                processHandler?(.transactionRestored(transaction: transaction))
             case .deferred:
-                processHandler?(.transactionDeferred)
+                processHandler?(.transactionDeferred(transaction: transaction))
             @unknown default:
                 print("unkndow transactionState")
             }

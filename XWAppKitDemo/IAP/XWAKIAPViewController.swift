@@ -78,18 +78,18 @@ class XWAKIAPViewController: UIViewController {
                 XWAKHud.show(msg: "商品信息请求成功")
             case .requestProductFailed:
                 XWAKHud.show(msg: "商品信息请求失败", delay: 3.0)
-            case .transactionPurchasing:
-                XWAKHud.show(msg: "开始支付")
+            case .transactionPurchasing(let transaction):
+                XWAKHud.show(msg: "开始支付: \(transaction)")
             case .transactionStart:
                 XWAKHud.show(msg: "交易开始")
-            case .transactionPurchased:
-                XWAKHud.show(msg: "交易完成", delay: 3.0)
-            case .transactionRestored:
-                XWAKHud.show(msg: "恢复购买完成", delay: 3.0)
-            case .transactionDeferred:
-                XWAKHud.show(msg: "Deferred状态", delay: 3.0)
-            case .transactionFailed:
-                XWAKHud.show(msg: "交易失败", delay: 3.0)
+            case .transactionPurchased(let transaction):
+                XWAKHud.show(msg: "交易完成: \(transaction)", delay: 3.0)
+            case .transactionRestored(let transaction):
+                XWAKHud.show(msg: "恢复购买完成: \(transaction)", delay: 3.0)
+            case .transactionDeferred(let transaction):
+                XWAKHud.show(msg: "Deferred状态: \(transaction)", delay: 3.0)
+            case .transactionFailed(let transaction):
+                XWAKHud.show(msg: "交易失败: \(transaction)", delay: 3.0)
             }
         }) { result in
             switch result {
