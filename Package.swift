@@ -22,7 +22,7 @@ let package = Package(
         .target(
             name: "XWAppKit_Swift",
             dependencies: [],
-            resources: [.copy("Info.plist")]),
+            resources: [.process("Info.plist")]),
         .testTarget(
             name: "XWAppKit_SwiftTests",
             dependencies: ["XWAppKit_Swift"]),
