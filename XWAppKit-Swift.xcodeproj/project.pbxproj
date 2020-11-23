@@ -33,8 +33,8 @@
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
-		AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */; };
-		AEA7472024CA756900E4B8E1 /* XWAppKit_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEA7471E24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */; };
+		AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */; };
 		AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */; };
 		AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */; };
@@ -167,10 +167,10 @@
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWAppKit_Swift.h; sourceTree = "<group>"; };
+		AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XWAppKit-Swift.h"; sourceTree = "<group>"; };
 		AEA7471324CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEA7471824CA756900E4B8E1 /* XWAppKit-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "XWAppKit-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAppKit_SwiftTests.swift; sourceTree = "<group>"; };
+		AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XWAppKit-SwiftTests.swift"; sourceTree = "<group>"; };
 		AEA7471F24CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEA7472C24CA790B00E4B8E1 /* XWAKSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSwitchButton.swift; sourceTree = "<group>"; };
 		AEA7473224CA90FD00E4B8E1 /* XWAppKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XWAppKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,7 +341,7 @@
 			children = (
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7471124CA756900E4B8E1 /* XWAppKit-Swift */,
-				AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */,
+				AEA7471C24CA756900E4B8E1 /* XWAppKit-SwiftTests */,
 				AEA7473324CA90FD00E4B8E1 /* XWAppKitDemo */,
 				AEA7471024CA756900E4B8E1 /* Products */,
 				AEA7474824CA943C00E4B8E1 /* Frameworks */,
@@ -371,7 +371,7 @@
 				AEA7477624CED0EA00E4B8E1 /* Design */,
 				AEA7475B24CAC93200E4B8E1 /* Extension */,
 				AEA7472924CA785100E4B8E1 /* UI */,
-				AEA7471224CA756900E4B8E1 /* XWAppKit_Swift.h */,
+				AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */,
 				AEA7471324CA756900E4B8E1 /* Info.plist */,
 				AE4A4E6925515E5600560A56 /* Resources.xcassets */,
 			);
@@ -379,16 +379,16 @@
 			path = "Sources/XWAppKit-Swift";
 			sourceTree = "<group>";
 		};
-		AEA7471C24CA756900E4B8E1 /* XWAppKit_SwiftTests */ = {
+		AEA7471C24CA756900E4B8E1 /* XWAppKit-SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
 				AEA7477924CED2DB00E4B8E1 /* Design */,
 				AEA7476024CACDC800E4B8E1 /* Extension */,
 				AEA7475324CABE8600E4B8E1 /* UI */,
-				AEA7471D24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift */,
+				AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */,
 				AEA7471F24CA756900E4B8E1 /* Info.plist */,
 			);
-			path = XWAppKit_SwiftTests;
+			path = "XWAppKit-SwiftTests";
 			sourceTree = "<group>";
 		};
 		AEA7472924CA785100E4B8E1 /* UI */ = {
@@ -678,7 +678,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEA7472024CA756900E4B8E1 /* XWAppKit_Swift.h in Headers */,
+				AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,7 +897,7 @@
 			files = (
 				AEA7476424CACDFB00E4B8E1 /* XWAKDictionaryEntensionTests.swift in Sources */,
 				AEA7475824CABEB700E4B8E1 /* XWASSwitchButtonTests.swift in Sources */,
-				AEA7471E24CA756900E4B8E1 /* XWAppKit_SwiftTests.swift in Sources */,
+				AEA7471E24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift in Sources */,
 				AEA7475A24CAC53400E4B8E1 /* XWASKeychainTests.swift in Sources */,
 				AEA7477B24CED2F800E4B8E1 /* XWAKColorTests.swift in Sources */,
 				AEA7476224CACDDF00E4B8E1 /* XWAKStringExtensionTests.swift in Sources */,
@@ -1145,7 +1145,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZC726AK722;
-				INFOPLIST_FILE = XWAppKit_SwiftTests/Info.plist;
+				INFOPLIST_FILE = "XWAppKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1166,7 +1166,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZC726AK722;
-				INFOPLIST_FILE = XWAppKit_SwiftTests/Info.plist;
+				INFOPLIST_FILE = "XWAppKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1318,7 +1318,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZC726AK722;
-				INFOPLIST_FILE = XWAppKit_SwiftTests/Info.plist;
+				INFOPLIST_FILE = "XWAppKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

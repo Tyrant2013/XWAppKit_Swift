@@ -1,6 +1,6 @@
 //
-//  XWAppKit_Swift.h
-//  XWAppKit_Swift
+//  XWAppKit-Swift.h
+//  XWAppKit-Swift
 //
 //  Created by ZHXW on 2020/7/24.
 //  Copyright © 2020 ZhuanagXiaowei. All rights reserved.
