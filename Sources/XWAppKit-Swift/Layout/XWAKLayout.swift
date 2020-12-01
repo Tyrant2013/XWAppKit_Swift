@@ -215,6 +215,7 @@ public class XWAKLayoutConstrait: NSObject {
 
 public extension UIView {
     var xwak: XWAKLayout {
+        assert(translatesAutoresizingMaskIntoConstraints == false, "translatesAutoresizingMaskIntoConstraints is not set to false")
         return XWAKLayout(targetView: self)
     }
 }
