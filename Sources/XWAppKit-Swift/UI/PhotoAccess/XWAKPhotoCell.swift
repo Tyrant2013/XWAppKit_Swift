@@ -16,8 +16,21 @@ class XWAKPhotoCell: UICollectionViewCell {
                 XWAKPhotoKit.shared.cancel(requestId: requestId)
             }
             guard let item = item else { return }
+            
+            _ = XWAKPhoto.shared.isSelectedItem(item)
+            
             let text = item.index == 0 ? "" : "\(item.index)"
+            
             numLabel.setupState(item.isSelected, text: text)
+            
+            if item.isSelected {
+                selectionView.isHidden = false
+                noActionView.isHidden = true
+            }
+            else {
+                selectionView.isHidden = true
+                noActionView.isHidden = !(XWAKPhoto.shared.count == XWAKPhoto.shared.max)
+            }
             
             requestId = item.loadThumb(progress: { (percent) in
                 

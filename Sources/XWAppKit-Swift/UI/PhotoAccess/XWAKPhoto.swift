@@ -25,6 +25,7 @@ class XWAKPhoto {
     static let NoMorePhotoSelectionNotification = Notification.Name("com.no.more.selection.notification")
     static let ContinuePhotoSelectionNotification = Notification.Name("com.continue.selection.notification")
     private(set) var items = [XWAKPhotoAsset]()
+    private var selectedItemIds = [String : Int]()
     public var max: Int = 1
     public var selectionHandler: (() -> Void)?
     
@@ -32,6 +33,8 @@ class XWAKPhoto {
         items.append(item)
         item.isSelected = true
         item.index = count
+        selectedItemIds[item.asset.localIdentifier] = count
+        
         NotificationCenter.default.post(name: XWAKPhoto.SelectionAddNotification, object: item)
         if items.count >= max {
             NotificationCenter.default.post(name: XWAKPhoto.NoMorePhotoSelectionNotification, object: nil)
@@ -42,7 +45,17 @@ class XWAKPhoto {
         items.removeAll { $0.asset.localIdentifier == item.asset.localIdentifier }
         item.isSelected = false
         item.index = 0
+        if let index = selectedItemIds.index(forKey: item.asset.localIdentifier) {
+            selectedItemIds.remove(at: index)
+        }
+        
         NotificationCenter.default.post(name: XWAKPhoto.SelectionRemoveIndexNotification, object: index)
+        selectedItemIds.forEach { (key, value) in
+            if value > index {
+                selectedItemIds[key] = (value - 1)
+            }
+        }
+        
         if items.count == (max - 1) {
             NotificationCenter.default.post(name: XWAKPhoto.ContinuePhotoSelectionNotification, object: nil)
         }
@@ -50,6 +63,16 @@ class XWAKPhoto {
     
     func clear() {
         items.removeAll()
+        selectedItemIds.removeAll()
+    }
+    
+    func isSelectedItem(_ item: XWAKPhotoAsset) -> Bool {
+        if let value = selectedItemIds[item.asset.localIdentifier] {
+            item.isSelected = true
+            item.index = value
+            return true
+        }
+        return false
     }
     
     public var count: Int { return items.count }

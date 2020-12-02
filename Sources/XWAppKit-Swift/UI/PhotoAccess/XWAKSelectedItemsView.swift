@@ -11,7 +11,9 @@ import UIKit
 class XWAKSelectedCell: UICollectionViewCell {
     public let imageView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.clipsToBounds = true
         return image
     }()
     override init(frame: CGRect) {

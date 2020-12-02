@@ -203,14 +203,16 @@ class XWAKPhotoBrowerViewController: UIViewController {
     
     @objc
     func imageTouched(_ sender: UITapGestureRecognizer) {
-        let item = items[index]
-        XWAKPhoto.shared.add(item)
-        selectedView.add(item: item)
-        selectedView.selectedItem = item
-        totalNumLabel.text = "\(XWAKPhoto.shared.count)"
-        stateImageView.isHidden = true
-        totalNumLabel.isHidden = false
-        totalNumLabel.scaleAnimation()
+        if XWAKPhoto.shared.count < XWAKPhoto.shared.max {
+            let item = items[index]
+            XWAKPhoto.shared.add(item)
+            selectedView.add(item: item)
+            selectedView.selectedItem = item
+            totalNumLabel.text = "\(XWAKPhoto.shared.count)"
+            stateImageView.isHidden = true
+            totalNumLabel.isHidden = false
+            totalNumLabel.scaleAnimation()
+        }
     }
     
     @objc
