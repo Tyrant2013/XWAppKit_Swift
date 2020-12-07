@@ -17,8 +17,6 @@ class XWAKPhotoCell: UICollectionViewCell {
             }
             guard let item = item else { return }
             
-            _ = XWAKPhoto.shared.isSelectedItem(item)
-            
             let text = item.index == 0 ? "" : "\(item.index)"
             
             numLabel.setupState(item.isSelected, text: text)

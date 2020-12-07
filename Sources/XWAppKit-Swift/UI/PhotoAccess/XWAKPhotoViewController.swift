@@ -320,6 +320,15 @@ class XWAKPhotoViewController: UIViewController {
         case .success(let items):
             self.items.removeAll()
             self.items.append(contentsOf: items)
+            if XWAKPhoto.shared.items.count > 0 {
+                let newSet = Set<XWAKPhotoAsset>(items)
+                for item in XWAKPhoto.shared.items {
+                    if let index = newSet.firstIndex(of: item) {
+                        newSet[index].isSelected = item.isSelected
+                        newSet[index].index = item.index
+                    }
+                }
+            }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

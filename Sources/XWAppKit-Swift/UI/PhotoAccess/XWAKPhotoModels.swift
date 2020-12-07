@@ -10,7 +10,17 @@ import Foundation
 import UIKit
 import Photos
 
-public class XWAKPhotoAsset {
+public class XWAKPhotoAsset: Hashable {
+    public static func == (lhs: XWAKPhotoAsset, rhs: XWAKPhotoAsset) -> Bool {
+        lhs.asset.localIdentifier == rhs.asset.localIdentifier
+    }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(asset.localIdentifier.hash)
+    }
+//    public var hashValue: Int {
+//        return self.asset.localIdentifier.hash
+//    }
+    
     var asset: PHAsset
     var requestId: Int = 0
     var isDegraded: Bool = false
