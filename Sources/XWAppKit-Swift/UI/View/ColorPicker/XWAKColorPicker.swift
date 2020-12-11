@@ -26,25 +26,6 @@ public class XWAKColorPicker: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-//    private let wheelContainer: UIView = {
-//        let view = UIView()
-//        view.accessibilityLabel = "wheel_Container"
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//    private let wheelView: XWAKColorWheelView = {
-//        let view = XWAKColorWheelView()
-//        view.accessibilityLabel = "wheel_view"
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//    private let brightnessView: XWAKColorComponent = {
-//        let view = XWAKColorComponent()
-//        view.accessibilityLabel = "brightness_view"
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.isUserInteractionEnabled = true
-//        return view
-//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +38,7 @@ public class XWAKColorPicker: UIView {
     }
     
     private func initViews() {
+        clipsToBounds = true
         backgroundColor = .white
         addSubview(seg)
         addSubview(hsbView)
@@ -72,5 +54,35 @@ public class XWAKColorPicker: UIView {
             .edge(equalTo: xwak, inset: 0, edges: [.left, .right, .bottom])
         
         hsbView.isHidden = true
+        seg.addTarget(self, action: #selector(segValueChange(_:)), for: .valueChanged)
+    }
+    
+    @objc
+    private func segValueChange(_ sender: UISegmentedControl) {
+        print(sender.selectedSegmentIndex)
+        switch sender.selectedSegmentIndex {
+        case 0:
+            rgbView.isHidden = false
+            rgbView.transform = CGAffineTransform(translationX: self.rgbView.bounds.width, y: 0)
+            UIView.animate(withDuration: 0.25) {
+                self.rgbView.transform = .identity
+                self.hsbView.transform = CGAffineTransform(translationX: -self.hsbView.bounds.width, y: 0)
+            } completion: { (finshed) in
+                self.hsbView.transform = .identity
+                self.hsbView.isHidden = true
+            }
+        case 1:
+            hsbView.isHidden = false
+            hsbView.transform = CGAffineTransform(translationX: -hsbView.bounds.width, y: 0)
+            UIView.animate(withDuration: 0.25) {
+                self.hsbView.transform = .identity
+                self.rgbView.transform = CGAffineTransform(translationX: self.rgbView.bounds.width, y: 0)
+            } completion: { (finished) in
+                self.rgbView.transform = .identity
+                self.rgbView.isHidden = true
+            }
+        default:
+            break
+        }
     }
 }
