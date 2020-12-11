@@ -87,6 +87,8 @@ class XWAKRGBView: UIControl {
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         blueComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
+        
+        updateHexValue()
     }
 
     @objc
@@ -104,6 +106,10 @@ class XWAKRGBView: UIControl {
         greenComponent.colors = (greenStart, greenEnd)
         blueComponent.colors = (blueStart, blueEnd)
         
+        updateHexValue()
+    }
+    
+    private func updateHexValue() {
         let red = redComponent.value
         let green = greenComponent.value
         let blue = blueComponent.value
