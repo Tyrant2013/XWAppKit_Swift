@@ -146,16 +146,16 @@ public class XWAKLayout: NSObject {
         return self.centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
             .centerY(equalTo: center.centerY, multiplier: multiplier, offset.y)
     }
-    @discardableResult
-    public func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.centerX(greaterThan: center.centerX, multiplier: multiplier, offset.x)
-            .centerY(greaterThan: center.centerY, multiplier: multiplier, offset.y)
-    }
-    @discardableResult
-    public func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.centerX(lessThan: center.centerX, multiplier: multiplier, offset.x)
-            .centerY(lessThan: center.centerY, multiplier: multiplier, offset.y)
-    }
+//    @discardableResult
+//    public func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+//        return self.centerX(greaterThan: center.centerX, multiplier: multiplier, offset.x)
+//            .centerY(greaterThan: center.centerY, multiplier: multiplier, offset.y)
+//    }
+//    @discardableResult
+//    public func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+//        return self.centerX(lessThan: center.centerX, multiplier: multiplier, offset.x)
+//            .centerY(lessThan: center.centerY, multiplier: multiplier, offset.y)
+//    }
     
     @discardableResult
     public func width(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {

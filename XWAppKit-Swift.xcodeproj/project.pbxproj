@@ -30,8 +30,15 @@
 		AE4E0974255E3B8D0028E106 /* XWAKProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */; };
 		AE4E097A255E5A8C0028E106 /* XWAKProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */; };
 		AE4E09D1255E64E00028E106 /* XWAKProgressLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */; };
+		AE5B510F258306D300924F8D /* XWAKColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B510E258306D300924F8D /* XWAKColorPickerViewController.swift */; };
+		AE5B51132583070300924F8D /* XWAKColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B51122583070300924F8D /* XWAKColorPicker.swift */; };
+		AE5B5119258318B000924F8D /* XWAKColorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B5118258318B000924F8D /* XWAKColorComponent.swift */; };
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
+		AE793F7925822C090031D172 /* XWAKColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE793F7825822C090031D172 /* XWAKColorWheelView.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
+		AE881C2A25834ADD00FB7F9F /* XWAKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */; };
+		AE881C2E25836DC900FB7F9F /* XWAKHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */; };
+		AE881C3225836DD100FB7F9F /* XWAKRGBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */; };
 		AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,8 +171,15 @@
 		AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressView.swift; sourceTree = "<group>"; };
 		AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressViewController.swift; sourceTree = "<group>"; };
 		AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressLayer.swift; sourceTree = "<group>"; };
+		AE5B510E258306D300924F8D /* XWAKColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorPickerViewController.swift; sourceTree = "<group>"; };
+		AE5B51122583070300924F8D /* XWAKColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorPicker.swift; sourceTree = "<group>"; };
+		AE5B5118258318B000924F8D /* XWAKColorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorComponent.swift; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
+		AE793F7825822C090031D172 /* XWAKColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorWheelView.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
+		AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSlider.swift; sourceTree = "<group>"; };
+		AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHSBView.swift; sourceTree = "<group>"; };
+		AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKRGBView.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XWAppKit-Swift.h"; sourceTree = "<group>"; };
 		AEA7471324CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -336,6 +350,19 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		AE793F7725822BAC0031D172 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				AE5B51122583070300924F8D /* XWAKColorPicker.swift */,
+				AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */,
+				AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */,
+				AE793F7825822C090031D172 /* XWAKColorWheelView.swift */,
+				AE5B5118258318B000924F8D /* XWAKColorComponent.swift */,
+				AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
 		AEA7470524CA756900E4B8E1 = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +433,7 @@
 		AEA7472B24CA78E900E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE793F7725822BAC0031D172 /* ColorPicker */,
 				AE4E0972255E3B650028E106 /* ProgressView */,
 				AE4A4E5E25515A8C00560A56 /* ImageCropView */,
 				AEA7476724CAE0E700E4B8E1 /* XWAKHud.swift */,
@@ -468,6 +496,7 @@
 				AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */,
 				AE25D8F0255B8BC600E8767E /* XWAKPhotoAssetViewController.swift */,
 				AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */,
+				AE5B510E258306D300924F8D /* XWAKColorPickerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -826,12 +855,14 @@
 				AEA7475F24CACBF700E4B8E1 /* StringExtension.swift in Sources */,
 				AEA7475D24CAC9BF00E4B8E1 /* DictionaryExtension.swift in Sources */,
 				AE3B59912558DC5C0060E2F0 /* XWAKImageMetaData.swift in Sources */,
+				AE5B51132583070300924F8D /* XWAKColorPicker.swift in Sources */,
 				AEF3EBBA25593368005E3C1F /* XWAKTextSelectionView.swift in Sources */,
 				AE10F2632514A027000131BE /* XWAKLabel.swift in Sources */,
 				AEF14D40251D886A0022AB88 /* UISpringTimingParameters.swift in Sources */,
 				AE4A4E6025515AB300560A56 /* XWAKImageCropBorder.swift in Sources */,
 				AEF14D49251D8A240022AB88 /* XWAKDecelerationTimingParameters.swift in Sources */,
 				AE1C0045255B838B0027EBAB /* XWAKPhotoKit.swift in Sources */,
+				AE881C2E25836DC900FB7F9F /* XWAKHSBView.swift in Sources */,
 				AEF14D8D252343B60022AB88 /* XWAKTextBackground.swift in Sources */,
 				AEA7479924D2B4A700E4B8E1 /* XWAKIAPManager.swift in Sources */,
 				AE4A4E5B25515A7500560A56 /* XWAKImageCropView.swift in Sources */,
@@ -844,6 +875,7 @@
 				AE4A4E6625515B0D00560A56 /* XWAKFrameBorderView.swift in Sources */,
 				AEF14D51251D8CDD0022AB88 /* XWAKRubberBand.swift in Sources */,
 				AEF14D7F2522CB180022AB88 /* XWAKTextSelected.swift in Sources */,
+				AE793F7925822C090031D172 /* XWAKColorWheelView.swift in Sources */,
 				AEA747B224D8133800E4B8E1 /* XWAKNetwork.swift in Sources */,
 				AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */,
 				AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */,
@@ -857,6 +889,7 @@
 				AEF83F7B255BC3CF009F454F /* XWAKPhotoViewController.swift in Sources */,
 				AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */,
 				AEA7476824CAE0E700E4B8E1 /* XWAKHud.swift in Sources */,
+				AE5B5119258318B000924F8D /* XWAKColorComponent.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
 				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
@@ -871,7 +904,9 @@
 				AE10F2742518A008000131BE /* XWAKTextLayout.swift in Sources */,
 				AEF83F89255BEA13009F454F /* XWAKPhotoPickerController.swift in Sources */,
 				AEA7477824CED11000E4B8E1 /* XWAKDesign.swift in Sources */,
+				AE881C3225836DD100FB7F9F /* XWAKRGBView.swift in Sources */,
 				AE25D8ED255B887E00E8767E /* XWAKPhotoModels.swift in Sources */,
+				AE881C2A25834ADD00FB7F9F /* XWAKSlider.swift in Sources */,
 				AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
 				AEF83F7F255BC588009F454F /* XWAKPhotoCell.swift in Sources */,
@@ -922,6 +957,7 @@
 				AEA747A724D7ED3800E4B8E1 /* XWAKTableViewExtensionViewController.swift in Sources */,
 				AEA7477024CE7B8700E4B8E1 /* XWAKHudViewController.swift in Sources */,
 				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
+				AE5B510F258306D300924F8D /* XWAKColorPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

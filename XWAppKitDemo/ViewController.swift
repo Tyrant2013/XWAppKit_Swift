@@ -26,6 +26,7 @@ class ViewController: UIViewController {
             ("SquareGird", "XWAKSquareGridViewController"),
             ("Photo Asset", "XWAKPhotoAssetViewController"),
             ("Progress", "XWAKProgressViewController"),
+            ("Color Picker", "XWAKColorPickerViewController"),
             ]
         ),
         ("ViewController", [
