@@ -60,6 +60,7 @@ public class XWAKColorPicker: UIView {
         backgroundColor = .white
         addSubview(seg)
         addSubview(hsbView)
+        addSubview(rgbView)
         
         seg.xwak.edge(equalTo: xwak, inset: 20, edges: [.left, .top, .right])
             .height(20)
