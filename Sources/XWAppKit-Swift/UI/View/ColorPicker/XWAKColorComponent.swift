@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XWAKColorComponent: UIControl {
+class XWAKColorComponent: UIControl, UITextFieldDelegate {
     
     public var min: Int {
         get {
@@ -79,12 +79,14 @@ class XWAKColorComponent: UIControl {
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.textAlignment = .center
         view.text = "0"
+        view.keyboardType = .numberPad
         return view
     }()
 
     private func setup() {
         addSubview(slider)
         addSubview(number)
+        number.delegate = self
 
         slider.xwak.left(equalTo: xwak.left)
             .height(20)
@@ -97,6 +99,37 @@ class XWAKColorComponent: UIControl {
         sliderRightToNumber?.isActive = true
         
         slider.addTarget(self, action: #selector(brightnessValueChange(_:)), for: .valueChanged)
+        number.addTarget(self, action: #selector(textFieldValueChange(_:)), for: .editingChanged)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let oldStr = textField.text {
+            let newStr = oldStr + string
+            if let num = Int(newStr), num <= 255 {
+                return true
+            }
+            return false
+        }
+        return true
+    }
+    
+    @objc
+    func textFieldValueChange(_ sender: UITextField) {
+        if var text = sender.text {
+            if text == "" {
+                text = "0"
+            }
+            else {
+                let ch = (text as NSString).character(at: 0)
+                // 第一位是 0
+                if ch == 48 {
+                    text.remove(at: text.startIndex)
+                }
+            }
+            sender.text = text
+            slider.value = Int(text)!
+            sendActions(for: .valueChanged)
+        }
     }
     
     @objc

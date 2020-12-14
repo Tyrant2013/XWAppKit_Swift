@@ -44,13 +44,13 @@ class XWAKRGBView: UIControl {
         view.value = 255
         return view
     }()
-    private let hex: UITextField = {
-        let view = UITextField()
+    private let hex: XWAKColorTextField = {
+        let view = XWAKColorTextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.layer.cornerRadius = 3
-        view.textAlignment = .center
+        view.textAlignment = .left
         return view
     }()
     override init(frame: CGRect) {
@@ -82,13 +82,17 @@ class XWAKRGBView: UIControl {
         
         hex.xwak.right(equalTo: xwak.right, -10)
             .top(equalTo: blueComponent.xwak.bottom, 20)
-            .size((120, 30))
+            .size((85, 30))
 
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         blueComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         
         updateHexValue()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endEditing(true)
     }
 
     @objc
@@ -114,6 +118,6 @@ class XWAKRGBView: UIControl {
         let green = greenComponent.value
         let blue = blueComponent.value
 //        let alpha = 255
-        hex.text = String(format: "0x%02X%02X%02X", red, green, blue)
+        hex.text = String(format: "%02X%02X%02X", red, green, blue)
     }
 }

@@ -39,6 +39,7 @@
 		AE881C2A25834ADD00FB7F9F /* XWAKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */; };
 		AE881C2E25836DC900FB7F9F /* XWAKHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */; };
 		AE881C3225836DD100FB7F9F /* XWAKRGBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */; };
+		AE881C46258744F900FB7F9F /* XWAKColorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C45258744F900FB7F9F /* XWAKColorTextField.swift */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */; };
 		AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -180,6 +181,7 @@
 		AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSlider.swift; sourceTree = "<group>"; };
 		AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHSBView.swift; sourceTree = "<group>"; };
 		AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKRGBView.swift; sourceTree = "<group>"; };
+		AE881C45258744F900FB7F9F /* XWAKColorTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorTextField.swift; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XWAppKit-Swift.h"; sourceTree = "<group>"; };
 		AEA7471324CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				AE793F7825822C090031D172 /* XWAKColorWheelView.swift */,
 				AE5B5118258318B000924F8D /* XWAKColorComponent.swift */,
 				AE881C2925834ADD00FB7F9F /* XWAKSlider.swift */,
+				AE881C45258744F900FB7F9F /* XWAKColorTextField.swift */,
 			);
 			path = ColorPicker;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				AEF83F7F255BC588009F454F /* XWAKPhotoCell.swift in Sources */,
 				AEA7477224CEB2BF00E4B8E1 /* XWAKToast.swift in Sources */,
 				AEF14D55251D953A0022AB88 /* UIImageExtension.swift in Sources */,
+				AE881C46258744F900FB7F9F /* XWAKColorTextField.swift in Sources */,
 				AEA747A124D41AA800E4B8E1 /* XWAKIAPResponDataListViewController.swift in Sources */,
 				AEBB8FF8254164ED0027ABB0 /* UIViewExtension.swift in Sources */,
 				AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */,
