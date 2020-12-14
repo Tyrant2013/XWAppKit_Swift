@@ -16,22 +16,23 @@ class XWAKColorPickerViewController: UIViewController {
         self.view.backgroundColor = .lightGray
         
         let view = XWAKColorPicker()
+        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.pickerDelegate = self
         self.view.addSubview(view)
         view.xwak.center(equalTo: self.view.xwak)
             .size((250, 250))
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension XWAKColorPickerViewController: XWAKColorPickerDelegate {
+    func colorPicker(_ picker: XWAKColorPicker, didSelectedColor red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        view.backgroundColor = .init(red: red, green: green, blue: blue, alpha: alpha)
     }
-    */
-
+    
+    func colorPicker(_ picker: XWAKColorPicker, didSelectedColor hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+        view.backgroundColor = .init(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+    }
 }

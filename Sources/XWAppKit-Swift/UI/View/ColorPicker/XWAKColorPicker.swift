@@ -8,8 +8,14 @@
 
 import UIKit
 
+public protocol XWAKColorPickerDelegate {
+    func colorPicker(_ picker: XWAKColorPicker, didSelectedColor red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
+    func colorPicker(_ picker: XWAKColorPicker, didSelectedColor hue: CGFloat, saturation: CGFloat, brightness: CGFloat)
+}
+
 public class XWAKColorPicker: UIView {
 
+    public var pickerDelegate: XWAKColorPickerDelegate?
     private let seg: UISegmentedControl = {
         let view = UISegmentedControl(items: ["RGB", "HSB"])
         view.accessibilityLabel = "segment_control"
@@ -55,11 +61,12 @@ public class XWAKColorPicker: UIView {
         
         hsbView.isHidden = true
         seg.addTarget(self, action: #selector(segValueChange(_:)), for: .valueChanged)
+        hsbView.addTarget(self, action: #selector(hsbValueChange(_:)), for: .valueChanged)
+        rgbView.addTarget(self, action: #selector(rgbValueChange(_:)), for: .valueChanged)
     }
     
     @objc
     private func segValueChange(_ sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
         switch sender.selectedSegmentIndex {
         case 0:
             rgbView.isHidden = false
@@ -84,5 +91,17 @@ public class XWAKColorPicker: UIView {
         default:
             break
         }
+    }
+    
+    @objc
+    private func hsbValueChange(_ sender: XWAKHSBView) {
+        let val = sender.value
+        self.pickerDelegate?.colorPicker(self, didSelectedColor: val.hue, saturation: val.saturation, brightness: val.brightness)
+    }
+    
+    @objc
+    private func rgbValueChange(_ sender: XWAKRGBView) {
+        let val = sender.value
+        self.pickerDelegate?.colorPicker(self, didSelectedColor: val.red, green: val.green, blue: val.blue, alpha: val.alpha)
     }
 }

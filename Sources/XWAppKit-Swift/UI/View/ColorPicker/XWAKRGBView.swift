@@ -53,6 +53,7 @@ class XWAKRGBView: UIControl {
         view.textAlignment = .left
         return view
     }()
+    public var value: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) = (0, 0, 0, 1.0)
     override init(frame: CGRect) {
         super.init(frame: frame)
         initRGBViews()
@@ -117,7 +118,9 @@ class XWAKRGBView: UIControl {
         let red = redComponent.value
         let green = greenComponent.value
         let blue = blueComponent.value
-//        let alpha = 255
+        let alpha = 255
         hex.text = String(format: "%02X%02X%02X", red, green, blue)
+        value = (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
+        sendActions(for: .valueChanged)
     }
 }

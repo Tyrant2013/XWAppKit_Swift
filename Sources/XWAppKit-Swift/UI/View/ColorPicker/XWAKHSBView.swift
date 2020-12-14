@@ -68,11 +68,12 @@ class XWAKHSBView: UIControl {
     @objc
     private func brightnessValueChange(_ sender: XWAKColorComponent) {
         wheelView.brightness = CGFloat(sender.value) / 255.0
+        sendActions(for: .valueChanged)
     }
     
     @objc
     private func hsbValueChange(_ sender: XWAKColorWheelView) {
-        
+        sendActions(for: .valueChanged)
     }
 
 }
