@@ -71,6 +71,11 @@ public class XWAKColorPicker: UIView {
         case 0:
             rgbView.isHidden = false
             rgbView.transform = CGAffineTransform(translationX: self.rgbView.bounds.width, y: 0)
+            let val = hsbView.value
+            let color = UIColor(hue: val.hue, saturation: val.saturation, brightness: val.brightness, alpha: 1.0)
+            var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            rgbView.value = (red, green, blue, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.rgbView.transform = .identity
                 self.hsbView.transform = CGAffineTransform(translationX: -self.hsbView.bounds.width, y: 0)
@@ -81,6 +86,11 @@ public class XWAKColorPicker: UIView {
         case 1:
             hsbView.isHidden = false
             hsbView.transform = CGAffineTransform(translationX: -hsbView.bounds.width, y: 0)
+            let val = rgbView.value
+            let color = UIColor(displayP3Red: val.red, green: val.green, blue: val.blue, alpha: val.alpha)
+            var (hue, saturation, brightness, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+            hsbView.value = (hue, saturation, brightness, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.hsbView.transform = .identity
                 self.rgbView.transform = CGAffineTransform(translationX: self.rgbView.bounds.width, y: 0)

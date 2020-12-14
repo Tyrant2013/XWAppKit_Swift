@@ -48,12 +48,25 @@ class XWAKRGBView: UIControl {
         let view = XWAKColorTextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.cornerRadius = 3
+        view.layer.borderColor = UIColor.xwak_color(with: "0xAAB0AF").cgColor
+        view.layer.cornerRadius = 5
         view.textAlignment = .left
         return view
     }()
-    public var value: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) = (0, 0, 0, 1.0)
+    public var value: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        get {
+            let red = redComponent.value
+            let green = greenComponent.value
+            let blue = blueComponent.value
+            let alpha = 255
+            return (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
+        }
+        set {
+            redComponent.value = min(Int(newValue.red * 255), 255)
+            greenComponent.value = min(Int(newValue.green * 255), 255)
+            blueComponent.value = min(Int(newValue.blue * 255), 255)
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         initRGBViews()
@@ -83,7 +96,7 @@ class XWAKRGBView: UIControl {
         
         hex.xwak.right(equalTo: xwak.right, -10)
             .top(equalTo: blueComponent.xwak.bottom, 20)
-            .size((85, 30))
+            .size((95, 30))
 
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
@@ -118,9 +131,9 @@ class XWAKRGBView: UIControl {
         let red = redComponent.value
         let green = greenComponent.value
         let blue = blueComponent.value
-        let alpha = 255
+//        let alpha = 255
         hex.text = String(format: "%02X%02X%02X", red, green, blue)
-        value = (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
+//        value = (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
         sendActions(for: .valueChanged)
     }
 }

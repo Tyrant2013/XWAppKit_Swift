@@ -23,9 +23,11 @@ class XWAKColorTextField: UITextField, UITextFieldDelegate {
         leftViewMode = .always
         let lbl = UILabel()
         lbl.text = "0x"
-        lbl.frame = CGRect(x: 0, y: 0, width: 20, height: 0)
+        lbl.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         lbl.textAlignment = .center
-        leftView = lbl
+        let left = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        leftView = left
+        left.addSubview(lbl)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

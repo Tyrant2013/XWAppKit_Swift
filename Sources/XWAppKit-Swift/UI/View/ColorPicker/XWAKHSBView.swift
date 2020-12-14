@@ -10,9 +10,9 @@ import UIKit
 
 class XWAKHSBView: UIControl {
     
-    public var value: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+    public var value: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         get {
-            return (wheelView.hue, wheelView.saturation, wheelView.brightness)
+            return (wheelView.hue, wheelView.saturation, wheelView.brightness, 1.0)
         }
         set {
             wheelView.hue = newValue.hue

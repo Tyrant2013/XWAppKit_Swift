@@ -76,7 +76,8 @@ class XWAKColorComponent: UIControl, UITextFieldDelegate {
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderColor = UIColor.xwak_color(with: "0xAAB0AF").cgColor
+        view.layer.cornerRadius = 5
         view.textAlignment = .center
         view.text = "0"
         view.keyboardType = .numberPad
