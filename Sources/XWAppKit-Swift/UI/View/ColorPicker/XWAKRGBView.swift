@@ -62,9 +62,13 @@ class XWAKRGBView: UIControl {
             return (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
         }
         set {
-            redComponent.value = min(Int(newValue.red * 255), 255)
-            greenComponent.value = min(Int(newValue.green * 255), 255)
-            blueComponent.value = min(Int(newValue.blue * 255), 255)
+            let red = min(Int(newValue.red * 255), 255)
+            let green = min(Int(newValue.green * 255), 255)
+            let blue = min(Int(newValue.blue * 255), 255)
+            redComponent.value = red
+            greenComponent.value = green
+            blueComponent.value = blue
+            hex.text = String(format: "%02X%02X%02X", red, green, blue)
         }
     }
     override init(frame: CGRect) {
