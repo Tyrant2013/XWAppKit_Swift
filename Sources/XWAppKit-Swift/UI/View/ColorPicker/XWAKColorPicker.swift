@@ -32,6 +32,22 @@ public class XWAKColorPicker: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    public var hsbValue: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        set {
+            hsbView.value = newValue
+        }
+        get {
+            return hsbView.value
+        }
+    }
+    public var rgbValue: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        set {
+            rgbView.value = newValue
+        }
+        get {
+            return rgbView.value
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
