@@ -8,7 +8,7 @@
 
 import UIKit
 
-class XWAKImageBrower: UIView {
+public class XWAKImageBrower: UIView {
 
     public var image: UIImage? {
         didSet {
@@ -53,7 +53,7 @@ class XWAKImageBrower: UIView {
     }
     
     private var isInit = false
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         if !isInit {
             if let image = image {
@@ -66,11 +66,11 @@ class XWAKImageBrower: UIView {
 }
 
 extension XWAKImageBrower: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         centerScrollViewContents()
     }
     
