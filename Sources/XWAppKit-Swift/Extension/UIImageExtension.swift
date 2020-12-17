@@ -32,4 +32,32 @@ public extension UIImage {
         }
         return UIImage(named: name, in: bundle, compatibleWith: nil)
     }
+    
+    func color(from pos: CGPoint) -> UIColor {
+        let (pointX, pointY) = (trunc(pos.x), trunc(pos.y))
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        var pixelData: [UInt8] = [0, 0, 0, 0]
+        pixelData.withUnsafeMutableBytes { pointer in
+            if let context = CGContext(data: pointer.baseAddress,
+                                       width: 1,
+                                       height: 1,
+                                       bitsPerComponent: 8,
+                                       bytesPerRow: 4,
+                                       space: colorSpace,
+                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+               let cgImage = cgImage {
+                context.setBlendMode(.copy)
+                context.translateBy(x: -pointX, y: pointY - size.height)
+                context.draw(cgImage, in: .init(origin: .zero, size: size))
+            }
+        }
+
+        let red = CGFloat(pixelData[0]) / 255.0
+        let green = CGFloat(pixelData[1]) / 255.0
+        let blue = CGFloat(pixelData[2]) / 255.0
+        let alpha = CGFloat(pixelData[3]) / 255.0
+        
+        return UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
+    }
 }
