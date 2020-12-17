@@ -19,14 +19,14 @@ public class XWAKImageBrower: UIView {
         }
     }
     
-    private let scrollView: UIScrollView = {
+    public let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.minimumZoomScale = 1.0
         view.maximumZoomScale = 3.0
         return view
     }()
-    private let imageView: UIImageView = {
+    public let imageView: UIImageView = {
         let view = UIImageView()
         
         return view
