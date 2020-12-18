@@ -64,4 +64,10 @@ public extension UIColor {
         alpha = round(alpha * 255)
         return String(format: "0x%02X%02X%02X%02X", Int(red), Int(green), Int(blue), Int(alpha))
     }
+    func inverseColor() -> UIColor {
+        var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        (r, g, b, a) = (1 - r, 1 - g, 1 - b, 1)
+        return UIColor(displayP3Red: r, green: g, blue: b, alpha: a)
+    }
 }
