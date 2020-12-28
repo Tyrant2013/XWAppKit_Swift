@@ -9,6 +9,7 @@ public class CIBoxBlur: ImageFilter {
         filter.setValue(inputImage, forKey:"inputImage")
         return self
     }
+    @discardableResult
     public func inputRadius(_ inputRadius: Double) -> CIBoxBlur {
         filter.setValue(inputRadius, forKey:"inputRadius")
         return self
