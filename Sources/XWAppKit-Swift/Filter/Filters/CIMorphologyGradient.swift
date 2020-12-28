@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMorphologyGradient: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMorphologyGradient")
     }
     public func inputRadius(_ inputRadius: Double) -> CIMorphologyGradient {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIToneCurve: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIToneCurve")
     }
     public func inputPoint2(_ inputPoint2: CIVector?) -> CIToneCurve {

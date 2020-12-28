@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMedianFilter: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMedianFilter")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMedianFilter {

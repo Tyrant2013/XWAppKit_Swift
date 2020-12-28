@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIVibrance: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIVibrance")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIVibrance {

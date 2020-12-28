@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISourceOutCompositing: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISourceOutCompositing")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISourceOutCompositing {

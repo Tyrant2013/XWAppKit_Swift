@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBloom: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBloom")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIBloom {

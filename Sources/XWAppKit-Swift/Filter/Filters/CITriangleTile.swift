@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITriangleTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITriangleTile")
     }
     public func inputWidth(_ inputWidth: Double) -> CITriangleTile {

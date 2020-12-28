@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISRGBToneCurveToLinear: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISRGBToneCurveToLinear")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISRGBToneCurveToLinear {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPaletteCentroid: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPaletteCentroid")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPaletteCentroid {

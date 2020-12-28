@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIVortexDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIVortexDistortion")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIVortexDistortion {

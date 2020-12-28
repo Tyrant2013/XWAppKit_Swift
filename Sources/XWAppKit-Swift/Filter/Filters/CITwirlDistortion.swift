@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITwirlDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITwirlDistortion")
     }
     public func inputAngle(_ inputAngle: Double) -> CITwirlDistortion {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMeshGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMeshGenerator")
     }
     public func inputWidth(_ inputWidth: Double) -> CIMeshGenerator {

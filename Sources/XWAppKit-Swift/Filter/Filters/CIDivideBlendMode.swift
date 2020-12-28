@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDivideBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDivideBlendMode")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIDivideBlendMode {

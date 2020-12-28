@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICMYKHalftone: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICMYKHalftone")
     }
     public func inputSharpness(_ inputSharpness: Double) -> CICMYKHalftone {

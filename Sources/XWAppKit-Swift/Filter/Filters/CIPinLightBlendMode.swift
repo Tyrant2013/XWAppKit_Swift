@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPinLightBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPinLightBlendMode")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIPinLightBlendMode {

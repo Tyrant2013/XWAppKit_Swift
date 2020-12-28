@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMaximumCompositing: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMaximumCompositing")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMaximumCompositing {

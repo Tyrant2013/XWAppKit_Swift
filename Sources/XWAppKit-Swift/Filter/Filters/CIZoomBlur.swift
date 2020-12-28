@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIZoomBlur: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIZoomBlur")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIZoomBlur {

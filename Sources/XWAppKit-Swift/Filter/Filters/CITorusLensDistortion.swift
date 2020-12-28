@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITorusLensDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITorusLensDistortion")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CITorusLensDistortion {

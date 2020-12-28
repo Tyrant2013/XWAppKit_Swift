@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorControls: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorControls")
     }
     public func inputSaturation(_ inputSaturation: Double) -> CIColorControls {

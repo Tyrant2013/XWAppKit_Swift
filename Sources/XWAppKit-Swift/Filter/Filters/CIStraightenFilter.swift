@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIStraightenFilter: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIStraightenFilter")
     }
     public func inputAngle(_ inputAngle: Double) -> CIStraightenFilter {

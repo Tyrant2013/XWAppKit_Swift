@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICode128BarcodeGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICode128BarcodeGenerator")
     }
     public func inputMessage(_ inputMessage: NSData?) -> CICode128BarcodeGenerator {

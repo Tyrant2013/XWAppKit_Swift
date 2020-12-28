@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISpotColor: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISpotColor")
     }
     public func inputCenterColor1(_ inputCenterColor1: CIColor?) -> CISpotColor {

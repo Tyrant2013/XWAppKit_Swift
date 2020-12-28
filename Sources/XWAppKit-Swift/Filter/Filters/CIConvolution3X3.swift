@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConvolution3X3: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConvolution3X3")
     }
     public func inputBias(_ inputBias: Double) -> CIConvolution3X3 {

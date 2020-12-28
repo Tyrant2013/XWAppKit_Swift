@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorPolynomial: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorPolynomial")
     }
     public func inputGreenCoefficients(_ inputGreenCoefficients: CIVector?) -> CIColorPolynomial {

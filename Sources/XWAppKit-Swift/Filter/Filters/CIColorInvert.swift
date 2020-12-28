@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorInvert: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorInvert")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorInvert {

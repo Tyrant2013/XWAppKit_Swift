@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDepthOfField: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDepthOfField")
     }
     public func inputPoint1(_ inputPoint1: CIVector?) -> CIDepthOfField {

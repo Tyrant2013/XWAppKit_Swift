@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGammaAdjust: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGammaAdjust")
     }
     public func inputPower(_ inputPower: Double) -> CIGammaAdjust {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDepthToDisparity: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDepthToDisparity")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIDepthToDisparity {

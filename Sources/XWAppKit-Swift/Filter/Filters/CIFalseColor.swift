@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIFalseColor: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIFalseColor")
     }
     public func inputColor1(_ inputColor1: CIColor?) -> CIFalseColor {

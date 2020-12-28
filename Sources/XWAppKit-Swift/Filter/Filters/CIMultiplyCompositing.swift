@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMultiplyCompositing: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMultiplyCompositing")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIMultiplyCompositing {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIRoundedRectangleGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIRoundedRectangleGenerator")
     }
     override public func inputColor(_ inputColor: CIColor?) -> CIRoundedRectangleGenerator {

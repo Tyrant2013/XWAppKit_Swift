@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAffineClamp: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAffineClamp")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIAffineClamp {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITwelvefoldReflectedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITwelvefoldReflectedTile")
     }
     public func inputAngle(_ inputAngle: Double) -> CITwelvefoldReflectedTile {

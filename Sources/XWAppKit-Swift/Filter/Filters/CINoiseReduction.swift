@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CINoiseReduction: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CINoiseReduction")
     }
     public func inputNoiseLevel(_ inputNoiseLevel: Double) -> CINoiseReduction {

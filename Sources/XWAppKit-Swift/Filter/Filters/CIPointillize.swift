@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPointillize: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPointillize")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIPointillize {

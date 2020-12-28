@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPageCurlWithShadowTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPageCurlWithShadowTransition")
     }
     public func inputRadius(_ inputRadius: Double) -> CIPageCurlWithShadowTransition {

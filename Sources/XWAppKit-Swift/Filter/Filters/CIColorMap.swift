@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorMap: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorMap")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorMap {

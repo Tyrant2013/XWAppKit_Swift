@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAdditionCompositing: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAdditionCompositing")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIAdditionCompositing {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILineOverlay: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILineOverlay")
     }
     public func inputNRNoiseLevel(_ inputNRNoiseLevel: Double) -> CILineOverlay {

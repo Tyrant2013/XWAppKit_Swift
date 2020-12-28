@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPageCurlTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPageCurlTransition")
     }
     public func inputExtent(_ inputExtent: CIVector?) -> CIPageCurlTransition {

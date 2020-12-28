@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConvolution7X7: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConvolution7X7")
     }
     public func inputWeights(_ inputWeights: CIVector?) -> CIConvolution7X7 {

@@ -3,7 +3,7 @@ import CoreImage
 import AVFoundation
 
 public class CICameraCalibrationLensCorrection: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICameraCalibrationLensCorrection")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CICameraCalibrationLensCorrection {

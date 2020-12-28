@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISepiaTone: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISepiaTone")
     }
     public func inputIntensity(_ inputIntensity: Double) -> CISepiaTone {

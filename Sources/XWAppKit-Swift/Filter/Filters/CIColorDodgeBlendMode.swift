@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorDodgeBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorDodgeBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorDodgeBlendMode {

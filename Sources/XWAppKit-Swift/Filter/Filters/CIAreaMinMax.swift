@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAreaMinMax: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAreaMinMax")
     }
     public func inputExtent(_ inputExtent: CIVector?) -> CIAreaMinMax {

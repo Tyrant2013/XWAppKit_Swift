@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGlassDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGlassDistortion")
     }
     public func inputScale(_ inputScale: Double) -> CIGlassDistortion {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMorphologyRectangleMaximum: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMorphologyRectangleMaximum")
     }
     public func inputHeight(_ inputHeight: Double) -> CIMorphologyRectangleMaximum {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIOpTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIOpTile")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIOpTile {

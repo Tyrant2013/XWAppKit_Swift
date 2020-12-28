@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorCurves: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorCurves")
     }
     public func inputColorSpace(_ inputColorSpace: NSObject?) -> CIColorCurves {

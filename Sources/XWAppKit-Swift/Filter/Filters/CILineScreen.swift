@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILineScreen: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILineScreen")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CILineScreen {

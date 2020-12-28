@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAztecCodeGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAztecCodeGenerator")
     }
     public func inputCorrectionLevel(_ inputCorrectionLevel: Double) -> CIAztecCodeGenerator {

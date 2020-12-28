@@ -3,7 +3,7 @@ import CoreImage
 import CoreML
 
 public class CICoreMLModelFilter: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICoreMLModelFilter")
     }
     public func inputSoftmaxNormalization(_ inputSoftmaxNormalization: Double) -> CICoreMLModelFilter {

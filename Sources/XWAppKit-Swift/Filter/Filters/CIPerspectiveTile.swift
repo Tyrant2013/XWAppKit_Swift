@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPerspectiveTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPerspectiveTile")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPerspectiveTile {

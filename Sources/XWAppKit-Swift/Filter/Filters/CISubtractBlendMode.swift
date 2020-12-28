@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISubtractBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISubtractBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISubtractBlendMode {

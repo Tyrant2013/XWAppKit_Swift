@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConstantColorGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConstantColorGenerator")
     }
     override public func inputColor(_ inputColor: CIColor?) -> CIConstantColorGenerator {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIParallelogramTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIParallelogramTile")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIParallelogramTile {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICircularScreen: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICircularScreen")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CICircularScreen {

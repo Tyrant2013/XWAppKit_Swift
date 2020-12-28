@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHueAdjust: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHueAdjust")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIHueAdjust {

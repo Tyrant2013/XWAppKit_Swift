@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPerspectiveCorrection: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPerspectiveCorrection")
     }
     public func inputTopLeft(_ inputTopLeft: CIVector?) -> CIPerspectiveCorrection {

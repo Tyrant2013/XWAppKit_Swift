@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBumpDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBumpDistortion")
     }
     public func inputScale(_ inputScale: Double) -> CIBumpDistortion {

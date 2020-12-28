@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDocumentEnhancer: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDocumentEnhancer")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIDocumentEnhancer {

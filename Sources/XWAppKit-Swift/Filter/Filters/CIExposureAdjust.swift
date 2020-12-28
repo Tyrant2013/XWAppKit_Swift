@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIExposureAdjust: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIExposureAdjust")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIExposureAdjust {

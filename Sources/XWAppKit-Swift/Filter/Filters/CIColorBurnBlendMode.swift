@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorBurnBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorBurnBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorBurnBlendMode {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAreaHistogram: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAreaHistogram")
     }
     public func inputScale(_ inputScale: Double) -> CIAreaHistogram {

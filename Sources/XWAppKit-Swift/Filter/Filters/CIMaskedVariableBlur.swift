@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMaskedVariableBlur: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMaskedVariableBlur")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMaskedVariableBlur {

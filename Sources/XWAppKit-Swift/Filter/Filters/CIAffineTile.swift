@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAffineTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAffineTile")
     }
     public func inputTransform(_ inputTransform: NSValue?) -> CIAffineTile {

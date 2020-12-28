@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIVignette: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIVignette")
     }
     public func inputIntensity(_ inputIntensity: Double) -> CIVignette {

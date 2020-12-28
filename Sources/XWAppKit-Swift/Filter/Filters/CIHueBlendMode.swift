@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHueBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHueBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIHueBlendMode {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIQRCodeGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIQRCodeGenerator")
     }
     public func inputMessage(_ inputMessage: NSData?) -> CIQRCodeGenerator {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorClamp: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorClamp")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorClamp {

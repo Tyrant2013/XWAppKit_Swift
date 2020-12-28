@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHoleDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHoleDistortion")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIHoleDistortion {

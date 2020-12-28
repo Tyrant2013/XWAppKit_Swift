@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGaussianGradient: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGaussianGradient")
     }
     public func inputRadius(_ inputRadius: Double) -> CIGaussianGradient {

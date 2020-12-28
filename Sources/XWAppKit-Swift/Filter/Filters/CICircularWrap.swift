@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICircularWrap: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICircularWrap")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CICircularWrap {

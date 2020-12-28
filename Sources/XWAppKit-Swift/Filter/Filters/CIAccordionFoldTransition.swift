@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAccordionFoldTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAccordionFoldTransition")
     }
     public func inputTargetImage(_ inputTargetImage: CIImage?) -> CIAccordionFoldTransition {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBokehBlur: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBokehBlur")
     }
     public func inputRingAmount(_ inputRingAmount: Double) -> CIBokehBlur {

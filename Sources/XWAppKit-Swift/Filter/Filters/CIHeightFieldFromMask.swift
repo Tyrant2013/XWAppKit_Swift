@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHeightFieldFromMask: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHeightFieldFromMask")
     }
     public func inputRadius(_ inputRadius: Double) -> CIHeightFieldFromMask {

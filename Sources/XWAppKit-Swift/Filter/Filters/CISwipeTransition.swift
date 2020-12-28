@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISwipeTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISwipeTransition")
     }
     public func inputTargetImage(_ inputTargetImage: CIImage?) -> CISwipeTransition {

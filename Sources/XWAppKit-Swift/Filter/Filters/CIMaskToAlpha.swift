@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMaskToAlpha: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMaskToAlpha")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMaskToAlpha {

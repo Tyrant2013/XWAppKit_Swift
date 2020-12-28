@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHighlightShadowAdjust: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHighlightShadowAdjust")
     }
     public func inputHighlightAmount(_ inputHighlightAmount: Double) -> CIHighlightShadowAdjust {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILinearToSRGBToneCurve: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILinearToSRGBToneCurve")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CILinearToSRGBToneCurve {

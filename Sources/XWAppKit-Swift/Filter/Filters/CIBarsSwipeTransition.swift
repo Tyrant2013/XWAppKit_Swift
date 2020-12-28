@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBarsSwipeTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBarsSwipeTransition")
     }
     public func inputBarOffset(_ inputBarOffset: Double) -> CIBarsSwipeTransition {

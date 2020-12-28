@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDotScreen: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDotScreen")
     }
     public func inputWidth(_ inputWidth: Double) -> CIDotScreen {

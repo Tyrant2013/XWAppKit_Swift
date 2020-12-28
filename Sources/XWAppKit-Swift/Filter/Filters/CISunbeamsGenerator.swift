@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISunbeamsGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISunbeamsGenerator")
     }
     public func inputSunRadius(_ inputSunRadius: Double) -> CISunbeamsGenerator {

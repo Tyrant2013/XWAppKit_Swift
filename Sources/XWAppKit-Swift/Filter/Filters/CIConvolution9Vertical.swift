@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConvolution9Vertical: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConvolution9Vertical")
     }
     public func inputWeights(_ inputWeights: CIVector?) -> CIConvolution9Vertical {

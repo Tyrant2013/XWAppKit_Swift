@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIEdgePreserveUpsampleFilter: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIEdgePreserveUpsampleFilter")
     }
     public func inputSpatialSigma(_ inputSpatialSigma: Double) -> CIEdgePreserveUpsampleFilter {

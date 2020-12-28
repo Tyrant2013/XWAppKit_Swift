@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICheckerboardGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICheckerboardGenerator")
     }
     public func inputSharpness(_ inputSharpness: Double) -> CICheckerboardGenerator {

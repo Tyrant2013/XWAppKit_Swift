@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITemperatureAndTint: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITemperatureAndTint")
     }
     public func inputTargetNeutral(_ inputTargetNeutral: CIVector?) -> CITemperatureAndTint {

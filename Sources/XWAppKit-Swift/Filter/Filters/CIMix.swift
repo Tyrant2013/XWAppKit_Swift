@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMix: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMix")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIMix {

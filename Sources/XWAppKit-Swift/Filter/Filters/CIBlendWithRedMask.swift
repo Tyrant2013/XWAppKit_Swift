@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBlendWithRedMask: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBlendWithRedMask")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIBlendWithRedMask {

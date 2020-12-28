@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CINinePartTiled: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CINinePartTiled")
     }
     public func inputBreakpoint0(_ inputBreakpoint0: CIVector?) -> CINinePartTiled {

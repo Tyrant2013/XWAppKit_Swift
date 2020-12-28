@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGuidedFilter: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGuidedFilter")
     }
     public func inputRadius(_ inputRadius: Double) -> CIGuidedFilter {

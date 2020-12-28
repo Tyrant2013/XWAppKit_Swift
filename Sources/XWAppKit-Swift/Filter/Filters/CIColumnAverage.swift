@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColumnAverage: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColumnAverage")
     }
     public func inputExtent(_ inputExtent: CIVector?) -> CIColumnAverage {

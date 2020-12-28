@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIEightfoldReflectedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIEightfoldReflectedTile")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIEightfoldReflectedTile {

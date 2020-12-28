@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITriangleKaleidoscope: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITriangleKaleidoscope")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CITriangleKaleidoscope {

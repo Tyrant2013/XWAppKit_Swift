@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDither: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDither")
     }
     public func inputIntensity(_ inputIntensity: Double) -> CIDither {

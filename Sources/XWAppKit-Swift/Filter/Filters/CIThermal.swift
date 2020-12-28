@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIThermal: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIThermal")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIThermal {

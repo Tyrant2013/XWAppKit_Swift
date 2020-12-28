@@ -29,6 +29,9 @@ class ViewController: UIViewController {
             ("Color Picker", "XWAKColorPickerViewController"),
             ]
         ),
+        ("Filters",[
+            ("Filters", "XWAKFiltersViewController"),
+        ]),
         ("ViewController", [
             ("LoginViewController", "XWAKLoginViewController")
             ]

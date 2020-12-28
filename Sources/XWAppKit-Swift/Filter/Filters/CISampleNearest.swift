@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISampleNearest: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISampleNearest")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISampleNearest {

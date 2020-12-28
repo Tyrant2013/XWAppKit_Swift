@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorMonochrome: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorMonochrome")
     }
     override public func inputColor(_ inputColor: CIColor?) -> CIColorMonochrome {

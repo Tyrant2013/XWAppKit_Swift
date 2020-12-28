@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISpotLight: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISpotLight")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISpotLight {

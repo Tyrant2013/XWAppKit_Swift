@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDisplacementDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDisplacementDistortion")
     }
     public func inputDisplacementImage(_ inputDisplacementImage: CIImage?) -> CIDisplacementDistortion {

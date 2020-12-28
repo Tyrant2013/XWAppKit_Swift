@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDissolveTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDissolveTransition")
     }
     public func inputTime(_ inputTime: Double) -> CIDissolveTransition {

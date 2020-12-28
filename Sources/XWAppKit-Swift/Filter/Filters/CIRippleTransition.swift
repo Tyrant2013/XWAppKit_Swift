@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIRippleTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIRippleTransition")
     }
     public func inputWidth(_ inputWidth: Double) -> CIRippleTransition {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHueSaturationValueGradient: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHueSaturationValueGradient")
     }
     public func inputColorSpace(_ inputColorSpace: NSObject?) -> CIHueSaturationValueGradient {

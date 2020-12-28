@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIBicubicScaleTransform: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBicubicScaleTransform")
     }
     public func inputC(_ inputC: Double) -> CIBicubicScaleTransform {

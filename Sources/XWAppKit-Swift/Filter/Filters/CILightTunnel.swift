@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILightTunnel: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILightTunnel")
     }
     public func inputRotation(_ inputRotation: Double) -> CILightTunnel {

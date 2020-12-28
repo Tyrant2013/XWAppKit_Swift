@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMinimumComponent: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMinimumComponent")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMinimumComponent {

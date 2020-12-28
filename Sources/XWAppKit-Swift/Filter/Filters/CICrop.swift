@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICrop: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICrop")
     }
     public func inputRectangle(_ inputRectangle: CIVector?) -> CICrop {

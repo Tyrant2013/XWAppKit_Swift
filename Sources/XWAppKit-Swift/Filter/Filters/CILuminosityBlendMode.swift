@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILuminosityBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILuminosityBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CILuminosityBlendMode {

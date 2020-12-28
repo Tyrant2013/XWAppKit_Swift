@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorMatrix: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorMatrix")
     }
     public func inputRVector(_ inputRVector: CIVector?) -> CIColorMatrix {

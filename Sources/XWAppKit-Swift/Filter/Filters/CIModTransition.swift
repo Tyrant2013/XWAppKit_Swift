@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIModTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIModTransition")
     }
     public func inputTargetImage(_ inputTargetImage: CIImage?) -> CIModTransition {

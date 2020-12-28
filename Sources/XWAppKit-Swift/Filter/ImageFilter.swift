@@ -9,8 +9,15 @@ import Foundation
 import CoreImage
 import UIKit
 
+public enum XWAKFilter: String, CaseIterable {
+    case AccordionFoldTransition = "CIAccordionFoldTransition"
+}
+
 // https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW29
 public class ImageFilter {
+    public var localizedName: String {
+        return CIFilter.localizedName(forFilterName: filter.name) ?? filter.name
+    }
     internal var filter: CIFilter
     public var outputImage: CIImage? {
         get {
@@ -20,6 +27,10 @@ public class ImageFilter {
     
     init(name: String) {
         filter = CIFilter(name: name)!
+    }
+    
+    init(name: XWAKFilter) {
+        filter = CIFilter(name: name.rawValue)!
     }
     
     public func inputImage(_ inputImage: CIImage?) -> ImageFilter {
@@ -33,7 +44,7 @@ public class ImageFilter {
 
 // Usage:
     
-extension UIImage {
+public extension UIImage {
     func applyingFilter(_ filter: ImageFilter) -> UIImage {
         let ciImage = self.ciImage != nil ? self.ciImage : CIImage(image: self)
         if let filteredImage = filter.inputImage(ciImage).outputImage {

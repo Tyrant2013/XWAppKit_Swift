@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIKeystoneCorrectionVertical: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIKeystoneCorrectionVertical")
     }
     public func inputBottomRight(_ inputBottomRight: CIVector?) -> CIKeystoneCorrectionVertical {

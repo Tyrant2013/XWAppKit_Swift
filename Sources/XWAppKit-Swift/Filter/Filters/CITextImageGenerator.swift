@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CITextImageGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CITextImageGenerator")
     }
     public func inputFontName(_ inputFontName: NSString?) -> CITextImageGenerator {

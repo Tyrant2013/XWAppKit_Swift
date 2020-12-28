@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPixellate: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPixellate")
     }
     public func inputScale(_ inputScale: Double) -> CIPixellate {

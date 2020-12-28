@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPalettize: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPalettize")
     }
     public func inputPerceptual(_ inputPerceptual: Double) -> CIPalettize {

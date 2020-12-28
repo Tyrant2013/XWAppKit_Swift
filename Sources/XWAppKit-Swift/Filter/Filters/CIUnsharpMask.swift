@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIUnsharpMask: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIUnsharpMask")
     }
     public func inputIntensity(_ inputIntensity: Double) -> CIUnsharpMask {

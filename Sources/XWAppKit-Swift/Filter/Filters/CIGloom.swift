@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGloom: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGloom")
     }
     public func inputIntensity(_ inputIntensity: Double) -> CIGloom {

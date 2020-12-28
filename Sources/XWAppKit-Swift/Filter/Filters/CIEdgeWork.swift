@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIEdgeWork: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIEdgeWork")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIEdgeWork {

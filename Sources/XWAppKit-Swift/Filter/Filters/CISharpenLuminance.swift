@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISharpenLuminance: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISharpenLuminance")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CISharpenLuminance {

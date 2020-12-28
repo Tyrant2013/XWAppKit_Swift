@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPhotoEffectTonal: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPhotoEffectTonal")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPhotoEffectTonal {

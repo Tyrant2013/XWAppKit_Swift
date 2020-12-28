@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMorphologyMaximum: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMorphologyMaximum")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIMorphologyMaximum {

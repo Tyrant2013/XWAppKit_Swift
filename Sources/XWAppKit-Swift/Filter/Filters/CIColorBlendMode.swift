@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorBlendMode")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CIColorBlendMode {

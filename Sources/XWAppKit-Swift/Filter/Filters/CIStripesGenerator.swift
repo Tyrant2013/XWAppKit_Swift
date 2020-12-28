@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIStripesGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIStripesGenerator")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIStripesGenerator {

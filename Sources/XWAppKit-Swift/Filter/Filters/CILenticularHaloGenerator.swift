@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILenticularHaloGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILenticularHaloGenerator")
     }
     public func inputStriationContrast(_ inputStriationContrast: Double) -> CILenticularHaloGenerator {

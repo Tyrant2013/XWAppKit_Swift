@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorCubesMixedWithMask: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorCubesMixedWithMask")
     }
     public func inputCube0Data(_ inputCube0Data: NSData?) -> CIColorCubesMixedWithMask {

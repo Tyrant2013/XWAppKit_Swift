@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIVignetteEffect: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIVignetteEffect")
     }
     public func inputRadius(_ inputRadius: Double) -> CIVignetteEffect {

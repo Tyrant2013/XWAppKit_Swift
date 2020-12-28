@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIRadialGradient: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIRadialGradient")
     }
     public func inputRadius0(_ inputRadius0: Double) -> CIRadialGradient {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPinchDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPinchDistortion")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPinchDistortion {

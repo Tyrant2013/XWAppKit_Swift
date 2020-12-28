@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorCubeWithColorSpace: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorCubeWithColorSpace")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIColorCubeWithColorSpace {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICrystallize: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICrystallize")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CICrystallize {

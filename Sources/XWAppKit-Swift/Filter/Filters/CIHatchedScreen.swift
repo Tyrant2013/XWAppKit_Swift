@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHatchedScreen: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHatchedScreen")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIHatchedScreen {

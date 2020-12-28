@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAreaAverage: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAreaAverage")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIAreaAverage {

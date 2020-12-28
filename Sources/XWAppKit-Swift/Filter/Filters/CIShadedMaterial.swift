@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIShadedMaterial: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIShadedMaterial")
     }
     public func inputScale(_ inputScale: Double) -> CIShadedMaterial {

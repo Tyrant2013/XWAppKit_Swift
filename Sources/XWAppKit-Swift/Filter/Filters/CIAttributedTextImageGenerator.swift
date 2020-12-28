@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAttributedTextImageGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAttributedTextImageGenerator")
     }
     public func inputText(_ inputText: NSAttributedString?) -> CIAttributedTextImageGenerator {

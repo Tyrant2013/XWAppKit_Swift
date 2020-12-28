@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMorphologyRectangleMinimum: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMorphologyRectangleMinimum")
     }
     public func inputWidth(_ inputWidth: Double) -> CIMorphologyRectangleMinimum {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPerspectiveRotate: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPerspectiveRotate")
     }
     public func inputPitch(_ inputPitch: Double) -> CIPerspectiveRotate {

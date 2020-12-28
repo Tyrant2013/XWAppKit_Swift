@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIAreaMinMaxRed: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIAreaMinMaxRed")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIAreaMinMaxRed {

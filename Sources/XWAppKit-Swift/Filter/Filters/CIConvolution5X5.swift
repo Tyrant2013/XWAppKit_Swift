@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConvolution5X5: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConvolution5X5")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIConvolution5X5 {

@@ -3,7 +3,7 @@ import CoreImage
 import AVFoundation
 
 public class CIDepthBlurEffect: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDepthBlurEffect")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIDepthBlurEffect {

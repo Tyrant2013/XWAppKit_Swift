@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CINinePartStretched: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CINinePartStretched")
     }
     public func inputBreakpoint1(_ inputBreakpoint1: CIVector?) -> CINinePartStretched {

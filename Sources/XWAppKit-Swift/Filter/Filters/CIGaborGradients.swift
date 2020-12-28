@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGaborGradients: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGaborGradients")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIGaborGradients {

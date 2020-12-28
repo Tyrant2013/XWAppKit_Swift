@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIKMeans: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIKMeans")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIKMeans {

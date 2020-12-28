@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorPosterize: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorPosterize")
     }
     public func inputLevels(_ inputLevels: Double) -> CIColorPosterize {

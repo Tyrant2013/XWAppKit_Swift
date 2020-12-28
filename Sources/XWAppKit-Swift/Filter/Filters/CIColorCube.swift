@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIColorCube: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIColorCube")
     }
     public func inputCubeData(_ inputCubeData: NSData?) -> CIColorCube {

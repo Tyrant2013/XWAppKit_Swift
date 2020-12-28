@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIRandomGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIRandomGenerator")
     }
 }

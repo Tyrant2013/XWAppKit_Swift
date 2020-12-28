@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILanczosScaleTransform: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILanczosScaleTransform")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CILanczosScaleTransform {

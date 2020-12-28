@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPhotoEffectFade: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPhotoEffectFade")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPhotoEffectFade {

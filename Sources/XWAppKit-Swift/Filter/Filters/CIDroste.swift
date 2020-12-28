@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDroste: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDroste")
     }
     public func inputPeriodicity(_ inputPeriodicity: Double) -> CIDroste {

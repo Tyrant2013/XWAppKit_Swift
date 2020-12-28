@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CICircleSplashDistortion: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CICircleSplashDistortion")
     }
     public func inputRadius(_ inputRadius: Double) -> CICircleSplashDistortion {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIStarShineGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIStarShineGenerator")
     }
     public func inputCrossScale(_ inputCrossScale: Double) -> CIStarShineGenerator {

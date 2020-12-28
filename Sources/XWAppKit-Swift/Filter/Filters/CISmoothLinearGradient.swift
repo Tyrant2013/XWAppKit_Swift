@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISmoothLinearGradient: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISmoothLinearGradient")
     }
     public func inputColor1(_ inputColor1: CIColor?) -> CISmoothLinearGradient {

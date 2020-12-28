@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISixfoldRotatedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISixfoldRotatedTile")
     }
     public func inputAngle(_ inputAngle: Double) -> CISixfoldRotatedTile {

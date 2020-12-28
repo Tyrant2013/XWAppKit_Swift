@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPDF417BarcodeGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPDF417BarcodeGenerator")
     }
     public func inputDataColumns(_ inputDataColumns: Double) -> CIPDF417BarcodeGenerator {

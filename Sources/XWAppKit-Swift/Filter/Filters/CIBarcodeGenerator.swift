@@ -3,7 +3,7 @@ import CoreImage
 
 @available(iOS 11.0, *)
 public class CIBarcodeGenerator: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIBarcodeGenerator")
     }
     public func inputBarcodeDescriptor(_ inputBarcodeDescriptor: CIBarcodeDescriptor?) -> CIBarcodeGenerator {

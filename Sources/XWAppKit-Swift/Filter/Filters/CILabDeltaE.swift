@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILabDeltaE: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILabDeltaE")
     }
     public func inputImage2(_ inputImage2: CIImage?) -> CILabDeltaE {

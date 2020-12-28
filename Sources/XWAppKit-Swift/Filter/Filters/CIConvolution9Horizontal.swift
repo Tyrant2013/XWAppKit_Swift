@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIConvolution9Horizontal: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIConvolution9Horizontal")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIConvolution9Horizontal {

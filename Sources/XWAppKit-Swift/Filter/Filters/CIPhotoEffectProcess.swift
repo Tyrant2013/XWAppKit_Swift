@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPhotoEffectProcess: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPhotoEffectProcess")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPhotoEffectProcess {

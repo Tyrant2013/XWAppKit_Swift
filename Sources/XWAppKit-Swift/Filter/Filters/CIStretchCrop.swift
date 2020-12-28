@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIStretchCrop: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIStretchCrop")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIStretchCrop {

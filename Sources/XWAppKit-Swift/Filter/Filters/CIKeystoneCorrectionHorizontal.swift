@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIKeystoneCorrectionHorizontal: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIKeystoneCorrectionHorizontal")
     }
     public func inputFocalLength(_ inputFocalLength: Double) -> CIKeystoneCorrectionHorizontal {

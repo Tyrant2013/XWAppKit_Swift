@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGlideReflectedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGlideReflectedTile")
     }
     public func inputWidth(_ inputWidth: Double) -> CIGlideReflectedTile {

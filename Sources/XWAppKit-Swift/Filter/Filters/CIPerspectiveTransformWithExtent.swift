@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIPerspectiveTransformWithExtent: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIPerspectiveTransformWithExtent")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIPerspectiveTransformWithExtent {

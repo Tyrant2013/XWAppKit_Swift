@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CISixfoldReflectedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CISixfoldReflectedTile")
     }
     public func inputWidth(_ inputWidth: Double) -> CISixfoldReflectedTile {

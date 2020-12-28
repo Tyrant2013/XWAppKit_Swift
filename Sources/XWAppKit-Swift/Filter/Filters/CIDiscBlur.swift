@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDiscBlur: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDiscBlur")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIDiscBlur {

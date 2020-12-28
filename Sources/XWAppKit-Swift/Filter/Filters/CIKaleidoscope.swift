@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIKaleidoscope: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIKaleidoscope")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIKaleidoscope {

@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIHexagonalPixellate: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIHexagonalPixellate")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIHexagonalPixellate {

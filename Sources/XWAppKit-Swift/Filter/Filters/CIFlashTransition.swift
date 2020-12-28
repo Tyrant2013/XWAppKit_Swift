@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIFlashTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIFlashTransition")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIFlashTransition {

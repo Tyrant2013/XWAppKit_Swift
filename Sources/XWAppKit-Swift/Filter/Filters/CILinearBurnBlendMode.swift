@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CILinearBurnBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CILinearBurnBlendMode")
     }
     public func inputBackgroundImage(_ inputBackgroundImage: CIImage?) -> CILinearBurnBlendMode {

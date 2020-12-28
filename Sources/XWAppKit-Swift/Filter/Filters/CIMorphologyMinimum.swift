@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIMorphologyMinimum: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIMorphologyMinimum")
     }
     public func inputRadius(_ inputRadius: Double) -> CIMorphologyMinimum {

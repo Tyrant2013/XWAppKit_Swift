@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIFourfoldTranslatedTile: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIFourfoldTranslatedTile")
     }
     public func inputCenter(_ inputCenter: CIVector?) -> CIFourfoldTranslatedTile {

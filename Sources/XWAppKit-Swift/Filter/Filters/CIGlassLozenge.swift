@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGlassLozenge: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGlassLozenge")
     }
     public func inputPoint1(_ inputPoint1: CIVector?) -> CIGlassLozenge {

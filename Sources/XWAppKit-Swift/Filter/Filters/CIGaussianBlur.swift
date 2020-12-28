@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIGaussianBlur: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIGaussianBlur")
     }
     public func inputRadius(_ inputRadius: Double) -> CIGaussianBlur {

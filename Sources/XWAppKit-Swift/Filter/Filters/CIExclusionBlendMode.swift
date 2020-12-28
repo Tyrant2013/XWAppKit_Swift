@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIExclusionBlendMode: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIExclusionBlendMode")
     }
     override public func inputImage(_ inputImage: CIImage?) -> CIExclusionBlendMode {

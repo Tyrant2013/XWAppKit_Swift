@@ -2,7 +2,7 @@ import Foundation
 import CoreImage
 
 public class CIDisintegrateWithMaskTransition: ImageFilter {
-    init() {
+    public init() {
         super.init(name: "CIDisintegrateWithMaskTransition")
     }
     public func inputMaskImage(_ inputMaskImage: CIImage?) -> CIDisintegrateWithMaskTransition {
