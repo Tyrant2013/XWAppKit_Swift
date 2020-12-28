@@ -28,6 +28,10 @@ class XWAKFiltersViewController: UIViewController {
         var datas = [(String, ImageFilter)]()
         let accordionFoldTransition = CIAccordionFoldTransition()
         datas.append((accordionFoldTransition.localizedName, accordionFoldTransition))
+        
+        let boxBlur = CIBoxBlur()
+        boxBlur.inputRadius(10)
+        datas.append((boxBlur.localizedName, boxBlur))
         return datas
     }()
     override func viewDidLoad() {
