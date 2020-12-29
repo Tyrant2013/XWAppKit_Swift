@@ -77,6 +77,6 @@ class XWAKPhoto {
     
     public var count: Int { return items.count }
     public var selectedItems: [UIImage] {
-        return items.map { $0.thumbImage! }
+        return items.map { $0.originImage! }
     }
 }

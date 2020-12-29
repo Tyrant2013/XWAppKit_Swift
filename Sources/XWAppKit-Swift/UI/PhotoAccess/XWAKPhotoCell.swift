@@ -132,6 +132,18 @@ class XWAKPhotoCell: UICollectionViewCell {
     
     @objc
     func numberTap(_ sender: UITapGestureRecognizer) {
+        guard let asset = item else {
+            return
+        }
+        if asset.originImage == nil {
+            XWAKHud.show()
+            _ = XWAKPhotoKit.shared.loadOriginImage(from: asset.asset, requestID: 0) { (progress) in
+                
+            } handler: { (image, isDegraded, error) in
+                asset.originImage = image
+                XWAKHud.dismiss()
+            }
+        }
         if item?.isSelected ?? false {
             if let text = numLabel.text, let num = Int(text) {
                 XWAKPhoto.shared.remove(item!, index: num)
