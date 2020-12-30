@@ -18,6 +18,7 @@ class XWAKHSBView: UIControl {
             wheelView.hue = newValue.hue
             wheelView.saturation = newValue.saturation
             wheelView.brightness = newValue.brightness
+            brightnessView.value = Int(newValue.brightness * CGFloat(brightnessView.max))
         }
     }
 
