@@ -23,6 +23,8 @@
 		AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3912212535556B00A87A14 /* UIImageViewExtension.swift */; };
 		AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39122E2535584F00A87A14 /* CGSizeExtension.swift */; };
 		AE3B59912558DC5C0060E2F0 /* XWAKImageMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B59902558DC5C0060E2F0 /* XWAKImageMetaData.swift */; };
+		AE4976CA259D775B00E08C16 /* XWAKPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4976C9259D775B00E08C16 /* XWAKPopupView.swift */; };
+		AE4976CE259D777100E08C16 /* XWAKPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4976CD259D777100E08C16 /* XWAKPopupViewController.swift */; };
 		AE4A4E5B25515A7500560A56 /* XWAKImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E5A25515A7500560A56 /* XWAKImageCropView.swift */; };
 		AE4A4E6025515AB300560A56 /* XWAKImageCropBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */; };
 		AE4A4E6625515B0D00560A56 /* XWAKFrameBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */; };
@@ -387,6 +389,8 @@
 		AE3912212535556B00A87A14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		AE39122E2535584F00A87A14 /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		AE3B59902558DC5C0060E2F0 /* XWAKImageMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageMetaData.swift; sourceTree = "<group>"; };
+		AE4976C9259D775B00E08C16 /* XWAKPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPopupView.swift; sourceTree = "<group>"; };
+		AE4976CD259D777100E08C16 /* XWAKPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPopupViewController.swift; sourceTree = "<group>"; };
 		AE4A4E5A25515A7500560A56 /* XWAKImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageCropView.swift; sourceTree = "<group>"; };
 		AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageCropBorder.swift; sourceTree = "<group>"; };
 		AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKFrameBorderView.swift; sourceTree = "<group>"; };
@@ -892,6 +896,7 @@
 				AE10F2622514A027000131BE /* XWAKLabel.swift */,
 				AEF14D58251DC7AE0022AB88 /* XWAKImageClipedView.swift */,
 				AEB42976253152FC003FDB13 /* XWAKSquareGridView.swift */,
+				AE4976C9259D775B00E08C16 /* XWAKPopupView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				AE25D8F0255B8BC600E8767E /* XWAKPhotoAssetViewController.swift */,
 				AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */,
 				AE5B510E258306D300924F8D /* XWAKColorPickerViewController.swift */,
+				AE4976CD259D777100E08C16 /* XWAKPopupViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1602,6 +1608,7 @@
 				AEFB202E2599C00A001DE05C /* CIDotScreen.swift in Sources */,
 				AE4A4E6025515AB300560A56 /* XWAKImageCropBorder.swift in Sources */,
 				AEFB20202599C00A001DE05C /* CIConvolution7X7.swift in Sources */,
+				AE4976CA259D775B00E08C16 /* XWAKPopupView.swift in Sources */,
 				AEF14D49251D8A240022AB88 /* XWAKDecelerationTimingParameters.swift in Sources */,
 				AEFB1FED2599C009001DE05C /* CILuminosityBlendMode.swift in Sources */,
 				AEFB1FC82599C009001DE05C /* CISepiaTone.swift in Sources */,
@@ -1874,6 +1881,7 @@
 				AEFB20682599C846001DE05C /* XWAKFiltersViewController.swift in Sources */,
 				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
 				AE5B510F258306D300924F8D /* XWAKColorPickerViewController.swift in Sources */,
+				AE4976CE259D777100E08C16 /* XWAKPopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

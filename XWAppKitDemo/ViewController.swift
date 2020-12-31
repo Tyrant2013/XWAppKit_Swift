@@ -27,6 +27,7 @@ class ViewController: UIViewController {
             ("Photo Asset", "XWAKPhotoAssetViewController"),
             ("Progress", "XWAKProgressViewController"),
             ("Color Picker", "XWAKColorPickerViewController"),
+            ("Popup View", "XWAKPopupViewController"),
             ]
         ),
         ("Filters",[
