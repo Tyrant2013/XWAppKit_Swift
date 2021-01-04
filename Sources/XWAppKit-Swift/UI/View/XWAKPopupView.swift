@@ -24,7 +24,7 @@ public class XWAKPopupView: UIView {
     
     private lazy var borderLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        self.layer.addSublayer(layer)
+        self.layer.insertSublayer(layer, at: 0)
         return layer
     }()
     
