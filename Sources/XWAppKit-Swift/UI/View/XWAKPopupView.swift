@@ -12,6 +12,7 @@ public class XWAKPopupView: UIView {
     public var radius: CGFloat = 10
     public var triangleTopPoint: CGPoint = .init(x: 50, y: 0)
     public var triangleHeight: CGFloat = 14
+    public var fillColor: UIColor = UIColor.xwak_color(with: 0xF5F5F5, alpha: 0.9)
     /*                ___
             /\
            /  \       triangleHeight
@@ -44,20 +45,20 @@ public class XWAKPopupView: UIView {
 //        path.addLine(to: .init(x: triangleTopPoint.x + triangeWidth / 2, y: triangleHeight))
         
         var bp1 = triangleTopPoint.x - triangeWidth / 2
-        var cp1 = bp1 + bp1 * 0.1
+        var cp1 = bp1 + 5 // bp1 * 0.1
         var bp2 = triangleTopPoint.x
-        var cp2 = bp2 - bp2 * 0.1
+        var cp2 = bp2 - 5 //bp2 * 0.1
         path.addCurve(to: triangleTopPoint,
                       controlPoint1: .init(x: cp1, y: triangleHeight),
                       controlPoint2: .init(x: cp2, y: 0))
         
         bp1 = triangleTopPoint.x
-        cp1 = bp1 + bp1 * 0.1
+        cp1 = bp1 + 5 //bp1 * 0.1
         bp2 = triangleTopPoint.x + triangeWidth / 2
-        cp2 = bp2 - bp2 * 0.0
+        cp2 = bp2 - 5 //bp2 * 0.0
         path.addCurve(to: .init(x: triangleTopPoint.x + triangeWidth / 2, y: triangleHeight),
                       controlPoint1: .init(x: cp1, y: 0),
-                      controlPoint2: .init(x: cp2 - 5, y: triangleHeight - 5))
+                      controlPoint2: .init(x: cp2, y: triangleHeight))
         
         path.addLine(to: .init(x: bounds.width - radius, y: triangleHeight))
         // 右上角
@@ -83,7 +84,7 @@ public class XWAKPopupView: UIView {
         path.addLine(to: .init(x: 0, y: radius + triangleHeight))
         
         borderLayer.path = path.cgPath
-        borderLayer.fillColor = UIColor.xwak_color(with: 0xF5F5F5, alpha: 0.9).cgColor
+        borderLayer.fillColor = fillColor.cgColor
     }
 
 }

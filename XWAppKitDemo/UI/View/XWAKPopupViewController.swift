@@ -19,8 +19,10 @@ class XWAKPopupViewController: UIViewController {
         let vv = XWAKPopupView()
         vv.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(vv)
-        vv.xwak.center(equalTo: view.safeAreaLayoutGuide.xwak)
-            .size((300, 350))
+        vv.triangleTopPoint = .init(x: 340, y: 0)
+        vv.fillColor = .red
+        vv.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.left, .right, .bottom])
+            .height(400)
     }
     
 
