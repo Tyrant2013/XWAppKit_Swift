@@ -179,36 +179,36 @@ class XWAKColorWheelView: UIControl {
     }
     
     private func HSBToRGB(hsb: HSB) -> RGB {
-        let color = UIColor(hue: hsb.hue, saturation: hsb.saturation, brightness: hsb.brightness, alpha: hsb.alpha)
-        var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return RGB(red: min(red, 1.0), green: min(green, 1.0), blue: min(blue, 1.0), alpha: min(alpha, 1.0))
+//        let color = UIColor(hue: hsb.hue, saturation: hsb.saturation, brightness: hsb.brightness, alpha: hsb.alpha)
+//        var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+//        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+//        return RGB(red: min(red, 1.0), green: min(green, 1.0), blue: min(blue, 1.0), alpha: min(alpha, 1.0))
         
-//        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
-//
-//        let i: Int = Int(hsb.hue * 6)
-//        let f = hsb.hue * 6 - CGFloat(i)
-//        let p = hsb.brightness * (1 - hsb.saturation)
-//        let q = hsb.brightness * (1 - f * hsb.saturation)
-//        let t = hsb.brightness * (1 - (1 - f) * hsb.saturation)
-//
-//        switch i % 6 {
-//        case 0:
-//            (r, g, b) = (hsb.brightness, t, p)
-//        case 1:
-//            (r, g, b) = (q, hsb.brightness, p)
-//        case 2:
-//            (r, g, b) = (p, hsb.brightness, t)
-//        case 3:
-//            (r, g, b) = (p, q, hsb.brightness)
-//        case 4:
-//            (r, g, b) = (t, p, hsb.brightness)
-//        case 5:
-//            (r, g, b) = (hsb.brightness, p, q)
-//        default:
-//            break
-//        }
-//        return RGB(red: r, green: g, blue: b, alpha: alpha)
+        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
+
+        let i: Int = Int(hsb.hue * 6)
+        let f = hsb.hue * 6 - CGFloat(i)
+        let p = hsb.brightness * (1 - hsb.saturation)
+        let q = hsb.brightness * (1 - f * hsb.saturation)
+        let t = hsb.brightness * (1 - (1 - f) * hsb.saturation)
+
+        switch i % 6 {
+        case 0:
+            (r, g, b) = (hsb.brightness, t, p)
+        case 1:
+            (r, g, b) = (q, hsb.brightness, p)
+        case 2:
+            (r, g, b) = (p, hsb.brightness, t)
+        case 3:
+            (r, g, b) = (p, q, hsb.brightness)
+        case 4:
+            (r, g, b) = (t, p, hsb.brightness)
+        case 5:
+            (r, g, b) = (hsb.brightness, p, q)
+        default:
+            break
+        }
+        return RGB(red: r, green: g, blue: b, alpha: alpha)
     }
 
     private func colorWheelValue(with position: CGPoint, hue: inout CGFloat, saturation: inout CGFloat) {

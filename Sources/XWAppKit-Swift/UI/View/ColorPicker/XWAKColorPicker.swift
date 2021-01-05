@@ -48,6 +48,14 @@ public class XWAKColorPicker: UIView {
             return rgbView.value
         }
     }
+    public var hexRGBValue: String {
+        set {
+            rgbView.hexValue = newValue
+        }
+        get {
+            return rgbView.hexValue
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,8 +97,6 @@ public class XWAKColorPicker: UIView {
             rgbView.transform = CGAffineTransform(translationX: self.rgbView.bounds.width, y: 0)
             let val = hsbView.value
             let color = UIColor(hue: val.hue, saturation: val.saturation, brightness: val.brightness, alpha: 1.0)
-//            var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-//            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
             let (red, green, blue, alpha) = color.rgbValue()
             print("HSB2RGB => red: \(red), green: \(green), blue: \(blue), alpha: \(alpha)")
             rgbView.value = (red, green, blue, alpha)
@@ -104,11 +110,8 @@ public class XWAKColorPicker: UIView {
         case 1:
             hsbView.isHidden = false
             hsbView.transform = CGAffineTransform(translationX: -hsbView.bounds.width, y: 0)
-            let val = rgbView.value
-            let color = UIColor(displayP3Red: val.red, green: val.green, blue: val.blue, alpha: val.alpha)
-//            var (hue, saturation, brightness, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-//            color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-            let (hue, saturation, brightness, alpha) = color.hsbValue()
+            let (hue, saturation, brightness) = RGBToHSB(hex: rgbView.hexValue)
+            let alpha: CGFloat = 1.0
             print("RGB2HSB => hue: \(hue), saturation: \(saturation), brightness: \(brightness), alpha: \(alpha)")
             hsbView.value = (hue, saturation, brightness, alpha)
             UIView.animate(withDuration: 0.25) {
@@ -133,5 +136,31 @@ public class XWAKColorPicker: UIView {
     private func rgbValueChange(_ sender: XWAKRGBView) {
         let val = sender.value
         self.pickerDelegate?.colorPicker(self, didSelectedColor: val.red, green: val.green, blue: val.blue, alpha: val.alpha)
+    }
+    
+    private func RGBToHSB(hex: String) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
+        let val = hex.hexToValue()
+        let r = val.red
+        let g = val.green
+        let b = val.blue
+        let maxValue = max(max(r, g), b)
+        let minValue = min(min(r, g), b)
+        
+        let br = maxValue / 255.0
+        let s = maxValue == 0 ? 0 : (maxValue - minValue) / maxValue
+        var h: CGFloat = 0
+        if maxValue == r && g >= b {
+            h = (g - b) * 60 / (maxValue - minValue)
+        }
+        else if maxValue == r && g < b {
+            h = (g - b) * 60 / (maxValue - minValue) + 360
+        }
+        else if maxValue == g {
+            h = (b - r) * 60 / (maxValue - minValue) + 120
+        }
+        else if maxValue == b {
+            h = (r - g) * 60 / (maxValue - minValue) + 240
+        }
+        return (h / 360.0, s, br)
     }
 }

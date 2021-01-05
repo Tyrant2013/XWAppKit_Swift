@@ -51,6 +51,7 @@ class XWAKRGBView: UIControl {
         view.layer.borderColor = UIColor.xwak_color(with: "0xAAB0AF").cgColor
         view.layer.cornerRadius = 5
         view.textAlignment = .left
+        view.font = .systemFont(ofSize: 14)
         return view
     }()
     public var value: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
@@ -69,6 +70,23 @@ class XWAKRGBView: UIControl {
             greenComponent.value = green
             blueComponent.value = blue
             hex.text = String(format: "%02X%02X%02X", red, green, blue)
+        }
+    }
+    
+    public var hexValue: String {
+        get {
+            let red = redComponent.value
+            let green = greenComponent.value
+            let blue = blueComponent.value
+            let alpha = 255
+            return String(format: "0x%02X%02X%02X%02X", red, green, blue, alpha)
+        }
+        set {
+            let val = newValue.hexToValue()
+            redComponent.value = Int(val.red)
+            greenComponent.value = Int(val.green)
+            blueComponent.value = Int(val.blue)
+            hex.text = String(format: "%02X%02X%02X", Int(val.red), Int(val.green), Int(val.blue))
         }
     }
     override init(frame: CGRect) {
@@ -100,7 +118,7 @@ class XWAKRGBView: UIControl {
         
         hex.xwak.right(equalTo: xwak.right, -10)
             .top(equalTo: blueComponent.xwak.bottom, 20)
-            .size((95, 30))
+            .size((105, 30))
 
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
@@ -139,5 +157,33 @@ class XWAKRGBView: UIControl {
         hex.text = String(format: "%02X%02X%02X", red, green, blue)
 //        value = (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
         sendActions(for: .valueChanged)
+    }
+}
+
+
+extension String {
+    func hexToValue() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        let hex = self
+        var hexValue = hex
+        if hex.starts(with: "0x") || hex.starts(with: "0X") {
+            hexValue = String(hex.dropFirst(2))
+        }
+        if hex.starts(with: "#") {
+            hexValue = String(hex.dropFirst())
+        }
+        if !(hexValue.count == 8 || hexValue.count == 6) {
+            fatalError("error hex string: \(self)")
+        }
+        let array = Array(hexValue)
+        let numbers = stride(from: 0, to: array.count, by: 2).map {
+            strtoul(String(array[$0..<min($0 + 2, array.count)]), nil, 16)
+        }
+        if numbers.count == 4 {
+            return (CGFloat(numbers[0]), CGFloat(numbers[1]), CGFloat(numbers[2]), CGFloat(numbers[3]))
+        }
+        if numbers.count == 3 {
+            return (CGFloat(numbers[0]), CGFloat(numbers[1]), CGFloat(numbers[2]), 255)
+        }
+        fatalError("error hex string: \(self)")
     }
 }
