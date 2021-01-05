@@ -98,7 +98,7 @@ public class XWAKColorPicker: UIView {
             let val = hsbView.value
             let color = UIColor(hue: val.hue, saturation: val.saturation, brightness: val.brightness, alpha: 1.0)
             let (red, green, blue, alpha) = color.rgbValue()
-            print("HSB2RGB => red: \(red), green: \(green), blue: \(blue), alpha: \(alpha)")
+//            print("HSB2RGB => red: \(red), green: \(green), blue: \(blue), alpha: \(alpha)")
             rgbView.value = (red, green, blue, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.rgbView.transform = .identity
@@ -112,7 +112,7 @@ public class XWAKColorPicker: UIView {
             hsbView.transform = CGAffineTransform(translationX: -hsbView.bounds.width, y: 0)
             let (hue, saturation, brightness) = RGBToHSB(hex: rgbView.hexValue)
             let alpha: CGFloat = 1.0
-            print("RGB2HSB => hue: \(hue), saturation: \(saturation), brightness: \(brightness), alpha: \(alpha)")
+//            print("RGB2HSB => hue: \(hue), saturation: \(saturation), brightness: \(brightness), alpha: \(alpha)")
             hsbView.value = (hue, saturation, brightness, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.hsbView.transform = .identity
