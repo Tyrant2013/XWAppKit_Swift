@@ -91,6 +91,7 @@ public class XWAKColorPicker: UIView {
             let color = UIColor(hue: val.hue, saturation: val.saturation, brightness: val.brightness, alpha: 1.0)
             var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
             color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            print("HSB2RGB => red: \(red), green: \(green), blue: \(blue), alpha: \(alpha)")
             rgbView.value = (red, green, blue, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.rgbView.transform = .identity
@@ -106,6 +107,7 @@ public class XWAKColorPicker: UIView {
             let color = UIColor(displayP3Red: val.red, green: val.green, blue: val.blue, alpha: val.alpha)
             var (hue, saturation, brightness, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
             color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+            print("RGB2HSB => hue: \(hue), saturation: \(saturation), brightness: \(brightness), alpha: \(alpha)")
             hsbView.value = (hue, saturation, brightness, alpha)
             UIView.animate(withDuration: 0.25) {
                 self.hsbView.transform = .identity
