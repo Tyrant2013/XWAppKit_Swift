@@ -25,13 +25,13 @@ class XWAKHSBView: UIControl {
     private let wheelView: XWAKColorWheelView = {
         let view = XWAKColorWheelView()
         view.accessibilityLabel = "wheel_view"
-        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private let brightnessView: XWAKColorComponent = {
         let view = XWAKColorComponent()
         view.accessibilityLabel = "brightness_view"
-        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         return view
     }()
@@ -53,17 +53,49 @@ class XWAKHSBView: UIControl {
         brightnessView.value = 255
         brightnessView.isShowNumberValue = false
         
-        wheelView.xwak.top(equalTo: xwak.top)
-            .centerX(equalTo: xwak.centerX)
-            .width(equalTo: wheelView.xwak.height)
-        brightnessView.xwak.top(equalTo: wheelView.xwak.bottom, 10)
-            .bottom(equalTo: xwak.bottom, -10)
-            .left(equalTo: xwak.left, 10)
-            .right(equalTo: xwak.right, -10)
-            .height(20)
+//        if bounds.width < bounds.height {
+//            wheelView.xwak.top(equalTo: xwak.top)
+//                .edge(equalTo: xwak, inset: 10, edges: [.left, .right])
+//                .height(equalTo: wheelView.xwak.width)
+//                .width(lessThan: xwak.width)
+//        }
+//        else {
+//            wheelView.xwak.top(equalTo: xwak.top)
+//                .centerX(equalTo: xwak.centerX)
+//                .width(equalTo: wheelView.xwak.height)
+//                .width(lessThan: xwak.width)
+//        }
+        
+//        wheelView.xwak.top(equalTo: xwak.top)
+//            .centerX(equalTo: xwak.centerX)
+//            .width(equalTo: wheelView.xwak.height)
+//            .width(lessThan: xwak.width)
+        
+//        brightnessView.xwak.top(equalTo: wheelView.xwak.bottom, 10)
+//            .bottom(equalTo: xwak.bottom, -10)
+//            .left(equalTo: xwak.left, 10)
+//            .right(equalTo: xwak.right, -10)
+//            .height(20)
         
         wheelView.addTarget(self, action: #selector(hsbValueChange(_:)), for: .valueChanged)
         brightnessView.addTarget(self, action: #selector(brightnessValueChange(_:)), for: .valueChanged)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        var frame: CGRect = .zero
+        var brightFrame = CGRect(origin: .zero, size: .init(width: 0, height: 20))
+        if bounds.width > bounds.height {
+            frame = CGRect(origin: .zero, size: .init(width: bounds.height, height: bounds.height))
+        }
+        else {
+            frame = CGRect(origin: .init(x: 5, y: 5), size: .init(width: bounds.width - 10, height: bounds.width - 10))
+        }
+        brightFrame.origin.x = 10
+        brightFrame.origin.y = frame.maxY + 10
+        brightFrame.size.width = bounds.width - 20
+        wheelView.frame = frame
+        brightnessView.frame = brightFrame
     }
     
     @objc

@@ -44,6 +44,7 @@ class XWAKColorWheelView: UIControl {
         didSet {
             if oldValue != brightness {
                 drawWheelImage()
+                updateIndicatorPosition(selectedPoint)
             }
         }
     }
