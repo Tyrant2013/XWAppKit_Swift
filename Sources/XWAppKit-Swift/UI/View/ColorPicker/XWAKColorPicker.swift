@@ -149,7 +149,10 @@ public class XWAKColorPicker: UIView {
         let br = maxValue / 255.0
         let s = maxValue == 0 ? 0 : (maxValue - minValue) / maxValue
         var h: CGFloat = 0
-        if maxValue == r && g >= b {
+        if maxValue == minValue {
+            h = 0
+        }
+        else if maxValue == r && g >= b {
             h = (g - b) * 60 / (maxValue - minValue)
         }
         else if maxValue == r && g < b {
