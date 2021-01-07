@@ -63,11 +63,12 @@ public class XWAKColorPicker: UIView {
                 return rgbView.hexValue
             }
             else {
-                let (h, s, br, _) = hsbView.value
-                let (r, g, b) = HSBToRGB(hsb: (h, s, br))
-                let red = min(Int(round(r * 255)), 255)
-                let green = min(Int(round(g * 255)), 255)
-                let blue = min(Int(round(b * 255)), 255)
+                let val = hsbView.value
+                let color = UIColor(hue: val.hue, saturation: val.saturation, brightness: val.brightness, alpha: 1.0)
+                let (r, g, b, _) = color.rgbValue()
+                let red = min(Int(r * 255), 255)
+                let green = min(Int(g * 255), 255)
+                let blue = min(Int(b * 255), 255)
                 return String(format: "0x%02X%02X%02XFF", red, green, blue)
             }
         }
