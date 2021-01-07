@@ -50,10 +50,26 @@ public class XWAKColorPicker: UIView {
     }
     public var hexRGBValue: String {
         set {
-            rgbView.hexValue = newValue
+            if seg.selectedSegmentIndex == 0 {
+                rgbView.hexValue = newValue
+            }
+            else {
+                let (h, s, b) = RGBToHSB(hex: newValue)
+                hsbView.value = (h, s, b, 1.0)
+            }
         }
         get {
-            return rgbView.hexValue
+            if seg.selectedSegmentIndex == 0 {
+                return rgbView.hexValue
+            }
+            else {
+                let (h, s, br, _) = hsbView.value
+                let (r, g, b) = HSBToRGB(hsb: (h, s, br))
+                let red = round(r * 255)
+                let green = round(g * 255)
+                let blue = round(b * 255)
+                return String(format: "0x%02X%02X%02XFF", red, green, blue)
+            }
         }
     }
     
@@ -165,5 +181,33 @@ public class XWAKColorPicker: UIView {
             h = (r - g) * 60 / (maxValue - minValue) + 240
         }
         return (h / 360.0, s, br)
+    }
+    
+    private func HSBToRGB(hsb: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat)) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
+
+        let i: Int = Int(hsb.hue * 6)
+        let f = hsb.hue * 6 - CGFloat(i)
+        let p = hsb.brightness * (1 - hsb.saturation)
+        let q = hsb.brightness * (1 - f * hsb.saturation)
+        let t = hsb.brightness * (1 - (1 - f) * hsb.saturation)
+
+        switch i % 6 {
+        case 0:
+            (r, g, b) = (hsb.brightness, t, p)
+        case 1:
+            (r, g, b) = (q, hsb.brightness, p)
+        case 2:
+            (r, g, b) = (p, hsb.brightness, t)
+        case 3:
+            (r, g, b) = (p, q, hsb.brightness)
+        case 4:
+            (r, g, b) = (t, p, hsb.brightness)
+        case 5:
+            (r, g, b) = (hsb.brightness, p, q)
+        default:
+            break
+        }
+        return (red: r, green: g, blue: b)
     }
 }
