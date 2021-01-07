@@ -32,9 +32,11 @@ class XWAKColorPickerViewController: UIViewController {
 extension XWAKColorPickerViewController: XWAKColorPickerDelegate {
     func colorPicker(_ picker: XWAKColorPicker, didSelectedColor red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         view.backgroundColor = .init(red: red, green: green, blue: blue, alpha: alpha)
+        print("from rgb: ", picker.hexRGBValue)
     }
     
     func colorPicker(_ picker: XWAKColorPicker, didSelectedColor hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
         view.backgroundColor = .init(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+        print("from hsb: ", picker.hexRGBValue)
     }
 }

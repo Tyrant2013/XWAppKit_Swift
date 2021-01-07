@@ -65,9 +65,9 @@ public class XWAKColorPicker: UIView {
             else {
                 let (h, s, br, _) = hsbView.value
                 let (r, g, b) = HSBToRGB(hsb: (h, s, br))
-                let red = round(r * 255)
-                let green = round(g * 255)
-                let blue = round(b * 255)
+                let red = min(Int(round(r * 255)), 255)
+                let green = min(Int(round(g * 255)), 255)
+                let blue = min(Int(round(b * 255)), 255)
                 return String(format: "0x%02X%02X%02XFF", red, green, blue)
             }
         }
