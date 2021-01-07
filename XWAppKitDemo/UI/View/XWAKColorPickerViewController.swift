@@ -19,11 +19,11 @@ class XWAKColorPickerViewController: UIViewController {
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         view.pickerDelegate = self
-//        view.hexRGBValue = "F8D800FF"
-        view.hexRGBValue = "FFFFFFFF"
+        view.hexRGBValue = "F8D800FF"
+//        view.hexRGBValue = "FFFFFFFF"
         self.view.addSubview(view)
         view.xwak.center(equalTo: self.view.xwak)
-            .size((250, 550))
+            .size((250, 350))
         // Do any additional setup after loading the view.
     }
 

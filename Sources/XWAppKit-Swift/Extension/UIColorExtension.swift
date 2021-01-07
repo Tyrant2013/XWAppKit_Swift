@@ -20,7 +20,7 @@ public extension UIColor {
         return UIColor(red: r, green: g, blue: b, alpha: alpha)
     }
     class func xwak_color(with hex: String) -> UIColor {
-        var hexValue = ""
+        var hexValue = hex
         if hex.starts(with: "0x") || hex.starts(with: "0X") {
             hexValue = String(hex.dropFirst(2))
         }

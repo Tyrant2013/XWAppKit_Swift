@@ -44,6 +44,14 @@ class XWAKRGBView: UIControl {
         view.value = 255
         return view
     }()
+    private let colorShowView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.addCorner()
+        view.addBorder()
+        return view
+    }()
     private let hex: XWAKColorTextField = {
         let view = XWAKColorTextField()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +95,7 @@ class XWAKRGBView: UIControl {
             greenComponent.value = Int(val.green)
             blueComponent.value = Int(val.blue)
             hex.text = String(format: "%02X%02X%02X", Int(val.red), Int(val.green), Int(val.blue))
+            colorShowView.backgroundColor = .xwak_color(with: hex.text!)
         }
     }
     override init(frame: CGRect) {
@@ -104,6 +113,7 @@ class XWAKRGBView: UIControl {
         addSubview(greenComponent)
         addSubview(blueComponent)
 //        addSubview(alphaComponent)
+        addSubview(colorShowView)
         
         addSubview(hex)
         
@@ -119,6 +129,8 @@ class XWAKRGBView: UIControl {
         hex.xwak.right(equalTo: xwak.right, -10)
             .top(equalTo: blueComponent.xwak.bottom, 20)
             .size((105, 30))
+        colorShowView.xwak.edge(equalTo: xwak, inset: 20, edges: [.left, .right, .bottom])
+            .top(equalTo: hex.xwak.bottom, 20)
 
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
@@ -155,7 +167,7 @@ class XWAKRGBView: UIControl {
         let blue = blueComponent.value
 //        let alpha = 255
         hex.text = String(format: "%02X%02X%02X", red, green, blue)
-//        value = (CGFloat(red) / 255, CGFloat(green) / 255, CGFloat(blue) / 255, CGFloat(alpha) / 255)
+        colorShowView.backgroundColor = .xwak_color(with: hex.text!)
         sendActions(for: .valueChanged)
     }
 }
