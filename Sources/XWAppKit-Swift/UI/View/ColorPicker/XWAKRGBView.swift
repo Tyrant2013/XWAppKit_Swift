@@ -129,8 +129,8 @@ class XWAKRGBView: UIControl {
         hex.xwak.right(equalTo: xwak.right, -10)
             .top(equalTo: blueComponent.xwak.bottom, 20)
             .size((105, 30))
-        colorShowView.xwak.edge(equalTo: xwak, inset: 20, edges: [.left, .right, .bottom])
-            .top(equalTo: hex.xwak.bottom, 20)
+        colorShowView.xwak.edge(equalTo: xwak, inset: 10, edges: [.left, .right, .bottom])
+            .top(equalTo: hex.xwak.bottom, 10)
 
         redComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)
         greenComponent.addTarget(self, action: #selector(colorComponentValueChange(_:)), for: .valueChanged)

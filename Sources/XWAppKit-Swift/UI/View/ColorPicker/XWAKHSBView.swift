@@ -84,17 +84,29 @@ class XWAKHSBView: UIControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         var frame: CGRect = .zero
-        var brightFrame = CGRect(origin: .zero, size: .init(width: 0, height: 20))
-        if bounds.width > bounds.height {
-            frame = CGRect(origin: .zero, size: .init(width: bounds.height, height: bounds.height))
+        let brightnessHeight: CGFloat = 20
+        let brightnessOffsetToBottom: CGFloat = 10
+        let brightnessOffsetToWheel: CGFloat = 10
+        var wheelOffsetX: CGFloat = 10
+        var brightFrame = CGRect(origin: .zero, size: .init(width: 0, height: brightnessHeight))
+        let width = bounds.width - wheelOffsetX * 2
+        let height = bounds.height - brightnessHeight - brightnessOffsetToBottom - brightnessOffsetToWheel
+        let len = min(width, height)
+//        if bounds.width > bounds.height {
+//            frame = CGRect(origin: .zero, size: .init(width: bounds.height, height: bounds.height))
+//        }
+//        else {
+//            frame = CGRect(origin: .init(x: 5, y: 5), size: .init(width: bounds.width - 10, height: bounds.width - 10))
+//        }
+        if len < width {
+            wheelOffsetX = (bounds.width - len) / 2
         }
-        else {
-            frame = CGRect(origin: .init(x: 5, y: 5), size: .init(width: bounds.width - 10, height: bounds.width - 10))
-        }
-        brightFrame.origin.x = 10
-        brightFrame.origin.y = frame.maxY + 10
-        brightFrame.size.width = bounds.width - 20
+        frame = CGRect(origin: .init(x: wheelOffsetX, y: 0), size: .init(width: len, height: len))
         wheelView.frame = frame
+        
+        brightFrame.origin.x = 10
+        brightFrame.origin.y = bounds.height - brightnessOffsetToBottom - brightnessHeight
+        brightFrame.size.width = bounds.width - 20
         brightnessView.frame = brightFrame
     }
     

@@ -23,7 +23,7 @@ class XWAKColorPickerViewController: UIViewController {
 //        view.hexRGBValue = "FFFFFFFF"
         self.view.addSubview(view)
         view.xwak.center(equalTo: self.view.xwak)
-            .size((250, 350))
+            .size((280, 300))
         // Do any additional setup after loading the view.
     }
 

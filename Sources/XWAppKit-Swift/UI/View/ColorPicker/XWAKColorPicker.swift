@@ -95,7 +95,7 @@ public class XWAKColorPicker: UIView {
             .height(20)
         seg.selectedSegmentIndex = 0
         
-        hsbView.xwak.top(equalTo: seg.xwak.bottom, 20)
+        hsbView.xwak.top(equalTo: seg.xwak.bottom, 10)
             .edge(equalTo: xwak, inset: 0, edges: [.left, .right, .bottom])
         rgbView.xwak.top(equalTo: seg.xwak.bottom, 20)
             .edge(equalTo: xwak, inset: 0, edges: [.left, .right, .bottom])
