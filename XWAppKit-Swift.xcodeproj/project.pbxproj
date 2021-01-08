@@ -23,6 +23,7 @@
 		AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3912212535556B00A87A14 /* UIImageViewExtension.swift */; };
 		AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39122E2535584F00A87A14 /* CGSizeExtension.swift */; };
 		AE3B59912558DC5C0060E2F0 /* XWAKImageMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B59902558DC5C0060E2F0 /* XWAKImageMetaData.swift */; };
+		AE4224CC25A8014600C68C88 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4224CB25A8014600C68C88 /* UIDeviceExtension.swift */; };
 		AE4976CA259D775B00E08C16 /* XWAKPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4976C9259D775B00E08C16 /* XWAKPopupView.swift */; };
 		AE4976CE259D777100E08C16 /* XWAKPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4976CD259D777100E08C16 /* XWAKPopupViewController.swift */; };
 		AE4A4E5B25515A7500560A56 /* XWAKImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E5A25515A7500560A56 /* XWAKImageCropView.swift */; };
@@ -389,6 +390,7 @@
 		AE3912212535556B00A87A14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		AE39122E2535584F00A87A14 /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		AE3B59902558DC5C0060E2F0 /* XWAKImageMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageMetaData.swift; sourceTree = "<group>"; };
+		AE4224CB25A8014600C68C88 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		AE4976C9259D775B00E08C16 /* XWAKPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPopupView.swift; sourceTree = "<group>"; };
 		AE4976CD259D777100E08C16 /* XWAKPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPopupViewController.swift; sourceTree = "<group>"; };
 		AE4A4E5A25515A7500560A56 /* XWAKImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageCropView.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 		AEA7470524CA756900E4B8E1 = {
 			isa = PBXGroup;
 			children = (
+				AE4224CB25A8014600C68C88 /* UIDeviceExtension.swift */,
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7471124CA756900E4B8E1 /* XWAppKit-Swift */,
 				AEA7471C24CA756900E4B8E1 /* XWAppKit-SwiftTests */,
@@ -1771,6 +1774,7 @@
 				AEF83F89255BEA13009F454F /* XWAKPhotoPickerController.swift in Sources */,
 				AEFB20432599C00A001DE05C /* CISunbeamsGenerator.swift in Sources */,
 				AEFB1FA22599C009001DE05C /* CICircularWrap.swift in Sources */,
+				AE4224CC25A8014600C68C88 /* UIDeviceExtension.swift in Sources */,
 				AEFB1F962599C009001DE05C /* CIParallelogramTile.swift in Sources */,
 				AEFB20252599C00A001DE05C /* CIColorCube.swift in Sources */,
 				AEFB201C2599C00A001DE05C /* CIPhotoEffectFade.swift in Sources */,
