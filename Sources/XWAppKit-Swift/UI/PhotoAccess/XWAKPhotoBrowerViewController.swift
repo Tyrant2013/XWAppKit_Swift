@@ -72,9 +72,12 @@ class XWAKPhotoBrowerViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("完成", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.lightGray, for: .disabled)
         button.tintColor = .white
         button.backgroundColor = .systemGreen
         button.addCorner(radius: 5)
+        button.isEnabled = false
         return button
     }()
     
@@ -181,7 +184,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
             .height(50)
         doneButton.xwak.centerY(equalTo: bottomActionView.xwak.centerY)
             .right(equalTo: bottomActionView.xwak.right, -10)
-            .size((70, 30))
+            .size((100, 30))
         
         selectedView.xwak.bottom(equalTo: bottomActionView.xwak.top)
             .edge(equalTo: safe, inset: 0, edges: [.left, .right])
@@ -212,6 +215,7 @@ class XWAKPhotoBrowerViewController: UIViewController {
             stateImageView.isHidden = true
             totalNumLabel.isHidden = false
             totalNumLabel.scaleAnimation()
+            doneButton.isEnabled = true
         }
     }
     
@@ -222,6 +226,9 @@ class XWAKPhotoBrowerViewController: UIViewController {
         selectedView.remove(removedItem: item)
         stateImageView.isHidden = false
         totalNumLabel.isHidden = true
+        if XWAKPhoto.shared.selectedItems.count == 0 {
+            doneButton.isEnabled = false
+        }
     }
     
     @objc

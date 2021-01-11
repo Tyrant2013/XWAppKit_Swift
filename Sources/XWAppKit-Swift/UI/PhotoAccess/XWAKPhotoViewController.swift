@@ -104,6 +104,7 @@ class XWAKPhotoViewController: UIViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("完成", for: .normal)
+        button.setTitleColor(.lightGray, for: .disabled)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.addCorner(radius: 5)
