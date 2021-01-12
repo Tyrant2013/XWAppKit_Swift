@@ -43,12 +43,26 @@ class XWAKColorPickerViewController: UIViewController {
         btn.setTitle("随机颜色", for: .normal)
         btn.addTarget(self, action: #selector(randomColorTouched(_:)), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(btn)
-        btn.xwak.top(equalTo: popupView.xwak.bottom, 20)
-            .centerX(equalTo: view.safeAreaLayoutGuide.xwak.centerX)
-            .size((80, 30))
         btn.addCorner()
         btn.addBorder()
+        view.addSubview(btn)
+        
+        btn.xwak.top(equalTo: popupView.xwak.bottom, 20)
+            .left(equalTo: popupView.xwak.left)
+            .size((80, 30))
+        
+        
+        let rbtn = UIButton(type: .system)
+        rbtn.translatesAutoresizingMaskIntoConstraints = false
+        rbtn.setTitle("随机位置", for: .normal)
+        rbtn.addTarget(self, action: #selector(randomPositionTouched(_:)), for: .touchUpInside)
+        rbtn.addCorner()
+        rbtn.addBorder()
+        view.addSubview(rbtn)
+        
+        rbtn.xwak.top(equalTo: popupView.xwak.bottom, 10)
+            .right(equalTo: popupView.xwak.right)
+            .size((80, 30))
     }
     
     @objc
@@ -58,6 +72,12 @@ class XWAKColorPickerViewController: UIViewController {
         let blue = arc4random() % 256
         let hexValue = String(format: "0x%02X%02X%02XFF", red, green, blue)
         picker.hexRGBValue = hexValue
+    }
+    
+    @objc
+    func randomPositionTouched(_ sneder: UIButton) {
+        let x = CGFloat(arc4random() % 280 + 10)
+        popupView.triangleTopPoint = .init(x: x, y: 0)
     }
 
 }
