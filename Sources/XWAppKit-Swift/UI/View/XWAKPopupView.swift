@@ -10,7 +10,12 @@ import UIKit
 
 public class XWAKPopupView: UIView {
     public var radius: CGFloat = 10
-    public var triangleTopPoint: CGPoint = .init(x: 50, y: 0)
+    public var triangleTopPoint: CGPoint = .init(x: 50, y: 0) {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     public var triangleHeight: CGFloat = 14
     public var fillColor: UIColor = UIColor.xwak_color(with: 0xF5F5F5, alpha: 0.9)
     /*                ___
