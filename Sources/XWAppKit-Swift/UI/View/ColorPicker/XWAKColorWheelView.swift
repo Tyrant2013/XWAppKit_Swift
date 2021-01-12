@@ -180,11 +180,6 @@ class XWAKColorWheelView: UIControl {
     }
     
     private func HSBToRGB(hsb: HSB) -> RGB {
-//        let color = UIColor(hue: hsb.hue, saturation: hsb.saturation, brightness: hsb.brightness, alpha: hsb.alpha)
-//        var (red, green, blue, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
-//        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-//        return RGB(red: min(red, 1.0), green: min(green, 1.0), blue: min(blue, 1.0), alpha: min(alpha, 1.0))
-        
         var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
 
         let i: Int = Int(hsb.hue * 6)

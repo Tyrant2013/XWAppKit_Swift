@@ -35,12 +35,21 @@ class XWAKSlider: UIControl {
         return bounds.width - cursorView.bounds.width
     }
     
-    public var value: Int = 0 {
-        didSet {
-            let x = CGFloat(value) / CGFloat(max) * realMoveDis
-            cursorView.transform = CGAffineTransform.identity.translatedBy(x: x, y: 0)
+    public var value: Int {
+        get {
+            return _innerValue
+        }
+        set {
+            _innerValue = newValue
+            let x = CGFloat(newValue) / CGFloat(max) * realMoveDis
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut) {
+                self.cursorView.transform = CGAffineTransform.identity.translatedBy(x: x, y: 0)
+            } completion: { (finished) in
+                
+            }
         }
     }
+    private var _innerValue: Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,7 +101,7 @@ class XWAKSlider: UIControl {
             let offset = cursorView.bounds.width / 2 // cursor view 的中点
             let real = realMoveDis
             let x = (location.x - offset).clamped(to: CGFloat(min)...real)
-            value = Int((x / real) * CGFloat(max))
+            _innerValue = Int((x / real) * CGFloat(max))
             cursorView.transform = CGAffineTransform.identity.translatedBy(x: x, y: 0)
             sendActions(for: .valueChanged)
         }

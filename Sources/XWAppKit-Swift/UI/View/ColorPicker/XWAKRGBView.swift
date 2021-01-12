@@ -95,7 +95,11 @@ class XWAKRGBView: UIControl {
             greenComponent.value = Int(val.green)
             blueComponent.value = Int(val.blue)
             hex.text = String(format: "%02X%02X%02X", Int(val.red), Int(val.green), Int(val.blue))
-            colorShowView.backgroundColor = .xwak_color(with: hex.text!)
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut) {
+                self.colorShowView.backgroundColor = .xwak_color(with: self.hex.text!)
+            } completion: { (finished) in
+                
+            }
         }
     }
     override init(frame: CGRect) {
@@ -165,7 +169,6 @@ class XWAKRGBView: UIControl {
         let red = redComponent.value
         let green = greenComponent.value
         let blue = blueComponent.value
-//        let alpha = 255
         hex.text = String(format: "%02X%02X%02X", red, green, blue)
         colorShowView.backgroundColor = .xwak_color(with: hex.text!)
         sendActions(for: .valueChanged)
