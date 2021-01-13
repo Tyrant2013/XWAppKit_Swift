@@ -136,9 +136,8 @@ class XWAKPhotoCell: UICollectionViewCell {
             return
         }
         if asset.originImage == nil {
-            XWAKHud.show()
             _ = XWAKPhotoKit.shared.loadOriginImage(from: asset.asset, requestID: 0) { (progress) in
-                
+                XWAKHud.show()
             } handler: { (image, isDegraded, error) in
                 asset.originImage = image
                 XWAKHud.dismiss()
