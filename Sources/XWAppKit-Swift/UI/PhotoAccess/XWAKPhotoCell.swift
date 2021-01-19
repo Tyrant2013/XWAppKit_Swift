@@ -82,22 +82,31 @@ class XWAKPhotoCell: UICollectionViewCell {
     
     private func setup() {
         contentView.addSubview(imageView)
-        contentView.addSubview(selectionView)
-        contentView.addSubview(numLabel)
-        contentView.addSubview(noActionView)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(numberTap(_:)))
-        numLabel.addGestureRecognizer(tap)
+        if XWAKPhoto.shared.max > 1 {
+            contentView.addSubview(selectionView)
+            contentView.addSubview(noActionView)
+            contentView.addSubview(numLabel)
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(numberTap(_:)))
+            numLabel.addGestureRecognizer(tap)
+            numLabel.xwak.edge(equalTo: contentView.xwak, inset: 5, edges: [.top, .right])
+                .size((24, 24))
+
+            selectionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
+            noActionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
+            
+            selectionView.isHidden = true
+            noActionView.isHidden = true
+            
+            addNotifications()
+        }
         
         imageView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
-        numLabel.xwak.edge(equalTo: contentView.xwak, inset: 5, edges: [.top, .right])
-            .size((24, 24))
-        selectionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
-        noActionView.xwak.edge(equalTo: contentView.xwak, inset: 0, edges: [.all])
         
-        selectionView.isHidden = true
-        noActionView.isHidden = true
-        
+    }
+    
+    private func addNotifications() {
         NotificationCenter.add(name: XWAKPhoto.SelectionAddNotification) { [weak self](notification) in
             let item = notification.object as! XWAKPhotoAsset
             if item.asset.localIdentifier == self?.item?.asset.localIdentifier {
@@ -105,7 +114,7 @@ class XWAKPhotoCell: UICollectionViewCell {
                 self?.selectionView.isHidden = !item.isSelected
             }
         }
-
+        
         NotificationCenter.add(name: XWAKPhoto.SelectionRemoveIndexNotification) { [weak self](notification) in
             let removedIndex = notification.object as! Int
             if let text = self?.numLabel.text, let num = Int(text) {
@@ -127,7 +136,6 @@ class XWAKPhotoCell: UICollectionViewCell {
         NotificationCenter.add(name: XWAKPhoto.ContinuePhotoSelectionNotification) { [weak self](notification) in
             self?.noActionView.isHidden = true
         }
-
     }
     
     @objc

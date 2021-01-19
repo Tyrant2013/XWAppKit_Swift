@@ -36,7 +36,9 @@ public class XWAKPhotoPickerController {
     
     public func show(in viewController: UIViewController, with delegate: XWAKPhotoPickerControllerDelegate) {
         XWAKPhoto.shared.selectionHandler = {
-            delegate.viewController(self, didSelected: XWAKPhoto.shared.selectedItems)
+            if XWAKPhoto.shared.count > 0 {
+                delegate.viewController(self, didSelected: XWAKPhoto.shared.selectedItems)
+            }
         }
         let photoView = XWAKPhotoViewController()
         photoView.isLimited = limited

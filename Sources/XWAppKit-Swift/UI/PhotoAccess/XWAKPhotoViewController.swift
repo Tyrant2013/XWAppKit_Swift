@@ -204,11 +204,14 @@ class XWAKPhotoViewController: UIViewController {
         collectionSelectionView.addGestureRecognizer(listTap)
         collectionSelectionView.isUserInteractionEnabled = true
         
-        view.addSubview(bottomActionBar)
-        bottomActionBar.addSubview(doneButton)
-        bottomActionBar.addSubview(previewButton)
-        previewButton.addTarget(self, action: #selector(previewTouched(_:)), for: .touchUpInside)
-        doneButton.addTarget(self, action: #selector(doneTouched(_:)), for: .touchUpInside)
+        // 可多选图片时，显示最下面的操作条
+        if XWAKPhoto.shared.max > 1 {
+            view.addSubview(bottomActionBar)
+            bottomActionBar.addSubview(doneButton)
+            bottomActionBar.addSubview(previewButton)
+            previewButton.addTarget(self, action: #selector(previewTouched(_:)), for: .touchUpInside)
+            doneButton.addTarget(self, action: #selector(doneTouched(_:)), for: .touchUpInside)
+        }
         
         view.addSubview(collectionView)
         collectionView.backgroundColor = .black
@@ -216,6 +219,7 @@ class XWAKPhotoViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(XWAKPhotoCell.self, forCellWithReuseIdentifier: "Cell")
         
+        // 被限制访问时
         if isLimited {
             view.addSubview(limitedView)
             limitedView.addSubview(limitedCloseButton)
@@ -250,16 +254,23 @@ class XWAKPhotoViewController: UIViewController {
             .left(equalTo: titleLabel.xwak.right, 10)
             .width(equalTo: arrowImageVIew.xwak.height)
         
-        collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
-            .top(equalTo: topActionBar.xwak.bottom)
-            .bottom(equalTo: bottomActionBar.xwak.top)
-        
-        bottomActionBar.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
-            .height(50)
-        previewButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .left])
-            .width(80)
-        doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .right])
-            .width(100)
+        // 多选时
+        if XWAKPhoto.shared.max > 1 {
+            collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right])
+                .top(equalTo: topActionBar.xwak.bottom)
+                .bottom(equalTo: bottomActionBar.xwak.top)
+            
+            bottomActionBar.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+                .height(50)
+            previewButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .left])
+                .width(80)
+            doneButton.xwak.edge(equalTo: bottomActionBar.xwak, inset: 10, edges: [.top, .bottom, .right])
+                .width(100)
+        }
+        else {
+            collectionView.xwak.edge(equalTo: safe, inset: 0, edges: [.left, .right, .bottom])
+                .top(equalTo: topActionBar.xwak.bottom)
+        }
         
         if isLimited {
             limitedView.xwak.edge(equalTo: safe, inset: 0, edges: [.all])
@@ -454,10 +465,49 @@ extension XWAKPhotoViewController: UICollectionViewDataSource {
 
 extension XWAKPhotoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let brower = XWAKPhotoBrowerViewController()
-        brower.index = indexPath.row
-        brower.items = items
-        navigationController?.pushViewController(brower, animated: true)
+        if XWAKPhoto.shared.max > 1 {
+            let brower = XWAKPhotoBrowerViewController()
+            brower.index = indexPath.row
+            brower.items = items
+            navigationController?.pushViewController(brower, animated: true)
+        }
+        else {
+            let item = items[indexPath.row]
+            let finishedSelection = {
+                XWAKPhoto.shared.add(item)
+                self.dismiss(animated: true) {
+                    XWAKPhoto.shared.selectionHandler?()
+                    XWAKPhoto.shared.clear()
+                }
+            }
+            if item.originImage == nil {
+                _ = item.loadOriginImage { (progress) in
+                    XWAKHud.show()
+                } _: { (image) in
+                    XWAKHud.dismiss()
+                    if image != nil && item.originImage != nil {
+                        item.originImage = image
+                        finishedSelection()
+                    }
+                    else {
+                        if item.originImage == nil {
+                            XWAKHud.show(in: nil,
+                                         title: "",
+                                         msg: "",
+                                         showIndicator: false,
+                                         delay: 1.5,
+                                         ignoreInteraction: true)
+                        }
+                        else {
+                            finishedSelection()
+                        }
+                    }
+                }
+            }
+            else {
+                finishedSelection()
+            }
+        }
     }
 }
 
