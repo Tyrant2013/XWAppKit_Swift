@@ -58,10 +58,10 @@ public extension UIColor {
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        red = min(round(red * 255), 255)
-        green = min(round(green * 255), 255)
-        blue = min(round(blue * 255), 255)
-        alpha = min(round(alpha * 255), 255)
+        red = max(min(round(red * 255), 255), 0)
+        green = max(min(round(green * 255), 255), 0)
+        blue = max(min(round(blue * 255), 255), 0)
+        alpha = max(min(round(alpha * 255), 255), 0)
         return String(format: "0x%02X%02X%02X%02X", Int(red), Int(green), Int(blue), Int(alpha))
     }
     
