@@ -48,7 +48,7 @@ public class XWAKSwitchButton: UIControl {
         }
         set {
             super.isSelected = newValue
-            set(selected: isSelected, animated: true)
+            set(selected: newValue, animated: true)
         }
     }
     
