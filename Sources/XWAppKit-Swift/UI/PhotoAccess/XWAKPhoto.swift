@@ -30,6 +30,8 @@ class XWAKPhoto {
     public var selectionHandler: (() -> Void)?
     
     func add(_ item: XWAKPhotoAsset) {
+//        if item.isSelected { return }
+        print("添加图片")
         items.append(item)
         item.isSelected = true
         item.index = count

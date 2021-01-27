@@ -92,7 +92,6 @@ public class XWAKPhotoKit {
                 progress(CGFloat(percent))
             }
         }
-        
         return PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options) { (image, info) in
             var downloadFinished = false
             var error: NSError? = nil
@@ -101,7 +100,8 @@ public class XWAKPhotoKit {
                 downloadFinished = !(info[PHImageCancelledKey] as? Bool ?? false) && (error == nil)
             }
             let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool ?? false)
-            if downloadFinished { handler(image, isDegraded, error) }
+            /// 这里会回调两次，一次 PHImageResultIsDegradedKey 的值是 1，一次是 0，只处理回调为0的那次
+            if downloadFinished && !isDegraded { handler(image, false, error) }
         }
     }
     
