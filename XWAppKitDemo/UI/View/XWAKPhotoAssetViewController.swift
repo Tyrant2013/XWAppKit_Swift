@@ -21,6 +21,29 @@ class XWAKPhotoAssetViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         return button
     }()
+    private let limitedOneButton: UISwitch = {
+        let vv = UISwitch()
+        vv.translatesAutoresizingMaskIntoConstraints = false
+        return vv
+    }()
+    private let limitedOneLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "选一个图片";
+        return label
+    }()
+    private let multipleButton: UISwitch = {
+        let vv = UISwitch()
+        vv.translatesAutoresizingMaskIntoConstraints = false
+        return vv
+    }()
+    private let multipleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "选多个图片";
+        return label
+    }()
+    private var limited: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +68,16 @@ class XWAKPhotoAssetViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(showButton)
         
+        view.addSubview(limitedOneButton)
+        view.addSubview(limitedOneLabel)
+        view.addSubview(multipleButton)
+        view.addSubview(multipleLabel)
+        
+        limitedOneButton.isOn = true
+        
+        limitedOneButton.addTarget(self, action: #selector(limitedOneValueChange(_:)), for: .valueChanged)
+        multipleButton.addTarget(self, action: #selector(multipleValueChange(_:)), for: .valueChanged)
+        
         showButton.addTarget(self, action: #selector(showButtonTouched(_:)), for: .touchUpInside)
     }
     
@@ -52,8 +85,20 @@ class XWAKPhotoAssetViewController: UIViewController {
     @objc
     func showButtonTouched(_ sender: UIButton) {
         let photoView = XWAKPhotoPickerController()
-        photoView.maxNumber = 1
+        photoView.maxNumber = limited
         photoView.show(in: self, with: self)
+    }
+    
+    @objc
+    func limitedOneValueChange(_ sender: UISwitch) {
+        multipleButton.setOn(!sender.isOn, animated: true)
+        limited = sender.isOn ? 1 : (Int(arc4random()) % 9 + 1)
+    }
+    
+    @objc
+    func multipleValueChange(_ sender: UISwitch) {
+        limitedOneButton.setOn(!sender.isOn, animated: true)
+        limited = sender.isOn ? (Int(arc4random()) % 9 + 1) : 1
     }
     
     func setupLayouts() {
@@ -61,6 +106,20 @@ class XWAKPhotoAssetViewController: UIViewController {
             .left(equalTo: view.safeAreaLayoutGuide.xwak.left, 30)
             .right(equalTo: view.safeAreaLayoutGuide.xwak.right, -30)
             .top(equalTo: view.safeAreaLayoutGuide.xwak.top, 50)
+        
+        limitedOneButton.xwak.left(equalTo: showButton.xwak.left)
+            .top(equalTo: showButton.xwak.bottom, 10)
+        limitedOneLabel.xwak.left(equalTo: limitedOneButton.xwak.right, 10)
+            .centerY(equalTo: limitedOneButton.xwak.centerY)
+            .right(equalTo: view.safeAreaLayoutGuide.xwak.right, -30)
+            .height(30)
+        
+        multipleButton.xwak.left(equalTo: limitedOneButton.xwak.left)
+            .top(equalTo: limitedOneButton.xwak.bottom, 10)
+        multipleLabel.xwak.left(equalTo: multipleButton.xwak.right, 10)
+            .centerY(equalTo: multipleButton.xwak.centerY)
+            .right(equalTo: view.safeAreaLayoutGuide.xwak.right, -30)
+            .height(30)
     }
 }
 
