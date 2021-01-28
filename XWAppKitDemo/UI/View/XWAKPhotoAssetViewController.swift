@@ -43,7 +43,32 @@ class XWAKPhotoAssetViewController: UIViewController {
         label.text = "选多个图片";
         return label
     }()
+    private let imageBrower: XWAKImageBrower = {
+        let vv = XWAKImageBrower()
+        vv.translatesAutoresizingMaskIntoConstraints = false
+        return vv
+    }()
+    private let previewButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("<<", for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    private let nextButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle(">>", for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
     private var limited: Int = 1
+    private var images = [UIImage]()
+    private var index: Int = 0 {
+        didSet {
+            if index < images.count {
+                imageBrower.image = images[index]
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,10 +98,18 @@ class XWAKPhotoAssetViewController: UIViewController {
         view.addSubview(multipleButton)
         view.addSubview(multipleLabel)
         
+        view.addSubview(imageBrower)
+        
+        view.addSubview(previewButton)
+        view.addSubview(nextButton)
+        
         limitedOneButton.isOn = true
         
         limitedOneButton.addTarget(self, action: #selector(limitedOneValueChange(_:)), for: .valueChanged)
         multipleButton.addTarget(self, action: #selector(multipleValueChange(_:)), for: .valueChanged)
+        
+        previewButton.addTarget(self, action: #selector(previewTouched(_:)), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextTouched(_:)), for: .touchUpInside)
         
         showButton.addTarget(self, action: #selector(showButtonTouched(_:)), for: .touchUpInside)
     }
@@ -101,6 +134,20 @@ class XWAKPhotoAssetViewController: UIViewController {
         limited = sender.isOn ? (Int(arc4random()) % 9 + 1) : 1
     }
     
+    @objc
+    func previewTouched(_ sender: UIButton) {
+        if index > 0 {
+            index -= 1
+        }
+    }
+    
+    @objc
+    func nextTouched(_ sender: UIButton) {
+        if index < images.count - 1 {
+            index += 1
+        }
+    }
+    
     func setupLayouts() {
         showButton.xwak.height(50)
             .left(equalTo: view.safeAreaLayoutGuide.xwak.left, 30)
@@ -120,13 +167,23 @@ class XWAKPhotoAssetViewController: UIViewController {
             .centerY(equalTo: multipleButton.xwak.centerY)
             .right(equalTo: view.safeAreaLayoutGuide.xwak.right, -30)
             .height(30)
+        
+        imageBrower.xwak.top(equalTo: multipleLabel.xwak.bottom, 10)
+            .edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.left, .right])
+            .bottom(equalTo: view.safeAreaLayoutGuide.xwak.bottom, -50)
+        previewButton.xwak.right(equalTo: view.safeAreaLayoutGuide.xwak.centerX, -10)
+            .size((100, 30))
+            .bottom(equalTo: view.safeAreaLayoutGuide.xwak.bottom, -10)
+        nextButton.xwak.left(equalTo: view.safeAreaLayoutGuide.xwak.centerX, 10)
+            .size((100, 30))
+            .centerY(equalTo: previewButton.xwak.centerY)
     }
 }
 
 extension XWAKPhotoAssetViewController: XWAKPhotoPickerControllerDelegate {
     func viewController(_ viewController: XWAKPhotoPickerController, didSelected items: [UIImage]) {
         print("XWAppKitDemo, XWAKPhotoAssetViewController: ", items.count)
+        images = items
+        index = 0
     }
-    
-    
 }
