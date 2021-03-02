@@ -47,6 +47,7 @@ public class XWAKSwitchButton: UIControl {
             return self.isSelectedInternal
         }
         set {
+            if isSelectedInternal == newValue { return }
             super.isSelected = newValue
             set(selected: newValue, animated: true)
         }
