@@ -75,9 +75,23 @@ class XWAKRGBView: UIControl {
             let green = min(Int(newValue.green * 255), 255)
             let blue = min(Int(newValue.blue * 255), 255)
             redComponent.value = red
+            
             greenComponent.value = green
             blueComponent.value = blue
             hex.text = String(format: "%02X%02X%02X", red, green, blue)
+            
+            let (r, g, b) = (newValue.red, newValue.green, newValue.blue)
+            
+            let redStart = UIColor(displayP3Red: 0, green: g, blue: b, alpha: 1.0)
+            let redEnd = UIColor(displayP3Red: 1, green: g , blue: b, alpha: 1.0)
+            let greenStart = UIColor(displayP3Red: r, green: 0, blue: b, alpha: 1.0)
+            let greenEnd = UIColor(displayP3Red: r, green: 1, blue: b, alpha: 1.0)
+            let blueStart = UIColor(displayP3Red: r, green: g, blue: 0, alpha: 1.0)
+            let blueEnd = UIColor(displayP3Red: r, green: g, blue: 1, alpha: 1.0)
+            
+            redComponent.colors = (redStart, redEnd)
+            greenComponent.colors = (greenStart, greenEnd)
+            blueComponent.colors = (blueStart, blueEnd)
         }
     }
     
@@ -95,6 +109,20 @@ class XWAKRGBView: UIControl {
             greenComponent.value = Int(val.green)
             blueComponent.value = Int(val.blue)
             hex.text = String(format: "%02X%02X%02X", Int(val.red), Int(val.green), Int(val.blue))
+            
+            let (r, g, b) = (val.red / 255, val.green / 255, val.blue / 255)
+            
+            let redStart = UIColor(displayP3Red: 0, green: g, blue: b, alpha: 1.0)
+            let redEnd = UIColor(displayP3Red: 1, green: g , blue: b, alpha: 1.0)
+            let greenStart = UIColor(displayP3Red: r, green: 0, blue: b, alpha: 1.0)
+            let greenEnd = UIColor(displayP3Red: r, green: 1, blue: b, alpha: 1.0)
+            let blueStart = UIColor(displayP3Red: r, green: g, blue: 0, alpha: 1.0)
+            let blueEnd = UIColor(displayP3Red: r, green: g, blue: 1, alpha: 1.0)
+            
+            redComponent.colors = (redStart, redEnd)
+            greenComponent.colors = (greenStart, greenEnd)
+            blueComponent.colors = (blueStart, blueEnd)
+            
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut) {
                 self.colorShowView.backgroundColor = .xwak_color(with: self.hex.text!)
             } completion: { (finished) in
