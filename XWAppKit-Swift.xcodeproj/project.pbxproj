@@ -19,6 +19,7 @@
 		AE1C0045255B838B0027EBAB /* XWAKPhotoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C0044255B838B0027EBAB /* XWAKPhotoKit.swift */; };
 		AE25D8ED255B887E00E8767E /* XWAKPhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE25D8EC255B887E00E8767E /* XWAKPhotoModels.swift */; };
 		AE25D8F1255B8BC600E8767E /* XWAKPhotoAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE25D8F0255B8BC600E8767E /* XWAKPhotoAssetViewController.swift */; };
+		AE342CBE2604A33F00D3DFAB /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE342CBD2604A33F00D3DFAB /* IntExtension.swift */; };
 		AE35524425625B9C007A7296 /* XWAKCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE35524325625B9C007A7296 /* XWAKCollectionListView.swift */; };
 		AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3912212535556B00A87A14 /* UIImageViewExtension.swift */; };
 		AE39122F2535584F00A87A14 /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE39122E2535584F00A87A14 /* CGSizeExtension.swift */; };
@@ -386,6 +387,7 @@
 		AE1C0044255B838B0027EBAB /* XWAKPhotoKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPhotoKit.swift; sourceTree = "<group>"; };
 		AE25D8EC255B887E00E8767E /* XWAKPhotoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPhotoModels.swift; sourceTree = "<group>"; };
 		AE25D8F0255B8BC600E8767E /* XWAKPhotoAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKPhotoAssetViewController.swift; sourceTree = "<group>"; };
+		AE342CBD2604A33F00D3DFAB /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		AE35524325625B9C007A7296 /* XWAKCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKCollectionListView.swift; sourceTree = "<group>"; };
 		AE3912212535556B00A87A14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		AE39122E2535584F00A87A14 /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
@@ -1009,6 +1011,7 @@
 				AE39122E2535584F00A87A14 /* CGSizeExtension.swift */,
 				AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */,
 				AEACCDD02563A856000847A4 /* NotificationCenterExtension.swift */,
+				AE342CBD2604A33F00D3DFAB /* IntExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1761,6 +1764,7 @@
 				AEFB20442599C00A001DE05C /* CIMedianFilter.swift in Sources */,
 				AEFB1F812599C009001DE05C /* CIThermal.swift in Sources */,
 				AEFB1F862599C009001DE05C /* CIHeightFieldFromMask.swift in Sources */,
+				AE342CBE2604A33F00D3DFAB /* IntExtension.swift in Sources */,
 				AEFB20142599C00A001DE05C /* CIExclusionBlendMode.swift in Sources */,
 				AEFB1F832599C009001DE05C /* CIAztecCodeGenerator.swift in Sources */,
 				AEFB203C2599C00A001DE05C /* CIDepthToDisparity.swift in Sources */,
