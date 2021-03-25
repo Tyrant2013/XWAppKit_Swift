@@ -31,6 +31,8 @@
 		AE4A4E6025515AB300560A56 /* XWAKImageCropBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */; };
 		AE4A4E6625515B0D00560A56 /* XWAKFrameBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */; };
 		AE4A4E6A25515E5600560A56 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE4A4E6925515E5600560A56 /* Resources.xcassets */; };
+		AE4BCE23260C20A000B0B59D /* XWAKSVGElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */; };
+		AE4BCE27260C2BEF00B0B59D /* XWAKSVGLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4BCE26260C2BEF00B0B59D /* XWAKSVGLoader.swift */; };
 		AE4E0974255E3B8D0028E106 /* XWAKProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */; };
 		AE4E097A255E5A8C0028E106 /* XWAKProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */; };
 		AE4E09D1255E64E00028E106 /* XWAKProgressLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */; };
@@ -399,6 +401,8 @@
 		AE4A4E5F25515AB300560A56 /* XWAKImageCropBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKImageCropBorder.swift; sourceTree = "<group>"; };
 		AE4A4E6525515B0D00560A56 /* XWAKFrameBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKFrameBorderView.swift; sourceTree = "<group>"; };
 		AE4A4E6925515E5600560A56 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
+		AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGElement.swift; sourceTree = "<group>"; };
+		AE4BCE26260C2BEF00B0B59D /* XWAKSVGLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGLoader.swift; sourceTree = "<group>"; };
 		AE4E0973255E3B8D0028E106 /* XWAKProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressView.swift; sourceTree = "<group>"; };
 		AE4E0979255E5A8C0028E106 /* XWAKProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressViewController.swift; sourceTree = "<group>"; };
 		AE4E09D0255E64E00028E106 /* XWAKProgressLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKProgressLayer.swift; sourceTree = "<group>"; };
@@ -787,6 +791,15 @@
 			path = ImageCropView;
 			sourceTree = "<group>";
 		};
+		AE4BCE21260C206400B0B59D /* SVG */ = {
+			isa = PBXGroup;
+			children = (
+				AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */,
+				AE4BCE26260C2BEF00B0B59D /* XWAKSVGLoader.swift */,
+			);
+			path = SVG;
+			sourceTree = "<group>";
+		};
 		AE4E0972255E3B650028E106 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -878,6 +891,7 @@
 		AEA7472924CA785100E4B8E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BCE21260C206400B0B59D /* SVG */,
 				AE1C0043255B83670027EBAB /* PhotoAccess */,
 				AE10F2772518A016000131BE /* XWAKText */,
 				AEA7477C24CFC23B00E4B8E1 /* ViewController */,
@@ -1756,6 +1770,7 @@
 				AEFB1F952599C009001DE05C /* CITriangleKaleidoscope.swift in Sources */,
 				AEFB1F932599C009001DE05C /* CIColorBlendMode.swift in Sources */,
 				AEFB20062599C00A001DE05C /* CIModTransition.swift in Sources */,
+				AE4BCE23260C20A000B0B59D /* XWAKSVGElement.swift in Sources */,
 				AEFB1F6D2599C009001DE05C /* CISixfoldReflectedTile.swift in Sources */,
 				AEFB1FD12599C009001DE05C /* CIDifferenceBlendMode.swift in Sources */,
 				AEFB1FF12599C00A001DE05C /* CIShadedMaterial.swift in Sources */,
@@ -1841,6 +1856,7 @@
 				AEFB1FF02599C00A001DE05C /* CIPhotoEffectInstant.swift in Sources */,
 				AEFB20182599C00A001DE05C /* CITemperatureAndTint.swift in Sources */,
 				AEFB1F6B2599C009001DE05C /* CIGuidedFilter.swift in Sources */,
+				AE4BCE27260C2BEF00B0B59D /* XWAKSVGLoader.swift in Sources */,
 				AEFB1FAC2599C009001DE05C /* CICameraCalibrationLensCorrection.swift in Sources */,
 				AEFB20342599C00A001DE05C /* CIDroste.swift in Sources */,
 				AEF14D45251D895E0022AB88 /* XWAKSpringTimingParameters.swift in Sources */,

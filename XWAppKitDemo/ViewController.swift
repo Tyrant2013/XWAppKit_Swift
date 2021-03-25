@@ -55,6 +55,9 @@ class ViewController: UIViewController {
 //        ])
         tableView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 0, edges: [.all])
         // Do any additional setup after loading the view.
+        
+        let svg = XWAKSVGLoader(fileName: "Data")
+        svg.parse()
     }
 }
 
