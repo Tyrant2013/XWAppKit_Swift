@@ -28,6 +28,7 @@ class ViewController: UIViewController {
             ("Progress", "XWAKProgressViewController"),
             ("Color Picker", "XWAKColorPickerViewController"),
             ("Popup View", "XWAKPopupViewController"),
+            ("SVG", "XWAKSVGViewController"),
             ]
         ),
         ("Filters",[
@@ -56,8 +57,8 @@ class ViewController: UIViewController {
         tableView.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 0, edges: [.all])
         // Do any additional setup after loading the view.
         
-        let svg = XWAKSVGLoader(fileName: "Data")
-        svg.parse()
+//        let svg = XWAKSVGLoader(fileName: "Data")
+//        svg.parse()
     }
 }
 

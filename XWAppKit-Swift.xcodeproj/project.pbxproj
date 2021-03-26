@@ -46,6 +46,12 @@
 		AE881C2E25836DC900FB7F9F /* XWAKHSBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */; };
 		AE881C3225836DD100FB7F9F /* XWAKRGBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */; };
 		AE881C46258744F900FB7F9F /* XWAKColorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE881C45258744F900FB7F9F /* XWAKColorTextField.swift */; };
+		AEA169F1260D8D33006EFD08 /* XWAKSVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA169F0260D8D33006EFD08 /* XWAKSVGPath.swift */; };
+		AEA169F5260DAC15006EFD08 /* XWAKSVGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA169F4260DAC15006EFD08 /* XWAKSVGRect.swift */; };
+		AEA169F9260DAD6B006EFD08 /* XWAKSVGEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA169F8260DAD6B006EFD08 /* XWAKSVGEllipse.swift */; };
+		AEA169FD260DAE25006EFD08 /* XWAKSVGCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA169FC260DAE25006EFD08 /* XWAKSVGCircle.swift */; };
+		AEA16A03260DC194006EFD08 /* XWAKSVGGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA16A02260DC194006EFD08 /* XWAKSVGGroup.swift */; };
+		AEA16A09260DCAB0006EFD08 /* no-data-animate_0.svg in Resources */ = {isa = PBXBuildFile; fileRef = AEA16A08260DCAB0006EFD08 /* no-data-animate_0.svg */; };
 		AEA7471924CA756900E4B8E1 /* XWAppKit_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */; };
 		AEA7471E24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */; };
 		AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -343,6 +349,10 @@
 		AEFB204A2599C0AD001DE05C /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFB20482599C0AC001DE05C /* ImageFilter.swift */; };
 		AEFB204E2599C149001DE05C /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFB204D2599C149001DE05C /* CIFilter.swift */; };
 		AEFB20682599C846001DE05C /* XWAKFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFB20672599C846001DE05C /* XWAKFiltersViewController.swift */; };
+		AEFCB912260D7A8D008C4C72 /* XWAKSVGPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFCB911260D7A8D008C4C72 /* XWAKSVGPolygon.swift */; };
+		AEFCB919260D7C95008C4C72 /* XWAKSVGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFCB918260D7C95008C4C72 /* XWAKSVGViewController.swift */; };
+		AEFCB91F260D7CD7008C4C72 /* XWAKSVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFCB91E260D7CD7008C4C72 /* XWAKSVGView.swift */; };
+		AEFCB923260D7F7F008C4C72 /* XWAKSVGRootElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFCB922260D7F7F008C4C72 /* XWAKSVGRootElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +426,12 @@
 		AE881C2D25836DC900FB7F9F /* XWAKHSBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKHSBView.swift; sourceTree = "<group>"; };
 		AE881C3125836DD100FB7F9F /* XWAKRGBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKRGBView.swift; sourceTree = "<group>"; };
 		AE881C45258744F900FB7F9F /* XWAKColorTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorTextField.swift; sourceTree = "<group>"; };
+		AEA169F0260D8D33006EFD08 /* XWAKSVGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGPath.swift; sourceTree = "<group>"; };
+		AEA169F4260DAC15006EFD08 /* XWAKSVGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGRect.swift; sourceTree = "<group>"; };
+		AEA169F8260DAD6B006EFD08 /* XWAKSVGEllipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGEllipse.swift; sourceTree = "<group>"; };
+		AEA169FC260DAE25006EFD08 /* XWAKSVGCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGCircle.swift; sourceTree = "<group>"; };
+		AEA16A02260DC194006EFD08 /* XWAKSVGGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGGroup.swift; sourceTree = "<group>"; };
+		AEA16A08260DCAB0006EFD08 /* no-data-animate_0.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "no-data-animate_0.svg"; sourceTree = "<group>"; };
 		AEA7470F24CA756900E4B8E1 /* XWAppKit_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XWAppKit_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA7471224CA756900E4B8E1 /* XWAppKit-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XWAppKit-Swift.h"; sourceTree = "<group>"; };
 		AEA7471324CA756900E4B8E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -720,6 +736,10 @@
 		AEFB20482599C0AC001DE05C /* ImageFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFilter.swift; sourceTree = "<group>"; };
 		AEFB204D2599C149001DE05C /* CIFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
 		AEFB20672599C846001DE05C /* XWAKFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKFiltersViewController.swift; sourceTree = "<group>"; };
+		AEFCB911260D7A8D008C4C72 /* XWAKSVGPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGPolygon.swift; sourceTree = "<group>"; };
+		AEFCB918260D7C95008C4C72 /* XWAKSVGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGViewController.swift; sourceTree = "<group>"; };
+		AEFCB91E260D7CD7008C4C72 /* XWAKSVGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGView.swift; sourceTree = "<group>"; };
+		AEFCB922260D7F7F008C4C72 /* XWAKSVGRootElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGRootElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -794,8 +814,9 @@
 		AE4BCE21260C206400B0B59D /* SVG */ = {
 			isa = PBXGroup;
 			children = (
-				AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */,
 				AE4BCE26260C2BEF00B0B59D /* XWAKSVGLoader.swift */,
+				AEFCB91E260D7CD7008C4C72 /* XWAKSVGView.swift */,
+				AEFCB926260D7F89008C4C72 /* Elements */,
 			);
 			path = SVG;
 			sourceTree = "<group>";
@@ -934,6 +955,7 @@
 				AEA7473824CA90FD00E4B8E1 /* ViewController.swift */,
 				AEA7473A24CA90FD00E4B8E1 /* Main.storyboard */,
 				AEA7473D24CA910100E4B8E1 /* Assets.xcassets */,
+				AEA16A08260DCAB0006EFD08 /* no-data-animate_0.svg */,
 				AE10F2892519A604000131BE /* abc.png */,
 				AEF14D60251DE4D30022AB88 /* bcd.png */,
 				AEA7473F24CA910100E4B8E1 /* LaunchScreen.storyboard */,
@@ -953,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA7474F24CAB23600E4B8E1 /* View */,
+				AEFCB918260D7C95008C4C72 /* XWAKSVGViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1419,6 +1442,21 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		AEFCB926260D7F89008C4C72 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */,
+				AEFCB922260D7F7F008C4C72 /* XWAKSVGRootElement.swift */,
+				AEA16A02260DC194006EFD08 /* XWAKSVGGroup.swift */,
+				AEFCB911260D7A8D008C4C72 /* XWAKSVGPolygon.swift */,
+				AEA169F0260D8D33006EFD08 /* XWAKSVGPath.swift */,
+				AEA169F4260DAC15006EFD08 /* XWAKSVGRect.swift */,
+				AEA169F8260DAD6B006EFD08 /* XWAKSVGEllipse.swift */,
+				AEA169FC260DAE25006EFD08 /* XWAKSVGCircle.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1555,6 +1593,7 @@
 				AEF14D61251DE4D30022AB88 /* bcd.png in Resources */,
 				AEA7474124CA910100E4B8E1 /* LaunchScreen.storyboard in Resources */,
 				AEA7473E24CA910100E4B8E1 /* Assets.xcassets in Resources */,
+				AEA16A09260DCAB0006EFD08 /* no-data-animate_0.svg in Resources */,
 				AEA7473C24CA90FD00E4B8E1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1644,6 +1683,7 @@
 				AEF14D8D252343B60022AB88 /* XWAKTextBackground.swift in Sources */,
 				AEFB20032599C00A001DE05C /* CISixfoldRotatedTile.swift in Sources */,
 				AEFB1FE32599C009001DE05C /* CIMorphologyMinimum.swift in Sources */,
+				AEFCB923260D7F7F008C4C72 /* XWAKSVGRootElement.swift in Sources */,
 				AEFB202A2599C00A001DE05C /* CISpotLight.swift in Sources */,
 				AEFB1FC32599C009001DE05C /* CIClamp.swift in Sources */,
 				AEFB1F852599C009001DE05C /* CIScreenBlendMode.swift in Sources */,
@@ -1698,6 +1738,7 @@
 				AEFB1FE62599C009001DE05C /* CIPhotoEffectTonal.swift in Sources */,
 				AEF14D862522CB440022AB88 /* XWAKAttributes.swift in Sources */,
 				AEFB1F922599C009001DE05C /* CISpotColor.swift in Sources */,
+				AEA169FD260DAE25006EFD08 /* XWAKSVGCircle.swift in Sources */,
 				AEFB200A2599C00A001DE05C /* CISmoothLinearGradient.swift in Sources */,
 				AEACCDDB2563B179000847A4 /* XWAKSelectedItemsView.swift in Sources */,
 				AE35524425625B9C007A7296 /* XWAKCollectionListView.swift in Sources */,
@@ -1741,9 +1782,11 @@
 				AEFB202D2599C00A001DE05C /* CIMorphologyRectangleMinimum.swift in Sources */,
 				AEFB1F912599C009001DE05C /* CIMinimumCompositing.swift in Sources */,
 				AEFB20112599C00A001DE05C /* CITwelvefoldReflectedTile.swift in Sources */,
+				AEA16A03260DC194006EFD08 /* XWAKSVGGroup.swift in Sources */,
 				AE5B5119258318B000924F8D /* XWAKColorComponent.swift in Sources */,
 				AEA7476C24CAE66400E4B8E1 /* WindowExtension.swift in Sources */,
 				AEA747AB24D7FE4500E4B8E1 /* XWAKProfileItem.swift in Sources */,
+				AEFCB912260D7A8D008C4C72 /* XWAKSVGPolygon.swift in Sources */,
 				AEA747A424D7E38100E4B8E1 /* UITableViewExtension.swift in Sources */,
 				AEFB1F752599C009001DE05C /* CIAdditionCompositing.swift in Sources */,
 				AE10F28625199265000131BE /* XWAKLine.swift in Sources */,
@@ -1775,11 +1818,13 @@
 				AEFB1FD12599C009001DE05C /* CIDifferenceBlendMode.swift in Sources */,
 				AEFB1FF12599C00A001DE05C /* CIShadedMaterial.swift in Sources */,
 				AEFB1FA32599C009001DE05C /* CIKMeans.swift in Sources */,
+				AEA169F1260D8D33006EFD08 /* XWAKSVGPath.swift in Sources */,
 				AEFB1F882599C009001DE05C /* CIColorCubeWithColorSpace.swift in Sources */,
 				AEFB20442599C00A001DE05C /* CIMedianFilter.swift in Sources */,
 				AEFB1F812599C009001DE05C /* CIThermal.swift in Sources */,
 				AEFB1F862599C009001DE05C /* CIHeightFieldFromMask.swift in Sources */,
 				AE342CBE2604A33F00D3DFAB /* IntExtension.swift in Sources */,
+				AEA169F9260DAD6B006EFD08 /* XWAKSVGEllipse.swift in Sources */,
 				AEFB20142599C00A001DE05C /* CIExclusionBlendMode.swift in Sources */,
 				AEFB1F832599C009001DE05C /* CIAztecCodeGenerator.swift in Sources */,
 				AEFB203C2599C00A001DE05C /* CIDepthToDisparity.swift in Sources */,
@@ -1824,6 +1869,7 @@
 				AEFB203A2599C00A001DE05C /* CISourceInCompositing.swift in Sources */,
 				AEFB1FC62599C009001DE05C /* CIMaximumComponent.swift in Sources */,
 				AEFB202B2599C00A001DE05C /* CICircleSplashDistortion.swift in Sources */,
+				AEA169F5260DAC15006EFD08 /* XWAKSVGRect.swift in Sources */,
 				AEA7472D24CA790B00E4B8E1 /* XWAKSwitchButton.swift in Sources */,
 				AEFB1FF22599C00A001DE05C /* CIMaskToAlpha.swift in Sources */,
 				AEFB200B2599C00A001DE05C /* CIAreaMaximum.swift in Sources */,
@@ -1868,6 +1914,7 @@
 				AEFB1F7B2599C009001DE05C /* CIFourfoldReflectedTile.swift in Sources */,
 				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,
 				AEF83F8F255BEDCC009F454F /* XWAKPhotoBrowerViewController.swift in Sources */,
+				AEFCB91F260D7CD7008C4C72 /* XWAKSVGView.swift in Sources */,
 				AEFB20352599C00A001DE05C /* CIBoxBlur.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1905,6 +1952,7 @@
 				AEFB20682599C846001DE05C /* XWAKFiltersViewController.swift in Sources */,
 				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
 				AE5B510F258306D300924F8D /* XWAKColorPickerViewController.swift in Sources */,
+				AEFCB919260D7C95008C4C72 /* XWAKSVGViewController.swift in Sources */,
 				AE4976CE259D777100E08C16 /* XWAKPopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
