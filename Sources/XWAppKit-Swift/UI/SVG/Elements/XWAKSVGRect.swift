@@ -29,6 +29,6 @@ class XWAKSVGRect: XWAKSVGElement {
     }
     
     override func fillPath() {
-        path = UIBezierPath(rect: .init(x: x, y: y, width: w, height: h))
+        path.addRect(.init(x: x, y: y, width: w, height: h))
     }
 }

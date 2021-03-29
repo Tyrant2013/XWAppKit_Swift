@@ -23,4 +23,12 @@ class XWAKSVGCircle: XWAKSVGElement {
         tagName = "circle"
     }
     
+    override func fillPath() {
+        path.addArc(center: .init(x: cx, y: cy),
+                    radius: CGFloat(r),
+                    startAngle: 0,
+                    endAngle: .pi * 2,
+                    clockwise: true)
+    }
+    
 }

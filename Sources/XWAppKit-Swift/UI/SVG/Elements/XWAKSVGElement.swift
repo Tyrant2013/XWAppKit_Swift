@@ -18,14 +18,16 @@ class XWAKSVGElement {
     var className: String?
     var transform: String?
     var group: String?
-    var path: UIBezierPath = UIBezierPath()
+    var path: CGMutablePath = CGMutablePath()
     var strokeColor: UIColor = .black
     var fillColor: UIColor = .black
+    var strokeWidth: Float = 1.0
     var style: String?
     var elements: [XWAKSVGElement] = []
-    var scale: CGFloat = 1.0
+    var scale: Float = 1.0
     
     var transform_origin: CGPoint = .zero
+    var opacity: Float = 1.0
     
     required init(dict: [String: String]) {
         title = dict["title"]
@@ -34,6 +36,7 @@ class XWAKSVGElement {
         transform = dict["transform"]
         group = ""
         style = dict["style"]
+        
         fillPath()
         
         if let style = style {
@@ -41,6 +44,18 @@ class XWAKSVGElement {
             let skippedSet = CharacterSet(charactersIn: " :;,\n()")
             scan.charactersToBeSkipped = skippedSet
             var name: NSString?
+            if scan.scanString("opacity", into: &name) && name != nil {
+                var num: Float = 0
+                if scan.scanFloat(&num) {
+                    opacity = num
+                }
+            }
+            if scan.scanString("stroke-width", into: &name) && name != nil {
+                var num: Float = 0
+                if scan.scanFloat(&num) {
+                    strokeWidth = num
+                }
+            }
             if scan.scanString("fill", into: &name) && name != nil {
                 var num: Double = 0
                 var nums: [Double] = []
@@ -74,6 +89,7 @@ class XWAKSVGElement {
                 scan.scanDouble(&y)
                 transform_origin = .init(x: x, y: y)
             }
+            
         }
     }
     

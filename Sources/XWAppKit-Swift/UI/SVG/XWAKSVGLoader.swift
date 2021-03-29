@@ -40,17 +40,21 @@ final class XWAKSVGLoader: NSObject {
     
     public var elements = [XWAKSVGElement]()
     public var root: XWAKSVGRootElement!
+    public var style: XWAKSVGStyle?
     private var stack = Stack<XWAKSVGElement>()
+    
+    private var currentTag: String = ""
 }
 
 extension XWAKSVGLoader: XMLParserDelegate {
     public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        currentTag = elementName
         switch elementName {
         case "svg":
             root = XWAKSVGRootElement(dict: attributeDict)
             stack.push(root)
         case "style":
-            print("style start")
+            style = XWAKSVGStyle()
         case "g":
             let group = XWAKSVGGroup(dict: attributeDict)
             stack.push(group)
@@ -104,5 +108,34 @@ extension XWAKSVGLoader: XMLParserDelegate {
     
     public func parserDidEndDocument(_ parser: XMLParser) {
         delegate?.loaderDidEnd(self)
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if currentTag == "style" && string.count > 0 {
+            style?.valueString = string
+            do {
+                let rules = string.components(separatedBy: "@")
+                let regexp = try NSRegularExpression(pattern: "/\\*.*?\\*/", options: .dotMatchesLineSeparators)
+                print(rules[0])
+                let str = regexp.stringByReplacingMatches(in: rules[0], options: .reportProgress, range: NSRange(location: 0, length: rules[0].count), withTemplate: "")
+                let classNameAndStyleStrings = str.components(separatedBy: CharacterSet(charactersIn: "}"))
+                print("will print css style property!")
+                for idStyleString in classNameAndStyleStrings {
+                    print("css: ", idStyleString)
+                    let rule = idStyleString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    if rule.count > 0 {
+                        let stringSplitContainer = rule.components(separatedBy: "{")
+                        print("name: ", stringSplitContainer[0])
+                        print("value: ", stringSplitContainer[1])
+                    }
+                }
+                for index in 1..<rules.count {
+                    print("keyframes: ", rules[index])
+                }
+            }
+            catch {
+                print(error)
+            }
+        }
     }
 }

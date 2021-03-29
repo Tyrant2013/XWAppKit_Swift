@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE012EF52611B4AA007003C1 /* XWAKSVGStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE012EF42611B4AA007003C1 /* XWAKSVGStyle.swift */; };
 		AE10F257251493FF000131BE /* XWAKAnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */; };
 		AE10F2632514A027000131BE /* XWAKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F2622514A027000131BE /* XWAKLabel.swift */; };
 		AE10F2672514A03E000131BE /* XWAKTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10F2662514A03E000131BE /* XWAKTextView.swift */; };
@@ -387,6 +388,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AE012EF42611B4AA007003C1 /* XWAKSVGStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSVGStyle.swift; sourceTree = "<group>"; };
 		AE10F256251493FF000131BE /* XWAKAnimatedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKAnimatedImageView.swift; sourceTree = "<group>"; };
 		AE10F2622514A027000131BE /* XWAKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLabel.swift; sourceTree = "<group>"; };
 		AE10F2662514A03E000131BE /* XWAKTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextView.swift; sourceTree = "<group>"; };
@@ -1446,6 +1448,7 @@
 			isa = PBXGroup;
 			children = (
 				AE4BCE22260C20A000B0B59D /* XWAKSVGElement.swift */,
+				AE012EF42611B4AA007003C1 /* XWAKSVGStyle.swift */,
 				AEFCB922260D7F7F008C4C72 /* XWAKSVGRootElement.swift */,
 				AEA16A02260DC194006EFD08 /* XWAKSVGGroup.swift */,
 				AEFCB911260D7A8D008C4C72 /* XWAKSVGPolygon.swift */,
@@ -1910,6 +1913,7 @@
 				AEFB1FBD2599C009001DE05C /* CIDepthBlurEffect.swift in Sources */,
 				AE10F2672514A03E000131BE /* XWAKTextView.swift in Sources */,
 				AEFB1FA02599C009001DE05C /* CICheckerboardGenerator.swift in Sources */,
+				AE012EF52611B4AA007003C1 /* XWAKSVGStyle.swift in Sources */,
 				AEFB1FB52599C009001DE05C /* CIDarkenBlendMode.swift in Sources */,
 				AEFB1F7B2599C009001DE05C /* CIFourfoldReflectedTile.swift in Sources */,
 				AEA7476A24CAE15100E4B8E1 /* XWAKAlert.swift in Sources */,

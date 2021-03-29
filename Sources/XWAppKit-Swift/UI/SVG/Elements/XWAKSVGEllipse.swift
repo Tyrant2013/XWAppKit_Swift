@@ -25,4 +25,8 @@ class XWAKSVGEllipse: XWAKSVGElement {
         super.init(dict: dict)
         tagName = "ellipse"
     }
+    
+    override func fillPath() {
+        path.addEllipse(in: .init(x: cx - rx, y: cy - ry, width: rx * 2, height: ry * 2))
+    }
 }

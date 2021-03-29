@@ -44,10 +44,10 @@ public class XWAKSVGView: UIView {
         if loader != nil {
             let w = bounds.width / loader!.root.viewBox.width
             let h = bounds.height / loader!.root.viewBox.height
-            drawNode(loader!.root, deep: 0, widthScale: w, heightScale: h)
+            let rootLayer = drawNode(loader!.root, deep: 0, widthScale: w, heightScale: h)
+            layer.addSublayer(rootLayer)
         }
     }
-
 }
 
 extension XWAKSVGView: XWAKSVGLoaderDelegate {
@@ -59,19 +59,21 @@ extension XWAKSVGView: XWAKSVGLoaderDelegate {
 
     }
     
-    func drawNode(_ ele: XWAKSVGElement, deep: Int, widthScale: CGFloat = 1.0, heightScale: CGFloat = 1.0) {
+    func drawNode(_ ele: XWAKSVGElement, deep: Int, widthScale: CGFloat = 1.0, heightScale: CGFloat = 1.0) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.frame = bounds
-        layer.path = ele.path.cgPath
+        layer.path = ele.path.copy()
         layer.lineWidth = 1
         layer.strokeColor = ele.strokeColor.cgColor
         layer.fillColor = ele.fillColor.cgColor
+        layer.opacity = ele.opacity
         
-        self.layer.addSublayer(layer)
-        layer.transform = CATransform3DScale(layer.transform, widthScale, heightScale, 1.0)
+//        layer.transform = CATransform3DScale(layer.transform, widthScale, heightScale, 1.0)
         
         for subEle in ele.children {
-            drawNode(subEle, deep: deep + 1)
+            let subLayer = drawNode(subEle, deep: deep + 1)
+            layer.addSublayer(subLayer)
         }
+        return layer
     }
 }
