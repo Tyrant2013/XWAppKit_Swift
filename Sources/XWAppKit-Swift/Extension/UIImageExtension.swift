@@ -60,4 +60,26 @@ public extension UIImage {
         
         return UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
     }
+    
+    subscript(x: Int, y: Int) -> UIColor? {
+        guard x < 0 || x > Int(size.width) || y < 0 || y > Int(size.height) else { return nil }
+        let provider = cgImage!.dataProvider
+        let providerData = provider!.data
+        let data = CFDataGetBytePtr(providerData!)
+        let numberOfComponents = 4
+        let pixelData = ((Int(size.width) * y) + x) * numberOfComponents
+        let r = CGFloat(data![pixelData]) / 255.0
+        let g = CGFloat(data![pixelData + 1]) / 255.0
+        let b = CGFloat(data![pixelData] + 2) / 255.0
+        let a = CGFloat(data![pixelData] + 3) / 255.0
+        
+        return UIColor(displayP3Red: r, green: g, blue: b, alpha: a)
+    }
+    
+    subscript(x: CGFloat, y: CGFloat) -> UIColor? {
+        guard x < 0 || x > size.width || y < 0 || y > size.height else { return nil }
+        let x = Int(x)
+        let y = Int(y)
+        return self[x, y]
+    }
 }
