@@ -11,9 +11,9 @@ import UIKit
 class XWAKSVGStyle: NSObject {
     public var valueString: String? {
         didSet {
-            if let value = valueString {
-                fatalError("nothing will do")
-            }
+//            if let value = valueString {
+//                fatalError("nothing will do")
+//            }
         }
     }
 }

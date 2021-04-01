@@ -64,10 +64,27 @@ public extension UIImage {
     
     func colors(around point: CGPoint, radius: Int, dis: Int) -> [UIColor] {
         var colors = [UIColor]()
-        guard let imageData = cgImage?.dataProvider?.data,
-              let imagePtr = CFDataGetBytePtr(imageData) else { return colors }
+//        guard let imageData = cgImage?.dataProvider?.data,
+//              let imagePtr = CFDataGetBytePtr(imageData) else { return colors }
         let width = Int(size.width)
         let height = Int(size.height)
+        var pixelData = [UInt8](repeating: 0, count: width * height * 4)
+        pixelData.withUnsafeMutableBytes { pointer in
+            if let context = CGContext(data: pointer.baseAddress,
+                                       width: width,
+                                       height: height,
+                                       bitsPerComponent: 8,
+                                       bytesPerRow: width * 4,
+                                       space: CGColorSpaceCreateDeviceRGB(),
+                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+               let cc = self.cgImage {
+                context.setBlendMode(.copy)
+//                context.translateBy(x: 0, y: -size.height)
+                context.draw(cc, in: .init(origin: .zero, size: size))
+            }
+        }
+        
+        
         let (lx, ly) = (Int(trunc(point.x)), Int(trunc(point.y)))
         for yIndex in -radius...radius {
             for xIndex in -radius...radius {
@@ -78,11 +95,15 @@ public extension UIImage {
                     continue
                 }
                 let index = (y * width + x) * 4
-                let rgba = imagePtr.advanced(by: index)
-                let red = CGFloat(rgba.pointee) / 255.0
-                let green = CGFloat(rgba.advanced(by: 1).pointee) / 255.0
-                let blue = CGFloat(rgba.advanced(by: 2).pointee) / 255.0
-                let alpha = CGFloat(rgba.advanced(by: 3).pointee) / 255.0
+//                let rgba = imagePtr.advanced(by: index)
+//                let red = CGFloat(rgba.pointee) / 255.0
+//                let green = CGFloat(rgba.advanced(by: 1).pointee) / 255.0
+//                let blue = CGFloat(rgba.advanced(by: 2).pointee) / 255.0
+//                let alpha = CGFloat(rgba.advanced(by: 3).pointee) / 255.0
+                let red = CGFloat(pixelData[index]) / 255.0
+                let green = CGFloat(pixelData[index + 1]) / 255.0
+                let blue = CGFloat(pixelData[index + 2]) / 255.0
+                let alpha = CGFloat(pixelData[index + 3]) / 255.0
                 let color = UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
                 colors.append(color)
             }
@@ -93,18 +114,39 @@ public extension UIImage {
     subscript(x: Int, y: Int) -> UIColor? {
         let (width, height) = (Int(size.width), Int(size.height))
         guard !(x < 0 || x > width || y < 0 || y > height) else { return nil }
-        guard let provider = cgImage?.dataProvider,
-              let imageData = provider.data,
-              let imagePtr = CFDataGetBytePtr(imageData) else { return nil }
+//        guard let provider = cgImage?.dataProvider,
+//              let imageData = provider.data,
+//              let imagePtr = CFDataGetBytePtr(imageData) else { return nil }
+        
+        var pixelData = [UInt8](repeating: 0, count: width * height * 4)
+        pixelData.withUnsafeMutableBytes { pointer in
+            if let context = CGContext(data: pointer.baseAddress,
+                                       width: width,
+                                       height: height,
+                                       bitsPerComponent: 8,
+                                       bytesPerRow: width * 4,
+                                       space: CGColorSpaceCreateDeviceRGB(),
+                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+               let cc = self.cgImage {
+                context.setBlendMode(.copy)
+//                context.translateBy(x: 0, y: -size.height)
+                context.draw(cc, in: .init(origin: .zero, size: size))
+            }
+        }
         
         let numberOfComponents = 4
         let index = (y * width + x) * numberOfComponents
-        let rgba = imagePtr.advanced(by: index)
+//        let rgba = imagePtr.advanced(by: index)
         
-        let r = CGFloat(rgba.pointee) / 255.0
-        let g = CGFloat(rgba.advanced(by: 1).pointee) / 255.0
-        let b = CGFloat(rgba.advanced(by: 2).pointee) / 255.0
-        let a = CGFloat(rgba.advanced(by: 3).pointee) / 255.0
+//        let r = CGFloat(rgba.pointee) / 255.0
+//        let g = CGFloat(rgba.advanced(by: 1).pointee) / 255.0
+//        let b = CGFloat(rgba.advanced(by: 2).pointee) / 255.0
+//        let a = CGFloat(rgba.advanced(by: 3).pointee) / 255.0
+
+        let r = CGFloat(pixelData[index]) / 255.0
+        let g = CGFloat(pixelData[index + 1]) / 255.0
+        let b = CGFloat(pixelData[index + 2]) / 255.0
+        let a = CGFloat(pixelData[index + 3]) / 255.0
         
         return UIColor(displayP3Red: r, green: g, blue: b, alpha: a)
     }
