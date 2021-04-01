@@ -92,7 +92,7 @@ public extension UIImage {
     
     subscript(x: Int, y: Int) -> UIColor? {
         let (width, height) = (Int(size.width), Int(size.height))
-        guard !(x > 0 || x > width || y < 0 || y > height) else { return nil }
+        guard !(x < 0 || x > width || y < 0 || y > height) else { return nil }
         guard let provider = cgImage?.dataProvider,
               let imageData = provider.data,
               let imagePtr = CFDataGetBytePtr(imageData) else { return nil }
