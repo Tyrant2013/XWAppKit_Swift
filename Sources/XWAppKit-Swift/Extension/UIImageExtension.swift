@@ -62,7 +62,7 @@ public extension UIImage {
         return self[pos.x, pos.y] ?? .clear
     }
     
-    func clors(around point: CGPoint, radius: Int, dis: Int) -> [UIColor] {
+    func colors(around point: CGPoint, radius: Int, dis: Int) -> [UIColor] {
         var colors = [UIColor]()
         guard let imageData = cgImage?.dataProvider?.data,
               let imagePtr = CFDataGetBytePtr(imageData) else { return colors }
