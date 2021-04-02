@@ -33,36 +33,62 @@ public extension UIImage {
         return UIImage(named: name, in: bundle, compatibleWith: nil)
     }
     
+    func loadPixels() -> [UInt8] {
+        let orientation = imageOrientation
+        var tt = CGAffineTransform.identity
+        let realSize = imageOrientationUpSize()
+        let (width, height) = (Int(realSize.width), Int(realSize.height))
+        switch orientation {
+        case .up:
+            print("正的， 不用改")
+        case .left, .leftMirrored:
+            tt = tt.translatedBy(x: realSize.width, y: 0).rotated(by: .pi / 2)
+            print("向左旋转90度")
+        case .right, .rightMirrored:
+            tt = tt.translatedBy(x: 0, y: realSize.height).rotated(by: -.pi / 2)
+            print("向右旋转90度")
+        case .down, .downMirrored:
+            tt = tt.translatedBy(x: size.width, y: size.height).rotated(by: .pi)
+            print("上下颠倒")
+        default:
+            print("不用修改")
+        }
+        
+        var pixelData: [UInt8] = [UInt8](repeating: 0, count: width * height * 4)
+        let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
+        pixelData.withUnsafeMutableBytes { pointer in
+            if let ctx = CGContext(data: pointer.baseAddress,
+                                width: width,
+                                height: height,
+                                bitsPerComponent: 8,
+                                bytesPerRow: width * 4,
+                                space: CGColorSpaceCreateDeviceRGB(),
+                                bitmapInfo: bitmapInfo),
+               let cgImage = cgImage {
+                ctx.concatenate(tt)
+                ctx.draw(cgImage, in: .init(origin: .zero, size: size))
+            }
+        }
+        return pixelData
+    }
+    
+    func imageOrientationUpSize() -> CGSize {
+        let orientation = imageOrientation
+        let (width, height): (CGFloat, CGFloat)
+        switch orientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            (width, height) = (size.height, size.width)
+        default:
+            (width, height) = (size.width, size.height)
+        }
+        return .init(width: width, height: height)
+    }
+    
     func color(from pos: CGPoint) -> UIColor {
-//        let (pointX, pointY) = (trunc(pos.x), trunc(pos.y))
-//
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        var pixelData: [UInt8] = [0, 0, 0, 0]
-//        pixelData.withUnsafeMutableBytes { pointer in
-//            if let context = CGContext(data: pointer.baseAddress,
-//                                       width: 1,
-//                                       height: 1,
-//                                       bitsPerComponent: 8,
-//                                       bytesPerRow: 4,
-//                                       space: colorSpace,
-//                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
-//               let cgImage = cgImage {
-//                context.setBlendMode(.copy)
-//                context.translateBy(x: -pointX, y: pointY - size.height)
-//                context.draw(cgImage, in: .init(origin: .zero, size: size))
-//            }
-//        }
-//
-//        let red = CGFloat(pixelData[0]) / 255.0
-//        let green = CGFloat(pixelData[1]) / 255.0
-//        let blue = CGFloat(pixelData[2]) / 255.0
-//        let alpha = CGFloat(pixelData[3]) / 255.0
-//
-//        return UIColor(displayP3Red: red, green: green, blue: blue, alpha: alpha)
         return self[pos.x, pos.y] ?? .clear
     }
     
-    func colors(around point: CGPoint, radius: Int, dis: Int) -> [UIColor] {
+    func colors(around point: CGPoint, radius: Int, disScale: Int) -> [UIColor] {
         var colors = [UIColor]()
         guard let imageData = cgImage?.dataProvider?.data,
               let imagePtr = CFDataGetBytePtr(imageData) else { return colors }
@@ -73,8 +99,8 @@ public extension UIImage {
         let (lx, ly) = (Int(trunc(point.x)), Int(trunc(point.y)))
         for yIndex in -radius...radius {
             for xIndex in -radius...radius {
-                let x = lx + xIndex * dis
-                let y = ly + yIndex * dis
+                let x = lx + xIndex * disScale
+                let y = ly + yIndex * disScale
                 if x < 0 || y < 0 || x > width || y > height {
                     colors.append(.black)
                     continue
