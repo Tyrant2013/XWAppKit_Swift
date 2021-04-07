@@ -33,6 +33,47 @@ public extension UIImage {
         return UIImage(named: name, in: bundle, compatibleWith: nil)
     }
     
+    func fixOrientation() -> UIImage {
+        guard imageOrientation != .up else {
+            return self
+        }
+        var tt = CGAffineTransform.identity
+        let realSize = imageOrientationUpSize()
+        switch imageOrientation {
+        case .left, .leftMirrored:
+            tt = tt.translatedBy(x: realSize.width, y: 0).rotated(by: .pi / 2)
+        case .right, .rightMirrored:
+            tt = tt.translatedBy(x: 0, y: realSize.height).rotated(by: -.pi / 2)
+        case .down, .downMirrored:
+            tt = tt.translatedBy(x: realSize.width, y: realSize.height).rotated(by: .pi)
+        default:
+            tt = .identity
+        }
+        
+        if let ctx = CGContext(data: nil,
+                               width: Int(realSize.width),
+                               height: Int(realSize.height),
+                               bitsPerComponent: cgImage!.bitsPerComponent,
+                               bytesPerRow: Int(realSize.width) * 8,
+                               space: cgImage!.colorSpace!,
+                               bitmapInfo: cgImage!.bitmapInfo.rawValue) {
+            ctx.concatenate(tt)
+            if let ii = ctx.makeImage() {
+                return UIImage(cgImage: ii)
+            }
+        }
+//        defer {
+//            UIGraphicsEndImageContext()
+//        }
+//        UIGraphicsBeginImageContext(realSize)
+//        if let ctx = UIGraphicsGetCurrentContext() {
+//            ctx.concatenate(tt)
+//            ctx.draw(cgImage!, in: .init(origin: .zero, size: realSize))
+//            return UIGraphicsGetImageFromCurrentImageContext() ?? self
+//        }
+        return self
+    }
+    
     func loadPixels() -> [UInt8] {
         let orientation = imageOrientation
         var tt = CGAffineTransform.identity
