@@ -9,6 +9,8 @@
 import UIKit
 import Foundation
 
+private class BundleFinder {}
+
 public extension UIImage {
     static func make(byRoundingCorners corners: UIRectCorner, radius: CGFloat) -> UIImage? {
         let rect = CGRect(origin: .zero, size: CGSize(width: radius * 2 + 1, height: radius * 2 + 1))
@@ -26,13 +28,41 @@ public extension UIImage {
     }
     
     static func xwak_frameImage(name: String) -> UIImage? {
-//        let bundle = Bundle(for: XWAKPhotoKit.self)
-//        let image = UIImage(named: name)
-//        if image != nil {
-//            return image
-//        }
-//        return UIImage(named: name, in: bundle, compatibleWith: nil)
-        return UIImage(named: name, in: .module, compatibleWith: nil)
+        
+        if let bundle = bundleFromModule() {
+            return UIImage(named: name, in: bundle, compatibleWith: nil)
+        }
+        else {
+            let bundle = Bundle(for: XWAKPhotoKit.self)
+            let image = UIImage(named: name)
+            if image != nil {
+                return image
+            }
+            return UIImage(named: name, in: bundle, compatibleWith: nil)
+        }
+    }
+    
+    fileprivate static func bundleFromModule() -> Bundle? {
+        let bundleName = "XWAppKit-Swift_XWAppKit-Swift"
+
+        let candidates = [
+            // Bundle should be present here when the package is linked into an App.
+            Bundle.main.resourceURL,
+
+            // Bundle should be present here when the package is linked into a framework.
+            Bundle(for: BundleFinder.self).resourceURL,
+
+            // For command-line tools.
+            Bundle.main.bundleURL,
+        ]
+
+        for candidate in candidates {
+            let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
+            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
+                return bundle
+            }
+        }
+        return nil
     }
     
     func fixOrientation() -> UIImage {
