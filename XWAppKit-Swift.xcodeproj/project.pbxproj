@@ -863,7 +863,6 @@
 		AEA7470524CA756900E4B8E1 = {
 			isa = PBXGroup;
 			children = (
-				AE4224CB25A8014600C68C88 /* UIDeviceExtension.swift */,
 				AEA7478624D1186900E4B8E1 /* AntiDebug */,
 				AEA7471124CA756900E4B8E1 /* XWAppKit-Swift */,
 				AEA7471C24CA756900E4B8E1 /* XWAppKit-SwiftTests */,
@@ -1042,6 +1041,7 @@
 		AEA7475B24CAC93200E4B8E1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AE4224CB25A8014600C68C88 /* UIDeviceExtension.swift */,
 				AEA7475C24CAC9BF00E4B8E1 /* DictionaryExtension.swift */,
 				AEA7475E24CACBF700E4B8E1 /* StringExtension.swift */,
 				AEA7476524CAD33100E4B8E1 /* UIColorExtension.swift */,

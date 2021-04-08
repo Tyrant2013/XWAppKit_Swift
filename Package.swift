@@ -9,7 +9,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "XWAppKit-Swift.framework",
+            name: "XWAppKit-Swift",
             targets: ["XWAppKit-Swift"]),
     ],
     dependencies: [
@@ -22,10 +22,10 @@ let package = Package(
         .target(
             name: "XWAppKit-Swift",
             dependencies: [],
-            exclude: ["Info.plist"],
-            resources: [.copy("Resources.xcassets")]),
+            exclude: ["Info.plist"]),
         .testTarget(
             name: "XWAppKit-SwiftTests",
-            dependencies: ["XWAppKit-Swift"]),
+            dependencies: ["XWAppKit-Swift"],
+            exclude: ["Info.plist"]),
     ]
 )

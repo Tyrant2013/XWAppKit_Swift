@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 public extension UIImage {
     static func make(byRoundingCorners corners: UIRectCorner, radius: CGFloat) -> UIImage? {
@@ -25,12 +26,13 @@ public extension UIImage {
     }
     
     static func xwak_frameImage(name: String) -> UIImage? {
-        let bundle = Bundle(for: XWAKPhotoKit.self)
-        let image = UIImage(named: name)
-        if image != nil {
-            return image
-        }
-        return UIImage(named: name, in: bundle, compatibleWith: nil)
+//        let bundle = Bundle(for: XWAKPhotoKit.self)
+//        let image = UIImage(named: name)
+//        if image != nil {
+//            return image
+//        }
+//        return UIImage(named: name, in: bundle, compatibleWith: nil)
+        return UIImage(named: name, in: .module, compatibleWith: nil)
     }
     
     func fixOrientation() -> UIImage {
