@@ -913,7 +913,8 @@
 				AEA7471D24CA756900E4B8E1 /* XWAppKit-SwiftTests.swift */,
 				AEA7471F24CA756900E4B8E1 /* Info.plist */,
 			);
-			path = "XWAppKit-SwiftTests";
+			name = "XWAppKit-SwiftTests";
+			path = "Tests/XWAppKit-SwiftTests";
 			sourceTree = "<group>";
 		};
 		AEA7472924CA785100E4B8E1 /* UI */ = {
