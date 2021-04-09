@@ -29,6 +29,7 @@ class ViewController: UIViewController {
             ("Color Picker", "XWAKColorPickerViewController"),
             ("Popup View", "XWAKPopupViewController"),
             ("SVG", "XWAKSVGViewController"),
+            ("Doughnut View", "XWAKColorPickerDoughnutViewController"),
             ]
         ),
         ("Filters",[

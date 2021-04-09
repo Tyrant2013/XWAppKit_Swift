@@ -53,6 +53,10 @@ public extension CGPoint {
         
         return sqrt(dx * dx + dy * dy)
     }
+    
+    func roundPoint() -> CGPoint {
+        return .init(x: round(x), y: round(y))
+    }
 }
 
 public extension CGPoint {

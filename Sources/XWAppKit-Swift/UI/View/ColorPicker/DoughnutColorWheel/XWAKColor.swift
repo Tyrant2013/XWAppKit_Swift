@@ -18,6 +18,12 @@ public class XWAKColor {
     private(set) var green: CGFloat = 0.0
     private(set) var blue: CGFloat = 0.0
     
+    var opaqueColor: UIColor {
+        get {
+            return UIColor(displayP3Red: red, green: green, blue: blue, alpha: 1.0)
+        }
+    }
+    
     private func HSVToRGB(h: CGFloat, s: CGFloat, v: CGFloat, r: inout CGFloat, g: inout CGFloat, b: inout CGFloat) {
         if s == 0.0 {
             (r, g, b) = (v, v, v)
@@ -95,5 +101,11 @@ public class XWAKColor {
         self.alpha = alpha.clamped(to: 0.0...1.0)
         RGBToHSV(r: red, g: green, b: blue, h: &hue, s: &saturation, v: &brightness)
     }
+    
+    
+}
+
+extension XWAKColor {
+    static let white = XWAKColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 }
 
