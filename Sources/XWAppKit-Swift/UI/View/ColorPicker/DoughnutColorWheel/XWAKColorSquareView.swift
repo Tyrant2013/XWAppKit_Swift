@@ -12,7 +12,7 @@ import MetalKit
 public class XWAKColorSquareView: MTKView {
     private var pipelineState: MTLRenderPipelineState?
     private var vertexBuffer: MTLBuffer?
-    private var uniformsBuffer: MTLBuffer?
+//    private var uniformsBuffer: MTLBuffer?
     private var commandQueue: MTLCommandQueue?
     
     override init(frame frameRect: CGRect, device: MTLDevice?) {
@@ -55,15 +55,15 @@ public class XWAKColorSquareView: MTKView {
             
             vertexBuffer = device.makeBuffer(bytes: v, length: MemoryLayout<Float>.size * v.count, options: [])
             
-            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.size, options: [])
-            let uniforms = uniformsBuffer!.contents().assumingMemoryBound(to: Uniforms.self)
-            uniforms.pointee.hue = 1.0
-            uniforms.pointee.modelViewProjectionMatrix = matrix_load(left: 0,
-                                                                     right: Float(bounds.width),
-                                                                     bottom: 0,
-                                                                     top: Float(bounds.height),
-                                                                     near: -1.0,
-                                                                     far: 1.0)
+//            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.size, options: [])
+//            let uniforms = uniformsBuffer!.contents().assumingMemoryBound(to: Uniforms.self)
+//            uniforms.pointee.hue = 1.0
+//            uniforms.pointee.modelViewProjectionMatrix = matrix_load(left: 0,
+//                                                                     right: Float(bounds.width),
+//                                                                     bottom: 0,
+//                                                                     top: Float(bounds.height),
+//                                                                     near: -1.0,
+//                                                                     far: 1.0)
             commandQueue = device.makeCommandQueue()
         }
     }
@@ -94,7 +94,7 @@ public class XWAKColorSquareView: MTKView {
     public override func draw(_ rect: CGRect) {
         if let currentDrawable = currentDrawable,
            let vertexBuffer = self.vertexBuffer,
-           let uniformsBuffer = self.uniformsBuffer,
+//           let uniformsBuffer = self.uniformsBuffer,
            let commandQueue = self.commandQueue,
            let renderPassDesc = currentRenderPassDescriptor,
            let pipeline = pipelineState {
@@ -105,8 +105,8 @@ public class XWAKColorSquareView: MTKView {
             renderEncoder.setFrontFacing(.counterClockwise)
             renderEncoder.setRenderPipelineState(pipeline)
             renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-            renderEncoder.setVertexBuffer(uniformsBuffer, offset: 0, index: 1)
-            renderEncoder.setFragmentBuffer(uniformsBuffer, offset: 0, index: 1)
+//            renderEncoder.setVertexBuffer(uniformsBuffer, offset: 0, index: 1)
+//            renderEncoder.setFragmentBuffer(uniformsBuffer, offset: 0, index: 1)
 
             renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
             renderEncoder.endEncoding()
