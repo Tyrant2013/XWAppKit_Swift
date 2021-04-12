@@ -8,16 +8,12 @@
 
 #include <metal_stdlib>
 using namespace metal;
+#include "ShaderTypes.h"
 
 struct Vertex {
     float4 position [[position]];
     float2 textureCoordinate [[user(texturecoord)]];
 };
-
-typedef struct
-{
-    float hue;
-} Uniforms;
 
 vertex Vertex vertexFunction(const device packed_float2 *position [[buffer(0)]],
                              uint vid [[vertex_id]]) {
@@ -29,7 +25,7 @@ vertex Vertex vertexFunction(const device packed_float2 *position [[buffer(0)]],
 
 fragment half4 fragmentFunction(Vertex input [[stage_in]],
                                 constant Uniforms &uniforms [[buffer(1)]]) {
-    half4 color = half4(1.0, 0.0, 1.0, 1.0);
+    half4 color = half4(1.0, 0.0, 0.0, 0.0) * uniforms.hue;
     return color;
 }
 

@@ -11,9 +11,12 @@ import MetalKit
 
 public class XWAKColorSquareView: MTKView {
     private var pipelineState: MTLRenderPipelineState?
+    private var vertexBuffer: MTLBuffer?
+    private var uniformsBuffer: MTLBuffer?
+    private var commandQueue: MTLCommandQueue?
     
     override init(frame frameRect: CGRect, device: MTLDevice?) {
-        super.init(frame: frameRect, device: device)
+        super.init(frame: frameRect, device: MTLCreateSystemDefaultDevice())
         self.drawableSize = .init(width: frameRect.width, height: frameRect.height)
         initViews()
     }
@@ -24,7 +27,7 @@ public class XWAKColorSquareView: MTKView {
     }
     
     private func initViews() {
-        if let device = MTLCreateSystemDefaultDevice() {
+        if let device = self.device {
             self.device = device
             
             let library = device.makeDefaultLibrary()
@@ -43,35 +46,34 @@ public class XWAKColorSquareView: MTKView {
             catch {
                 print(error)
             }
-        }
-    }
-    
-    public override func draw(_ rect: CGRect) {
-        if let currentDrawable = currentDrawable, let device = device, let pipeline = pipelineState {
-            let commandQueue = device.makeCommandQueue()
-            let commandBuffer = commandQueue?.makeCommandBuffer()
+            
             let v: [Float] = [-1.0,  1.0,
                                1.0,  1.0,
                               -1.0, -1.0,
                                1.0, -1.0]
-            let vertexBuffer = device.makeBuffer(bytes: v, length: MemoryLayout<Float>.size * v.count, options: [])!
-            let renderPassDesc = MTLRenderPassDescriptor()
+            vertexBuffer = device.makeBuffer(bytes: v, length: MemoryLayout<Float>.size * v.count, options: [])
             
-            renderPassDesc.colorAttachments[0].texture = currentDrawable.texture
-            renderPassDesc.colorAttachments[0].clearColor = MTLClearColor(red: 1, green: 1, blue: 1, alpha: 1)
-            renderPassDesc.colorAttachments[0].storeAction = .store
-            renderPassDesc.colorAttachments[0].loadAction = .clear
+            uniformsBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.size, options: [])
+            uniformsBuffer!.contents().assumingMemoryBound(to: Uniforms.self).pointee.hue = 1.0
+            commandQueue = device.makeCommandQueue()
+        }
+    }
+    
+    public override func draw(_ rect: CGRect) {
+        if let currentDrawable = currentDrawable,
+           let vertexBuffer = self.vertexBuffer,
+           let uniformsBuffer = self.uniformsBuffer,
+           let commandQueue = self.commandQueue,
+           let renderPassDesc = currentRenderPassDescriptor,
+           let pipeline = pipelineState {
+            
+            let commandBuffer = commandQueue.makeCommandBuffer()
             
             guard let renderEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDesc) else { return }
-//            renderEncoder.setViewport(MTLViewport(originX: 0,
-//                                                  originY: 0,
-//                                                  width: Double(drawableSize.width),
-//                                                  height: Double(drawableSize.height),
-//                                                  znear: -1,
-//                                                  zfar: 1.0))
             renderEncoder.setFrontFacing(.counterClockwise)
             renderEncoder.setRenderPipelineState(pipeline)
             renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+            renderEncoder.setFragmentBuffer(uniformsBuffer, offset: 0, index: 1)
             renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
             renderEncoder.endEncoding()
             

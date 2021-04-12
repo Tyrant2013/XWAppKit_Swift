@@ -47,7 +47,8 @@ class XWAKProgressLayer: CALayer {
         path.stroke()
         
         UIColor.systemOrange.setStroke()
-        let endAngle: CGFloat = (-.pi / 2) + (.pi * 2) * progress
+        let mid: CGFloat = (.pi * 2) * progress
+        let endAngle: CGFloat = (-.pi / 2) + mid
         let progressPath = UIBezierPath(arcCenter: arcCenter,
                                         radius: radius,
                                         startAngle: start,
