@@ -18,8 +18,7 @@
 
 #include <simd/simd.h>
 
-typedef struct
-{
+typedef struct {
     float hue;
 } Uniforms;
 

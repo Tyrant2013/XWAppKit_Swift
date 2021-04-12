@@ -432,7 +432,7 @@
 		AE61733C262007BF00656DEF /* XWAKColorPickerDoughnutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorPickerDoughnutViewController.swift; sourceTree = "<group>"; };
 		AE6173412620414100656DEF /* XWAKColorSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorSquareView.swift; sourceTree = "<group>"; };
 		AE61734526204D8600656DEF /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
-		AE61735A2623D8D700656DEF /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		AE61737C2623F8FC00656DEF /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
 		AE793F7825822C090031D172 /* XWAKColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorWheelView.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
@@ -878,7 +878,7 @@
 				AE84DC36261FF737003836DE /* XWAKColorIndicator.swift */,
 				AE6173412620414100656DEF /* XWAKColorSquareView.swift */,
 				AE61734526204D8600656DEF /* Shader.metal */,
-				AE61735A2623D8D700656DEF /* ShaderTypes.h */,
+				AE61737C2623F8FC00656DEF /* ShaderTypes.h */,
 			);
 			path = DoughnutColorWheel;
 			sourceTree = "<group>";

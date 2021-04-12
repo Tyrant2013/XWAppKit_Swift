@@ -28,7 +28,7 @@ vertex VertexInOut vertexFunction(constant Vertex *vertexArr [[buffer(0)]],
 
 fragment half4 fragmentFunction(VertexInOut input [[stage_in]],
                                 constant Uniforms &uniforms [[buffer(1)]]) {
-    half4 color = half4(1.0, 1.0, 0.0, 0.0) * uniforms.hue;
+    half4 color = half4(1.0, 0.0, 0.0, 1.0) * uniforms.hue;
     return color;
 }
 
