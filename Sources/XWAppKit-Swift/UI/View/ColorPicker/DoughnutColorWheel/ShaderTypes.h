@@ -20,6 +20,7 @@
 
 typedef struct {
     float hue;
+    matrix_float4x4 modelViewProjectionMatrix;
 } Uniforms;
 
 #endif /* ShaderTypes_h */
