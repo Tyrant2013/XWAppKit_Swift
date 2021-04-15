@@ -144,6 +144,10 @@ public class XWAKSwitchButton: UIControl {
     }
     
     private func reset(desiredSelected state: Bool, willBe animated: Bool) {
+        trailCircle.strokeColor = trailStrokeColor.cgColor
+        circle.strokeColor = strokeColor.cgColor
+        checkmark.strokeColor = trailStrokeColor.cgColor
+        
         CATransaction.begin()
         let desiredAndAnimatedOrNot = (state && animated) || (!state && !animated)
         checkmark.strokeEnd     = desiredAndAnimatedOrNot ? 0.0 : finalStrokeEndForCheckmark

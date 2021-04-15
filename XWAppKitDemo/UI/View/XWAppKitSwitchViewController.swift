@@ -18,6 +18,8 @@ class XWAppKitSwitchViewController: UIViewController {
         let btn = XWAKSwitchButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         
+        btn.trailStrokeColor = .orange
+        
         view.addSubview(btn)
         btn.xwak.width(50)
             .height(50)
