@@ -19,6 +19,7 @@ class XWAppKitSwitchViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         
         btn.trailStrokeColor = .orange
+        btn.strokeColor = .red
         
         view.addSubview(btn)
         btn.xwak.width(50)

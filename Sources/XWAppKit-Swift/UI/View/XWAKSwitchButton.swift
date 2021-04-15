@@ -24,9 +24,18 @@ public class XWAKSwitchButton: UIControl {
 
     public var lineWidth: CGFloat = 2.0
     
-    public var strokeColor: UIColor = .black
+    public var strokeColor: UIColor = .black {
+        didSet {
+            circle.strokeColor = strokeColor.cgColor
+        }
+    }
     
-    public var trailStrokeColor: UIColor = .black
+    public var trailStrokeColor: UIColor = .black {
+        didSet {
+            trailCircle.strokeColor = trailStrokeColor.cgColor
+            checkmark.strokeColor = trailStrokeColor.cgColor
+        }
+    }
     
     public var backgroundLayerColor: UIColor = .clear
     
@@ -144,9 +153,6 @@ public class XWAKSwitchButton: UIControl {
     }
     
     private func reset(desiredSelected state: Bool, willBe animated: Bool) {
-        trailCircle.strokeColor = trailStrokeColor.cgColor
-        circle.strokeColor = strokeColor.cgColor
-        checkmark.strokeColor = trailStrokeColor.cgColor
         
         CATransaction.begin()
         let desiredAndAnimatedOrNot = (state && animated) || (!state && !animated)
