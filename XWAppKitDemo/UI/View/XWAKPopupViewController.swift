@@ -16,6 +16,10 @@ class XWAKPopupViewController: UIViewController {
         view.backgroundColor = .white
         
         // Do any additional setup after loading the view.
+        let tt = XWAKPopupTriangleView()
+        tt.frame = CGRect(x: 10, y: 100, width: 60, height: 60)
+        view.addSubview(tt)
+        
         let vv = XWAKPopupView()
         vv.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(vv)

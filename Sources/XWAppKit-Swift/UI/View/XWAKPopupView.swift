@@ -8,7 +8,42 @@
 
 import UIKit
 
+public enum XWAKPopupViewPosition {
+    case left
+    case bottom
+    case right
+    case top
+}
+
+public class XWAKPopupTriangleView: UIView {
+    private lazy var borderLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        self.layer.addSublayer(layer)
+        return layer
+    }()
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let path = UIBezierPath()
+        path.move(to: .init(x: 0, y: bounds.height))
+        path.addCurve(to: .init(x: bounds.width / 2, y: 0),
+                      controlPoint1: .init(x: 20, y: 57),
+                      controlPoint2: .init(x: 18, y: 3))
+//        bounds.width / 2 - 10
+//        bounds.height - 3
+//        bounds.width / 2 - 12
+//        3
+        path.addCurve(to: .init(x: bounds.width, y: bounds.height),
+                      controlPoint1: .init(x: bounds.width / 2 + 14, y: 3),
+                      controlPoint2: .init(x: bounds.width / 2 + 11.5, y: bounds.height - 10))
+        borderLayer.path = path.cgPath
+        borderLayer.fillColor = UIColor.white.cgColor
+        borderLayer.strokeColor = UIColor.black.cgColor
+        borderLayer.lineWidth = 2
+    }
+}
+
 public class XWAKPopupView: UIView {
+    public var arrowPosition: XWAKPopupViewPosition = .top
     public var radius: CGFloat = 10
     public var triangleTopPoint: CGPoint = .init(x: 50, y: 0) {
         didSet {
@@ -33,8 +68,7 @@ public class XWAKPopupView: UIView {
         return layer
     }()
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
+    private func drawTopTriangle() -> CGPath {
         let path = UIBezierPath()
 
         // 左上角
@@ -87,8 +121,25 @@ public class XWAKPopupView: UIView {
                     endAngle: .pi,
                     clockwise: true)
         path.addLine(to: .init(x: 0, y: radius + triangleHeight))
-        
-        borderLayer.path = path.cgPath
+        return path.cgPath
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if arrowPosition == .top {
+            borderLayer.path = drawTopTriangle()
+        }
+        switch arrowPosition {
+        case .left:
+            print("实现中")
+        case .top:
+            borderLayer.path = drawTopTriangle()
+        case .right:
+            print("实现中")
+        case .bottom:
+            print("实现中")
+        }
         borderLayer.fillColor = fillColor.cgColor
     }
 

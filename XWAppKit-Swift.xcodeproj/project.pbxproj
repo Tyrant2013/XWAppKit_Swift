@@ -44,9 +44,11 @@
 		AE6173422620414100656DEF /* XWAKColorSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6173412620414100656DEF /* XWAKColorSquareView.swift */; };
 		AE61734626204D8600656DEF /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = AE61734526204D8600656DEF /* Shader.metal */; };
 		AE6173492620532200656DEF /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = AE61734526204D8600656DEF /* Shader.metal */; };
-		AE61735B2623D8D700656DEF /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = AE61735A2623D8D700656DEF /* ShaderTypes.h */; };
+		AE61735B2623D8D700656DEF /* (null) in Headers */ = {isa = PBXBuildFile; };
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
+		AE72A481262E6F2300341929 /* XWAKBezierToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */; };
 		AE793F7925822C090031D172 /* XWAKColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE793F7825822C090031D172 /* XWAKColorWheelView.swift */; };
+		AE802BC2262EB8E8005BB2F4 /* XWAKBezierConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
 		AE84DBEE261DAA88003836DE /* XWAKDoughnutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84DBED261DAA88003836DE /* XWAKDoughnutView.swift */; };
 		AE84DBF2261DACC2003836DE /* XWAKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84DBF1261DACC2003836DE /* XWAKColor.swift */; };
@@ -434,7 +436,9 @@
 		AE61734526204D8600656DEF /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		AE61737C2623F8FC00656DEF /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		AE6E03D424EA229E0035C519 /* XWAKLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayout.swift; sourceTree = "<group>"; };
+		AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKBezierToolsViewController.swift; sourceTree = "<group>"; };
 		AE793F7825822C090031D172 /* XWAKColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorWheelView.swift; sourceTree = "<group>"; };
+		AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKBezierConfigView.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
 		AE84DBED261DAA88003836DE /* XWAKDoughnutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDoughnutView.swift; sourceTree = "<group>"; };
 		AE84DBF1261DACC2003836DE /* XWAKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColor.swift; sourceTree = "<group>"; };
@@ -855,6 +859,15 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		AE72A484262E724500341929 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */,
+				AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		AE793F7725822BAC0031D172 /* ColorPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,6 +994,7 @@
 				AEA747A824D7EF5800E4B8E1 /* IAP */,
 				AEA747A524D7ED2700E4B8E1 /* Extension */,
 				AEA7474E24CAB23100E4B8E1 /* UI */,
+				AE72A484262E724500341929 /* Tools */,
 				AEA7473424CA90FD00E4B8E1 /* AppDelegate.swift */,
 				AEA7473624CA90FD00E4B8E1 /* SceneDelegate.swift */,
 				AEA7473824CA90FD00E4B8E1 /* ViewController.swift */,
@@ -1499,7 +1513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA7472024CA756900E4B8E1 /* XWAppKit-Swift.h in Headers */,
-				AE61735B2623D8D700656DEF /* ShaderTypes.h in Headers */,
+				AE61735B2623D8D700656DEF /* (null) in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1936,6 +1950,7 @@
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
 				AEF14D38251D85730022AB88 /* XWAKGeometry.swift in Sources */,
 				AEFB20192599C00A001DE05C /* CIDocumentEnhancer.swift in Sources */,
+				AE802BC2262EB8E8005BB2F4 /* XWAKBezierConfigView.swift in Sources */,
 				AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */,
 				AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */,
 				AEFB1FF02599C00A001DE05C /* CIPhotoEffectInstant.swift in Sources */,
@@ -1987,6 +2002,7 @@
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
 				AE6173492620532200656DEF /* Shader.metal in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
+				AE72A481262E6F2300341929 /* XWAKBezierToolsViewController.swift in Sources */,
 				AEB4297B25315334003FDB13 /* XWAKSquareGridViewController.swift in Sources */,
 				AEF14D5D251DE3E80022AB88 /* XWAKClipedImageViewController.swift in Sources */,
 				AEA7473724CA90FD00E4B8E1 /* SceneDelegate.swift in Sources */,

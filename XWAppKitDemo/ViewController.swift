@@ -12,6 +12,7 @@ import XWAppKit_Swift
 class ViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let dataSources = [
+        ("工具",[("贝塞尔曲线", "XWAKBezierToolsViewController")]),
         ("Extension", [
             ("TableView", "XWAKTableViewExtensionViewController")
             ]
@@ -40,7 +41,8 @@ class ViewController: UIViewController {
             ]
         ),
         ("IAP", [("iap", "XWAKIAPViewController")]
-        )
+        ),
+        
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
