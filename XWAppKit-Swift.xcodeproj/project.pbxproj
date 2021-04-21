@@ -48,7 +48,8 @@
 		AE6E03D524EA229F0035C519 /* XWAKLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E03D424EA229E0035C519 /* XWAKLayout.swift */; };
 		AE72A481262E6F2300341929 /* XWAKBezierToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */; };
 		AE793F7925822C090031D172 /* XWAKColorWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE793F7825822C090031D172 /* XWAKColorWheelView.swift */; };
-		AE802BC2262EB8E8005BB2F4 /* XWAKBezierConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */; };
+		AE802BC9262FCC20005BB2F4 /* XWAKBezierConfigList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE802BC5262FC178005BB2F4 /* XWAKBezierConfigList.swift */; };
+		AE802BCA262FCC20005BB2F4 /* XWAKBezierConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */; };
 		AE822BA4251C3EE20073EB5E /* XWAKTextBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */; };
 		AE84DBEE261DAA88003836DE /* XWAKDoughnutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84DBED261DAA88003836DE /* XWAKDoughnutView.swift */; };
 		AE84DBF2261DACC2003836DE /* XWAKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84DBF1261DACC2003836DE /* XWAKColor.swift */; };
@@ -439,6 +440,7 @@
 		AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKBezierToolsViewController.swift; sourceTree = "<group>"; };
 		AE793F7825822C090031D172 /* XWAKColorWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColorWheelView.swift; sourceTree = "<group>"; };
 		AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKBezierConfigView.swift; sourceTree = "<group>"; };
+		AE802BC5262FC178005BB2F4 /* XWAKBezierConfigList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKBezierConfigList.swift; sourceTree = "<group>"; };
 		AE822BA3251C3EE20073EB5E /* XWAKTextBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextBorder.swift; sourceTree = "<group>"; };
 		AE84DBED261DAA88003836DE /* XWAKDoughnutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKDoughnutView.swift; sourceTree = "<group>"; };
 		AE84DBF1261DACC2003836DE /* XWAKColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKColor.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 			children = (
 				AE72A480262E6F2300341929 /* XWAKBezierToolsViewController.swift */,
 				AE802BC1262EB8E8005BB2F4 /* XWAKBezierConfigView.swift */,
+				AE802BC5262FC178005BB2F4 /* XWAKBezierConfigList.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1950,7 +1953,6 @@
 				AEA7479D24D3B84B00E4B8E1 /* XWAKIAPVerify.swift in Sources */,
 				AEF14D38251D85730022AB88 /* XWAKGeometry.swift in Sources */,
 				AEFB20192599C00A001DE05C /* CIDocumentEnhancer.swift in Sources */,
-				AE802BC2262EB8E8005BB2F4 /* XWAKBezierConfigView.swift in Sources */,
 				AE3912222535556B00A87A14 /* UIImageViewExtension.swift in Sources */,
 				AEA747AD24D80AA500E4B8E1 /* XWAKProfileCell.swift in Sources */,
 				AEFB1FF02599C00A001DE05C /* CIPhotoEffectInstant.swift in Sources */,
@@ -2000,6 +2002,7 @@
 				AEA7479F24D3EC2F00E4B8E1 /* XWAKIAPViewController.swift in Sources */,
 				AE25D8F1255B8BC600E8767E /* XWAKPhotoAssetViewController.swift in Sources */,
 				AEA7476E24CAF0F300E4B8E1 /* XWAKAlertViewController.swift in Sources */,
+				AE802BCA262FCC20005BB2F4 /* XWAKBezierConfigView.swift in Sources */,
 				AE6173492620532200656DEF /* Shader.metal in Sources */,
 				AEA7474724CA942400E4B8E1 /* XWAppKitSwitchViewController.swift in Sources */,
 				AE72A481262E6F2300341929 /* XWAKBezierToolsViewController.swift in Sources */,
@@ -2011,6 +2014,7 @@
 				AEFB20682599C846001DE05C /* XWAKFiltersViewController.swift in Sources */,
 				AEA7477424CEBC1F00E4B8E1 /* XWAKToastViewController.swift in Sources */,
 				AE5B510F258306D300924F8D /* XWAKColorPickerViewController.swift in Sources */,
+				AE802BC9262FCC20005BB2F4 /* XWAKBezierConfigList.swift in Sources */,
 				AEFCB919260D7C95008C4C72 /* XWAKSVGViewController.swift in Sources */,
 				AE4976CE259D777100E08C16 /* XWAKPopupViewController.swift in Sources */,
 			);

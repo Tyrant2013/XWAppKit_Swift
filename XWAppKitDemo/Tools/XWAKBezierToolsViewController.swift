@@ -22,6 +22,9 @@ class XWAKBezierToolsViewController: UIViewController {
     let lineLayer = CAShapeLayer()
     lazy var control1: UIView = makeControlView()
     lazy var control2: UIView = makeControlView()
+    lazy var controlS = makeControlView()
+    lazy var controlE = makeControlView()
+    var layers = [CAShapeLayer]()
 
     private func makeControlView() -> UIView {
         let view = UIView()
@@ -30,6 +33,7 @@ class XWAKBezierToolsViewController: UIViewController {
         view.layer.cornerRadius = view.bounds.width / 2
         return view
     }
+    
     private let configView: XWAKBezierConfigView = {
         let view = XWAKBezierConfigView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,10 +47,12 @@ class XWAKBezierToolsViewController: UIViewController {
         view.backgroundColor = .lightGray
         // Do any additional setup after loading the view.
         view.addSubview(showView)
-        showView.layer.addSublayer(lineLayer)
+//        showView.layer.addSublayer(lineLayer)
         
         showView.addSubview(control1)
         showView.addSubview(control2)
+        showView.addSubview(controlS)
+        showView.addSubview(controlE)
         var center = showView.center
         center.x = view.center.x
         
@@ -59,18 +65,34 @@ class XWAKBezierToolsViewController: UIViewController {
         
         control1.center = configView.configs[0].control1
         control2.center = configView.configs[0].control2
+        controlS.center = configView.configs[0].startPoint
+        controlE.center = configView.configs[0].endPoint
 
         let pan1 = UIPanGestureRecognizer(target: self, action: #selector(controlPan(_:)))
         control1.addGestureRecognizer(pan1)
 
         let pan2 = UIPanGestureRecognizer(target: self, action: #selector(controlPan(_:)))
         control2.addGestureRecognizer(pan2)
+        
+        let pan3 = UIPanGestureRecognizer(target: self, action: #selector(controlPan(_:)))
+        controlS.addGestureRecognizer(pan3)
+        
+        let pan4 = UIPanGestureRecognizer(target: self, action: #selector(controlPan(_:)))
+        controlE.addGestureRecognizer(pan4)
 
-        lineLayer.strokeColor = UIColor.orange.cgColor
-        lineLayer.fillColor = UIColor.white.cgColor
-        lineLayer.lineWidth = 2
+        let layer = makeLayer()
+        showView.layer.addSublayer(layer)
+        layers.append(layer)
         
         updatePath(update: false)
+    }
+    
+    func makeLayer() -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.orange.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 2
+        return layer
     }
     
     var moveView: UIView?
@@ -81,7 +103,7 @@ class XWAKBezierToolsViewController: UIViewController {
             moveView = sender.view
         case .changed:
             moveView?.center = sender.location(in: showView)
-            updatePath(update: true)
+            updatePath(index: configView.index, update: true)
         case .ended:
             moveView = nil
         default:
@@ -94,7 +116,15 @@ class XWAKBezierToolsViewController: UIViewController {
         if update {
             configView.configs[index].control1 = control1.center
             configView.configs[index].control2 = control2.center
+            configView.configs[index].startPoint = controlS.center
+            configView.configs[index].endPoint = controlE.center
         }
+        control1.center = configView.configs[index].control1
+        control2.center = configView.configs[index].control2
+        controlS.center = configView.configs[index].startPoint
+        controlE.center = configView.configs[index].endPoint
+        
+        let updateLayer = layers[index]
         
         let config = configView.configs[index]
         let contr1 = config.control1
@@ -106,7 +136,7 @@ class XWAKBezierToolsViewController: UIViewController {
         path.addCurve(to: config.endPoint,
                       controlPoint1: contr1,
                       controlPoint2: contr2)
-        lineLayer.path = path.cgPath
+        updateLayer.path = path.cgPath
         
     }
     
@@ -118,7 +148,14 @@ class XWAKBezierToolsViewController: UIViewController {
 
 extension XWAKBezierToolsViewController: XWAKBezierConfigViewDelegate {
     func configView(_ configView: XWAKBezierConfigView, didUpdate data: XWAKBezierConfig) {
-        updatePath(update: false)
+        updatePath(index: configView.index, update: false)
+    }
+    
+    func configView(_ configView: XWAKBezierConfigView, didAdd data: XWAKBezierConfig) {
+        let layer = makeLayer()
+        layers.append(layer)
+        showView.layer.addSublayer(layer)
+        updatePath(index: configView.index, update: false)
     }
     
     func configView(_ configView: XWAKBezierConfigView, updateTarget size: CGSize) {

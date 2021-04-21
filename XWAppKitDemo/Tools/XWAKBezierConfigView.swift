@@ -13,16 +13,18 @@ public struct XWAKBezierConfig {
     public var endPoint: CGPoint = .zero
     public var control1: CGPoint = .zero
     public var control2: CGPoint = .zero
+    public var rate: CGFloat = 1.0
 }
 
 public protocol XWAKBezierConfigViewDelegate {
     func configView(_ configView: XWAKBezierConfigView, didUpdate data: XWAKBezierConfig) -> Void
+    func configView(_ configView: XWAKBezierConfigView, didAdd data: XWAKBezierConfig) -> Void
     func configView(_ configView: XWAKBezierConfigView, updateTarget size: CGSize) -> Void
 }
 
 public class XWAKBezierConfigView: UIView {
 
-    private(set) var index: Int = 0
+    public var index: Int = 0
     public var configs = [XWAKBezierConfig]() {
         didSet {
             let config = configs[index]
@@ -63,6 +65,7 @@ public class XWAKBezierConfigView: UIView {
     private lazy var endLabel = makeLabel("结束点:")
     private lazy var control1Label = makeLabel("c1:")
     private lazy var control2Label = makeLabel("c2:")
+    private lazy var rateLabel = makeLabel("比率:")
     
     private lazy var cw = makeTextField()
     private lazy var ch = makeTextField()
@@ -74,6 +77,43 @@ public class XWAKBezierConfigView: UIView {
     private lazy var c1y = makeTextField()
     private lazy var c2x = makeTextField()
     private lazy var c2y = makeTextField()
+    
+    private lazy var rate = makeTextField()
+    private lazy var sxRate = makeTextField()
+    private lazy var syRate = makeTextField()
+    private lazy var exRate = makeTextField()
+    private lazy var eyRate = makeTextField()
+    private lazy var c1xRate = makeTextField()
+    private lazy var c1yRate = makeTextField()
+    private lazy var c2xRate = makeTextField()
+    private lazy var c2yRate = makeTextField()
+    
+    private let line: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .orange
+        return view
+    }()
+    
+    private lazy var add: UIButton = {
+        let view = UIButton(type: .system)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setTitle("+", for: .normal)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.orange.cgColor
+        view.layer.cornerRadius = 15
+        view.backgroundColor = .white
+        view.addTarget(self, action: #selector(addTouched(_:)), for: .touchUpInside)
+        return view
+    }()
+    private let listView: XWAKBezierConfigList = {
+        let view = XWAKBezierConfigList()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.layer.borderWidth = 1
+//        view.layer.borderColor = UIColor.orange.cgColor
+//        view.layer.cornerRadius = 15
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,57 +132,93 @@ public class XWAKBezierConfigView: UIView {
     private func setupViews() {
         [cw, ch].forEach { addSubview($0) }
         
-        [startLabel, endLabel, control1Label, control2Label].forEach { addSubview($0) }
+        [startLabel, endLabel, control1Label, control2Label, rateLabel].forEach { addSubview($0) }
         
         [sx, sy ,ex, ey, c1x, c1y, c2x, c2y].forEach { addSubview($0) }
+        
+        [sxRate, syRate ,exRate, eyRate, c1xRate, c1yRate, c2xRate, c2yRate].forEach { addSubview($0) }
+        
+        addSubview(add)
+        addSubview(listView)
+        addSubview(line)
+        addSubview(rate)
+        listView.delegate = self
     }
     
     private func setupLayouts() {
-        cw.xwak.centerX(equalTo: xwak.centerX, multiplier: 0.5)
+        let tfSize: (CGFloat, CGFloat) = (60, 30)
+        let labelSize: (CGFloat, CGFloat) = (90, 30)
+        [cw, ch, startLabel, endLabel, control1Label, control2Label, rateLabel].forEach { $0.xwak.size(labelSize) }
+        [sx, sy, ex, ey, c1x, c1y, c2x, c2y, rate, sxRate, syRate, exRate, eyRate, c1xRate, c1yRate, c2xRate, c2yRate].forEach{ $0.xwak.size(tfSize) }
+        cw.xwak.left(equalTo: xwak.left, 20)
             .top(equalTo: xwak.top, 10)
-            .size((80, 30))
         ch.xwak.centerY(equalTo: cw.xwak.centerY)
-            .centerX(equalTo: xwak.centerX, multiplier: 1.5)
-            .size((80, 30))
+            .left(equalTo: cw.xwak.right, 20)
         startLabel.xwak.left(equalTo: xwak.left, 10)
             .top(equalTo: cw.xwak.bottom, 50)
-            .size((80, 30))
         sx.xwak.left(equalTo: startLabel.xwak.right, 10)
             .centerY(equalTo: startLabel.xwak.centerY)
-            .size((60, 30))
         sy.xwak.left(equalTo: sx.xwak.right, 10)
             .centerY(equalTo: sx.xwak.centerY)
-            .size((60, 30))
         
         endLabel.xwak.top(equalTo: startLabel.xwak.bottom, 10)
             .left(equalTo: startLabel.xwak.left)
-            .size(equalTo: startLabel.xwak)
         ex.xwak.left(equalTo: endLabel.xwak.right, 10)
             .centerY(equalTo: endLabel.xwak.centerY)
-            .size((60, 30))
         ey.xwak.left(equalTo: ex.xwak.right, 10)
             .centerY(equalTo: ex.xwak.centerY)
-            .size((60, 30))
         
         control1Label.xwak.top(equalTo: endLabel.xwak.bottom, 10)
             .left(equalTo: startLabel.xwak.left)
-            .size(equalTo: startLabel.xwak)
+
         c1x.xwak.left(equalTo: control1Label.xwak.right, 10)
             .centerY(equalTo: control1Label.xwak.centerY)
-            .size((60, 30))
         c1y.xwak.left(equalTo: c1x.xwak.right, 10)
             .centerY(equalTo: c1x.xwak.centerY)
-            .size((60, 30))
         
         control2Label.xwak.top(equalTo: control1Label.xwak.bottom, 10)
             .left(equalTo: startLabel.xwak.left)
-            .size(equalTo: startLabel.xwak)
+
         c2x.xwak.left(equalTo: control2Label.xwak.right, 10)
             .centerY(equalTo: control2Label.xwak.centerY)
-            .size((60, 30))
         c2y.xwak.left(equalTo: c2x.xwak.right, 10)
             .centerY(equalTo: c2x.xwak.centerY)
-            .size((60, 30))
+        
+        add.xwak.centerY(equalTo: listView.xwak.centerY)
+            .size((30, 30))
+            .right(equalTo: xwak.right, -20)
+        listView.xwak.left(equalTo: xwak.left, 10)
+            .right(equalTo: add.xwak.left, -10)
+            .top(equalTo: cw.xwak.bottom, 10)
+            .height(30)
+        
+        line.xwak.left(equalTo: sy.xwak.right, 10)
+            .top(equalTo: sy.xwak.top)
+            .width(1)
+            .bottom(equalTo: c2y.xwak.bottom)
+        
+        sxRate.xwak.left(equalTo: line.xwak.right, 10)
+            .top(equalTo: line.xwak.top)
+        syRate.xwak.left(equalTo: sxRate.xwak.right, 10)
+            .top(equalTo: sxRate.xwak.top)
+        exRate.xwak.left(equalTo: line.xwak.right, 10)
+            .top(equalTo: sxRate.xwak.bottom, 10)
+        eyRate.xwak.left(equalTo: exRate.xwak.right, 10)
+            .top(equalTo: exRate.xwak.top)
+        c1xRate.xwak.left(equalTo: line.xwak.right, 10)
+            .top(equalTo: exRate.xwak.bottom, 10)
+        c1yRate.xwak.left(equalTo: c1xRate.xwak.right, 10)
+            .top(equalTo: c1xRate.xwak.top)
+        c2xRate.xwak.left(equalTo: line.xwak.right, 10)
+            .top(equalTo: c1xRate.xwak.bottom, 10)
+        c2yRate.xwak.left(equalTo: c2xRate.xwak.right, 10)
+            .top(equalTo: c2xRate.xwak.top)
+        
+        rateLabel.xwak.left(equalTo: ch.xwak.right, 10)
+            .centerY(equalTo: ch.xwak.centerY)
+
+        rate.xwak.centerY(equalTo: rateLabel.xwak.centerY)
+            .left(equalTo: rateLabel.xwak.right, 10)
     }
     
     private func setupData() {
@@ -156,6 +232,8 @@ public class XWAKBezierConfigView: UIView {
         ch.text = "\(targetSize.height)"
         
         updateUI(config: config)
+        
+        listView.addOne()
     }
     
     private func updateUI(config: XWAKBezierConfig) {
@@ -167,6 +245,25 @@ public class XWAKBezierConfigView: UIView {
         c1y.text = "\(config.control1.y)"
         c2x.text = "\(config.control2.x)"
         c2y.text = "\(config.control2.y)"
+        rate.text = "\(config.rate)"
+        
+        sxRate.text = "\(config.startPoint.x / config.rate)"
+        syRate.text = "\(config.startPoint.y / config.rate)"
+        exRate.text = "\(config.endPoint.x / config.rate)"
+        eyRate.text = "\(config.endPoint.y / config.rate)"
+        c1xRate.text = "\(config.control1.x / config.rate)"
+        c1yRate.text = "\(config.control1.y / config.rate)"
+        c2xRate.text = "\(config.control2.x / config.rate)"
+        c2yRate.text = "\(config.control2.y / config.rate)"
+    }
+    
+    @objc
+    func addTouched(_ sender: UIButton) {
+        index += 1
+        let newConfig = configs[index - 1]
+        configs.append(newConfig)
+        listView.addOne()
+        delegate?.configView(self, didAdd: newConfig)
     }
     
 }
@@ -185,14 +282,29 @@ extension XWAKBezierConfigView: UITextFieldDelegate {
             if let sxStr = sx.text as NSString?, let syStr = sy.text as NSString?,
                let exStr = ex.text as NSString?, let eyStr = ey.text as NSString?,
                let c1xStr = c1x.text as NSString?, let c1yStr = c1y.text as NSString?,
-               let c2xStr = c2x.text as NSString?, let c2yStr = c2y.text as NSString? {
+               let c2xStr = c2x.text as NSString?, let c2yStr = c2y.text as NSString?,
+               let rStr = rate.text as NSString? {
                 let sp = CGPoint(x: CGFloat(sxStr.floatValue), y: CGFloat(syStr.floatValue))
                 let ep = CGPoint(x: CGFloat(exStr.floatValue), y: CGFloat(eyStr.floatValue))
                 let c1 = CGPoint(x: CGFloat(c1xStr.floatValue), y: CGFloat(c1yStr.floatValue))
                 let c2 = CGPoint(x: CGFloat(c2xStr.floatValue), y: CGFloat(c2yStr.floatValue))
-                configs[index] = XWAKBezierConfig(startPoint: sp, endPoint: ep, control1: c1, control2: c2)
+                let r = CGFloat(rStr.floatValue)
+                configs[index] = XWAKBezierConfig(startPoint: sp,
+                                                  endPoint: ep,
+                                                  control1: c1,
+                                                  control2: c2,
+                                                  rate: r)
                 delegate?.configView(self, didUpdate: configs[index])
             }
         }
+    }
+}
+
+extension XWAKBezierConfigView: XWAKBezierConfigListDelegate {
+    func listView(_ listView: XWAKBezierConfigList, didSelected index: Int) {
+        self.index = index
+        let config = configs[index]
+        updateUI(config: config)
+        delegate?.configView(self, didUpdate: config)
     }
 }
