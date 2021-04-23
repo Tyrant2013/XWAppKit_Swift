@@ -135,6 +135,10 @@ public class XWAKPopupView: UIView {
 
         insertSubview(coverView, aboveSubview: triangle)
         
+        update()
+    }
+    
+    func update() {
         let ids = CGAffineTransform.identity
         let trans: CGAffineTransform
         let (x, y, w, h): (CGFloat, CGFloat, CGFloat, CGFloat)
