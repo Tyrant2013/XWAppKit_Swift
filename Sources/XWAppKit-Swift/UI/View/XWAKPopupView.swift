@@ -21,6 +21,12 @@ public class XWAKPopupTriangleView: UIView {
             borderLayer.fillColor = fillColor.cgColor
         }
     }
+    public var borderColor:  UIColor = .black {
+        didSet {
+            borderLayer.strokeColor = borderColor.cgColor
+            borderLayer.lineWidth = 1
+        }
+    }
     private lazy var borderLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         self.layer.addSublayer(layer)
@@ -28,7 +34,7 @@ public class XWAKPopupTriangleView: UIView {
     }()
     public override init(frame: CGRect) {
         var solidFrame = frame
-        solidFrame.size = CGSize(width: 22, height: 14)
+        solidFrame.size = CGSize(width: 20, height: 10)
         super.init(frame: solidFrame)
         setup()
     }
@@ -59,7 +65,9 @@ public class XWAKPopupTriangleView: UIView {
                       controlPoint2: .init(x: 16.5, y: 9.5))
         
         borderLayer.path = path.cgPath
-        borderLayer.fillColor = UIColor.red.cgColor
+        borderLayer.fillColor = fillColor.cgColor
+        borderLayer.lineWidth = 1
+        borderLayer.strokeColor = borderColor.cgColor
     }
 }
 
@@ -76,9 +84,17 @@ public class XWAKPopupView: UIView {
     public var fillColor: UIColor = UIColor.xwak_color(with: 0xF5F5F5, alpha: 0.9) {
         didSet {
             borderLayer.fillColor = fillColor.cgColor
+            coverView.backgroundColor = fillColor
             triangle.fillColor = fillColor
         }
     }
+    public var borderColor: UIColor = .black {
+        didSet {
+            borderLayer.strokeColor = borderColor.cgColor
+            triangle.borderColor = borderColor
+        }
+    }
+    
     /*                ___
             /\
            /  \       triangleHeight
@@ -90,65 +106,11 @@ public class XWAKPopupView: UIView {
     
     private lazy var borderLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
+        layer.lineWidth = 1
         self.layer.insertSublayer(layer, at: 0)
         return layer
     }()
     
-//    private func drawTopTriangle() -> CGPath {
-//        let path = UIBezierPath()
-//
-//        // 左上角
-//        path.move(to: .init(x: 0, y: radius + triangleHeight))
-//        path.addArc(withCenter: .init(x: radius, y: triangleHeight + radius),
-//                    radius: radius,
-//                    startAngle: .pi,
-//                    endAngle: -.pi/2,
-//                    clockwise: true)
-//        path.addLine(to: .init(x: triangleTopPoint.x - triangeWidth / 2, y: triangleHeight))
-//        // 三角
-////        path.addLine(to: triangleTopPoint)
-////        path.addLine(to: .init(x: triangleTopPoint.x + triangeWidth / 2, y: triangleHeight))
-//
-//        var bp1 = triangleTopPoint.x - triangeWidth / 2
-//        var cp1 = bp1 + 5 // bp1 * 0.1
-//        var bp2 = triangleTopPoint.x
-//        var cp2 = bp2 - 5 //bp2 * 0.1
-//        path.addCurve(to: triangleTopPoint,
-//                      controlPoint1: .init(x: cp1, y: triangleHeight),
-//                      controlPoint2: .init(x: cp2, y: 0))
-//
-//        bp1 = triangleTopPoint.x
-//        cp1 = bp1 + 5 //bp1 * 0.1
-//        bp2 = triangleTopPoint.x + triangeWidth / 2
-//        cp2 = bp2 - 5 //bp2 * 0.0
-//        path.addCurve(to: .init(x: triangleTopPoint.x + triangeWidth / 2, y: triangleHeight),
-//                      controlPoint1: .init(x: cp1, y: 0),
-//                      controlPoint2: .init(x: cp2, y: triangleHeight))
-//
-//        path.addLine(to: .init(x: bounds.width - radius, y: triangleHeight))
-//        // 右上角
-//        path.addArc(withCenter: .init(x: bounds.width - radius, y: triangleHeight + radius),
-//                    radius: radius,
-//                    startAngle: -.pi/2,
-//                    endAngle: 0,
-//                    clockwise: true)
-//        path.addLine(to: .init(x: bounds.width, y: bounds.height - 10))
-//        // 右下角
-//        path.addArc(withCenter: .init(x: bounds.width - radius, y: bounds.height - radius),
-//                    radius: radius,
-//                    startAngle: 0,
-//                    endAngle: .pi/2,
-//                    clockwise: true)
-//        path.addLine(to: .init(x: radius, y: bounds.height))
-//        // 左下角
-//        path.addArc(withCenter: .init(x: radius, y: bounds.height - radius),
-//                    radius: radius,
-//                    startAngle: .pi/2,
-//                    endAngle: .pi,
-//                    clockwise: true)
-//        path.addLine(to: .init(x: 0, y: radius + triangleHeight))
-//        return path.cgPath
-//    }
     private lazy var tw: CGFloat = 20
     private lazy var th: CGFloat = 10
     private lazy var triangle: XWAKPopupTriangleView = {
@@ -158,34 +120,21 @@ public class XWAKPopupView: UIView {
         addSubview(view)
         return view
     }()
+    private lazy var coverView: UIView = {
+        let layer = UIView()
+        return layer
+    }()
     
-//    private lazy var midHLine: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(view)
-//        view.xwak.edge(equalTo: xwak, inset: 0, edges: [.left, .right])
-//            .centerY(equalTo: xwak.centerY)
-//            .height(1)
-//        view.backgroundColor = .black
-//        return view
-//    }()
-//    private lazy var midVLine: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(view)
-//        view.xwak.edge(equalTo: xwak, inset: 0, edges: [.top, .bottom])
-//            .centerX(equalTo: xwak.centerX)
-//            .width(1)
-//        view.backgroundColor = .black
-//        return view
-//    }()
+    /// 三角指向的View
+    public var targetView: UIView?
+    /// 添加到View
+    public var sourceView: UIView?
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        
-//        midHLine.backgroundColor = .black
-//        midVLine.backgroundColor = .black
 
+        insertSubview(coverView, aboveSubview: triangle)
+        
         let ids = CGAffineTransform.identity
         let trans: CGAffineTransform
         let (x, y, w, h): (CGFloat, CGFloat, CGFloat, CGFloat)
@@ -199,7 +148,31 @@ public class XWAKPopupView: UIView {
 //            triFrame.origin.y = 10
             // 中间
             triFrame.origin.y = (bounds.height - tw) / 2
+            if let t = targetView, let s = sourceView {
+                let tFrame = t.superview!.convert(t.frame, to: s)
+                var sFrame = CGRect(x: tFrame.maxX + 5,
+                                    y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
+                                    width: self.frame.width,
+                                    height: self.frame.height)
+                var delta: CGFloat = 0
+                if sFrame.maxY > s.frame.height {
+                    delta = sFrame.maxY - s.frame.height + 10
+                }
+                sFrame.origin.y -= delta
+                self.frame = sFrame
+                if delta != 0 {
+                    triFrame.origin.y += delta
+                    if triFrame.minY < radius {
+                        triFrame.origin.y = radius
+                    }
+                    else if triFrame.maxY > bounds.height - tw {
+                        triFrame.origin.y = bounds.height - tw
+                    }
+                }
+            }
+            
             triFrame.origin.x = 0
+            coverView.frame = CGRect(x: th, y: triFrame.minY, width: 1, height: tw)
         case .top:
             trans = ids
             (x, y, w, h) = (0, th, bounds.width, bounds.height - th)
@@ -208,23 +181,99 @@ public class XWAKPopupView: UIView {
             // 中间
             triFrame.origin.x = (bounds.width - tw) / 2
             triFrame.origin.y = 0
+            if let t = targetView, let s = sourceView {
+                let tFrame = t.superview!.convert(t.frame, to: s)
+                var sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
+                                    y: tFrame.maxY + 5,
+                                    width: self.frame.width,
+                                    height: self.frame.height)
+                var delta: CGFloat = 0
+                if sFrame.maxX > s.frame.width {
+                    delta = sFrame.maxX - s.frame.width + 10
+                }
+                sFrame.origin.x -= delta
+                self.frame = sFrame
+                if delta != 0 {
+                    triFrame.origin.x += delta
+                    if triFrame.minX < radius {
+                        triFrame.origin.x = radius
+                    }
+                    else if triFrame.maxX > bounds.width - tw {
+                        triFrame.origin.x = bounds.width - tw
+                    }
+                }
+            }
+            coverView.frame = CGRect(x: triFrame.minX, y: triFrame.maxY, width: triFrame.width, height: 1)
         case .right:
             trans = ids.rotated(by: .pi / 2).translatedBy(x: 0, y: (tw-th)/2)
             (x, y, w, h) = (0, 0, bounds.width - th, bounds.height)
             triFrame.origin.x = bounds.width - th
-            triFrame.origin.y = radius
+//            triFrame.origin.y = radius
+            triFrame.origin.y = (bounds.height - tw) / 2
+            if let t = targetView, let s = sourceView {
+                let tFrame = t.superview!.convert(t.frame, to: s)
+                var sFrame = CGRect(x: tFrame.minX - 5 - self.frame.width,
+                                    y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
+                                    width: self.frame.width,
+                                    height: self.frame.height)
+                var delta: CGFloat = 0
+                if sFrame.maxY > s.frame.height {
+                    delta = sFrame.maxY - s.frame.height + 10
+                }
+                sFrame.origin.y -= delta
+                self.frame = sFrame
+                if delta != 0 {
+                    triFrame.origin.y += delta
+                    if triFrame.minY < radius {
+                        triFrame.origin.y = radius
+                    }
+                    else if triFrame.maxY > bounds.height - tw {
+                        triFrame.origin.y = bounds.height - tw
+                    }
+                }
+            }
+            coverView.frame = CGRect(x: w - 1, y: triFrame.minY, width: 1, height: tw)
         case .bottom:
             trans = ids.rotated(by: .pi)
             (x, y, w, h) = (0, 0, bounds.width, bounds.height - th)
             triFrame.origin.y = bounds.height - th
-            triFrame.origin.x = radius
+//            triFrame.origin.x = radius
+            triFrame.origin.x = (bounds.width - tw) / 2
+            if let t = targetView, let s = sourceView {
+                let tFrame = t.superview!.convert(t.frame, to: s)
+                var sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
+                                    y: tFrame.minY - bounds.height - 5,
+                                    width: self.frame.width,
+                                    height: self.frame.height)
+                var delta: CGFloat = 0
+                if sFrame.maxX > s.frame.width {
+                    delta = sFrame.maxX - s.frame.width + 10
+                }
+                sFrame.origin.x -= delta
+                self.frame = sFrame
+                if delta != 0 {
+                    triFrame.origin.x += delta
+                    if triFrame.minX < radius {
+                        triFrame.origin.x = radius
+                    }
+                    else if triFrame.maxX > bounds.width - tw {
+                        triFrame.origin.x = bounds.width - tw
+                    }
+                }
+            }
+            coverView.frame = CGRect(x: triFrame.minX, y: triFrame.minY - 1, width: triFrame.width, height: 1)
         }
         triangle.frame = triFrame
         triangle.transform = trans
         let path = UIBezierPath(roundedRect: .init(x: x, y: y, width: w, height: h), cornerRadius: radius)
         borderLayer.path = path.cgPath
         borderLayer.fillColor = fillColor.cgColor
+        borderLayer.strokeColor = borderColor.cgColor
+        
+        coverView.backgroundColor = fillColor
+        
         triangle.fillColor = fillColor
+        triangle.borderColor = borderColor
     }
 
 }

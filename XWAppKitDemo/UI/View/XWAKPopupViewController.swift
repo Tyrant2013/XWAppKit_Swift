@@ -66,6 +66,13 @@ class XWAKPopupViewController: UIViewController {
         vv3.arrowPosition = .bottom
         vv3.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.right, .bottom])
             .size((170, 170))
+        
+        let targetView = UIView(frame: CGRect(x: 320, y: 450, width: 88, height: 150))
+        view.addSubview(targetView)
+        targetView.backgroundColor = .black
+        
+        vv3.targetView = targetView
+        vv3.sourceView = self.view
     }
     
 
