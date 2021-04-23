@@ -138,7 +138,7 @@ public class XWAKPopupView: UIView {
         update()
     }
     
-    func update() {
+    public func update() {
         let ids = CGAffineTransform.identity
         let trans: CGAffineTransform
         let (x, y, w, h): (CGFloat, CGFloat, CGFloat, CGFloat)
