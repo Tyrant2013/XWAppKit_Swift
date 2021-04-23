@@ -35,44 +35,50 @@ class XWAKPopupViewController: UIViewController {
 //        view.addSubview(tt3)
 //        tt3.transform = CGAffineTransform.identity.rotated(by: -.pi / 2)
         
+        let cc = UIView()
+        cc.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(cc)
+        cc.backgroundColor = .yellow
+        cc.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 0, edges: [.all])
+        
         let vv = XWAKPopupView()
         vv.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vv)
+        cc.addSubview(vv)
         vv.fillColor = .red
         vv.arrowPosition = .left
         vv.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.left, .top])
-            .size((170, 170))
+            .size((340, 340))
         
-        let vv1 = XWAKPopupView()
-        vv1.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vv1)
-        vv1.fillColor = .red
-        vv1.arrowPosition = .right
-        vv1.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.right, .top])
-            .size((170, 170))
+//        let vv1 = XWAKPopupView()
+//        vv1.translatesAutoresizingMaskIntoConstraints = false
+//        cc.addSubview(vv1)
+//        vv1.fillColor = .red
+//        vv1.arrowPosition = .right
+//        vv1.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.right, .top])
+//            .size((170, 170))
+//
+//        let vv2 = XWAKPopupView()
+//        vv2.translatesAutoresizingMaskIntoConstraints = false
+//        cc.addSubview(vv2)
+//        vv2.fillColor = .red
+//        vv2.arrowPosition = .top
+//        vv2.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.left, .bottom])
+//            .size((170, 170))
+//
+//        let vv3 = XWAKPopupView()
+//        vv3.translatesAutoresizingMaskIntoConstraints = false
+//        cc.addSubview(vv3)
+//        vv3.fillColor = .red
+//        vv3.arrowPosition = .bottom
+//        vv3.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.right, .bottom])
+//            .size((170, 170))
         
-        let vv2 = XWAKPopupView()
-        vv2.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vv2)
-        vv2.fillColor = .red
-        vv2.arrowPosition = .top
-        vv2.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.left, .bottom])
-            .size((170, 170))
-        
-        let vv3 = XWAKPopupView()
-        vv3.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vv3)
-        vv3.fillColor = .red
-        vv3.arrowPosition = .bottom
-        vv3.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 10, edges: [.right, .bottom])
-            .size((170, 170))
-        
-        let targetView = UIView(frame: CGRect(x: 320, y: 450, width: 88, height: 150))
-        view.addSubview(targetView)
+        let targetView = UIView(frame: CGRect(x: 20, y: 20, width: 88, height: 150))
+        cc.addSubview(targetView)
         targetView.backgroundColor = .black
         
-        vv3.targetView = targetView
-        vv3.sourceView = self.view
+        vv.targetView = targetView
+        vv.sourceView = cc
     }
     
 

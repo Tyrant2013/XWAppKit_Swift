@@ -162,6 +162,9 @@ public class XWAKPopupView: UIView {
                 if sFrame.maxY > s.frame.height {
                     delta = sFrame.maxY - s.frame.height + 10
                 }
+                else if sFrame.minY < 0 {
+                    delta = sFrame.minY - 10
+                }
                 sFrame.origin.y -= delta
                 self.frame = sFrame
                 if delta != 0 {
@@ -279,5 +282,44 @@ public class XWAKPopupView: UIView {
         triangle.fillColor = fillColor
         triangle.borderColor = borderColor
     }
+    
+//    private func updateTop() -> (trianlgeFrame: CGRect, path: CGPath, transform: CGAffineTransform) {
+//        let ids = CGAffineTransform.identity
+//        let trans: CGAffineTransform
+//        let (x, y, w, h): (CGFloat, CGFloat, CGFloat, CGFloat)
+//        var triFrame = triangle.frame
+//        trans = ids
+//        (x, y, w, h) = (0, th, bounds.width, bounds.height - th)
+//        // 最左边
+////            triFrame.origin.x = radius
+//        // 中间
+//        triFrame.origin.x = (bounds.width - tw) / 2
+//        triFrame.origin.y = 0
+//        if let t = targetView, let s = sourceView {
+//            let tFrame = t.superview!.convert(t.frame, to: s)
+//            var sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
+//                                y: tFrame.maxY + 5,
+//                                width: self.frame.width,
+//                                height: self.frame.height)
+//            var delta: CGFloat = 0
+//            if sFrame.maxX > s.frame.width {
+//                delta = sFrame.maxX - s.frame.width + 10
+//            }
+//            sFrame.origin.x -= delta
+//            self.frame = sFrame
+//            if delta != 0 {
+//                triFrame.origin.x += delta
+//                if triFrame.minX < radius {
+//                    triFrame.origin.x = radius
+//                }
+//                else if triFrame.maxX > bounds.width - tw {
+//                    triFrame.origin.x = bounds.width - tw
+//                }
+//            }
+//        }
+//        coverView.frame = CGRect(x: triFrame.minX, y: triFrame.maxY, width: triFrame.width, height: 1)
+//        let path = UIBezierPath(roundedRect: .init(x: x, y: y, width: w, height: h), cornerRadius: radius)
+//        return (triFrame, path.cgPath, trans)
+//    }
 
 }
