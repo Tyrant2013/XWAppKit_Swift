@@ -130,19 +130,25 @@ public class XWAKPopupView: UIView {
     /// 添加到View
     public var sourceView: UIView?
     
+    private var isInit = false
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        insertSubview(coverView, aboveSubview: triangle)
-        
-        update()
+        if !isInit {
+            isInit = true
+            insertSubview(coverView, aboveSubview: triangle)
+            
+            update()
+        }
     }
     
-    public func update() {
+    public func update(animated: Bool = false) {
         let ids = CGAffineTransform.identity
         let trans: CGAffineTransform
         let (x, y, w, h): (CGFloat, CGFloat, CGFloat, CGFloat)
         var triFrame = triangle.frame
+        let coverFrame: CGRect
+        var sFrame: CGRect = self.frame
         
         switch arrowPosition {
         case .left:
@@ -154,10 +160,10 @@ public class XWAKPopupView: UIView {
             triFrame.origin.y = (bounds.height - tw) / 2
             if let t = targetView, let s = sourceView {
                 let tFrame = t.superview!.convert(t.frame, to: s)
-                var sFrame = CGRect(x: tFrame.maxX + 5,
-                                    y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
-                                    width: self.frame.width,
-                                    height: self.frame.height)
+                sFrame = CGRect(x: tFrame.maxX + 5,
+                                y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
+                                width: self.frame.width,
+                                height: self.frame.height)
                 var delta: CGFloat = 0
                 if sFrame.maxY > s.frame.height {
                     delta = sFrame.maxY - s.frame.height + 10
@@ -166,7 +172,7 @@ public class XWAKPopupView: UIView {
                     delta = sFrame.minY - 10
                 }
                 sFrame.origin.y -= delta
-                self.frame = sFrame
+                
                 if delta != 0 {
                     triFrame.origin.y += delta
                     if triFrame.minY < radius {
@@ -179,7 +185,7 @@ public class XWAKPopupView: UIView {
             }
             
             triFrame.origin.x = 0
-            coverView.frame = CGRect(x: th, y: triFrame.minY, width: 1, height: tw)
+            coverFrame = CGRect(x: th, y: triFrame.minY, width: 1, height: tw)
         case .top:
             trans = ids
             (x, y, w, h) = (0, th, bounds.width, bounds.height - th)
@@ -190,16 +196,16 @@ public class XWAKPopupView: UIView {
             triFrame.origin.y = 0
             if let t = targetView, let s = sourceView {
                 let tFrame = t.superview!.convert(t.frame, to: s)
-                var sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
-                                    y: tFrame.maxY + 5,
-                                    width: self.frame.width,
-                                    height: self.frame.height)
+                sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
+                                y: tFrame.maxY + 5,
+                                width: self.frame.width,
+                                height: self.frame.height)
                 var delta: CGFloat = 0
                 if sFrame.maxX > s.frame.width {
                     delta = sFrame.maxX - s.frame.width + 10
                 }
                 sFrame.origin.x -= delta
-                self.frame = sFrame
+                
                 if delta != 0 {
                     triFrame.origin.x += delta
                     if triFrame.minX < radius {
@@ -210,7 +216,7 @@ public class XWAKPopupView: UIView {
                     }
                 }
             }
-            coverView.frame = CGRect(x: triFrame.minX, y: triFrame.maxY, width: triFrame.width, height: 1)
+            coverFrame = CGRect(x: triFrame.minX, y: triFrame.maxY, width: triFrame.width, height: 1)
         case .right:
             trans = ids.rotated(by: .pi / 2).translatedBy(x: 0, y: (tw-th)/2)
             (x, y, w, h) = (0, 0, bounds.width - th, bounds.height)
@@ -219,16 +225,16 @@ public class XWAKPopupView: UIView {
             triFrame.origin.y = (bounds.height - tw) / 2
             if let t = targetView, let s = sourceView {
                 let tFrame = t.superview!.convert(t.frame, to: s)
-                var sFrame = CGRect(x: tFrame.minX - 5 - self.frame.width,
-                                    y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
-                                    width: self.frame.width,
-                                    height: self.frame.height)
+                sFrame = CGRect(x: tFrame.minX - 5 - self.frame.width,
+                                y: tFrame.minY - (self.frame.height - tFrame.height) / 2,
+                                width: self.frame.width,
+                                height: self.frame.height)
                 var delta: CGFloat = 0
                 if sFrame.maxY > s.frame.height {
                     delta = sFrame.maxY - s.frame.height + 10
                 }
                 sFrame.origin.y -= delta
-                self.frame = sFrame
+                
                 if delta != 0 {
                     triFrame.origin.y += delta
                     if triFrame.minY < radius {
@@ -239,7 +245,7 @@ public class XWAKPopupView: UIView {
                     }
                 }
             }
-            coverView.frame = CGRect(x: w - 1, y: triFrame.minY, width: 1, height: tw)
+            coverFrame = CGRect(x: w - 1, y: triFrame.minY, width: 1, height: tw)
         case .bottom:
             trans = ids.rotated(by: .pi)
             (x, y, w, h) = (0, 0, bounds.width, bounds.height - th)
@@ -248,16 +254,16 @@ public class XWAKPopupView: UIView {
             triFrame.origin.x = (bounds.width - tw) / 2
             if let t = targetView, let s = sourceView {
                 let tFrame = t.superview!.convert(t.frame, to: s)
-                var sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
-                                    y: tFrame.minY - bounds.height - 5,
-                                    width: self.frame.width,
-                                    height: self.frame.height)
+                sFrame = CGRect(x: tFrame.minX - (self.frame.width - tFrame.width) / 2,
+                                y: tFrame.minY - bounds.height - 5,
+                                width: self.frame.width,
+                                height: self.frame.height)
                 var delta: CGFloat = 0
                 if sFrame.maxX > s.frame.width {
                     delta = sFrame.maxX - s.frame.width + 10
                 }
                 sFrame.origin.x -= delta
-                self.frame = sFrame
+                
                 if delta != 0 {
                     triFrame.origin.x += delta
                     if triFrame.minX < radius {
@@ -268,19 +274,28 @@ public class XWAKPopupView: UIView {
                     }
                 }
             }
-            coverView.frame = CGRect(x: triFrame.minX, y: triFrame.minY - 1, width: triFrame.width, height: 1)
+            coverFrame = CGRect(x: triFrame.minX, y: triFrame.minY - 1, width: triFrame.width, height: 1)
         }
-        triangle.frame = triFrame
-        triangle.transform = trans
+        
+//        triangle.frame = triFrame
+//        triangle.transform = trans
         let path = UIBezierPath(roundedRect: .init(x: x, y: y, width: w, height: h), cornerRadius: radius)
         borderLayer.path = path.cgPath
         borderLayer.fillColor = fillColor.cgColor
         borderLayer.strokeColor = borderColor.cgColor
         
         coverView.backgroundColor = fillColor
+//        coverView.frame = coverFrame
         
         triangle.fillColor = fillColor
         triangle.borderColor = borderColor
+        
+        UIView.animate(withDuration: animated ? 0.25 : 0.0) {
+            self.triangle.frame = triFrame
+            self.triangle.transform = trans
+            self.coverView.frame = coverFrame
+            self.frame = sFrame
+        }
     }
     
 //    private func updateTop() -> (trianlgeFrame: CGRect, path: CGPath, transform: CGAffineTransform) {
