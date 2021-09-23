@@ -9,6 +9,8 @@
 import UIKit
 import XWAppKit_Swift
 
+import MachO
+
 class ViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let dataSources = [
@@ -62,6 +64,16 @@ class ViewController: UIViewController {
         
 //        let svg = XWAKSVGLoader(fileName: "Data")
 //        svg.parse()
+        
+//        var threads: thread_act_array_t?
+//        var thread_count: mach_msg_type_number_t = 0
+//        let kr = task_threads(mach_task_self_, &threads, &thread_count)
+//        if kr != KERN_SUCCESS {
+//            print("faile")
+//            return
+//        }
+//        print("Call \(thread_count) threads:\n")
+        XWAKCallStack.callStack(with: .all)
     }
 }
 
