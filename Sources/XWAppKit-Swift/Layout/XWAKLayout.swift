@@ -34,12 +34,33 @@ public class XWAKLayout: NSObject {
     lazy public var width = XWAKLayoutConstrait(edge: .width, upper: self)
     lazy public var height = XWAKLayoutConstrait(edge: .height, upper: self)
     
-    /// 竖屏起效的约束
-    public var verticalLayouts: [XWAKLayoutConstrait] = []
-    /// 横屏起效的约束
-    public var horizontalLayouts: [XWAKLayoutConstrait] = []
+    /// 竖屏起效的约束, 添加到这里面的约束会自动设置为false, 需要调用activeVerticals方法才能生效
+    public var verticalLayouts: [XWAKLayoutConstrait] = [] {
+        didSet {
+            disableAll()
+        }
+    }
+    /// 横屏起效的约束, 添加到这里面的约束会自动设置为false, 需要调用activeHorizontals方法才能生效
+    public var horizontalLayouts: [XWAKLayoutConstrait] = [] {
+        didSet {
+            disableAll()
+        }
+    }
     /// 添加完约束后自动生效, 默认值为 true, 必须优先于约束设置才能生效，否则只会影响设置后的约束设置
     public var autoActive: Bool = true
+    /// 使添加到 verticalLayouts 和 horizontalLayouts 里的约束失效
+    public func disableAll() {
+        verticalLayouts.forEach { $0.isActive = false }
+        horizontalLayouts.forEach { $0.isActive = false }
+    }
+    /// 使添加到 verticalLayouts 里的约束生效
+    public func activeVerticals() {
+        verticalLayouts.forEach { $0.isActive = true }
+    }
+    /// 使添加到 verticalLayouts 里的约束生效
+    public func activeHorizontals() {
+        horizontalLayouts.forEach { $0.isActive = true }
+    }
     
     init(targetView: AnyObject) {
         self.target = targetView
@@ -47,10 +68,8 @@ public class XWAKLayout: NSObject {
         
         NotificationCenter.default.addObserver(forName: UIApplication.didChangeStatusBarFrameNotification, object: nil, queue: OperationQueue.main) { [self] _ in
             let orientation = UIApplication.shared.statusBarOrientation
-            self.verticalLayouts.forEach { $0.isActive = false }
-            self.horizontalLayouts.forEach { $0.isActive = false }
-            (orientation.isPortrait ? self.verticalLayouts : self.horizontalLayouts)
-            .forEach { $0.isActive = true }
+            self.disableAll()
+            orientation.isPortrait ? self.activeVerticals() : self.activeHorizontals()
         }
     }
     
