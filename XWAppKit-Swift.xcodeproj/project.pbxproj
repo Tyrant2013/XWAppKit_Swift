@@ -114,6 +114,7 @@
 		AEB4297B25315334003FDB13 /* XWAKSquareGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */; };
 		AEBB8FF8254164ED0027ABB0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */; };
 		AEBC51EC2645251B00DC72DE /* XWAKCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC51EB2645251B00DC72DE /* XWAKCallStack.swift */; };
+		AEEBC542274CB5260052E6A1 /* XWAKLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBC541274CB5260052E6A1 /* XWAKLayoutViewController.swift */; };
 		AEF14D23251C9FAB0022AB88 /* XWAKTextContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */; };
 		AEF14D28251D7FAC0022AB88 /* ComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D27251D7FAC0022AB88 /* ComparableExtension.swift */; };
 		AEF14D2E251D80240022AB88 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF14D2D251D80240022AB88 /* CGPointExtension.swift */; };
@@ -513,6 +514,7 @@
 		AEB4297A25315334003FDB13 /* XWAKSquareGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKSquareGridViewController.swift; sourceTree = "<group>"; };
 		AEBB8FF7254164ED0027ABB0 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AEBC51EB2645251B00DC72DE /* XWAKCallStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKCallStack.swift; sourceTree = "<group>"; };
+		AEEBC541274CB5260052E6A1 /* XWAKLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKLayoutViewController.swift; sourceTree = "<group>"; };
 		AEF14D22251C9FAB0022AB88 /* XWAKTextContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWAKTextContainerView.swift; sourceTree = "<group>"; };
 		AEF14D27251D7FAC0022AB88 /* ComparableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtension.swift; sourceTree = "<group>"; };
 		AEF14D2D251D80240022AB88 /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
@@ -1034,6 +1036,7 @@
 		AEA7474F24CAB23600E4B8E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AEEBC541274CB5260052E6A1 /* XWAKLayoutViewController.swift */,
 				AEA7474624CA942400E4B8E1 /* XWAppKitSwitchViewController.swift */,
 				AEA7476D24CAF0F300E4B8E1 /* XWAKAlertViewController.swift */,
 				AEA7476F24CE7B8700E4B8E1 /* XWAKHudViewController.swift */,
@@ -1997,6 +2000,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEEBC542274CB5260052E6A1 /* XWAKLayoutViewController.swift in Sources */,
 				AEA7473924CA90FD00E4B8E1 /* ViewController.swift in Sources */,
 				AEA7473524CA90FD00E4B8E1 /* AppDelegate.swift in Sources */,
 				AE61733D262007BF00656DEF /* XWAKColorPickerDoughnutViewController.swift in Sources */,

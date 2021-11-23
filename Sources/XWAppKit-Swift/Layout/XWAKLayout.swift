@@ -16,10 +16,16 @@ public enum XWAKEqualEdge {
     case all
 }
 
+public extension XWAKLayout {
+    
+}
+
 public class XWAKLayout: NSObject {
-    fileprivate let target: Any
+    fileprivate weak var target: AnyObject?
     
     lazy public var left = XWAKLayoutConstrait(edge: .left, upper: self)
+    lazy public var leading = XWAKLayoutConstrait(edge: .leading, upper: self)
+    lazy public var trailing = XWAKLayoutConstrait(edge: .trailing, upper: self)
     lazy public var right = XWAKLayoutConstrait(edge: .right, upper: self)
     lazy public var top = XWAKLayoutConstrait(edge: .top, upper: self)
     lazy public var bottom = XWAKLayoutConstrait(edge: .bottom, upper: self)
@@ -28,7 +34,7 @@ public class XWAKLayout: NSObject {
     lazy public var width = XWAKLayoutConstrait(edge: .width, upper: self)
     lazy public var height = XWAKLayoutConstrait(edge: .height, upper: self)
     
-    init(targetView: Any) {
+    init(targetView: AnyObject) {
         self.target = targetView
         super.init()
     }
@@ -93,23 +99,23 @@ public class XWAKLayout: NSObject {
     @discardableResult
     public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets, edges: [XWAKEqualEdge]) -> XWAKLayout {
         if edges.contains(.all) {
-            self.left(equalTo: edge.left, multiplier: multiplier, inset.left)
+            left(equalTo: edge.left, multiplier: multiplier, inset.left)
                 .right(equalTo: edge.right, multiplier: multiplier, inset.right)
                 .top(equalTo: edge.top, multiplier: multiplier, inset.top)
                 .bottom(equalTo: edge.bottom, multiplier: multiplier, inset.bottom)
         }
         else {
             if edges.contains(.left) {
-                self.left(equalTo: edge.left, multiplier: multiplier, inset.left)
+                left(equalTo: edge.left, multiplier: multiplier, inset.left)
             }
             if edges.contains(.right) {
-                self.right(equalTo: edge.right, multiplier: multiplier, inset.right)
+                right(equalTo: edge.right, multiplier: multiplier, inset.right)
             }
             if edges.contains(.top) {
-                self.top(equalTo: edge.top, multiplier: multiplier, inset.top)
+                top(equalTo: edge.top, multiplier: multiplier, inset.top)
             }
             if edges.contains(.bottom) {
-                self.bottom(equalTo: edge.bottom, multiplier: multiplier, inset.bottom)
+                bottom(equalTo: edge.bottom, multiplier: multiplier, inset.bottom)
             }
         }
         return self
@@ -117,91 +123,90 @@ public class XWAKLayout: NSObject {
     
     @discardableResult
     public func centerX(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: centerX, r: edge, multiplier: multiplier, constant: constant)
+        equal(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func centerX(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: centerX, r: edge, multiplier: multiplier, constant: constant)
+        greater(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func centerX(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: centerX, r: edge, multiplier: multiplier, constant: constant)
+        less(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
     public func centerY(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: centerY, r: edge, multiplier: multiplier, constant: constant)
+        equal(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func centerY(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: centerY, r: edge, multiplier: multiplier, constant: constant)
+        greater(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func centerY(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: centerY, r: edge, multiplier: multiplier, constant: constant)
+        less(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
     public func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
+        centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
             .centerY(equalTo: center.centerY, multiplier: multiplier, offset.y)
     }
-//    @discardableResult
-//    public func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
-//        return self.centerX(greaterThan: center.centerX, multiplier: multiplier, offset.x)
-//            .centerY(greaterThan: center.centerY, multiplier: multiplier, offset.y)
-//    }
-//    @discardableResult
-//    public func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
-//        return self.centerX(lessThan: center.centerX, multiplier: multiplier, offset.x)
-//            .centerY(lessThan: center.centerY, multiplier: multiplier, offset.y)
-//    }
+    @discardableResult
+    public func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+        centerX(greaterThan: center.centerX, multiplier: multiplier, offset.x)
+            .centerY(greaterThan: center.centerY, multiplier: multiplier, offset.y)
+    }
+    @discardableResult
+    public func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+        centerX(lessThan: center.centerX, multiplier: multiplier, offset.x)
+            .centerY(lessThan: center.centerY, multiplier: multiplier, offset.y)
+    }
     
     @discardableResult
     public func width(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: width, r: edge, multiplier: multiplier, constant: constant)
+        equal(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func width(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: width, r: edge, multiplier: multiplier, constant: constant)
+        greater(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func width(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: width, r: edge, multiplier: multiplier, constant: constant)
+        less(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
     public func height(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: height, r: edge, multiplier: multiplier, constant: constant)
+        equal(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func height(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: height, r: edge, multiplier: multiplier, constant: constant)
+        greater(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
     public func height(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: height, r: edge, multiplier: multiplier, constant: constant)
+        less(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
     public func size(equalTo center: XWAKLayout? = nil, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.width(equalTo: center?.width, multiplier: multiplier, size.width)
+        width(equalTo: center?.width, multiplier: multiplier, size.width)
             .height(equalTo: center?.height, multiplier: multiplier, size.height)
     }
     @discardableResult
     public func size(greaterThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.width(greaterThan: center?.width, multiplier: multiplier, size.width)
+        width(greaterThan: center?.width, multiplier: multiplier, size.width)
             .height(greaterThan: center?.height, multiplier: multiplier, size.height)
     }
     @discardableResult
     public func size(lessThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
-        return self.width(lessThan: center?.width, multiplier: multiplier, size.width)
+        width(lessThan: center?.width, multiplier: multiplier, size.width)
             .height(lessThan: center?.height, multiplier: multiplier, size.height)
     }
     
     private func equal(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
-        let constraint = l.equal(r, multiplier: multiplier, constant: constant)
-        NSLayoutConstraint.activate([constraint])
+        l.equal(r, multiplier: multiplier, constant: constant).isActive = true
         return self
     }
     
@@ -217,37 +222,49 @@ public class XWAKLayout: NSObject {
 }
 
 enum XWAKLayoutEdge {
-    case left
-    case right
-    case top
-    case bottom
-    case centerX
-    case centerY
-    case width
-    case height
+    case left, right, leading, trailing, top, bottom, centerX, centerY, width, height
 }
 
 public class XWAKLayoutConstrait: NSObject {
     private let edge: XWAKLayoutEdge
     fileprivate let upper: XWAKLayout
+    private var constraint: NSLayoutConstraint?
+    public var constant: CGFloat {
+        get { return constraint?.constant ?? 0 }
+        set { constraint?.constant = newValue }
+    }
+    public var multiplier: CGFloat {
+        get { return constraint?.multiplier ?? 0 }
+        set {
+            guard let cs = constraint else { return }
+            constraint = NSLayoutConstraint(item: cs.firstItem!,
+                                            attribute: cs.firstAttribute,
+                                            relatedBy: cs.relation,
+                                            toItem: cs.secondItem,
+                                            attribute: cs.secondAttribute,
+                                            multiplier: newValue,
+                                            constant: cs.constant)
+            cs.isActive = false
+            constraint?.isActive = true
+        }
+    }
+    public var isActive: Bool {
+        get { constraint?.isActive ?? false }
+        set { constraint?.isActive = newValue }
+    }
+    
     private var attribute: NSLayoutConstraint.Attribute {
         switch edge {
-        case .left:
-            return .leading
-        case .right:
-            return .trailing
-        case .top:
-            return .top
-        case .bottom:
-            return .bottom
-        case .centerX:
-            return .centerX
-        case .centerY:
-            return .centerY
-        case .width:
-            return .width
-        case .height:
-            return .height
+        case .left:     return .left
+        case .right:    return .right
+        case .leading:  return .leading
+        case .trailing: return .trailing
+        case .top:      return .top
+        case .bottom:   return .bottom
+        case .centerX:  return .centerX
+        case .centerY:  return .centerY
+        case .width:    return .width
+        case .height:   return .height
         }
     }
     init(edge: XWAKLayoutEdge, upper: XWAKLayout) {
@@ -257,73 +274,62 @@ public class XWAKLayoutConstrait: NSObject {
     }
     
     fileprivate func equal(_ to: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, constant: CGFloat = 0.0) -> NSLayoutConstraint {
-        if to == nil {
-            return NSLayoutConstraint(item: upper.target,
-                                      attribute: attribute,
-                                      relatedBy: .equal,
-                                      toItem: nil,
-                                      attribute: .notAnAttribute,
-                                      multiplier: multiplier,
-                                      constant: constant)
-        }
-        return NSLayoutConstraint(item: upper.target,
-                                  attribute: attribute,
-                                  relatedBy: .equal,
-                                  toItem: to!.upper.target,
-                                  attribute: to!.attribute,
-                                  multiplier: multiplier,
-                                  constant: constant)
+        makeConstraint(to, multiplier: multiplier, constant: constant, relatedBy: .equal)
     }
     
     fileprivate func less(_ to: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, constant: CGFloat = 0.0) -> NSLayoutConstraint {
-        if to == nil {
-            return NSLayoutConstraint(item: upper.target,
-                                      attribute: attribute,
-                                      relatedBy: .lessThanOrEqual,
-                                      toItem: nil,
-                                      attribute: .notAnAttribute,
-                                      multiplier: multiplier,
-                                      constant: constant)
-        }
-        return NSLayoutConstraint(item: upper.target,
-                                  attribute: attribute,
-                                  relatedBy: .lessThanOrEqual,
-                                  toItem: to!.upper.target,
-                                  attribute: to!.attribute,
-                                  multiplier: multiplier,
-                                  constant: constant)
+        makeConstraint(to, multiplier: multiplier, constant: constant, relatedBy: .lessThanOrEqual)
     }
     
     fileprivate func greater(_ to: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, constant: CGFloat = 0.0) -> NSLayoutConstraint {
-        if to == nil {
-            return NSLayoutConstraint(item: upper.target,
-                                      attribute: attribute,
-                                      relatedBy: .greaterThanOrEqual,
-                                      toItem: nil,
-                                      attribute: .notAnAttribute,
-                                      multiplier: multiplier,
-                                      constant: constant)
-        }
-        return NSLayoutConstraint(item: upper.target,
-                                  attribute: attribute,
-                                  relatedBy: .greaterThanOrEqual,
-                                  toItem: to!.upper.target,
-                                  attribute: to!.attribute,
-                                  multiplier: multiplier,
-                                  constant: constant)
+        makeConstraint(to, multiplier: multiplier, constant: constant, relatedBy: .greaterThanOrEqual)
+    }
+    
+    fileprivate func makeConstraint(_ to: XWAKLayoutConstrait? = nil,
+                                    multiplier: CGFloat,
+                                    constant: CGFloat,
+                                    relatedBy: NSLayoutConstraint.Relation) -> NSLayoutConstraint {
+        guard constraint == nil else { return constraint! }
+        let noTo = to == nil
+        let toItem = noTo ? nil : to!.upper.target
+        let toAttribute: NSLayoutConstraint.Attribute = noTo ? .notAnAttribute : to!.attribute
+        constraint = NSLayoutConstraint(item: upper.target as Any,
+                                        attribute: attribute,
+                                        relatedBy: relatedBy,
+                                        toItem: toItem,
+                                        attribute: toAttribute,
+                                        multiplier: multiplier,
+                                        constant: constant)
+        return constraint!
     }
     
 }
 
+fileprivate var XWAKKey = "XWAKKey"
+
 public extension UIView {
     var xwak: XWAKLayout {
-//        assert(translatesAutoresizingMaskIntoConstraints == false, "translatesAutoresizingMaskIntoConstraints is not set to false")
-        return XWAKLayout(targetView: self)
+        get {
+            var obj = objc_getAssociatedObject(self, &XWAKKey) as? XWAKLayout
+            if obj == nil {
+                
+                obj = XWAKLayout(targetView: self)
+                objc_setAssociatedObject(self, &XWAKKey, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            }
+            return obj!
+        }
     }
 }
 
 public extension UILayoutGuide {
     var xwak: XWAKLayout {
-        return XWAKLayout(targetView: self)
+        get {
+            var obj = objc_getAssociatedObject(self, &XWAKKey) as? XWAKLayout
+            if obj == nil {
+                obj = XWAKLayout(targetView: self)
+                objc_setAssociatedObject(self, &XWAKKey, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            }
+            return obj!
+        }
     }
 }

@@ -20,6 +20,7 @@ class ViewController: UIViewController {
             ]
         ),
         ("UI", [
+            ("Layout", "XWAKLayoutViewController"),
             ("SwitchButton", "XWAppKitSwitchViewController"),
             ("Alert", "XWAKAlertViewController"),
             ("Hud", "XWAKHudViewController"),

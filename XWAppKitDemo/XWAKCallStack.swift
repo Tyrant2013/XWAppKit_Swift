@@ -35,10 +35,10 @@ func StackOfThread(_ thread: thread_t) -> String {
         threadInfoSt.userTime = threadInfo.system_time.microseconds
     }
 //    __darwin_mcontext64
-    var machineContext: mcontext_t
-    var state_count: mach_msg_type_number_t = 0
+//    var machineContext: mcontext_t
+//    var state_count: mach_msg_type_number_t = 0
     
-    var reStr = "Stack of thread: \(thread):\n CPU used: \(threadInfoSt.cpuUsage) percent\n user time: \(threadInfoSt.userTime) second\n"
+    let reStr = "Stack of thread: \(thread):\n CPU used: \(threadInfoSt.cpuUsage) percent\n user time: \(threadInfoSt.userTime) second\n"
 //    thread_get_state(thread, 0, &machineContext.pointee.__ss, &state_count)
     return reStr
     
