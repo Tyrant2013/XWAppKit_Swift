@@ -86,12 +86,12 @@ public class XWAKLayout: NSObject {
     }
     
     @discardableResult
-    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat = 0.0, edges: [XWAKEqualEdge]) -> XWAKLayout {
+    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat, edges: [XWAKEqualEdge]) -> XWAKLayout {
         let edgeInset = UIEdgeInsets(top: inset, left: inset, bottom: -inset, right: -inset)
         return self.edge(equalTo: edge, multiplier: multiplier, inset: edgeInset, edges: edges)
     }
     @discardableResult
-    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets = .zero, edges: [XWAKEqualEdge]) -> XWAKLayout {
+    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets, edges: [XWAKEqualEdge]) -> XWAKLayout {
         if edges.contains(.all) {
             self.left(equalTo: edge.left, multiplier: multiplier, inset.left)
                 .right(equalTo: edge.right, multiplier: multiplier, inset.right)
