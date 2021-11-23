@@ -47,6 +47,8 @@ public class XWAKLayout: NSObject {
         
         NotificationCenter.default.addObserver(forName: UIApplication.didChangeStatusBarFrameNotification, object: nil, queue: OperationQueue.main) { [self] _ in
             let orientation = UIApplication.shared.statusBarOrientation
+            self.verticalLayouts.forEach { $0.isActive = false }
+            self.horizontalLayouts.forEach { $0.isActive = false }
             (orientation.isPortrait ? self.verticalLayouts : self.horizontalLayouts)
             .forEach { $0.isActive = true }
         }
