@@ -34,70 +34,100 @@ public class XWAKLayout: NSObject {
     lazy public var width = XWAKLayoutConstrait(edge: .width, upper: self)
     lazy public var height = XWAKLayoutConstrait(edge: .height, upper: self)
     
+    /// 竖屏起效的约束
+    public var verticalLayouts: [XWAKLayoutConstrait] = []
+    /// 横屏起效的约束
+    public var horizontalLayouts: [XWAKLayoutConstrait] = []
+    /// 添加完约束后自动生效, 默认值为 true, 必须优先于约束设置才能生效，否则只会影响设置后的约束设置
+    public var autoActive: Bool = true
+    
     init(targetView: AnyObject) {
         self.target = targetView
         super.init()
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.didChangeStatusBarFrameNotification, object: nil, queue: OperationQueue.main) { [self] _ in
+            let orientation = UIApplication.shared.statusBarOrientation
+            (orientation.isPortrait ? self.verticalLayouts : self.horizontalLayouts)
+            .forEach { $0.isActive = true }
+        }
+    }
+    
+    private func equal(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
+        l.equal(r, multiplier: multiplier, constant: constant).isActive = autoActive
+        return self
+    }
+    
+    private func greater(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
+        l.greater(r, multiplier: multiplier, constant: constant).isActive = autoActive
+        return self
+    }
+    
+    private func less(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
+        l.less(r, multiplier: multiplier, constant: constant).isActive = autoActive
+        return self
+    }
+}
+
+public extension XWAKLayout {
+    @discardableResult
+    func left(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        equal(l: left, r: edge, multiplier: multiplier, constant: constant)
+    }
+    @discardableResult
+    func left(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        greater(l: left, r: edge, multiplier: multiplier, constant: constant)
+    }
+    @discardableResult
+    func left(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        less(l: left, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func left(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: left, r: edge, multiplier: multiplier, constant: constant)
+    func right(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        equal(l: right, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func left(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: left, r: edge, multiplier: multiplier, constant: constant)
+    func right(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        greater(l: right, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func left(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: left, r: edge, multiplier: multiplier, constant: constant)
-    }
-    
-    @discardableResult
-    public func right(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: right, r: edge, multiplier: multiplier, constant: constant)
-    }
-    @discardableResult
-    public func right(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: right, r: edge, multiplier: multiplier, constant: constant)
-    }
-    @discardableResult
-    public func right(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: right, r: edge, multiplier: multiplier, constant: constant)
+    func right(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        less(l: right, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func top(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: top, r: edge, multiplier: multiplier, constant: constant)
+    func top(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        equal(l: top, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func top(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: top, r: edge, multiplier: multiplier, constant: constant)
+    func top(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        greater(l: top, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func top(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: top, r: edge, multiplier: multiplier, constant: constant)
-    }
-    
-    @discardableResult
-    public func bottom(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return equal(l: bottom, r: edge, multiplier: multiplier, constant: constant)
-    }
-    @discardableResult
-    public func bottom(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return greater(l: bottom, r: edge, multiplier: multiplier, constant: constant)
-    }
-    @discardableResult
-    public func bottom(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
-        return less(l: bottom, r: edge, multiplier: multiplier, constant: constant)
+    func top(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        less(l: top, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat, edges: [XWAKEqualEdge]) -> XWAKLayout {
+    func bottom(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        equal(l: bottom, r: edge, multiplier: multiplier, constant: constant)
+    }
+    @discardableResult
+    func bottom(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        greater(l: bottom, r: edge, multiplier: multiplier, constant: constant)
+    }
+    @discardableResult
+    func bottom(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+        less(l: bottom, r: edge, multiplier: multiplier, constant: constant)
+    }
+    
+    @discardableResult
+    func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: CGFloat, edges: [XWAKEqualEdge]) -> XWAKLayout {
         let edgeInset = UIEdgeInsets(top: inset, left: inset, bottom: -inset, right: -inset)
         return self.edge(equalTo: edge, multiplier: multiplier, inset: edgeInset, edges: edges)
     }
     @discardableResult
-    public func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets, edges: [XWAKEqualEdge]) -> XWAKLayout {
+    func edge(equalTo edge: XWAKLayout, multiplier: CGFloat = 1.0, inset: UIEdgeInsets, edges: [XWAKEqualEdge]) -> XWAKLayout {
         if edges.contains(.all) {
             left(equalTo: edge.left, multiplier: multiplier, inset.left)
                 .right(equalTo: edge.right, multiplier: multiplier, inset.right)
@@ -122,102 +152,87 @@ public class XWAKLayout: NSObject {
     }
     
     @discardableResult
-    public func centerX(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerX(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         equal(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func centerX(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerX(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         greater(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func centerX(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerX(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         less(l: centerX, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func centerY(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerY(equalTo edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         equal(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func centerY(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerY(greaterThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         greater(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func centerY(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func centerY(lessThan edge: XWAKLayoutConstrait, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         less(l: centerY, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+    func center(equalTo center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
         centerX(equalTo: center.centerX, multiplier: multiplier, offset.x)
             .centerY(equalTo: center.centerY, multiplier: multiplier, offset.y)
     }
     @discardableResult
-    public func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+    func center(greaterThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
         centerX(greaterThan: center.centerX, multiplier: multiplier, offset.x)
             .centerY(greaterThan: center.centerY, multiplier: multiplier, offset.y)
     }
     @discardableResult
-    public func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
+    func center(lessThan center: XWAKLayout, multiplier: CGFloat = 1.0, _ offset: (x: CGFloat, y: CGFloat) = (0, 0)) -> XWAKLayout {
         centerX(lessThan: center.centerX, multiplier: multiplier, offset.x)
             .centerY(lessThan: center.centerY, multiplier: multiplier, offset.y)
     }
     
     @discardableResult
-    public func width(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func width(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         equal(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func width(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func width(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         greater(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func width(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func width(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         less(l: width, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func height(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func height(equalTo edge: XWAKLayoutConstrait? = nil, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         equal(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func height(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func height(greaterThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         greater(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     @discardableResult
-    public func height(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
+    func height(lessThan edge: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, _ constant: CGFloat = 0.0) -> XWAKLayout {
         less(l: height, r: edge, multiplier: multiplier, constant: constant)
     }
     
     @discardableResult
-    public func size(equalTo center: XWAKLayout? = nil, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
+    func size(equalTo center: XWAKLayout? = nil, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
         width(equalTo: center?.width, multiplier: multiplier, size.width)
             .height(equalTo: center?.height, multiplier: multiplier, size.height)
     }
     @discardableResult
-    public func size(greaterThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
+    func size(greaterThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
         width(greaterThan: center?.width, multiplier: multiplier, size.width)
             .height(greaterThan: center?.height, multiplier: multiplier, size.height)
     }
     @discardableResult
-    public func size(lessThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
+    func size(lessThan center: XWAKLayout?, multiplier: CGFloat = 1.0, _ size: (width: CGFloat , height: CGFloat) = (0, 0)) -> XWAKLayout {
         width(lessThan: center?.width, multiplier: multiplier, size.width)
             .height(lessThan: center?.height, multiplier: multiplier, size.height)
-    }
-    
-    private func equal(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
-        l.equal(r, multiplier: multiplier, constant: constant).isActive = true
-        return self
-    }
-    
-    private func greater(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
-        l.greater(r, multiplier: multiplier, constant: constant).isActive = true
-        return self
-    }
-    
-    private func less(l: XWAKLayoutConstrait, r: XWAKLayoutConstrait?, multiplier: CGFloat = 1.0, constant: CGFloat) -> XWAKLayout {
-        l.less(r, multiplier: multiplier, constant: constant).isActive = true
-        return self
     }
 }
 
