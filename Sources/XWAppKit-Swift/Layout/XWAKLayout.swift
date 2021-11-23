@@ -273,6 +273,7 @@ public class XWAKLayoutConstrait: NSObject {
         get { return constraint?.multiplier ?? 0 }
         set {
             guard let cs = constraint else { return }
+            guard cs.multiplier != newValue else { return }
             constraint = NSLayoutConstraint(item: cs.firstItem!,
                                             attribute: cs.firstAttribute,
                                             relatedBy: cs.relation,
