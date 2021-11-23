@@ -34,6 +34,12 @@ class XWAKLayoutViewController: UIViewController {
         rectangle.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 50, edges: [.left, .right])
             .height(200)
             .centerY(equalTo: view.xwak.centerY)
+        
+        /// 重复设置的话，只有第一次的会有效
+        rectangle.xwak.edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 50, edges: [.left, .right])
+            .height(300)
+            .centerY(equalTo: view.xwak.centerY)
+        
         move.xwak.top(equalTo: rectangle.xwak.bottom)
             .edge(equalTo: view.safeAreaLayoutGuide.xwak, inset: 30, edges: [.left, .right])
             .height(50)
